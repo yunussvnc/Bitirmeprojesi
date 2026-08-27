@@ -3829,3 +3829,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6281 ; https://www.yemeksepeti.co
 ## PASTA VERA BEŞİKTAŞ ID 6280 — HOLD
 Hentzer `Sinanpaşa, Şht. Dursun Bakan Sk. 25/A, 34330 Beşiktaş/İstanbul`, telefon `+90 551 825 34 01`. Yandex ve yerel/sosyal içerikler Pasta Vera Beşiktaş’ı ve 25/A çevresini destekliyor. Ancak bulunan Migros menüsü Çanakkale Merkez, Yemeksepeti menüsü Diyarbakır şubesine ait; erişilebilir resmi Instagram profili login duvarında. Exact Beşiktaş şubesi için son bir yıldan 20 fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6280 ; https://yandex.com.tr/maps/org/pasta_vera/62031771452/ ; https://www.migros.com.tr/yemek/pasta-vera-merkez-barbaros-mah-st-30fe3 ; https://www.instagram.com/pastaverabesiktas/ ; https://restoranim.net/istanbul/besiktas/restoran/pasta-vera-besiktas
+
+## BURGER MUNCH ID 6278 — HOLD
+Hentzer `Adnan Kahveci, Anadolu Cd. No:2, 34528 Beylikdüzü/İstanbul`, telefon `+90 552 804 83 42`. Resmi Instagram `@burgermunchtr` 09.08.2026 paylaşımı Burger Munch Beylikdüzü’nü ve yalnızca 399 TL kampanyasını doğruluyor; ürün bazlı fiyat listesi sunmuyor. Exact telefon/adres için yeterli bağımsız parite ve son bir yıl içinde 20 benzersiz fiyatlı gıda ürünü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6278 ; https://www.instagram.com/burgermunchtr/reel/Db04_t_IjBk/
