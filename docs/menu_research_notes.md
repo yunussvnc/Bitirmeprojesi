@@ -3338,3 +3338,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/qsma/florida-coffee-qsma ; 
 ## İSTAKOZİ ID 6405 HOLD
 İstakozi resmi sitesi ve resmi menüsü şubeyi Mecidiye Mah. Osmanzade Sk. No:6 ve `+90 (212) 227 37 27` olarak gösteriyor; Instagram `0533 471 38 27` veriyor. Hentzer ise Kaymakçı Sk. No:7 ve telefon boş; Yemeksepeti `vs46` Kaymakçı Sokak 7 adresini gösterse de exact telefon parity’si yok. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://istakozi.com/ ; https://istakozi.com/menu/ ; https://www.yemeksepeti.com/en/restaurant/vs46/istakozi ; https://www.instagram.com/istakozi/
+
+## BAHAR UNLU MAMÜLLERİ ID 6404 HOLD
+Yandex, Servis Kayıt Listesi ve Instagram Hentzer ile Yıldırım, Şht. Kamil Balkan Cd. No:82 ve `+90 212 618 20 06` bilgisini büyük ölçüde destekliyor; ancak kapı eki 82A ve aynı telefon Bulurum’da Ali Fuat Başgil Cd. 102/A olarak çelişiyor. Yemeksepeti `ubl4` vendoru exact Bayrampaşa adres/telefonuyla doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://yandex.com.tr/maps/org/bahar_unlu_mamulleri/219418331114/ ; https://serviskayitlistesi.com/istanbul/bayrampasa/kafe/bahar-unlu-mamulleri-_rSngQ.html ; https://www.instagram.com/bugdayci_baharpasta/ ; https://www.yemeksepeti.com/en/restaurant/ubl4/bahar-firin-and-unlu-mamuller
