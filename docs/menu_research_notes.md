@@ -3841,3 +3841,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6277 ; https://esmerchef.com.tr/ 
 ## LOU PİZZA NAPOLETANA ID 6276 — HOLD
 Hentzer `Gayrettepe, Yıldız Posta Cd. Evren Sitesi No: 32E, 34349 Beşiktaş`, telefon `+90 535 789 54 88`. Menu-TR aynı 32E adres ve telefonu doğrudan doğruluyor; bazı dizinlerde 34E varyantı bulunuyor. Son bir yıl içinde exact şubeye ait 20 benzersiz fiyatlı ürün menüsü bulunamadı; sosyal içeriklerde yalnızca toplam menü/deneyim fiyatları var. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6276 ; https://www.menu-tr.com/istanbul/besiktas/pizza-restorani/lou-pizza-napoletana-2 ; https://restaurantguru.com/Lou-Pizza-Napoletana-Istanbul ; https://restoranim.net/istanbul/besiktas/pizzaci/lou-pizza-napoletana
+
+## DOSTLAR MEYHANESİ ID 6275 — HOLD
+Hentzer `Kavacık, Otağtepe Cd. 15 B, 34810 Beykoz/İstanbul`, telefon `+90 216 465 83 99`. Menu-TR aynı adres/telefonu doğrudan doğruluyor; Yandex ve Yaka.la da adresi destekliyor. Ancak son bir yıl içinde fiyatları görünen en az 20 benzersiz ürünlü menü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6275 ; https://www.menu-tr.com/istanbul/beykoz/restoran/dostlar-meyhanesi ; https://yaka.la/detail/istanbul/beykoz/dostlar-meyhanesi/adres?uuid ; https://yandex.com.tr/maps/115694/beykoz/category/restaurant/184106394/
