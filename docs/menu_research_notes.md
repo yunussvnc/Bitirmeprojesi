@@ -3250,3 +3250,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/m3cg/il-capriccio-pizza ; h
 ## ENBEY İSKENDER PİDE LAHMACUN ID 6427 HOLD
 Hentzer `Cumhuriyet Cd. No:10` ve `+90 212 873 08 80` bilgileri Mekanlar.com, Restaurant Guru ve Instagram ile destekleniyor. Ancak Yemeksepeti `xu7l` vendor metninde adres `Çamlık Caddesi No:3/F` olduğundan exact şube parity’si sağlanamadı; sayfa CAPTCHA nedeniyle tam menü de doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/xu7l/enbey-iskender-and-lahmacun ; https://mekanlar.com/mekan/enbey-iskemder-lahmacun-cumhuriyet-mh ; https://restaurantguru.com/Enbey-Iskender-Pide-Lahmacun-Istanbul
+
+## SAKHALIN İSTANBUL ID 6426 HOLD
+Sakhalin resmi sitesi Hentzer ile Levazım/Koru Sokak/Zorlu Center şube bilgisini ve `+90 530 811 88 88` telefonunu doğruluyor. SevenRooms güncel Signature Tasting Menu için kişi başı 7.000 TL gösteriyor; fakat menüdeki yemekler ayrı ayrı fiyatlandırılmamış ve à la carte için 20 güncel bireysel ürün fiyatı doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://sakhalin.rest/istanbul/en ; https://www.sevenrooms.com/experiences/sakhalinistanbul/tasting-menu-4635764914012160
