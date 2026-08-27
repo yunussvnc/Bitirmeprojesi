@@ -3258,3 +3258,7 @@ Kaynaklar: https://sakhalin.rest/istanbul/en ; https://www.sevenrooms.com/experi
 ## KASAP BAHATTİN USTANIN YERİ ID 6425 HOLD
 Yandex, Bulurum, Menu-TR ve DliPlace Hentzer ile Beyaz Erguvan Cd. Paşabahçe adresini ve `+90 216 413 91 00` telefonunu destekliyor. Ancak son bir yıl içinde doğrulanmış, şube bazlı 20 ürün fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://yandex.com/maps/org/kasap_bahattin_ustanin_yeri/134509666489/ ; https://www.bulurum.com/en/details/76_i560a61a_a03c24d_b05074713_de ; https://www.menu-tr.com/istanbul/beykoz/kasap/kasap-bahattin-ustanin-yeri
+
+## PIZZA LOCALE BEYLİKDÜZÜ ID 6424 HOLD
+Pizza Locale resmi şube sayfası Hentzer ile `Marmara, Ulusum Cd. 14S, Beylikdüzü` ve `0212 924 17 72` exact parity’sini doğruluyor. Ancak Yemeksepeti `x5kr` vendor sayfasının erişilebilir adresi `Ferit Tek Sok. No:2-B` olduğundan Moda/Kadıköy şubesine ait; Beylikdüzü şubesiyle eşleşmiyor. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.pizzalocale.net/sube ; https://www.yemeksepeti.com/en/restaurant/x5kr/pizza-locale-x5kr
