@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6300": {
+    "name": "FISTIK KEBAP LAHMACUN",
+    "sourceUrl": "https://www.migros.com.tr/yemek/fistik-kebap-lahmacun-besiktas-mecidiye-mah-st-2034f",
+    "sourceName": "Canlı Migros Yemek menüsü; Mecidiye Mah. Büyükşekerci Sok. 4 / +90 212 258 51 49 exact şube paritesi",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Lahmacun", "price": "225 TL", "category": "Lahmacun" },
+      { "name": "Ezogelin Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Sarımsaklı Lahmacun", "price": "240 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Pide", "price": "495 TL", "category": "Fırın Ürünleri" },
+      { "name": "Lüx Karışık Pide", "price": "530 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kavurmalı Pide", "price": "530 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sucuklu Kaşarlı Pide", "price": "495 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kavurmalı Kaşarlı Pide", "price": "585 TL", "category": "Fırın Ürünleri" },
+      { "name": "Beyaz Peynirli Pide", "price": "455 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sucuklu Pide", "price": "505 TL", "category": "Fırın Ürünleri" },
+      { "name": "Soğansız Lahmacun", "price": "240 TL", "category": "Fırın Ürünleri" },
+      { "name": "Pastırmalı Kaşarlı Pide", "price": "750 TL", "category": "Fırın Ürünleri" },
+      { "name": "Başpınar Lahmacun (1,5 Boyutunda)", "price": "350 TL", "category": "Fırın Ürünleri" },
+      { "name": "Karışık Pide", "price": "495 TL", "category": "Fırın Ürünleri" },
+      { "name": "Tavuklu Pide", "price": "455 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Lahmacun", "price": "325 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Pide", "price": "455 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Pide", "price": "455 TL", "category": "Fırın Ürünleri" },
+      { "name": "Fıstıklı Kebap", "price": "900 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kaşarlı Kebap", "price": "890 TL", "category": "Kebaplar & Izgaralar" }
+    ]
+  },
   "6301": {
     "name": "MY FRIED CHICKEN - İSTANBUL BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/y0ue/my-fried-chicken-y0ue",
