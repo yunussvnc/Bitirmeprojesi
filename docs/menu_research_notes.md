@@ -3334,3 +3334,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/chuu_coffee/151923585248/ ; https://ww
 ## FLORIDA COFFEE BEYKOZ ID 6406 HOLD
 Hentzer’in telefon alanı boş; Yandex, Instagram, Kacıyor, Servis Listeleri ve Restoranim Gümüşsuyu, Kelle İbrahim Cd. adresini destekliyor. Yemeksepeti `qsma` güncel fiyatlı geniş menü sunuyor ancak generic konum gösteriyor ve adres/telefon yayımlamıyor; zorunlu exact business/branch parity’si kurulamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/qsma/florida-coffee-qsma ; https://yandex.com.tr/maps/org/florida_coffee_beykoz/229299063313/ ; https://www.instagram.com/florida_coffee_beykoz/ ; https://servislisteleri.com/istanbul/beykoz/kafe/florida-coffe-WC3Fl0.html
+
+## İSTAKOZİ ID 6405 HOLD
+İstakozi resmi sitesi ve resmi menüsü şubeyi Mecidiye Mah. Osmanzade Sk. No:6 ve `+90 (212) 227 37 27` olarak gösteriyor; Instagram `0533 471 38 27` veriyor. Hentzer ise Kaymakçı Sk. No:7 ve telefon boş; Yemeksepeti `vs46` Kaymakçı Sokak 7 adresini gösterse de exact telefon parity’si yok. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://istakozi.com/ ; https://istakozi.com/menu/ ; https://www.yemeksepeti.com/en/restaurant/vs46/istakozi ; https://www.instagram.com/istakozi/
