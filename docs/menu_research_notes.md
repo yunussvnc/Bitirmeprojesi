@@ -3417,3 +3417,7 @@ Kaynaklar: https://wanderlog.com/tr/place/details/7688304/beylikd%C3%BCz%C3%BC-b
 ## PİZZALİVE & KAFETERYA ID 6386
 Hentzer `Haraççı-Hadımköy Yolu Caddesi 322/B, Hastane, Haraççı-Hadımköy Yolu Cd. No:322 D:B, 34555 Arnavutköy/İstanbul` ve `0212 677 54 83`; resmi Pizzalive Hadımköy Instagram hesabı aynı sipariş hattını, Yandex ve Mekanlar aynı bölge/işletme bağını destekliyor. Canlı Yemeksepeti `d93w` sayfasından 2026-08-27 tarihinde 20 benzersiz fiyatlı menü/pizza ürünü alındı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/d93w/pizzalive-kafeterya ; https://www.instagram.com/pizzalive_hadimkoy/ ; https://yandex.com.tr/maps/org/pizzalive/80267932865/ ; https://restoranim.net/istanbul/arnavutkoy/pizzaci/pizzalive-kafeterya
+
+## ÖZİKİZLER KÜNEFE BEYLİKDÜZÜ BEYKENT ID 6385 HOLD
+Resmi Beylikdüzü şube sayfası ve Yandex/Bulurum `Avrupa Cad. Vista Dört Evleri 89LC8` ile `0212 855 12 12` bilgisini doğruluyor. Fakat dijikep menüsü Gaziantep Batıkent adres/0342 telefonu taşıyor; fiyatlı içerik wrong-branch olduğu için **override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.ozikizlerkunefe.com/beylikduzu-subesi.php ; https://yandex.com.tr/maps/org/ozikizler_kunefe_beylikduzu_subesi/135194570362/ ; https://ozikizlerkunefemenu.dijikep.com/ ; https://www.bulurum.com/details/3b61ai60db0h7707707k3cab643j7e16
