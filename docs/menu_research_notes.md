@@ -3857,3 +3857,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6273 ; https://www.menu-tr.com/is
 ## HAY HAY İSTANBUL ID 6272 — HOLD
 Hentzer `İç Kapı, Levent, Çalıkuşu Sk. No:1 No:1, ikinci kat, 34330 Beşiktaş`, telefon `+90 534 053 47 78`. Resmi Facebook etkinlik sonucu, Polomap, Winniey ve Yandex adres/telefon/konum bilgisini destekliyor. Ancak son bir yıl içinde exact şubeye ait 20 benzersiz fiyatlı gıda veya atıştırmalık ürünü menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6272 ; https://www.facebook.com/100069578416705/videos/770952637838676/ ; https://tr.polomap.com/lv/%C5%9Fi%C5%9Fli/163650 ; https://winniey.com/en/spots/istanbul-levent-bar
+
+## YAZ DÖNER BEŞYÜZEVLER ID 6271 — HOLD
+Hentzer `Yıldırım, Eski Edirne Asf. No:205, 34045 Bayrampaşa`, telefon `+90 212 479 09 80`. Resmi Instagram `@yaz_doner` ve RestaurantGuru arama sonucu exact şube/telefonu destekliyor; RestaurantGuru sayfası captcha/suspicious-activity duvarında. Son bir yıl içinde 20 benzersiz fiyatlı gıda ürünü ve erişilebilir exact Yemeksepeti/Migros vendoru bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6271 ; https://www.instagram.com/yaz_doner/ ; https://restaurantguru.com/Dunya-Doner-Istanbul-3
