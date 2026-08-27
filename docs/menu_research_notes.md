@@ -3853,3 +3853,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6274 ; https://www.facebook.com/6
 ## MIKEL COFFEE COMPANY BEYKOZ ID 6273 — HOLD
 Hentzer `Merkez, Fevzi Paşa Cd. No:1, 34820 Beykoz/İstanbul`, telefon `+90 212 272 32 32`. Menu-TR, FreddoFinder, Kaçıyor ve Servis Kayıt exact adres/telefonu doğruluyor. Resmi mikelcoffee.com.tr kategori menülerinde erişilebilir fiyat metni yok; fiyatlar şube bazında ayrıştırılmıyor. Son bir yıl içinde Beykoz şubesine ait 20 fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6273 ; https://www.menu-tr.com/istanbul/beykoz/kafe/mikel-coffee-company-33 ; https://mikelcoffee.com.tr/ ; https://mikelcoffee.com.tr/productcategory/kahve/ ; https://mikelcoffee.com.tr/productcategory/icecekler/ ; https://kaciyor.com/mikel-coffee-company-beykoz
+
+## HAY HAY İSTANBUL ID 6272 — HOLD
+Hentzer `İç Kapı, Levent, Çalıkuşu Sk. No:1 No:1, ikinci kat, 34330 Beşiktaş`, telefon `+90 534 053 47 78`. Resmi Facebook etkinlik sonucu, Polomap, Winniey ve Yandex adres/telefon/konum bilgisini destekliyor. Ancak son bir yıl içinde exact şubeye ait 20 benzersiz fiyatlı gıda veya atıştırmalık ürünü menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6272 ; https://www.facebook.com/100069578416705/videos/770952637838676/ ; https://tr.polomap.com/lv/%C5%9Fi%C5%9Fli/163650 ; https://winniey.com/en/spots/istanbul-levent-bar
