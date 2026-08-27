@@ -3537,3 +3537,7 @@ Kaynaklar: https://www.migros.com.tr/yemek/ghaya-panini-coffee-beylikduzu-kavakl
 ## HOLY CUP COFFEE BAYRAMPAŞA ID 6356 HOLD
 Yandex Bayrampaşa Adapark adresi ve `0212 640 27 78` telefonunu doğruluyor; fakat güncel fiyatlı dijital menü `Holy Cup Coffee — Taksim` olarak etiketli ve Bayrampaşa şubesine exact bağlanamıyor. Yanlış branch menüsü eklenmedi; **strict HOLD**.
 Kaynaklar: https://yandex.com.tr/maps/org/holy_cup_coffee/86381768117/ ; https://www.holycupmenu.com.tr/menu/ ; https://www.parkada.com.tr/index.php/trip/holy-cup-coffee-bayrampasa-adapark/
+
+## ÖZ ÇITIRIM UNLU MAMÜLLERİ ID 6355 HOLD
+Yandex exact telefon `+90 216 322 47 73` ve işletmeyi doğruluyor; ancak Hentzer `Salkım Sk. 42`, Yandex `Pamir Sok. 42` gösteriyor. Son bir yıl ürün bazlı TL menü de bulunamadı. Exact adres ve güncel fiyat şartları sağlanmadığı için **strict HOLD**.
+Kaynaklar: https://yandex.com.tr/maps/org/ozcitirim_ekmek_ve_unlu_mamulleri/128673510293/ ; https://kaciyor.com/oz-citirim-unlu-mamulleri ; https://restoranim.net/istanbul/istanbul/firin/oz-citirim-unlu-mamulleri
