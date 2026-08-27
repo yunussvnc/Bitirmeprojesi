@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6309": {
+    "name": "MOGAF DÖNER BEYLİKDÜZÜ KAVAKLI ŞUBESİ",
+    "sourceUrl": "https://mogafdoner.com/wp-content/uploads/2026/03/Mogaf-_a3_menu_v3_fiyatli-2026-Mart-Gel-Al.pdf",
+    "sourceName": "Resmi MOGAF Mart 2026 Gel-Al fiyat menüsü ve resmi Kavaklı Şubesi sayfası; Kavaklı Yeşilyurt Cd. Demir Country Çarşı No:17/F / 0850 840 80 55 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Köfte Dürüm (Tek, 90 gr.)", "price": "280 TL", "category": "Dürümler" },
+      { "name": "Köfte Dürüm (Double, 180 gr.)", "price": "380 TL", "category": "Dürümler" },
+      { "name": "Tavuk Burrito (120 gr.)", "price": "320 TL", "category": "Burritolar" },
+      { "name": "Tavuk Burrito (180 gr.)", "price": "400 TL", "category": "Burritolar" },
+      { "name": "Tavuk Burrito (240 gr.)", "price": "480 TL", "category": "Burritolar" },
+      { "name": "Bomba Tavuk Burrito (120 gr.)", "price": "360 TL", "category": "Burritolar" },
+      { "name": "Bomba Tavuk Burrito (180 gr.)", "price": "440 TL", "category": "Burritolar" },
+      { "name": "Bomba Tavuk Burrito (240 gr.)", "price": "520 TL", "category": "Burritolar" },
+      { "name": "Mexicano Tavuk Burrito (120 gr.)", "price": "360 TL", "category": "Burritolar" },
+      { "name": "Mexicano Tavuk Burrito (180 gr.)", "price": "440 TL", "category": "Burritolar" },
+      { "name": "Mexicano Tavuk Burrito (240 gr.)", "price": "520 TL", "category": "Burritolar" },
+      { "name": "Köfte Bomba Burrito (120 gr.)", "price": "360 TL", "category": "Burritolar" },
+      { "name": "Köfte Bomba Burrito (180 gr.)", "price": "440 TL", "category": "Burritolar" },
+      { "name": "Köfte Bomba Burrito (240 gr.)", "price": "520 TL", "category": "Burritolar" },
+      { "name": "Mexicano Köfte Burrito (120 gr.)", "price": "360 TL", "category": "Burritolar" },
+      { "name": "Mexicano Köfte Burrito (180 gr.)", "price": "460 TL", "category": "Burritolar" },
+      { "name": "Mexicano Köfte Burrito (240 gr.)", "price": "520 TL", "category": "Burritolar" },
+      { "name": "Bomba Tenders Burrito", "price": "460 TL", "category": "Burritolar" },
+      { "name": "Tenders Burrito", "price": "420 TL", "category": "Burritolar" },
+      { "name": "Bomba Köfte Dürüm (Double, 180 gr.)", "price": "420 TL", "category": "Dürümler" }
+    ]
+  },
   "6311": {
     "name": "BEŞİKTAŞ MERCAN GURME | 1960",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/mjse/mercan-kokorec-and-midye",
