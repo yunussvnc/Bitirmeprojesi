@@ -75,5 +75,11 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
 
 # --workers 1 bilinçli: model singleton bellekte tek kopya tutulmalı,
 # birden fazla worker RAM'i katlar (CLAUDE.md OOM notu).
+# --limit-max-requests: prod'da tespit edilen, kaynağı henüz bulunamamış bir
+# istek-başına bellek birikimi ~6-13 istekte 2560M container limitine çarpıp
+# OOM kill'e (kernel tarafından sert, ani öldürme — ardından ~1-2 dk model
+# reload boyunca TÜM istekler 502 dönüyor) yol açıyordu. 15 istekte bir uvicorn
+# kendini nazikçe kapatır, `restart: unless-stopped` anında yeniden başlatır —
+# gerçek sızıntı kaynağı bulunana kadar geçici ama etkili bir önlem.
 ENTRYPOINT ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
-CMD ["--workers", "1"]
+CMD ["--workers", "1", "--limit-max-requests", "15"]
