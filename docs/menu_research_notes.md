@@ -3821,3 +3821,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6283 ; https://g360.ai/vr/istanbu
 ## KİLOVİÇ ID 6282 — HOLD
 Hentzer `Adnan Kahveci, Esentepe Cd., 34528 Beylikdüzü/İstanbul`, telefon `+90 533 917 12 70`. Resmi kilovich.com aynı adresi ancak farklı telefonu `+90 533 949 25 97` yayımlıyor. Bazı 2026 sosyal paylaşımlarında Hentzer telefonu görünse de resmi siteyle çelişki bulunuyor; ayrıca resmi menü sayfalarının erişilebilir metni fiyatlı ürünleri sunmuyor. **100% exact telefon paritesi ve 20 güncel ürün/fiyat doğrulanamadığı için HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6282 ; https://kilovich.com/ ; https://kilovich.com/kilosu ; https://kilovich.com/d%C3%BCr%C3%BCm ; https://kilovich.com/burger-1 ; https://www.instagram.com/reel/DY6kgu1tFLE/
+
+## ÇEVİKOĞLU TAVUK DÖNER & KOVA TAVUK PİLAV ID 6281 — HOLD
+Hentzer `İnci Konak, Adnan Kahveci, Osmanlı Cd. No:1 No:35D, 34528 Beylikdüzü` / `+90 541 193 83 00`; işletme sosyal kaynakları telefonu destekliyor. Yemeksepeti Çevikoğlu Döner vendoru erişilebilir olsa da exact adres/telefon görünmüyor ve içecekler dışarıda bırakıldığında 20 benzersiz gıda ürünü sunmuyor. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6281 ; https://www.yemeksepeti.com/en/restaurant/lx34/cevikoglu-doner-lx34 ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/restoran/cevikoglu-yaprak-et-tavuk-doner-by-donerci-abi-Yu1tjY.html ; https://www.instagram.com/cevikogludoner/
