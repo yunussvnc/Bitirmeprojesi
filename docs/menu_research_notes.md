@@ -3365,3 +3365,7 @@ Kaynaklar: https://www.migros.com.tr/yemek/pizza-da-pizza-pitza-mia-besiktas-dik
 ## SushiCo Nişantaşı ID 6399 KABUL
 Resmi SushiCo Nişantaşı sayfası `Mim Kemal Öke Cad. No:21, Nişantaşı-İstanbul` ve `444 78 74` telefonunu doğruluyor; Waze/Yandex/Mindtrip exact kapı ve telefon parity’sini destekliyor. Resmi Nişantaşı QR menüsü mobil User-Agent ile ayrıştırıldı ve bireysel TL fiyatları erişildi. İçecekler, soslar, tatlılar ve tekrar ürünler dışlanarak 20 benzersiz gıda ürünü eklendi; QR menüsünün yayın tarihi görünmediği için `verifiedAt` erişim/doğrulama tarihi `2026-08-27` tutuldu.
 Kaynaklar: https://www.sushico.com.tr/tr/subeler/nisantasi ; https://nisantasi-sushico.arimenu.com/?cat ; https://www.waze.com/live-map/directions/tr/i%CC%87stanbul/sushico?to
+
+## OLIVE'S PIZZERIA ID 6398 HOLD
+Resmi Olive's sitesi Levent için Başlık sokak Nispetiye mahallesi No:22/A ve `212 284 57 24 / 212 284 57 25` veriyor; bağımsız kaynaklar Hentzer telefonu ve No:22 varyantını desteklese de zorunlu exact kapı eki `22`–`22/A` çelişkisi giderilemedi. Yemeksepeti `j9i8` güncel fiyatlı menü sunsa da exact branch ayrıntısı doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.olivespizzeria.com/ ; https://www.yemeksepeti.com/restaurant/j9i8/olives-pizzeria ; https://kaciyor.com/olive-s-pizzeria ; https://www.instagram.com/reel/C_XrClrgnf2/
