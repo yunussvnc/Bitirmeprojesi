@@ -3465,3 +3465,7 @@ Kaynaklar: https://www.instagram.com/beykebaprestaurant/ ; https://www.facebook.
 ## HACİVAT ID 6374 HOLD
 Adres/telefon resmi Instagram ve firma rehberleriyle eşleşiyor; fakat Menuburada menü olmadığını bildiriyor, resmi Eatbu sayfasında da son bir yıl ürün bazlı TL fiyat bulunmuyor. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.instagram.com/hacivat_pastane_cafe/ ; https://enkalitelifirmalar.com.tr/hacivat ; https://www.servisisletmebul.com/istanbul/bayrampasa/pastane-tatlici/hacivat-s8qh8p.html ; https://menuburada.com/hacivat-ismet-pasa-istanbul/ ; https://hacivat-pastanesi.eatbu.com/?lang=tr
+
+## METRO GROSSMARKET BAYRAMPAŞA ID 6373 HOLD
+Kayıt restoran değil hipermarket; Metro resmi mağaza sayfası adres/telefonu, Bulurum ve Waze market sınıfını doğruluyor. Gıda restoran menüsü kapsam dışı olduğundan **override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.metro-tr.com/magazalar/bayrampasa ; https://www.bulurum.com/details/_3bj_i34200iaa_k5dbc5ib__j0f0e2h ; https://www.waze.com/az/live-map/directions/tr/i%CC%87stanbul/metro-grossmarket-bayrampasa
