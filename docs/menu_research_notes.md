@@ -3254,3 +3254,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/xu7l/enbey-iskender-and-lah
 ## SAKHALIN İSTANBUL ID 6426 HOLD
 Sakhalin resmi sitesi Hentzer ile Levazım/Koru Sokak/Zorlu Center şube bilgisini ve `+90 530 811 88 88` telefonunu doğruluyor. SevenRooms güncel Signature Tasting Menu için kişi başı 7.000 TL gösteriyor; fakat menüdeki yemekler ayrı ayrı fiyatlandırılmamış ve à la carte için 20 güncel bireysel ürün fiyatı doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://sakhalin.rest/istanbul/en ; https://www.sevenrooms.com/experiences/sakhalinistanbul/tasting-menu-4635764914012160
+
+## KASAP BAHATTİN USTANIN YERİ ID 6425 HOLD
+Yandex, Bulurum, Menu-TR ve DliPlace Hentzer ile Beyaz Erguvan Cd. Paşabahçe adresini ve `+90 216 413 91 00` telefonunu destekliyor. Ancak son bir yıl içinde doğrulanmış, şube bazlı 20 ürün fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://yandex.com/maps/org/kasap_bahattin_ustanin_yeri/134509666489/ ; https://www.bulurum.com/en/details/76_i560a61a_a03c24d_b05074713_de ; https://www.menu-tr.com/istanbul/beykoz/kasap/kasap-bahattin-ustanin-yeri
