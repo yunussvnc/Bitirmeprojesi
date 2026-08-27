@@ -3813,3 +3813,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6285 ; https://www.yemeksepeti.co
 ## GÜMBET DÖNER - BEYLİKDÜZÜ ID 6284 — HOLD
 Hentzer kaydı `Flora City, Adnan Kahveci, Kafkas Cd. No 88, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 34 15`. Araştırmada bu exact işletme/telefonu bağımsız doğrulayan ve son bir yıl içinde fiyatları görünen en az 20 ürünlü güvenilir menü kaynağı bulunamadı. **HOLD; override eklenmedi.**
 Kaynak: https://api.asemos.tr/api/v1/places/6284
+
+## CAN CAFE KAHVALTI ID 6283 — HOLD
+Hentzer kaydı `Çağ Apartmanı, Sinanpaşa, Çelebioğlu Sk. D:27-29, 34353 Beşiktaş/İstanbul`, telefon `+90 212 258 74 17`. Wanderboat, Cybo, G360, Restoranim ve Yemekle aynı işletme/telefon çevresini doğruluyor; resmi Instagram profili login duvarına yönlendi. Son bir yıl içinde exact şubeye ait 20 okunabilir fiyatlı ürün bulunamadı; görünen 900 TL masa/menemen bilgisi tam ürün menüsü değil. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6283 ; https://g360.ai/vr/istanbul_besiktas_can_cafe_kahvalti ; https://restoranim.net/istanbul/besiktas/kahvaltici/can-cafe-kahvalti ; https://www.yemekle.com/istanbul/besiktas/kahvaltici/can-cafe-kahvalti ; https://www.instagram.com/cankafekahvalti/
