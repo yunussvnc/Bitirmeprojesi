@@ -3625,3 +3625,7 @@ Kaynaklar: https://www.tellakebap.com/subelerimiz/ ; https://www.tellakebap.com/
 ## HOLD — BOMBACI FATİH ID 6333
 Hentzer kaydı `Sinanpaşa, Beşiktaş Cd. No:15, 34353 Beşiktaş/İstanbul` ve `+90 532 151 77 34`; Yandex Maps, Waze, Tripadvisor ve Restaurant Guru aynı şube adresi/telefonunu doğruluyor. Restaurant Guru’da en yeni menü sürümü 3 ay önce eklenmiş görünse de ürün/fiyat içeriği erişilebilir metin olarak alınamadı; 20 benzersiz son bir yıl fiyatlı ürün bağımsız doğrulanamadı. Bu nedenle tahmini fiyat kullanılmadan **strict HOLD; override eklenmedi.**
 Kaynaklar: https://yandex.com.tr/maps/org/bombaci_fatih/166011845821/ ; https://restaurantguru.com/Bombaci-Fatih-Istanbul/menu ; https://www.tripadvisor.com.tr/Restaurant_Review-g23701958-d24970494-Reviews-Bombaci_Fatih-Besiktas.html
+
+## ESKİ BABEL OCAKBAŞI RESTAURANT ID 6332
+Hentzer kaydı `Şehit Muhtar, Süslü Saksı Sk. No:10A, 34435 Beyoğlu/İstanbul` ve `+90 212 244 40 71`; Eski Babel’in resmi sitesi aynı adres ve telefonu, Yandex, Waze, Instagram ve Corner da exact şubeyi doğruluyor. Resmi Eski Babel 2026 menüsünde Kebaplar ve Başlangıçlar kategorilerinden 20 benzersiz gıda ürünü/fiyatı görüldü. İçecekler, alkollü içecekler, meyveler ve poşet dışlandı. **Override kabul edildi.**
+Kaynaklar: https://eskibabel.com/ ; https://eskibabel.com/menu/menu.php ; https://eskibabel.com/menu/category.php?id=5 ; https://eskibabel.com/menu/category.php?id=4 ; https://yandex.com.tr/maps/org/eski_babel_ocakbasi_restaurant/1076261435/

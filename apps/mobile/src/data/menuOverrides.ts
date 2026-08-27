@@ -6334,6 +6334,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+  "6332": {
+    "name": "ESKİ BABEL OCAKBAŞI RESTAURANT",
+    "sourceUrl": "https://eskibabel.com/menu/menu.php",
+    "sourceName": "Eski Babel resmi 2026 menüsü; resmi iletişim sayfası, Yandex ve Instagram ile Şehit Muhtar Mah. Süslü Saksı Sk. No:10A / 0212 244 40 71 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Fıstıklı Kebap", "price": "1200 TL", "category": "Kebaplar" },
+      { "name": "Vejetaryan Kebap", "price": "800 TL", "category": "Kebaplar" },
+      { "name": "Çöp Şiş", "price": "1000 TL", "category": "Kebaplar" },
+      { "name": "Uykuluk", "price": "1000 TL", "category": "Kebaplar" },
+      { "name": "Böbrek", "price": "870 TL", "category": "Kebaplar" },
+      { "name": "Beyti Kebap", "price": "1130 TL", "category": "Kebaplar" },
+      { "name": "Tavuk Kanat", "price": "750 TL", "category": "Kebaplar" },
+      { "name": "Piliç Şiş", "price": "750 TL", "category": "Kebaplar" },
+      { "name": "Taraklık", "price": "1200 TL", "category": "Kebaplar" },
+      { "name": "Kaburga", "price": "1100 TL", "category": "Kebaplar" },
+      { "name": "Külbastı", "price": "1130 TL", "category": "Kebaplar" },
+      { "name": "Pirzola", "price": "1110 TL", "category": "Kebaplar" },
+      { "name": "Ciğer Şiş", "price": "1000 TL", "category": "Kebaplar" },
+      { "name": "Karışık Kebap", "price": "1800 TL", "category": "Kebaplar" },
+      { "name": "Ali Nazik Kebap", "price": "1130 TL", "category": "Kebaplar" },
+      { "name": "Patlıcan Kebap", "price": "1030 TL", "category": "Kebaplar" },
+      { "name": "Urfa Kebap", "price": "950 TL", "category": "Kebaplar" },
+      { "name": "Adana Kebap", "price": "950 TL", "category": "Kebaplar" },
+      { "name": "Çiğköfte", "price": "430 TL", "category": "Başlangıçlar" },
+      { "name": "Günün Çorbası", "price": "200 TL", "category": "Başlangıçlar" }
+    ]
+  },
   "6334": {
     "name": "TELLA KEBAP BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/z88g/tella-kebap",
