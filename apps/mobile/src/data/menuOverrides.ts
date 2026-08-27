@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6364": {
+    "name": "BEYKOZ PİDE VE BÖREK SALONU",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vphh/beykoz-pide-and-borek",
+    "sourceName": "Canlı Yemeksepeti exact Beykoz Pide & Börek menüsü; resmi site/Facebook ve Kaçıyor ile Merkez Hacı Alibey adresi/telefonu doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Kıymalı Kol Böreği (250 gr.)", "price": "225 TL", "category": "Börekler" },
+      { "name": "Küt Böreği (4 Dilim)", "price": "180 TL", "category": "Börekler" },
+      { "name": "Kıymalı Su Böreği (250 gr.)", "price": "225 TL", "category": "Börekler" },
+      { "name": "Peynirli Kol Böreği (250 gr.)", "price": "225 TL", "category": "Börekler" },
+      { "name": "Peynirli Su Böreği (250 gr.)", "price": "225 TL", "category": "Börekler" },
+      { "name": "Kuru Peynirli Poğaça", "price": "40 TL", "category": "Poğaçalar" },
+      { "name": "Sade Poğaça", "price": "40 TL", "category": "Poğaçalar" },
+      { "name": "Kaşarlı Poğaça", "price": "40 TL", "category": "Poğaçalar" },
+      { "name": "Kıymalı Poğaça", "price": "40 TL", "category": "Poğaçalar" },
+      { "name": "Peynirli Poğaça", "price": "40 TL", "category": "Poğaçalar" },
+      { "name": "Dereotlu Poğaça", "price": "40 TL", "category": "Poğaçalar" },
+      { "name": "Kıymalı Kaşarlı Karadeniz Pidesi", "price": "395 TL", "category": "Pideler" },
+      { "name": "Kıymalı Yumurtalı Karadeniz Pidesi", "price": "395 TL", "category": "Pideler" },
+      { "name": "Kaşarlı Sucuklu Karadeniz Pidesi", "price": "395 TL", "category": "Pideler" },
+      { "name": "Sebzeli Karadeniz Pidesi", "price": "395 TL", "category": "Pideler" },
+      { "name": "Tavuklu Karışık Karadeniz Pidesi", "price": "395 TL", "category": "Pideler" },
+      { "name": "Kıymalı Karışık Karadeniz Pidesi", "price": "425 TL", "category": "Pideler" },
+      { "name": "Kuşbaşılı Karışık Karadeniz Pidesi", "price": "495 TL", "category": "Pideler" },
+      { "name": "Kavurmalı Kaşarlı Karadeniz Pidesi", "price": "495 TL", "category": "Pideler" },
+      { "name": "Kuşbaşılı Karadeniz Pidesi", "price": "495 TL", "category": "Pideler" }
+    ]
+  },
   "6365": {
     "name": "KÖFTECİ YUSUF BAYRAMPAŞA PASHADOR",
     "sourceUrl": "https://www.migros.com.tr/yemek/kofteci-yusuf-bayrampasa-muratpasa-mah-st-1eb6e",
