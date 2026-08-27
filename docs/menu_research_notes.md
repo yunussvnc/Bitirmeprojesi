@@ -3425,3 +3425,7 @@ Kaynaklar: https://www.ozikizlerkunefe.com/beylikduzu-subesi.php ; https://yande
 ## MANDABATMAZ ID 6384 HOLD
 Resmi site exact `Asmalımescit Mah. İstiklal Cad. Olivia Geçidi Çıkmazı No:1/A` ve `0212 243 77 37` bilgilerini doğruluyor. Ancak son bir yıl içinde şubeye ait ürün bazlı güncel fiyatlı menü bulunamadı; 2023 menü görseli ve yaklaşık fiyat kaynakları yeterli değil. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.mandabatmaz.com.tr/iletisim ; https://www.mandabatmaz.com.tr/ ; https://gurmerehber.com/mandabatmaz-beyoglu/ ; https://mesprestiges.com/tr/istanbul/places/mandabatmaz/menu
+
+## SUSHICO BEBEK ID 6383
+Resmi SushiCo Bebek sayfası, Yandex ve Yemeksepeti başlığı exact `Bebek, Cevdet Paşa Cd. No:69 D:B, 34342 Beşiktaş/İstanbul` ve genel `444 78 74` hattını doğruluyor. Canlı Yemeksepeti `gclc` Bebek menüsünden 2026-08-27 tarihinde Popular carousel tekrarları dışlanarak 15 starter ve 5 soup olmak üzere 20 benzersiz güncel fiyatlı ürün alındı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/gclc/sushico-gclc ; https://www.sushico.com.tr/en/subeler/bebek ; https://yandex.com.tr/maps/org/sushico_bebek/44247870518/ ; https://bebek-sushico.arimenu.com/

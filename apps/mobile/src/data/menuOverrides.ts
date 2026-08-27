@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6383": {
+    "name": "SUSHICO BEBEK",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/gclc/sushico-gclc",
+    "sourceName": "Canlı Yemeksepeti exact Bebek menüsü; resmi SushiCo Bebek sayfası/Yandex ile Cevdet Paşa adresi ve 444 78 74 şube parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Shrimp Bomb (10 pcs.)", "price": "892 TL", "category": "Starters" },
+      { "name": "Edamame", "price": "384 TL", "category": "Starters" },
+      { "name": "Corn Tempura", "price": "608 TL", "category": "Starters" },
+      { "name": "Shrimp Chips", "price": "350 TL", "category": "Starters" },
+      { "name": "Crispy Shrimp (10 pcs.)", "price": "890 TL", "category": "Starters" },
+      { "name": "Chili Garlic Soslu Edamame", "price": "408 TL", "category": "Starters" },
+      { "name": "Fish & Chips", "price": "976 TL", "category": "Starters" },
+      { "name": "Chicken Balls (8 pcs)", "price": "584 TL", "category": "Starters" },
+      { "name": "Somon Carpaccio With Ponzu Sauce", "price": "980 TL", "category": "Starters" },
+      { "name": "Karides Topları", "price": "700 TL", "category": "Starters" },
+      { "name": "Crispy Green Bean Tempura", "price": "540 TL", "category": "Starters" },
+      { "name": "Mongolian Chicken", "price": "614 TL", "category": "Starters" },
+      { "name": "Golden Ebi Bites", "price": "860 TL", "category": "Starters" },
+      { "name": "Chicken Katsu Finger", "price": "670 TL", "category": "Starters" },
+      { "name": "Fresh Cucumber Kimchi", "price": "430 TL", "category": "Starters" },
+      { "name": "Hot & Sour Soup", "price": "418 TL", "category": "Soups" },
+      { "name": "Chicken & Corn Soup with Asparagus", "price": "388 TL", "category": "Soups" },
+      { "name": "Wonton Soup", "price": "430 TL", "category": "Soups" },
+      { "name": "Miso Soup", "price": "460 TL", "category": "Soups" },
+      { "name": "Tom Yum Soup", "price": "494 TL", "category": "Soups" }
+    ]
+  },
   "6386": {
     "name": "PİZZALİVE & KAFETERYA",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/d93w/pizzalive-kafeterya",
