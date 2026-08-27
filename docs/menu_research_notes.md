@@ -3861,3 +3861,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6272 ; https://www.facebook.com/1
 ## YAZ DÖNER BEŞYÜZEVLER ID 6271 — HOLD
 Hentzer `Yıldırım, Eski Edirne Asf. No:205, 34045 Bayrampaşa`, telefon `+90 212 479 09 80`. Resmi Instagram `@yaz_doner` ve RestaurantGuru arama sonucu exact şube/telefonu destekliyor; RestaurantGuru sayfası captcha/suspicious-activity duvarında. Son bir yıl içinde 20 benzersiz fiyatlı gıda ürünü ve erişilebilir exact Yemeksepeti/Migros vendoru bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6271 ; https://www.instagram.com/yaz_doner/ ; https://restaurantguru.com/Dunya-Doner-Istanbul-3
+
+## LIFE MOON COFFEE ID 6270 — HOLD
+Hentzer `Kavaklı, Mehmet Akif Ersoy Cd. No:17, 34520 Beylikdüzü`, telefon `+90 501 008 09 42`. Snapchat Place kaydı aynı adres/telefonu doğrudan doğruluyor; resmi Instagram işletmenin Kavaklı/Demir Country şubesini destekliyor. Son bir yıl içinde 20 benzersiz gıda/içecek ürünü ve fiyatı yayınlanmış exact şube menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6270 ; https://www.snapchat.com/place/life-moon-coffee/518345a2-0800-4701-b635-7534d63c89eb ; https://www.instagram.com/p/DLFdYgJsZzg/ ; https://www.instagram.com/lifemooncoffee/
