@@ -3270,3 +3270,7 @@ Kaynaklar: https://tr.polomap.com/zh-CN/istanbul/224175 ; https://www.bulurum.co
 ## ETÇİ MEHMET BURGER BEYKENT ID 6422 ACCEPTED
 Hentzer `Gürpınar Mah. Yavuz Sultan Selim Bulvarı No:28R, 34528 Büyükçekmece/İstanbul`, telefon `+90 212 428 38 24`. Etçi Mehmet’in resmi şube sayfası Beykent adres/telefonunu doğruluyor ve doğrudan Yemeksepeti `lrci` vendoruna bağlıyor. Güncel vendor menüsünden popüler carousel tekrarları, içecek ve poşet dışlanarak 20 benzersiz burger, çorba, hot dog ve ızgara ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.etcimehmetburger.com/subeler ; https://www.yemeksepeti.com/en/restaurant/lrci/etci-mehmet-burger-lrci
+
+## SİTA BALIK GAYRETTEPE ID 6421 HOLD
+Instagram 2025 paylaşımları, Snapchat, Servis Listeleri, Restoranim.net ve Yandex Hentzer ile Gayrettepe Vefabey Sok. No:16/1 ve `+90 212 266 26 56` exact parity’sini destekliyor. Ancak `Gayrettepe Balıkçısı` Yemeksepeti vendorunun Sita Balık exact şubesi olduğu doğrulanamadı; Sita adına ait son bir yıl fiyatlı 20 ürün menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.instagram.com/sitabalik/ ; https://www.yemeksepeti.com/restaurant/zrlz/gayrettepe-balikcisi-zrlz
