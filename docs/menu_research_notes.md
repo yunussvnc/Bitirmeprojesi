@@ -3429,3 +3429,7 @@ Kaynaklar: https://www.mandabatmaz.com.tr/iletisim ; https://www.mandabatmaz.com
 ## SUSHICO BEBEK ID 6383
 Resmi SushiCo Bebek sayfası, Yandex ve Yemeksepeti başlığı exact `Bebek, Cevdet Paşa Cd. No:69 D:B, 34342 Beşiktaş/İstanbul` ve genel `444 78 74` hattını doğruluyor. Canlı Yemeksepeti `gclc` Bebek menüsünden 2026-08-27 tarihinde Popular carousel tekrarları dışlanarak 15 starter ve 5 soup olmak üzere 20 benzersiz güncel fiyatlı ürün alındı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/gclc/sushico-gclc ; https://www.sushico.com.tr/en/subeler/bebek ; https://yandex.com.tr/maps/org/sushico_bebek/44247870518/ ; https://bebek-sushico.arimenu.com/
+
+## ARE YOU CHOCOLATE BEŞİKTAŞ ID 6382 HOLD
+Hentzer `Sinanpaşa, Maşuklar Yokuşu 4a, 34353 Beşiktaş/İstanbul` ve `0538 948 48 13` bilgileri resmi Instagram/Facebook ile destekleniyor; ancak Yandex aynı telefonu `Cihannüma, Maşuklar Yokuşu 2/2` adresiyle veriyor. Kolay Restoran menüsü pasif HTTP’de yalnızca yükleme kabuğu döndürdü; tam ürün/fiyat listesi ve exact şube bağı bağımsız biçimde doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.instagram.com/areyouchocolate/ ; https://www.facebook.com/areyouchocolatebesiktas/ ; https://yandex.com.tr/maps/org/are_you_chocolate_cikolata_kahve/157854404856/ ; https://menu.kolayrestoran.com/are-you-chocolate ; https://menu.kolayrestoran.com/are-you-chocolate/0
