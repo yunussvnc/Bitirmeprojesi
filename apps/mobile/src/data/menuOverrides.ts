@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6392": {
+    "name": "DUAYEN MEYHANE BEŞİKTAŞ",
+    "sourceUrl": "https://duayen.menuluka.com/",
+    "sourceName": "Canlı Duayen dijital menüsü; Bulurum/Yandex/Mekan ile exact Cihannüma adresi ve telefon doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Serpme Kahvaltı", "price": "1400 TL", "category": "Kahvaltılar" },
+      { "name": "Göz Yumurtalı Kruvasanlı Kahvaltı", "price": "650 TL", "category": "Kahvaltılar" },
+      { "name": "Kahvaltı Tabağı", "price": "600 TL", "category": "Kahvaltılar" },
+      { "name": "Mantarlı Kruvasanlı Kahvaltı", "price": "700 TL", "category": "Kahvaltılar" },
+      { "name": "Simit Kahvaltı", "price": "450 TL", "category": "Kahvaltılar" },
+      { "name": "Sosisli Kruvasanlı Kahvaltı", "price": "700 TL", "category": "Kahvaltılar" },
+      { "name": "Çakallı Menemeni", "price": "275 TL", "category": "Kahvaltılar" },
+      { "name": "Kaşarlı Omlet", "price": "235 TL", "category": "Kahvaltılar" },
+      { "name": "Sucuklu Göz Yumurta", "price": "315 TL", "category": "Kahvaltılar" },
+      { "name": "Mantarlı Omlet", "price": "300 TL", "category": "Kahvaltılar" },
+      { "name": "Kajun Baharatlı Kızarmış Patates", "price": "235 TL", "category": "Ara Sıcaklar" },
+      { "name": "Soğan Halkası", "price": "290 TL", "category": "Ara Sıcaklar" },
+      { "name": "Sosis Tava Patates", "price": "320 TL", "category": "Ara Sıcaklar" },
+      { "name": "Cips Nugget", "price": "370 TL", "category": "Ara Sıcaklar" },
+      { "name": "Cheddar Soslu Patates Kızartması", "price": "255 TL", "category": "Ara Sıcaklar" },
+      { "name": "Chicken Burger", "price": "450 TL", "category": "Burgerler & Wraplar" },
+      { "name": "Classic Burger", "price": "500 TL", "category": "Burgerler & Wraplar" },
+      { "name": "Tiftik Burger", "price": "600 TL", "category": "Burgerler & Wraplar" },
+      { "name": "Çift Katlı Burger", "price": "850 TL", "category": "Burgerler & Wraplar" },
+      { "name": "Tavuklu Wrap", "price": "535 TL", "category": "Burgerler & Wraplar" }
+    ]
+  },
   "6393": {
     "name": "İBB BEYKOZ SAHİL SOSYAL TESİSLERİ",
     "sourceUrl": "https://menufiyatlar.com/702-ibb-beykoz-sosyal-tesisleri-menu-fiyatlari",

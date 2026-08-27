@@ -3389,3 +3389,7 @@ Kaynaklar: https://vahacoffee.com/ ; https://vahacoffee.com/menu/ ; https://www.
 ## İBB BEYKOZ SAHİL SOSYAL TESİSLERİ ID 6393
 Hentzer `Paşabahçe Mahallesi Burunbahçe Mevki, Barbaros Cd. No:16, 34800 Beykoz/İstanbul` ve `444 10 34` bilgisiyle İBB resmi rezervasyon sayfasındaki aynı adresle eşleşiyor. 2026 tarihli menufiyatlar listesinde ürün bazlı TL fiyatlardan 20 benzersiz kalem alındı: ana yemekler, salatalar, zeytinyağlılar ve ara sıcaklar. **Override kabul edildi.**
 Kaynaklar: https://menufiyatlar.com/702-ibb-beykoz-sosyal-tesisleri-menu-fiyatlari ; https://tesislerrezervasyon.ibb.istanbul/ ; https://www.instagram.com/reel/DX1o3ZZoHlP/
+
+## DUAYEN MEYHANE BEŞİKTAŞ ID 6392
+Bulurum, Yandex ve Mekan kayıtları exact `Cihannüma Mahallesi, Barbaros Caddesi & Camcı Hüseyin Sokak No:4, 34330 Beşiktaş/İstanbul` ve `0212 227 75 74` bilgisini eşleştiriyor. Canlı Duayen dijital menüsünden 2026-08-27 tarihinde 20 benzersiz fiyatlı yemek ürünü alındı: kahvaltılar, ara sıcaklar ve burger/wraplar. **Override kabul edildi.**
+Kaynaklar: https://duayen.menuluka.com/ ; https://www.bulurum.com/details/2a16dfcg0bcb1103_0_bcf5k5cccde1g ; https://yandex.com.tr/maps/org/duayen_meyhane_besiktas/130454546960/ ; https://mekan.com/mekan/duayen-restaurant
