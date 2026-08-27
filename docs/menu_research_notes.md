@@ -3493,3 +3493,7 @@ Kaynaklar: https://www.bulurum.com/details/ac36akc0063a276ca65cacb_d_740cc0 ; ht
 ## KILÇIKSIZ BALIK - SICAK MEZE DÜNYASI ID 6367
 Hentzer `Adnan Kahveci Mahallesi Erenler Caddesi (Beylik Kapalı Pazar Alanı içi), No:23-24, 34528 Beylikdüzü/İstanbul` ve `+90 212 852 35 52`; resmi Instagram/Facebook ve Restoranim/Servis Kayıt Listesi aynı şube bölgesini doğruluyor. Canlı Yemeksepeti `wf7p` menüsünden 2026-08-27 tarihinde 19 benzersiz güncel fiyatlı balık, sıcak meze, ekmek arası, salata ve tatlı ürünü alındı; içecek ve poşet dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/wf7p/kilciksiz-balik ; https://www.instagram.com/kilciksiz_balik/ ; https://www.facebook.com/304389556085466/ ; https://restoranim.net/istanbul/beylikduzu/balikci/kilciksiz-balik-sicak-meze-dunyasi ; https://serviskayitlistesi.com/istanbul/beylikduzu/restoran/kilciksiz-balik-sicak-meze-dunyasi-yR_GMo.html
+
+## BEYKOZ KAHVECİSİ ID 6366 HOLD
+Hentzer telefon alanı null; belediye kaydı 31/A ve 444 6 661 verir. Resmi Kimyon bağlantısı `Gümüşsuyu Kahvecisi` alt şubesini gösteriyor, exact şube/telefon paritesi sağlanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.beykoz.bel.tr/tesisler/detay/beykoz-kahvecisi ; https://app.kimyon.app/beykozkahvecisi ; https://yandex.com.tr/maps/org/beykoz_kahvecisi/50563162710/ ; https://restoranim.net/istanbul/beykoz/kafe/beykoz-kahvecisi
