@@ -3449,3 +3449,7 @@ Kaynaklar: https://www.makirestoran.com/iletisim.php ; https://www.instagram.com
 ## ÇUKURÇAYIR EKMEK FABRİKASI ID 6378 HOLD
 İşletme ve telefon çeşitli kaynaklarla eşleşiyor; ancak kapı numarası 199/119/99 olarak çelişkili ve son bir yıl ürün bazlı TL fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://restoranim.net/istanbul/istanbul/firin/cukurcayir-ekmek-fabrikasi ; https://www.kaciyor.com/cukurcayir-ekmek-fabrikasi ; https://www.bulurum.com/details/2daachb3cd0a_eba0d2b_2_0d71631cg ; https://yandex.com.tr/maps/org/ekmek_firini/8815857262/
+
+## FIVEBITES BURGER BEYKOZ ID 6377
+Hentzer `Göksu, Mihrişah Valide Sultan Cd. No:1, 34815 Beykoz/İstanbul` ve `+90 546 767 45 26`; resmi FiveBites Instagram, Facebook ve Yandex aynı Göksu adres/telefonu doğruluyor. Canlı Yemeksepeti `pvzf` sayfasından 2026-08-27 tarihinde Popular carousel tekrarları dışlanarak 9 burger ve 4 patates olmak üzere 13 benzersiz güncel fiyatlı yiyecek ürünü alındı; içecek, sos ve poşet kalemleri dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/pvzf/fivebites-burger ; https://yandex.com/maps/org/five_bites/16112490633/ ; https://www.instagram.com/fivebitesburger_/ ; https://www.facebook.com/61572641062574/videos/1846109712660516/

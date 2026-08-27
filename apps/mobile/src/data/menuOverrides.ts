@@ -92315,6 +92315,27 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6377": {
+    "name": "FIVEBITES BURGER BEYKOZ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pvzf/fivebites-burger",
+    "sourceName": "Canlı Yemeksepeti exact FiveBites Burger menüsü; resmi FiveBites/Yandex ile Göksu adres-telefon parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Five Bites Burger", "price": "404,60 TL", "category": "Burgerler" },
+      { "name": "Smoke Down Burger", "price": "641,75 TL", "category": "Burgerler" },
+      { "name": "Smash N Dash Burger", "price": "541,45 TL", "category": "Burgerler" },
+      { "name": "Jamiryo Burger", "price": "499,80 TL", "category": "Burgerler" },
+      { "name": "Sweet Kiss Burger", "price": "470,05 TL", "category": "Burgerler" },
+      { "name": "Crunchick Burger", "price": "380,80 TL", "category": "Burgerler" },
+      { "name": "Hot Doggy Burger", "price": "364,65 TL", "category": "Burgerler" },
+      { "name": "Chick Chick Bites", "price": "391 TL", "category": "Burgerler" },
+      { "name": "Tender Bites Burger", "price": "688,50 TL", "category": "Burgerler" },
+      { "name": "Patates Kızartması", "price": "142,80 TL", "category": "Patatesler" },
+      { "name": "Cajun Baharatlı Patates Kızartması", "price": "148,75 TL", "category": "Patatesler" },
+      { "name": "Cheddarlı Patates Kızartması", "price": "208,25 TL", "category": "Patatesler" },
+      { "name": "Trüf Mantarlı Parmesanlı Patates Kızartması", "price": "289 TL", "category": "Patatesler" }
+    ]
+  },
   "6383": {
     "name": "SUSHICO BEBEK",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/gclc/sushico-gclc",
