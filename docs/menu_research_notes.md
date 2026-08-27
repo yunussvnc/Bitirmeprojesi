@@ -3541,3 +3541,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/holy_cup_coffee/86381768117/ ; https:/
 ## ÖZ ÇITIRIM UNLU MAMÜLLERİ ID 6355 HOLD
 Yandex exact telefon `+90 216 322 47 73` ve işletmeyi doğruluyor; ancak Hentzer `Salkım Sk. 42`, Yandex `Pamir Sok. 42` gösteriyor. Son bir yıl ürün bazlı TL menü de bulunamadı. Exact adres ve güncel fiyat şartları sağlanmadığı için **strict HOLD**.
 Kaynaklar: https://yandex.com.tr/maps/org/ozcitirim_ekmek_ve_unlu_mamulleri/128673510293/ ; https://kaciyor.com/oz-citirim-unlu-mamulleri ; https://restoranim.net/istanbul/istanbul/firin/oz-citirim-unlu-mamulleri
+
+## ENBEY DÖNER KEBAP BEYLİKDÜZÜ ID 6354 HOLD
+Resmi Enbey sitesi Beykent şubesini `Adnan Kahveci Mah. Yavuz Sultan Selim Blv. No:23` gösterirken Hentzer `Perlavista AVM No:1 No:48` gösteriyor. Telefon `444 62 21` eşleşse de exact adres paritesi kesin değil; güncel Yemeksepeti menüsü yanlış şubeye uygulanmadı. **Strict HOLD**.
+Kaynaklar: https://enbeydoner.com.tr/subelerimiz/ ; https://enbeydoner.com.tr/ ; https://www.instagram.com/reel/Dcd65LAsvmA/ ; https://www.yemeksepeti.com/restaurant/j0cl/enbey-doner-beylikduzu
