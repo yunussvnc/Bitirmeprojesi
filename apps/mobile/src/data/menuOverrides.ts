@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6400": {
+    "name": "PİTZA MİA (PİZZADAPİZZA)",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pizza-da-pizza-pitza-mia-besiktas-dikilitas-mah-st-2fd09",
+    "sourceName": "Migros Yemek exact Pizza Da Pizza - Pitza Mia Beşiktaş (Dikilitaş Mah.) menüsü; Restoranim/Menu-TR/Tumİşyeri/Instagram ile Yenidoğan Sok. No:12/A ve +90 212 261 61 53 parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Akdeniz Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Arrabbiata Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Dört Mevsim Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Funghi Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Margherita Pizza (Orta Boy) (30 Cm.)", "price": "375 TL", "category": "Klasik Pizzalar" },
+      { "name": "Rokalı Margherita Pizza (Orta Boy) (30 Cm.)", "price": "380 TL", "category": "Klasik Pizzalar" },
+      { "name": "Salamlı Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Sebzelim Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Sosisli Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Efsane Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Bbq Sucuk Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Queen Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Fantastik Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Karışık Pizza (Orta Boy) (30 Cm.)", "price": "399 TL", "category": "Klasik Pizzalar" },
+      { "name": "Hawaii Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Vegan Pizza (Orta Boy) (30 Cm.)", "price": "395 TL", "category": "Klasik Pizzalar" },
+      { "name": "Acılı Tavuklu Gurme Pizza (Orta Boy) (30 Cm.)", "price": "415 TL", "category": "Gurme Pizzalar" },
+      { "name": "Hellim Special Gurme Pizza (Orta Boy) (30 Cm.)", "price": "415 TL", "category": "Gurme Pizzalar" },
+      { "name": "Bbq Chicken Gurme Pizza (Orta Boy) (30 Cm.)", "price": "415 TL", "category": "Gurme Pizzalar" },
+      { "name": "Chicken Supreme Gurme Pizza (Orta Boy) (30 Cm.)", "price": "415 TL", "category": "Gurme Pizzalar" }
+    ]
+  },
   "6511": {
     "name": "SALT FRIED CHICKEN BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pehr/salt-fried-chicken-pehr",

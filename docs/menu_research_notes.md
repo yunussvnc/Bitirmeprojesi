@@ -3355,3 +3355,8 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/gaw7/kebap-haus-gaw7 ; http
 ## BAZLAMA İSTASYONU BEYLİKDÜZÜ ID 6401 HOLD
 Resmi Instagram ve Yandex Hentzer ile Adnan Kahveci, Çamlıtepe Cd. No:20A D:3 ve `+90 555 046 60 56` exact parity’sini destekliyor. Yemeksepeti `asj2` vendoru Fahrettin Kerim Gökay Cd. (farklı şube) gösterdiği için kullanılmadı. Exact Migros Yemek sayfası bulundu ancak dinamik ürün fiyatları güvenilir biçimde çıkarılamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.instagram.com/bazlamaistasyonu_beylikduzu/ ; https://yandex.com.tr/maps/org/bazlama_istasyonu_beylikduzu/207958770340/ ; https://www.migros.com.tr/yemek/bazlama-istasyonu-beylikduzu-adnan-kahveci-mah-st-1a15f ; https://www.yemeksepeti.com/en/restaurant/asj2/bazlama-istasyonu-asj2
+
+
+## PİTZA MİA (PİZZADAPİZZA) ID 6400 KABUL
+Restoranim, Menu-TR, Kacıyor, Tumİşyeri ve resmi Instagram Hentzer ile `Dikilitaş, Yenidoğan Sok. No:12/A, 34349 Beşiktaş/İstanbul` ve `+90 212 261 61 53` exact adres/telefon parity’sini doğruluyor. Migros Yemek exact `Pizza Da Pizza - Pitza Mia, Beşiktaş (Dikilitaş Mah.)` vendorunda orta boy klasik/gurme pizza kategorilerinin güncel TL fiyatları görüldü. İçecek, sos, tatlı, yan ürün ve menüler dışlanarak 20 benzersiz pizza ürünü override’a aktarıldı; kaynak yayın tarihi görünmediği için `verifiedAt` erişim/doğrulama tarihi olan `2026-08-27` tutuldu.
+Kaynaklar: https://www.migros.com.tr/yemek/pizza-da-pizza-pitza-mia-besiktas-dikilitas-mah-st-2fd09 ; https://www.yemeksepeti.com/restaurant/wmqb/pitza-mia-pizza-da-pizza-wmqb ; https://www.instagram.com/pitzamiatr/ ; https://restoranim.net/istanbul/besiktas/pizzaci/pitza-mia-pizzadapizza
