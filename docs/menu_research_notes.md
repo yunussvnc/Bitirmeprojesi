@@ -3908,3 +3908,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6261 ; https://qrdos.tr/oz-beykoz
 ## HUNGRY BIRDS FRIED CHICKEN BEŞİKTAŞ ID 6260 — HOLD
 Hentzer `Cihannüma, Barbaros Blv. 14/C, 34353 Beşiktaş`, telefon `+90 544 170 00 40`. Menu-TR exact adres/telefonu; Tripadvisor, RestaurantGuru, HalalFoodle, Cybo, TikTok ve 27.04.2026 Instagram aynı şubeyi destekliyor. Menu-TR’de ürün/özellik adları var ancak fiyat belirtilmemiş; 20 güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6260 ; https://www.menu-tr.com/istanbul/besiktas/tavuk-restorani/hungry-birds-fried-chicken-besiktas ; https://restaurantguru.com/Hungry-Birds-Istanbul ; https://halalfoodle.com/restaurants/turkey/istanbul/besiktas/hungry-birds-fried-chicken-besiktas-cihannuma ; https://www.instagram.com/p/DXHxaBziHSu/
+
+## BİZİM ZURNA DÜRÜM ID 6259 — HOLD
+Hentzer `Çubuklu, Öztürk Sk. No:19, 34805 Beykoz`, telefon `+90 542 501 00 65`. RestaurantGuru, Cybo, İstanbul Servis Listesi ve 2026 sosyal içerikleri exact adres/telefonu destekliyor. Güncel kanıtlarda yalnız sınırlı fiyat bilgisi (70 TL çorba) bulundu; 20 benzersiz fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6259 ; https://restaurantguru.com/Bizim-Zurna-DurumHalit-Ustadan-Ozel-Soslu-70cm-Tavuk-Durum-Istanbul ; https://www.instagram.com/reel/DZrr5gttiV/ ; https://istanbulservislistesi.com.tr/istanbul/beykoz/restoran/bizim-zurna-durumozel-soslu-70cm-tavuk-durum-8iiq00.html
