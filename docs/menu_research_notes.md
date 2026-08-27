@@ -3401,3 +3401,7 @@ Kaynaklar: https://misskokorechmidye.com/menu/ ; https://www.instagram.com/miss.
 ## FLÂN BAKERY AKARETLER ID 6390 HOLD
 Yandex ve resmi Instagram exact Akaretler adres/telefonunu doğruluyor: `Vişnezade, Süleyman Seba Cd. No:32/1` ve `0533 359 35 26`. Ancak resmi Flan şube listesinde Akaretler bulunmuyor; Yemeksepeti `zd30` ve FineDine fiyatlı menüleri marka düzeyinde olup exact Akaretler şubesini adres/telefonla bağlamıyor. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.flan.com.tr/subelerimiz/ ; https://www.instagram.com/p/DIoXs5ZAZp1/ ; https://yandex.com/maps/org/flan_bakery_akaretler/18910502885/ ; https://www.yemeksepeti.com/en/restaurant/zd30/flan-bakery-zd30 ; https://qr.finedinemenu.com/flan-bakery-and-coffee
+
+## KONTES YENİ NESİL MEYHANE ID 6389 HOLD
+İsim/telefon eşleşmesi mevcut; ancak Hentzer `Kocatepe Cd. No:293`, Yandex `Kocatepe Cad. No:293A` gösteriyor. Son bir yıl içinde ürün bazlı güncel TL fiyatlı doğrulanabilir menü de bulunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://yandex.com.tr/maps/org/kontes_yeni_nesil_meyhane/30342923850/ ; https://mekanlar.com/mekan/kontes-yeni-nesil-meyhane-sahil ; https://www.instagram.com/kontesbeylikduzu/ ; https://www.instagram.com/reel/DTbSRlhiu_4/
