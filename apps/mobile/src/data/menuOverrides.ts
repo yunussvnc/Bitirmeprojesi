@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6348": {
+    "name": "PASAPORT PİZZA BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pasaport-pizza-beylikduzu-kavakli-mah-st-220b6",
+    "sourceName": "Canlı Migros Yemek exact Pasaport Pizza Beylikdüzü (Kavaklı Mah.) menüsü; resmi Pasaport Pizza şubeler sayfası ile Kavaklı Mah. Esef Sk. No:19/A / 0212 665 55 55 doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Margarita (Büyük)", "price": "538.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Mantarlı & Sosisli (Büyük)", "price": "531.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Luna (Büyük)", "price": "531.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Ege (Büyük)", "price": "573.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Akdeniz (Büyük)", "price": "573.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Mexican (Büyük)", "price": "573.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Special (Büyük)", "price": "573.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Vegetarian (Büyük)", "price": "573.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Dream (Büyük)", "price": "573.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "4 Peynirli (Büyük)", "price": "643.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Tavuklu (Büyük)", "price": "643.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Ton Balıklı (Büyük)", "price": "643.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Kavurmalım (Büyük)", "price": "671.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Kapadokya (Büyük)", "price": "671.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Füme Kaburga (Büyük)", "price": "741.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Mix (Büyük)", "price": "573.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Carnaval (Büyük)", "price": "580.86 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Acılı Tavuklu (Büyük)", "price": "657.93 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "İzmir Karışık (Orta)", "price": "472.36 TL", "category": "Orta Boy Pizzalar" },
+      { "name": "Somon Füme (Orta)", "price": "510.86 TL", "category": "Orta Boy Pizzalar" }
+    ]
+  },
   "6357": {
     "name": "GHAYA COFFEE COMPANY BEYLİKDÜZÜ",
     "sourceUrl": "https://www.migros.com.tr/yemek/ghaya-panini-coffee-beylikduzu-kavakli-mah-st-2b4cb",

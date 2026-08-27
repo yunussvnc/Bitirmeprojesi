@@ -3565,3 +3565,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/illa_burger/44651607770/ ; https://www
 ## RIDERS ZONE COFFEE MAKARNA&PIZZA ID 6349 HOLD
 Yandex exact işletme ve `+90 532 596 47 73` telefonu doğruluyor; ancak Hentzer `Peyami Safa Sokağı Semerkand Line Sitesi`, Yandex `Mehmetçik Cad. 14` gösteriyor. Son bir yıl exact şube fiyatlı menü bulunamadı. **Strict HOLD**.
 Kaynaklar: https://yandex.com.tr/maps/org/riders_zone_coffee_makarna_pizza/2185252977/ ; https://www.instagram.com/riderszoneco/ ; https://firmaatlas.com/istanbul/buyukcekmece/firma/riders-zone-coffee-makarna-pizza-2497048
+
+## PASAPORT PİZZA BEYLİKDÜZÜ ID 6348
+Hentzer `Kavaklı, Esef Sk. No:19/A, 34520 Beylikdüzü/İstanbul` ve `+90 212 665 55 55`; resmi Pasaport Pizza şubeler sayfası aynı Kavaklı Mah. Esef Sk. No:19/A adresini doğruluyor, Restoranim ve güncel işletme kayıtları telefonu destekliyor. Canlı Migros Yemek exact `Pasaport Pizza, Beylikdüzü (Kavaklı Mah.)` menüsünden 2026-08-27 tarihinde 18 büyük boy ve 2 orta boy olmak üzere 20 benzersiz güncel pizza ürünü alındı; Popüler tekrarları, içecek/sos/poşet ve kampanyalı kombinasyonlar dışlandı. **Override kabul edildi.**
+Kaynaklar: https://pasaportpizza.com/subeler ; https://www.migros.com.tr/yemek/pasaport-pizza-beylikduzu-kavakli-mah-st-220b6 ; https://restoranim.net/istanbul/istanbul/pizzaci/pasaport-pizza-beylikduzu
