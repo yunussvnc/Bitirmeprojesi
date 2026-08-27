@@ -3657,3 +3657,7 @@ Kaynaklar: https://www.migros.com.tr/yemek/pizza-v-sisli-fulya-mah-st-2fabd ; ht
 ## HOLD — TARİHİ BALAT DÖNERCİSİ B.PAŞA ID 6325
 Hentzer kaydı `Yıldırım, Ali Fuat Başgil Cd. No:107, 34045 Bayrampaşa/İstanbul` ve `+90 212 578 18 85`; işletmenin 2026 Instagram içerikleri, Yandex ve TikTok telefonu doğruluyor. Yemeksepeti’nde aynı marka/şube için çok sayıda güncel döner ürünü ve fiyatı bulundu. Ancak bağımsız kaynaklarda adres `No:107A` (Yandex), `No:107D` (Yemeksepeti) ve genel `No:107` (sosyal içerik) olarak farklılaşıyor; Hentzer kaydındaki exact bağımsız bölüm kesinleştirilemedi. %100 adres paritesi zorunlu olduğu için menü aktarılmadan **strict HOLD** bırakıldı.
 Kaynaklar: https://www.yemeksepeti.com/restaurant/or8j/tarihi-balat-donercisi ; https://yandex.com.tr/maps/org/tarihi_balat_donercisi_b_pasa/216210986212/ ; https://www.instagram.com/balatdonercisi/ ; https://www.tiktok.com/@tarihibalatgecedonercisi/video/7652747331464400146
+
+## HOLD — MILANO BEANS COFFEE ID 6324
+Hentzer kaydı `Şehit Muhtar, Tarlabaşı Blv No:100-112B, 34435 Beyoğlu/İstanbul` ve `+90 510 221 62 03`; Maptons ve Restaurant Guru aynı Tarlabaşı Blv No:100-112B işletmesini gösteriyor, ancak kamuya açık telefon `+90 532 707 60 03` olarak farklı. Ayrıca erişilebilir kaynaklarda son bir yıl içinde 20 benzersiz fiyatlı gıda ürünü bulunamadı. Zorunlu %100 telefon paritesi sağlanamadığından **strict HOLD; override eklenmedi.**
+Kaynaklar: https://tr.maptons.com/p/12780016965 ; https://fr.restaurantguru.com/amp/Milano-Beans-Coffee-shop-Istanbul
