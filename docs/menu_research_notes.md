@@ -3521,3 +3521,7 @@ Kaynaklar: https://www.migros.com.tr/yemek/kaffee-schutz-besiktas-cihannuma-mah-
 ## ÜMİT ET DÖNER ID 6360 HOLD
 Resmi Ümit Et ve Yandex Hentzer adres/telefonunu destekliyor; ancak Yemeksepeti `wyhi` More info panelinde adres **Çamlıtepe Cd. No:28**. Hentzer `Osmanlı Cd. No:52 D:4` olduğundan exact şube paritesi sağlanamadı. Güncel menü yanlış şubeye uygulanmadı; **strict HOLD**.
 Kaynaklar: https://umitet.com/iletisim/ ; https://yandex.com.tr/maps/org/umit_et_doner/1569062009/ ; https://www.yemeksepeti.com/en/restaurant/wyhi/umit-et-doner
+
+## POINT LOUNGE BEŞİKTAŞ ID 6359 HOLD
+Dijital menü exact Point Lounge Beşiktaş adı/adres çevresi ve güncel fiyatlı yiyecek menüsü sunuyor; fakat telefon alanı boş, Yandex `0544 800 34 04` gösterirken Hentzer `0541 270 54 88` gösteriyor. Zorunlu exact phone parity sağlanamadığı için menü eklenmedi; **strict HOLD**.
+Kaynaklar: https://pointlounge.dijital.menu/26236 ; https://pointlounge.dijital.menu/26229 ; https://nr.maptons.com/p/12867820538 ; https://www.menu-tr.com/istanbul/besiktas/nargile-salonu/point-lounge-besiktas-nargileoyun-salonu
