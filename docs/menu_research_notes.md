@@ -3941,3 +3941,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6253 ; https://www.iskarmoz.com/ 
 ## BEŞİKTAŞ BARBAROS COFFY ID 6252 — HOLD
 Hentzer `Cihannüma, Barbaros Blv. 45/B, 34022 Beşiktaş`, telefon `+90 212 919 00 66`; Kaçıyor, RestaurantGuru, Tumİşyeri ve servis listeleri destekliyor. Migros `Coffy, Beşiktaş (Cihannüma Mah.)` vendoru çok sayıda güncel fiyat gösteriyor fakat 45/B adres numarası ve onaylı telefon vendor sayfasında görünmüyor. %100 exact branch paritesi sağlanamadığı için **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6252 ; https://www.migros.com.tr/yemek/coffy-besiktas-cihannuma-mah-st-25d3b ; https://coffy.com.tr/ ; https://kaciyor.com/besiktas-barbaros-coffy ; https://restaurantguru.com/Besiktas-Barbaros-Coffy-Istanbul
+
+## ERDEM PASTANESİ ID 6251 — HOLD
+Hentzer `Çengeldere, Çengeldere Cd., 34820 Beykoz`, telefon `+90 531 290 90 44`; Menu-TR ve çeşitli dizinler adresi destekliyor, Yandex aynı telefonu ancak daha spesifik `Çengeldere Cad. 99/2` kapı numarasını gösteriyor. Hentzer adresinde kapı numarası olmadığından ve exact şubeye ait son bir yıl içinde doğrulanmış 20 fiyatlı ürün menüsü bulunamadığından **HOLD; override eklenmedi**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6251 ; https://www.menu-tr.com/istanbul/beykoz/pastane/erdem-pastanesi ; https://yandex.com.tr/maps/org/erdem_pastanesi/234638182826/ ; https://www.servisisletmebul.com/istanbul/beykoz/pastane-tatlici/erdem-pastanesi-bk8zeh.html
