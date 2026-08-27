@@ -3557,3 +3557,7 @@ Kaynaklar: https://vosvoscafebar.com/ ; https://yandex.com.tr/maps/org/vosvos_ca
 ## B & B BAKERY — BURCU & BETÜL ID 6351 HOLD
 İşletme adı ve Beylikdüzü/Kavaklı kimliği arama sonuçlarıyla destekleniyor; ancak resmi Instagram giriş duvarı nedeniyle exact güncel iletişim doğrulanamadı. Son bir yıl exact şube ürün bazlı TL menüsü bulunamadı. **Strict HOLD**.
 Kaynaklar: https://www.instagram.com/b.bbakery/ ; https://restoranim.net/istanbul/istanbul/pastane/b-b-bakery-burcu-betul
+
+## İLLA BURGER KAVACIK ID 6350 HOLD
+Yandex exact işletme/telefonu (`+90 542 298 86 28`) doğruluyor; ancak Hentzer `Yayabeyi Sk. No:27/A`, Yandex `Yaya Beyi Sok. No:27` gösteriyor. Yemeksepeti güncel fiyatlı menü sunsa da zorunlu exact kapı paritesi sağlanmadı. **Strict HOLD**.
+Kaynaklar: https://yandex.com.tr/maps/org/illa_burger/44651607770/ ; https://www.yemeksepeti.com/en/restaurant/m89o/illa-burger-m89o ; https://merkezzirveservis.com.tr/firma/3/illa-burger-beykoz/
