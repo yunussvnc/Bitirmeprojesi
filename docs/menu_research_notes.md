@@ -3347,3 +3347,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/bahar_unlu_mamulleri/219418331114/ ; h
 ## CELO RESTAURANT ID 6403 KABUL
 CELO resmi sitesi ve `/menu` sayfası Hentzer ile `Kavaklı, Oğuzhan Cd. No:22, 34520 Beylikdüzü/İstanbul` ve `+90 530 171 34 52` exact adres/telefon parity’sini doğruluyor. Canlı Yemeksepeti `kug4` vendorunda 11 kebap/ızgara, 7 fırın, 4 dürüm, 3 çorba, 3 yan ürün ve tatlı kategorilerinde güncel TL fiyatları görüldü. İçecekler, poşet ve tatlı dışlanarak 20 benzersiz gıda ürünü override’a aktarıldı; menü tarihi kaynakta görünmediği için `verifiedAt` erişim/doğrulama tarihi olarak `2026-08-27` tutuldu.
 Kaynaklar: https://celorestaurant.com/ ; https://www.celorestaurant.com/menu ; https://www.yemeksepeti.com/en/restaurant/kug4/celo-kebap-and-lahmacun-and-pide ; https://www.instagram.com/celokebap/
+
+## KEBAP HAUS LOUNGE ID 6402 HOLD
+Hentzer kaydı Büyükşehir, Anadolu Cd. No:30 ve `+90 212 873 12 12` veriyor; ancak bu exact ad/telefon için doğrulanabilir resmi işletme kaydı bulunamadı. Yemeksepeti `gaw7/rutr` güncel fiyatlı Kebap Haus menüleri sunsa da exact Beylikdüzü adres/telefon parity’si gösterilmedi. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/gaw7/kebap-haus-gaw7 ; https://www.yemeksepeti.com/en/restaurant/rutr/kebap-haus
