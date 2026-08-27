@@ -3373,3 +3373,7 @@ Kaynaklar: https://www.olivespizzeria.com/ ; https://www.yemeksepeti.com/restaur
 ## YANDAKİ MEYHANE ID 6397 HOLD
 Yandex Maps, Instagram profili ve Quandoo; `Akatlar Mahallesi, Etiler, Zeytinoğlu Cd. 9/a` ve `0538 374 04 02` bilgilerini eşleştiriyor. Ancak Quandoo ürünleri fiyatsız yayımlıyor; son bir yılda doğrulanabilir ürün bazlı TL fiyat içeren resmi/QR/teslimat menüsü bulunamadı. PRAYS yalnız kişi başı fiyat aralığı veriyor. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://yandex.com.tr/maps/org/yandaki_meyhane/199524851392/ ; https://www.instagram.com/yandaki_meyhane/ ; https://www.quandoo.com.tr/en/place/yandaki-meyhane-93689/menu ; https://prayshub.com/restaurants/yandaki-meyhane-istanbul
+
+## HİSAR BALIKÇISI ID 6396 HOLD
+Resmi iletişim ve Instagram exact şubeyi `Anadolu Hisarı, Kızılserçe Sok. No:8` ve `0216 308 10 03` ile doğruluyor. Resmi menü güncel ürün adlarını içeriyor ancak TL fiyat yayımlamıyor; bulunan fiyatlı arşiv 2017/2019 tarihli. Son bir yıl şartı sağlanmadığı için **override eklenmedi; strict HOLD.**
+Kaynaklar: http://www.hisarbalikcisi.com.tr/iletisim.php ; http://www.hisarbalikcisi.com.tr/menu.php ; https://www.instagram.com/hisarbalikcisi/ ; https://www.wheree.com/menu
