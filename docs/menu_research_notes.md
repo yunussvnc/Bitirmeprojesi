@@ -3433,3 +3433,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/gclc/sushico-gclc ; https:/
 ## ARE YOU CHOCOLATE BEŞİKTAŞ ID 6382 HOLD
 Hentzer `Sinanpaşa, Maşuklar Yokuşu 4a, 34353 Beşiktaş/İstanbul` ve `0538 948 48 13` bilgileri resmi Instagram/Facebook ile destekleniyor; ancak Yandex aynı telefonu `Cihannüma, Maşuklar Yokuşu 2/2` adresiyle veriyor. Kolay Restoran menüsü pasif HTTP’de yalnızca yükleme kabuğu döndürdü; tam ürün/fiyat listesi ve exact şube bağı bağımsız biçimde doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.instagram.com/areyouchocolate/ ; https://www.facebook.com/areyouchocolatebesiktas/ ; https://yandex.com.tr/maps/org/are_you_chocolate_cikolata_kahve/157854404856/ ; https://menu.kolayrestoran.com/are-you-chocolate ; https://menu.kolayrestoran.com/are-you-chocolate/0
+
+## YILDIRIM PETSHOP ID 6381 HOLD
+Kayıt restoran değil petshop olarak doğrulandı; adres `Bosna Sk No:33A` ve `0545 441 00 34` kaynaklarla eşleşiyor. Gıda ürün menüsü kapsam dışı olduğundan **override eklenmedi; strict HOLD.**
+Kaynaklar: https://patimahallesi.com/rehber/yildirim-petshop-bayrampasa-istanbul ; https://www.yerelesnaf.com/istanbul/bayrampasa/petshop/yildirim-petshop/ ; https://www.instagram.com/p/DaLLqWVisE5/ ; https://www.instagram.com/reel/DSHbleQipL7/
