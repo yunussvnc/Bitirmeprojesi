@@ -1897,6 +1897,14 @@ async def smart_search_v2(request: SmartSearchRequest, background_tasks: Backgro
     - Async: Paralel işlemler
     """
     try:
+        # Boş/anlamsız veya aşırı uzun sorgular embedding/RAG'a hiç girmesin —
+        # ucuz bir kontrol, pahalı vektör işleminden önce erken çıkış.
+        cleaned_query = (request.query or "").strip()
+        if not cleaned_query:
+            raise HTTPException(status_code=422, detail="Sorgu boş olamaz.")
+        if len(cleaned_query) > 300:
+            raise HTTPException(status_code=422, detail="Sorgu çok uzun (maks. 300 karakter).")
+
         response_language = resolve_response_language(request.query, request.language, request.locale)
         # 1. CACHE CHECK
         cache_key = None
@@ -1978,7 +1986,12 @@ async def smart_search_v2(request: SmartSearchRequest, background_tasks: Backgro
                 print(f"[SmartSearch] Database search starting (query: '{request.query}')...")
                 if not rag_status.get("ready"):
                     try:
-                        rag_status = await asyncio.to_thread(_bootstrap_rag_index_sync)
+                        # ensure_rag_ready() kilitli (rag_bootstrap_lock) — index henüz
+                        # hazır değilken art arda/eşzamanlı gelen istekler her biri kendi
+                        # başına pahalı tam-korpus re-embed'ine girmesin (7 eşzamanlı istek
+                        # = 7 paralel tam reindex → CPU/RAM patlaması, container OOM crash).
+                        # Direkt _bootstrap_rag_index_sync çağrısı bu korumayı atlıyordu.
+                        rag_status = await ensure_rag_ready()
                     except Exception:
                         pass
 
@@ -2446,7 +2459,9 @@ async def smart_search_v2(request: SmartSearchRequest, background_tasks: Backgro
         )
         
         return response
-        
+
+    except HTTPException:
+        raise
     except Exception as e:
         import traceback
         traceback.print_exc()
