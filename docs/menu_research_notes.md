@@ -3274,3 +3274,7 @@ Kaynaklar: https://www.etcimehmetburger.com/subeler ; https://www.yemeksepeti.co
 ## SİTA BALIK GAYRETTEPE ID 6421 HOLD
 Instagram 2025 paylaşımları, Snapchat, Servis Listeleri, Restoranim.net ve Yandex Hentzer ile Gayrettepe Vefabey Sok. No:16/1 ve `+90 212 266 26 56` exact parity’sini destekliyor. Ancak `Gayrettepe Balıkçısı` Yemeksepeti vendorunun Sita Balık exact şubesi olduğu doğrulanamadı; Sita adına ait son bir yıl fiyatlı 20 ürün menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.instagram.com/sitabalik/ ; https://www.yemeksepeti.com/restaurant/zrlz/gayrettepe-balikcisi-zrlz
+
+## MADO BEYOĞLU ID 6420 HOLD
+MADO resmi şube listesi, Yandex ve Snapchat Hentzer ile İstiklal Cd. No:38 / `+90 212 245 46 21` exact parity’sini destekliyor. Ancak Yemeksepeti `xmr2` vendoru `Beylikdüzü Cad. No:5/A` adresinde; Beyoğlu şubesiyle eşleşmiyor. MADO’nun erişilebilir resmi food-menu sayfası LE fiyatlı farklı ülke menüsü olduğundan Beyoğlu TL fiyatı olarak kullanılmadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://mado.com.tr/yurt-ici-subeler/ ; https://yandex.com/maps/org/mado/140342513246/ ; https://www.yemeksepeti.com/en/restaurant/xmr2/mado-xmr2 ; https://www.mado.menu/food-menu/
