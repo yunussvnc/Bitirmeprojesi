@@ -3385,3 +3385,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/sqb7/iyb-bubble-waffle-sqb7
 ## VAHA COFFEE AND MORE BEYLİKDÜZÜ ID 6394 HOLD
 Menu-tr ve 2026-05-26 tarihli İstanbul Servis Listesi exact `Barış, Beylikdüzü OSB, Kır Sk. No:9` ve `0542 329 53 65` bilgilerini destekliyor. Resmi site 2025 menüsüne yönlendiriyor; ancak menü sayfası rate-limit nedeniyle okunamadı, WordPress arama uç noktasında işletmeyle ilgisiz spam içerik bulundu ve son bir yıl içinde güvenilir ürün bazlı TL fiyat doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://vahacoffee.com/ ; https://vahacoffee.com/menu/ ; https://www.menu-tr.com/istanbul/beylikduzu/kafe/vaha-coffee-and-more-beylikduzu ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/kafe/vaha-coffee-and-more-beylikduzu-EbCopA.html
+
+## İBB BEYKOZ SAHİL SOSYAL TESİSLERİ ID 6393
+Hentzer `Paşabahçe Mahallesi Burunbahçe Mevki, Barbaros Cd. No:16, 34800 Beykoz/İstanbul` ve `444 10 34` bilgisiyle İBB resmi rezervasyon sayfasındaki aynı adresle eşleşiyor. 2026 tarihli menufiyatlar listesinde ürün bazlı TL fiyatlardan 20 benzersiz kalem alındı: ana yemekler, salatalar, zeytinyağlılar ve ara sıcaklar. **Override kabul edildi.**
+Kaynaklar: https://menufiyatlar.com/702-ibb-beykoz-sosyal-tesisleri-menu-fiyatlari ; https://tesislerrezervasyon.ibb.istanbul/ ; https://www.instagram.com/reel/DX1o3ZZoHlP/

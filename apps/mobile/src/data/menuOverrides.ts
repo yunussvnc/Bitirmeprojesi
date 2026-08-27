@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6393": {
+    "name": "İBB BEYKOZ SAHİL SOSYAL TESİSLERİ",
+    "sourceUrl": "https://menufiyatlar.com/702-ibb-beykoz-sosyal-tesisleri-menu-fiyatlari",
+    "sourceName": "2026 tarihli ürün/fiyat listesi; İBB resmi rezervasyon sayfası ile exact Paşabahçe adresi ve Hentzer 444 10 34 iletişim eşleşmesi",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Salih Kebabı", "price": "650 TL", "category": "Ana Yemekler" },
+      { "name": "Ispanak Yatağında Levrek Fileto", "price": "575 TL", "category": "Ana Yemekler" },
+      { "name": "Sebzeli Yaprak Bonfile", "price": "650 TL", "category": "Ana Yemekler" },
+      { "name": "Çoban Salata", "price": "70 TL", "category": "Salatalar" },
+      { "name": "Mevsim Salata", "price": "70 TL", "category": "Salatalar" },
+      { "name": "Söğüş Salata", "price": "70 TL", "category": "Salatalar" },
+      { "name": "Hellim Peynirli Salata", "price": "155 TL", "category": "Salatalar" },
+      { "name": "Piliç Etli Salata", "price": "150 TL", "category": "Salatalar" },
+      { "name": "Kırmızı Etli Salata", "price": "325 TL", "category": "Salatalar" },
+      { "name": "Biber Dolma", "price": "90 TL", "category": "Zeytinyağlılar" },
+      { "name": "Soslu Patlıcan", "price": "90 TL", "category": "Zeytinyağlılar" },
+      { "name": "Enginar", "price": "90 TL", "category": "Zeytinyağlılar" },
+      { "name": "Taze Fasulye", "price": "90 TL", "category": "Zeytinyağlılar" },
+      { "name": "Yaprak Sarma", "price": "90 TL", "category": "Zeytinyağlılar" },
+      { "name": "Zeytinyağlı Tabağı", "price": "115 TL", "category": "Zeytinyağlılar" },
+      { "name": "Patates Tava", "price": "60 TL", "category": "Ara Sıcaklar" },
+      { "name": "Paçanga Böreği", "price": "90 TL", "category": "Ara Sıcaklar" },
+      { "name": "Mantar Graten", "price": "110 TL", "category": "Ara Sıcaklar" },
+      { "name": "Mantar Kavurma", "price": "100 TL", "category": "Ara Sıcaklar" },
+      { "name": "Jülyen Dil Balığı", "price": "300 TL", "category": "Ara Sıcaklar" }
+    ]
+  },
   "6395": {
     "name": "İYB BUBBLE WAFFLE BAYRAMPAŞA YILDIRIM",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/sqb7/iyb-bubble-waffle-sqb7",
