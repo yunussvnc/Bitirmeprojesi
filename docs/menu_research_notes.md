@@ -3533,3 +3533,7 @@ Kaynaklar: https://www.gunbakery.com/ ; https://www.yemeksepeti.com/en/restauran
 ## GHAYA COFFEE COMPANY BEYLİKDÜZÜ ID 6357
 Hentzer `Kavaklı, Yeşilyurt Cd. No:15 D:1E, 34520 Beylikdüzü/İstanbul` ve `+90 543 277 79 87`; Kaçıyor exact adres/telefonu ve Ghaya sosyal hesapları işletme kimliğini doğruluyor. Canlı Migros Yemek exact `Ghaya Panini & Coffee, Beylikdüzü (Kavaklı Mah.)` menüsünden 2026-08-27 tarihinde 5 tatlı, 4 sıcak kahve ve 4 matcha olmak üzere 13 benzersiz güncel fiyatlı yiyecek/içecek ürünü alındı; poşet ve gazlı içecekler dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.migros.com.tr/yemek/ghaya-panini-coffee-beylikduzu-kavakli-mah-st-2b4cb ; https://kaciyor.com/ghaya-coffee-company ; https://www.instagram.com/ghayacoffee/
+
+## HOLY CUP COFFEE BAYRAMPAŞA ID 6356 HOLD
+Yandex Bayrampaşa Adapark adresi ve `0212 640 27 78` telefonunu doğruluyor; fakat güncel fiyatlı dijital menü `Holy Cup Coffee — Taksim` olarak etiketli ve Bayrampaşa şubesine exact bağlanamıyor. Yanlış branch menüsü eklenmedi; **strict HOLD**.
+Kaynaklar: https://yandex.com.tr/maps/org/holy_cup_coffee/86381768117/ ; https://www.holycupmenu.com.tr/menu/ ; https://www.parkada.com.tr/index.php/trip/holy-cup-coffee-bayrampasa-adapark/
