@@ -3286,3 +3286,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/kazim_bufe/184042683523/ ; https://www
 ## KAZAN 37 ID 6418 HOLD
 Kazan 37 Instagram profili ve 2026-06-28 paylaşımı Hentzer ile Çubuklu, Öztürk Sok. 25/A ve `+90 216 331 34 35` exact parity’sini destekliyor. Yemeksepeti `kv37` vendoru aynı mekan adıyla eşleşiyor; ancak menüde yalnız Çikolatalı Gözleme (300 TL), içecekler ve poşet erişilebilir durumda. 20 benzersiz gıda ürünü şartı sağlanamadığından **override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.instagram.com/kazan__37/ ; https://www.yemeksepeti.com/en/restaurant/kv37/kazan-37-kv37
+
+## J9 KÖFTE KEBAP ID 6417 HOLD
+J9 resmi Instagram profili ve paylaşımları Hentzer ile Cumhuriyet Köy/Beykoz Cd. No:1 ve `+90 530 683 13 34` exact parity’sini destekliyor. Ancak son bir yıl içinde doğrulanmış 20 benzersiz gıda ürünü yok; yalnız birkaç sosyal medya fiyatı mevcut ve exact delivery vendoru bulunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.instagram.com/j9kebapp/ ; https://www.instagram.com/p/DMimQ_5taKv/ ; https://www.instagram.com/p/DS9vs0_DtDO/
