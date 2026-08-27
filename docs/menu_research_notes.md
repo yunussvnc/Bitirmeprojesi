@@ -3405,3 +3405,7 @@ Kaynaklar: https://www.flan.com.tr/subelerimiz/ ; https://www.instagram.com/p/DI
 ## KONTES YENİ NESİL MEYHANE ID 6389 HOLD
 İsim/telefon eşleşmesi mevcut; ancak Hentzer `Kocatepe Cd. No:293`, Yandex `Kocatepe Cad. No:293A` gösteriyor. Son bir yıl içinde ürün bazlı güncel TL fiyatlı doğrulanabilir menü de bulunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://yandex.com.tr/maps/org/kontes_yeni_nesil_meyhane/30342923850/ ; https://mekanlar.com/mekan/kontes-yeni-nesil-meyhane-sahil ; https://www.instagram.com/kontesbeylikduzu/ ; https://www.instagram.com/reel/DTbSRlhiu_4/
+
+## KAYIKÇILAR BALIK RESTAURANT ID 6388 HOLD
+Mekanlar, Menu-TR, Kacıyor, LaCarte ve Bulurum exact `Anadolu Kavağı, Yalı Çk. No:2` ve `0216 320 22 08` bilgilerini destekliyor. Fakat son bir yıl içinde ürün bazlı TL fiyatlı doğrulanabilir menü bulunamadı; farklı adres/telefonlu Instagram kaydı dışlandı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://mekanlar.com/mekan/kayikcilar-balik-restaurant ; https://www.menu-tr.com/istanbul/beykoz/balik-restorani/kayikcilar-balik-restaurant ; https://kaciyor.com/kayikcilar-balik-restaurant ; https://www.bulurum.com/details/0b1h056464cac4066h0g5j3g4f13614f
