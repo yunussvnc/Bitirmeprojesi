@@ -6418,6 +6418,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Döner Dürüm (70 gr.)", "price": "225 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6279": {
+    "name": "HENCHIKO RESTORAN",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/ecoh/henchiko-fried-chicken",
+    "sourceName": "Canlı Yemeksepeti exact Henchiko Fried Chicken vendor; resmi Facebook/Instagram ve yerel dizinlerle Şht. Asım Cd. 6A / +90 212 258 88 82 paritesi",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Henchiko Royal Burger", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Chilli Honey BBQ Chicken Burger", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Henchiko Süper Special Burger", "price": "790 TL", "category": "Özel Menüler" },
+      { "name": "Henchiko Special Chicken", "price": "500 TL", "category": "Özel Menüler" },
+      { "name": "Eko Special Menü", "price": "650 TL", "category": "Özel Menüler" },
+      { "name": "Classic Basic Chicken Burger", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Hero Chicken Burger", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Mexicano Dynamite Chicken Burger", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Carolina Chicken Burger", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Buffalo Chicken Burger", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Suprim Tenders (6 Adet)", "price": "620 TL", "category": "Tenders" },
+      { "name": "Suprim Tenders (9 Adet)", "price": "780 TL", "category": "Tenders" },
+      { "name": "Mexicano Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "Sriracha Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "BBQ Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "Ballı Hardal", "price": "30 TL", "category": "Soslar" },
+      { "name": "Ranch Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "Carolina Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "Sweet Chili Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "Best Mayo Sos", "price": "30 TL", "category": "Soslar" }
+    ]
+  },
   "6299": {
     "name": "KAVACIK BALIKÇISI BARBUNİ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/gus6/kavacik-balikcisi-barbuni",
