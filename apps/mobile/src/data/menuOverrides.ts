@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6391": {
+    "name": "MISS KOKORECH BEYLİKDÜZÜ",
+    "sourceUrl": "https://misskokorechmidye.com/menu/",
+    "sourceName": "Resmi Miss Kokorech güncel menüsü; exact Adnan Kahveci şubesi adres/telefon bilgileri ve resmi sipariş bağlantısı",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Çeyrek Domatesli Kokoreç", "price": "210 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "Yarım Domatesli Kokoreç", "price": "370 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "Üç Çeyrek Domatesli Kokoreç", "price": "560 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "Tam Ekmek Domatesli Kokoreç", "price": "740 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "Çeyrek Sade Kokoreç", "price": "230 TL", "category": "Sade Kokoreçler" },
+      { "name": "Yarım Sade Kokoreç", "price": "420 TL", "category": "Sade Kokoreçler" },
+      { "name": "Üç Çeyrek Sade Kokoreç", "price": "630 TL", "category": "Sade Kokoreçler" },
+      { "name": "Tam Ekmek Sade Kokoreç", "price": "840 TL", "category": "Sade Kokoreçler" },
+      { "name": "Çeyrek İzmir Kokoreç", "price": "230 TL", "category": "İzmir Usulü Kokoreçler" },
+      { "name": "Yarım İzmir Kokoreç", "price": "420 TL", "category": "İzmir Usulü Kokoreçler" },
+      { "name": "Üç Çeyrek İzmir Kokoreç", "price": "630 TL", "category": "İzmir Usulü Kokoreçler" },
+      { "name": "Tam Ekmek İzmir Kokoreç", "price": "840 TL", "category": "İzmir Usulü Kokoreçler" },
+      { "name": "Dürüm Sade Kokoreç", "price": "500 TL", "category": "Misskokorech Özel" },
+      { "name": "Yarım Ekmek Dolma Kokoreç", "price": "600 TL", "category": "Misskokorech Özel" },
+      { "name": "Dürüm Kokoreç", "price": "450 TL", "category": "Misskokorech Özel" },
+      { "name": "İzmir Usulü Dürüm Kokoreç", "price": "500 TL", "category": "Misskokorech Özel" },
+      { "name": "Güveç Porsiyon Kokoreç", "price": "700 TL", "category": "Porsiyon Kokoreçler" },
+      { "name": "Sade Güveç Porsiyon Kokoreç", "price": "750 TL", "category": "Porsiyon Kokoreçler" },
+      { "name": "İzmir Güveç Porsiyon Kokoreç", "price": "750 TL", "category": "Porsiyon Kokoreçler" },
+      { "name": "Lokum Porsiyon Kokoreç", "price": "800 TL", "category": "Porsiyon Kokoreçler" }
+    ]
+  },
   "6392": {
     "name": "DUAYEN MEYHANE BEŞİKTAŞ",
     "sourceUrl": "https://duayen.menuluka.com/",

@@ -3393,3 +3393,7 @@ Kaynaklar: https://menufiyatlar.com/702-ibb-beykoz-sosyal-tesisleri-menu-fiyatla
 ## DUAYEN MEYHANE BEŞİKTAŞ ID 6392
 Bulurum, Yandex ve Mekan kayıtları exact `Cihannüma Mahallesi, Barbaros Caddesi & Camcı Hüseyin Sokak No:4, 34330 Beşiktaş/İstanbul` ve `0212 227 75 74` bilgisini eşleştiriyor. Canlı Duayen dijital menüsünden 2026-08-27 tarihinde 20 benzersiz fiyatlı yemek ürünü alındı: kahvaltılar, ara sıcaklar ve burger/wraplar. **Override kabul edildi.**
 Kaynaklar: https://duayen.menuluka.com/ ; https://www.bulurum.com/details/2a16dfcg0bcb1103_0_bcf5k5cccde1g ; https://yandex.com.tr/maps/org/duayen_meyhane_besiktas/130454546960/ ; https://mekan.com/mekan/duayen-restaurant
+
+## MISS KOKORECH BEYLİKDÜZÜ ID 6391
+Resmi Miss Kokorech menüsü exact Adnan Kahveci şubesini `Adnan Kahveci Mah. Anadolu Cd. No:11/19 Beylikdüzü / İstanbul` ve `+90 212 856 02 84` ile tanımlıyor; bu bilgiler Hentzer `Anadolu Cd. No:11` ve telefonu ile exact şube bağını doğruluyor. Resmi menüden 2026-08-27 tarihinde 20 benzersiz fiyatlı kokoreç ürünü alındı. **Override kabul edildi.**
+Kaynaklar: https://misskokorechmidye.com/menu/ ; https://www.instagram.com/miss.kokorech/ ; https://www.yemeksepeti.com/restaurant/ovj5/miss-kokorech-ovj5
