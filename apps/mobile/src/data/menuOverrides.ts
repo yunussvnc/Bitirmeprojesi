@@ -92315,6 +92315,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6362": {
+    "name": "AHESTE PERA",
+    "sourceUrl": "https://menufiyatlar.com/1291-aheste-pera-menu-fiyatlari",
+    "sourceName": "2026-05-14 tarihli Aheste Pera fiyat listesi; resmi Aheste Restaurant, Gault & Millau ve Bulurum ile Asmalı Mescit Meşrutiyet Cd. No:107/F / 0212 243 26 33 doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Tadım Menüsü", "price": "4800 TL", "category": "Tadım Menüsü" },
+      { "name": "Türk Artizan Peynirleri", "price": "1000 TL", "category": "Başlangıçlar" },
+      { "name": "Dudi Pilavı", "price": "950 TL", "category": "Menü" },
+      { "name": "Yedikule Salatası", "price": "950 TL", "category": "Menü" },
+      { "name": "Kuru Dolma", "price": "1000 TL", "category": "Menü" },
+      { "name": "Narenciyeli Levrek", "price": "1100 TL", "category": "Menü" },
+      { "name": "Tuna Kadayıfı", "price": "1600 TL", "category": "Menü" },
+      { "name": "Pancar", "price": "1000 TL", "category": "Menü" },
+      { "name": "Urla Enginar Konfi", "price": "1350 TL", "category": "Menü" },
+      { "name": "Kereviz", "price": "1100 TL", "category": "Menü" },
+      { "name": "Mısır Dolgulu Makarna", "price": "1200 TL", "category": "Menü" },
+      { "name": "Rakı Kalamar", "price": "1250 TL", "category": "Menü" },
+      { "name": "Kumpir Yürek", "price": "1350 TL", "category": "Menü" },
+      { "name": "Kuzu Gerdan", "price": "1650 TL", "category": "Menü" },
+      { "name": "Kokoreç", "price": "1400 TL", "category": "Menü" },
+      { "name": "Levrek", "price": "2400 TL", "category": "Menü" },
+      { "name": "Tavuk Konfi", "price": "2400 TL", "category": "Menü" },
+      { "name": "Kuzu İncik", "price": "2600 TL", "category": "Menü" }
+    ]
+  },
   "6363": {
     "name": "ESMER CAFE TAKSİM",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/xf1p/esmer-cafe",

@@ -3509,3 +3509,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/vphh/beykoz-pide-and-borek 
 ## ESMER CAFE TAKSİM ID 6363
 Hentzer `Şehit Muhtar, İstiklal Cd. No:40, 34430 Beyoğlu/İstanbul` ve `+90 212 245 56 56`; resmi Esmer Cafe iletişim sayfası aynı adres/telefonu doğruluyor, Yandex ve Bulurum da eşleşiyor. Canlı Yemeksepeti `xf1p` menüsünden 2026-08-27 tarihinde 20 benzersiz güncel fiyatlı börek, tost, gözleme, burger, mantı, yan ürün, tatlı ve waffle alındı; içecek, poşet ve kampanyalı tekrarlar dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.esmercafe.com/tr/contact ; https://www.yemeksepeti.com/en/restaurant/xf1p/esmer-cafe ; https://yandex.com/maps/org/esmer_cafe_restaurant/1378262552/ ; https://www.bulurum.com/details/50a_126b5idg43cdcd4g_i4k_0bi167g
+
+## AHESTE PERA ID 6362
+Hentzer `Asmalı Mescit, Meşrutiyet Cd. No:107 F, 34430 Beyoğlu/İstanbul` ve `+90 212 243 26 33`; Aheste Restaurant, Gault & Millau ve Bulurum aynı exact şube adres/telefonu doğruluyor. 2026-05-14 tarihli Aheste Pera fiyat listesinde 18 benzersiz güncel fiyatlı yiyecek/menü ürünü bulundu; alkol/içecek ve tekrarlar dışlandı. Resmi sitenin menü sayfası dinamik olduğu için fiyat doğrulamasında tarihli menufiyatlar kaynağı kullanıldı. **Override kabul edildi.**
+Kaynaklar: https://ahesterestaurant.com/ ; https://menufiyatlar.com/1291-aheste-pera-menu-fiyatlari ; https://www.gault-millau.com.tr/aheste-pera/ ; https://www.bulurum.com/en/details/__0a06b43ici2h5ebh7d513f0gckb_bk
