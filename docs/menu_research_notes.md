@@ -3865,3 +3865,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6271 ; https://www.instagram.com/
 ## LIFE MOON COFFEE ID 6270 — HOLD
 Hentzer `Kavaklı, Mehmet Akif Ersoy Cd. No:17, 34520 Beylikdüzü`, telefon `+90 501 008 09 42`. Snapchat Place kaydı aynı adres/telefonu doğrudan doğruluyor; resmi Instagram işletmenin Kavaklı/Demir Country şubesini destekliyor. Son bir yıl içinde 20 benzersiz gıda/içecek ürünü ve fiyatı yayınlanmış exact şube menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6270 ; https://www.snapchat.com/place/life-moon-coffee/518345a2-0800-4701-b635-7534d63c89eb ; https://www.instagram.com/p/DLFdYgJsZzg/ ; https://www.instagram.com/lifemooncoffee/
+
+## LORESIMA GARDEN POLONEZKÖY ID 6269 — HOLD
+Hentzer `Bozhane, Boğaziçi Cd. No:22/A, 34829 Beykoz`, telefon `+90 539 557 98 28`. Restoranim, RestaurantGuru, Yenifirma ve Onedio exact adresi destekliyor. Arama sonucunda görünen 27.05.2026 Instagram paylaşımı açıldığında `Uzunpark Et-Mangal Cumhuriyetköy` adlı farklı işletmeye ait çıktı; menü/fiyat kanıtı exact kabul edilmedi. Son bir yıl içinde 20 benzersiz fiyatlı ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6269 ; https://restoranim.net/istanbul/beykoz/restoran/loresima-garden-polonezkoy ; https://restaurantguru.com/Loresima-Garden-Cumhuriyet-Koyu ; https://www.instagram.com/p/DY6dxknt7It/ ; https://onedio.com/haber/beykoz-da-gune-guzel-bir-baslangic-yapabileceginiz-en-iyi-kahvalti-mekanlari-1299940
