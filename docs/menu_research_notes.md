@@ -3302,3 +3302,7 @@ Kaynaklar: https://pizzasliceguy.com/ ; https://yandex.com.tr/maps/org/sliceguy_
 ## GRANNY'S WAFFLES & KUMPIR ID 6414 HOLD
 Granny’s resmi şubeler sayfası Hentzer ile Yıldırım, Şehir Parkı Caddesi No:43/A adresini doğruluyor; ancak resmi telefon `+90 553 420 24 50`, Hentzer telefonu `+90 552 420 24 50`. Zorunlu telefon parity’si sağlanamadığı için Yemeksepeti/QR menü fiyatları kullanılmadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://grannyswaffles.com.tr/subelerimiz/ ; https://www.yemeksepeti.com/en/restaurant/f5x8/grannys-waffles-and-kumpir-f5x8 ; https://grannyswaffles.qrmenu.com.tr/waffles
+
+## MORNİVA COFFEE & WAFFLE ID 6413 HOLD
+Morniva resmi sitesi ile Tripadvisor, Yandex, Instagram ve Firma Fihristi Hentzer ile Sinanpaşa, Yenilik Sok. No:4-6A ve `+90 535 954 06 56` exact parity’sini destekliyor. Resmi LimonPOS menü bağlantısı erişilemedi; Yemeksepeti `ju6t` fiyatları exact şube adres/telefonuyla doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://morniva.com.tr/ ; https://www.yemeksepeti.com/restaurant/ju6t/morniva-waffle ; https://yandex.com.tr/maps/org/morniva_coffee_waffle/160977302769/
