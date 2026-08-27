@@ -3322,3 +3322,7 @@ Kaynaklar: https://digma.com.tr/ ; https://digma.com.tr/kahvalti ; https://yande
 ## YALI LOUNGE ID 6409 HOLD
 Tripadvisor, Meyhankoli, Cybo, Opendi ve Yandex Hentzer ile Four Seasons Yalı Lounge, Çırağan Cd. No:28 ve `+90 552 381 11 11` exact parity’sini destekliyor. Finedine menüsü boş yükleniyor; Four Seasons resmi sayfası yalnız USD 343 başlangıçlı çift kişilik set menü sunuyor, 20 bireysel güncel TL ürün fiyatı bulunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.fourseasons.com/bosphorus/dining/restaurants/yali_lounge/ ; https://www.fourseasons.com/bosphorus/dining/culinary-experiences/prix-fixe-menu/romantic-dinner-menu-at-yali-lounge/ ; https://qr.finedinemenu.com/yali ; https://www.meyhankoli.com/restoran/yali-lounge-867
+
+## COOK ISTANBUL ID 6408 HOLD
+Yandex, Mekanlar, Restoranim ve Instagram Hentzer ile Barış, Samsun Cd. N14 ve `+90 212 852 53 34` exact işletme bilgisini destekliyor. Yemeksepeti `r423` güncel fiyatlı tatlı menüsü sunuyor; ancak vendor ayrıntısında exact Beylikdüzü adres/telefon parity’si görünmedi ve resmi site erişim hatası verdi. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/r423/cookistanbul-and-profiterol-r423 ; https://yandex.com.tr/maps/org/cook_istanbul_profiterol/217513045563/ ; https://www.instagram.com/cookistanbulprofiterol/
