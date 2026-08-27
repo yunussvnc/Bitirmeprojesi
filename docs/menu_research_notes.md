@@ -3817,3 +3817,7 @@ Kaynak: https://api.asemos.tr/api/v1/places/6284
 ## CAN CAFE KAHVALTI ID 6283 — HOLD
 Hentzer kaydı `Çağ Apartmanı, Sinanpaşa, Çelebioğlu Sk. D:27-29, 34353 Beşiktaş/İstanbul`, telefon `+90 212 258 74 17`. Wanderboat, Cybo, G360, Restoranim ve Yemekle aynı işletme/telefon çevresini doğruluyor; resmi Instagram profili login duvarına yönlendi. Son bir yıl içinde exact şubeye ait 20 okunabilir fiyatlı ürün bulunamadı; görünen 900 TL masa/menemen bilgisi tam ürün menüsü değil. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6283 ; https://g360.ai/vr/istanbul_besiktas_can_cafe_kahvalti ; https://restoranim.net/istanbul/besiktas/kahvaltici/can-cafe-kahvalti ; https://www.yemekle.com/istanbul/besiktas/kahvaltici/can-cafe-kahvalti ; https://www.instagram.com/cankafekahvalti/
+
+## KİLOVİÇ ID 6282 — HOLD
+Hentzer `Adnan Kahveci, Esentepe Cd., 34528 Beylikdüzü/İstanbul`, telefon `+90 533 917 12 70`. Resmi kilovich.com aynı adresi ancak farklı telefonu `+90 533 949 25 97` yayımlıyor. Bazı 2026 sosyal paylaşımlarında Hentzer telefonu görünse de resmi siteyle çelişki bulunuyor; ayrıca resmi menü sayfalarının erişilebilir metni fiyatlı ürünleri sunmuyor. **100% exact telefon paritesi ve 20 güncel ürün/fiyat doğrulanamadığı için HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6282 ; https://kilovich.com/ ; https://kilovich.com/kilosu ; https://kilovich.com/d%C3%BCr%C3%BCm ; https://kilovich.com/burger-1 ; https://www.instagram.com/reel/DY6kgu1tFLE/
