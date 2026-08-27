@@ -3441,3 +3441,7 @@ Kaynaklar: https://patimahallesi.com/rehber/yildirim-petshop-bayrampasa-istanbul
 ## CHIMI CHIMNEY CAKE ID 6380 HOLD
 Adres 2026 Instagram/TikTok ve DocentPro ile `Sinanpaşa, Yeni Hamam Sok. No:7` olarak doğrulandı; güncel fiyatlı içerik de mevcut. Fakat Hentzer telefon alanı boş olduğundan zorunlu exact telefon paritesi sağlanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.instagram.com/reel/DaS8o4koE3B/ ; https://www.instagram.com/p/DbazDOdDODd/ ; https://www.facebook.com/istanbulburadatr/videos/1346094074404947/ ; https://docentpro.com/places/chimi-chimney-cake_NTg2MDgz
+
+## MAKI RESTORAN BEBEK ID 6379 HOLD
+Resmi Maki iletişim sayfası `Bebek Mah. Cevdetpaşa Cad. Eminbey Apartmanı No:39 A No:1` ve `0530 359 00 00` bilgilerini doğruluyor. Fakat Yandex aynı kaydı kalıcı kapalı gösteriyor; güncel şube menüsü/fiyatı doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.makirestoran.com/iletisim.php ; https://www.instagram.com/p/DFNRUK7g0Tv/ ; https://yandex.com/maps/org/maki_restaurant/54901815951/ ; https://www.corner.inc/place/pevqt3irYCQk
