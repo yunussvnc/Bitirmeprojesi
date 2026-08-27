@@ -3369,3 +3369,7 @@ Kaynaklar: https://www.sushico.com.tr/tr/subeler/nisantasi ; https://nisantasi-s
 ## OLIVE'S PIZZERIA ID 6398 HOLD
 Resmi Olive's sitesi Levent için Başlık sokak Nispetiye mahallesi No:22/A ve `212 284 57 24 / 212 284 57 25` veriyor; bağımsız kaynaklar Hentzer telefonu ve No:22 varyantını desteklese de zorunlu exact kapı eki `22`–`22/A` çelişkisi giderilemedi. Yemeksepeti `j9i8` güncel fiyatlı menü sunsa da exact branch ayrıntısı doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.olivespizzeria.com/ ; https://www.yemeksepeti.com/restaurant/j9i8/olives-pizzeria ; https://kaciyor.com/olive-s-pizzeria ; https://www.instagram.com/reel/C_XrClrgnf2/
+
+## YANDAKİ MEYHANE ID 6397 HOLD
+Yandex Maps, Instagram profili ve Quandoo; `Akatlar Mahallesi, Etiler, Zeytinoğlu Cd. 9/a` ve `0538 374 04 02` bilgilerini eşleştiriyor. Ancak Quandoo ürünleri fiyatsız yayımlıyor; son bir yılda doğrulanabilir ürün bazlı TL fiyat içeren resmi/QR/teslimat menüsü bulunamadı. PRAYS yalnız kişi başı fiyat aralığı veriyor. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://yandex.com.tr/maps/org/yandaki_meyhane/199524851392/ ; https://www.instagram.com/yandaki_meyhane/ ; https://www.quandoo.com.tr/en/place/yandaki-meyhane-93689/menu ; https://prayshub.com/restaurants/yandaki-meyhane-istanbul
