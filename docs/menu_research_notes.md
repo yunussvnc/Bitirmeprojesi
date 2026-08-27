@@ -3326,3 +3326,7 @@ Kaynaklar: https://www.fourseasons.com/bosphorus/dining/restaurants/yali_lounge/
 ## COOK ISTANBUL ID 6408 HOLD
 Yandex, Mekanlar, Restoranim ve Instagram Hentzer ile Barış, Samsun Cd. N14 ve `+90 212 852 53 34` exact işletme bilgisini destekliyor. Yemeksepeti `r423` güncel fiyatlı tatlı menüsü sunuyor; ancak vendor ayrıntısında exact Beylikdüzü adres/telefon parity’si görünmedi ve resmi site erişim hatası verdi. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/r423/cookistanbul-and-profiterol-r423 ; https://yandex.com.tr/maps/org/cook_istanbul_profiterol/217513045563/ ; https://www.instagram.com/cookistanbulprofiterol/
+
+## CHUU COFFEE ID 6407 HOLD
+Yandex Hentzer ile `+90 531 083 31 95` telefonunu destekliyor; ancak adres Hentzer’de Maşuklar Yokuşu No:2/A, Yandex’te Cihannüma Mah. Maşuklar Yokuşu 2/1 olarak çelişiyor. Instagram’da güncel fiyatlı menü yok ve exact şubeye ait 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://yandex.com.tr/maps/org/chuu_coffee/151923585248/ ; https://www.instagram.com/chuudayiz/
