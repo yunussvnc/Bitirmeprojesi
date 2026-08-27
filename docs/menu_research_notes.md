@@ -3278,3 +3278,7 @@ Kaynaklar: https://www.instagram.com/sitabalik/ ; https://www.yemeksepeti.com/re
 ## MADO BEYOĞLU ID 6420 HOLD
 MADO resmi şube listesi, Yandex ve Snapchat Hentzer ile İstiklal Cd. No:38 / `+90 212 245 46 21` exact parity’sini destekliyor. Ancak Yemeksepeti `xmr2` vendoru `Beylikdüzü Cad. No:5/A` adresinde; Beyoğlu şubesiyle eşleşmiyor. MADO’nun erişilebilir resmi food-menu sayfası LE fiyatlı farklı ülke menüsü olduğundan Beyoğlu TL fiyatı olarak kullanılmadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://mado.com.tr/yurt-ici-subeler/ ; https://yandex.com/maps/org/mado/140342513246/ ; https://www.yemeksepeti.com/en/restaurant/xmr2/mado-xmr2 ; https://www.mado.menu/food-menu/
+
+## KAZIM BÜFE ID 6419 HOLD
+Yandex, Maptons, Tumİşyeri, Cybo ve Hangi Mekan Hentzer ile Yıldız, Çırağan Cd. 4A ve `+90 531 304 19 38` exact parity’sini destekliyor. Ancak son bir yıl içinde doğrulanmış 20 ürünlü fiyatlı menü bulunamadı; yalnız birkaç genel fiyat bilgisi mevcut. Adana Kazım Büfe ve farklı işletme vendorları kullanılmadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://yandex.com.tr/maps/org/kazim_bufe/184042683523/ ; https://www.tumisyeri.com/kaz%C4%B1m-büfe_94-0531-304-19-38 ; https://www.hangimekan.com.tr/yeme-icme/istanbul/besiktas/kazim-bufe/
