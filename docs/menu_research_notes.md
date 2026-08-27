@@ -3413,3 +3413,7 @@ Kaynaklar: https://mekanlar.com/mekan/kayikcilar-balik-restaurant ; https://www.
 ## BEYLİKDÜZÜ BEYLİK PAZARI ID 6387 HOLD
 Kayıt bir pazar alanı; restoran/tekil yiyecek işletmesi değil. Hentzer’de telefon yok ve son bir yıl ürün bazlı menü/fiyat bulunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://wanderlog.com/tr/place/details/7688304/beylikd%C3%BCz%C3%BC-beylik-pazar%C4%B1 ; https://www.beylikduzu.istanbul/icerik/beylik-pazari-servisleri ; https://www.instagram.com/p/DRmEUaNjGGQ/
+
+## PİZZALİVE & KAFETERYA ID 6386
+Hentzer `Haraççı-Hadımköy Yolu Caddesi 322/B, Hastane, Haraççı-Hadımköy Yolu Cd. No:322 D:B, 34555 Arnavutköy/İstanbul` ve `0212 677 54 83`; resmi Pizzalive Hadımköy Instagram hesabı aynı sipariş hattını, Yandex ve Mekanlar aynı bölge/işletme bağını destekliyor. Canlı Yemeksepeti `d93w` sayfasından 2026-08-27 tarihinde 20 benzersiz fiyatlı menü/pizza ürünü alındı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/d93w/pizzalive-kafeterya ; https://www.instagram.com/pizzalive_hadimkoy/ ; https://yandex.com.tr/maps/org/pizzalive/80267932865/ ; https://restoranim.net/istanbul/arnavutkoy/pizzaci/pizzalive-kafeterya

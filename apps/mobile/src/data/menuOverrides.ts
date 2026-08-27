@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6386": {
+    "name": "PİZZALİVE & KAFETERYA",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/d93w/pizzalive-kafeterya",
+    "sourceName": "Canlı Yemeksepeti güncel Pizzalive Kafeterya menüsü; resmi Pizzalive Hadımköy Instagram/Yandex ile exact Haraççı-Hadımköy şube telefon/adres doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Ekonomik Orta Boy Pizza (2 Kişilik)", "price": "728 TL", "category": "Menüler" },
+      { "name": "Ekonomik Orta Boy Pizza (3 Kişilik)", "price": "1096 TL", "category": "Menüler" },
+      { "name": "Ekonomik Büyük Boy Pizza (2 Kişilik)", "price": "864 TL", "category": "Menüler" },
+      { "name": "Ekonomik Büyük Boy Pizza (3 Kişilik)", "price": "1296 TL", "category": "Menüler" },
+      { "name": "Pizza (Orta Boy) Menü", "price": "640 TL", "category": "Menüler" },
+      { "name": "Margarita Pizza (Orta Boy)", "price": "372 TL", "category": "Seçkin Pizzalar" },
+      { "name": "Sucuk Keyfi Pizza (Orta Boy)", "price": "372 TL", "category": "Seçkin Pizzalar" },
+      { "name": "Mantarino Pizza (Orta Boy)", "price": "372 TL", "category": "Seçkin Pizzalar" },
+      { "name": "Sosislim Pizza (Orta Boy)", "price": "372 TL", "category": "Seçkin Pizzalar" },
+      { "name": "Margarita Pizza (Büyük Boy)", "price": "432 TL", "category": "Seçkin Pizzalar" },
+      { "name": "Sucuk Keyfi Pizza (Büyük Boy)", "price": "432 TL", "category": "Seçkin Pizzalar" },
+      { "name": "Mantarino Pizza (Büyük Boy)", "price": "432 TL", "category": "Seçkin Pizzalar" },
+      { "name": "Sosislim Pizza (Büyük Boy)", "price": "432 TL", "category": "Seçkin Pizzalar" },
+      { "name": "Classic Pizza (Orta Boy)", "price": "388 TL", "category": "Klasik Pizzalar" },
+      { "name": "Special Pizza (Orta Boy)", "price": "388 TL", "category": "Klasik Pizzalar" },
+      { "name": "Salamlı Pizza (Orta Boy)", "price": "388 TL", "category": "Klasik Pizzalar" },
+      { "name": "Donatella Pizza (Orta Boy)", "price": "388 TL", "category": "Klasik Pizzalar" },
+      { "name": "Vejetaryen Pizza (Orta Boy)", "price": "388 TL", "category": "Klasik Pizzalar" },
+      { "name": "Parti Pizza (Orta Boy)", "price": "388 TL", "category": "Klasik Pizzalar" },
+      { "name": "Meksika Ateşi Pizza (Orta Boy)", "price": "388 TL", "category": "Klasik Pizzalar" }
+    ]
+  },
   "6391": {
     "name": "MISS KOKORECH BEYLİKDÜZÜ",
     "sourceUrl": "https://misskokorechmidye.com/menu/",
