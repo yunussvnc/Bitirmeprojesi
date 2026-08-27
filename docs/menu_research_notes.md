@@ -3330,3 +3330,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/r423/cookistanbul-and-profi
 ## CHUU COFFEE ID 6407 HOLD
 Yandex Hentzer ile `+90 531 083 31 95` telefonunu destekliyor; ancak adres Hentzer’de Maşuklar Yokuşu No:2/A, Yandex’te Cihannüma Mah. Maşuklar Yokuşu 2/1 olarak çelişiyor. Instagram’da güncel fiyatlı menü yok ve exact şubeye ait 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://yandex.com.tr/maps/org/chuu_coffee/151923585248/ ; https://www.instagram.com/chuudayiz/
+
+## FLORIDA COFFEE BEYKOZ ID 6406 HOLD
+Hentzer’in telefon alanı boş; Yandex, Instagram, Kacıyor, Servis Listeleri ve Restoranim Gümüşsuyu, Kelle İbrahim Cd. adresini destekliyor. Yemeksepeti `qsma` güncel fiyatlı geniş menü sunuyor ancak generic konum gösteriyor ve adres/telefon yayımlamıyor; zorunlu exact business/branch parity’si kurulamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/qsma/florida-coffee-qsma ; https://yandex.com.tr/maps/org/florida_coffee_beykoz/229299063313/ ; https://www.instagram.com/florida_coffee_beykoz/ ; https://servislisteleri.com/istanbul/beykoz/kafe/florida-coffe-WC3Fl0.html
