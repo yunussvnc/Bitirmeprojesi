@@ -3282,3 +3282,7 @@ Kaynaklar: https://mado.com.tr/yurt-ici-subeler/ ; https://yandex.com/maps/org/m
 ## KAZIM BÜFE ID 6419 HOLD
 Yandex, Maptons, Tumİşyeri, Cybo ve Hangi Mekan Hentzer ile Yıldız, Çırağan Cd. 4A ve `+90 531 304 19 38` exact parity’sini destekliyor. Ancak son bir yıl içinde doğrulanmış 20 ürünlü fiyatlı menü bulunamadı; yalnız birkaç genel fiyat bilgisi mevcut. Adana Kazım Büfe ve farklı işletme vendorları kullanılmadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://yandex.com.tr/maps/org/kazim_bufe/184042683523/ ; https://www.tumisyeri.com/kaz%C4%B1m-büfe_94-0531-304-19-38 ; https://www.hangimekan.com.tr/yeme-icme/istanbul/besiktas/kazim-bufe/
+
+## KAZAN 37 ID 6418 HOLD
+Kazan 37 Instagram profili ve 2026-06-28 paylaşımı Hentzer ile Çubuklu, Öztürk Sok. 25/A ve `+90 216 331 34 35` exact parity’sini destekliyor. Yemeksepeti `kv37` vendoru aynı mekan adıyla eşleşiyor; ancak menüde yalnız Çikolatalı Gözleme (300 TL), içecekler ve poşet erişilebilir durumda. 20 benzersiz gıda ürünü şartı sağlanamadığından **override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.instagram.com/kazan__37/ ; https://www.yemeksepeti.com/en/restaurant/kv37/kazan-37-kv37
