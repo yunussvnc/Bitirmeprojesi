@@ -3294,3 +3294,7 @@ Kaynaklar: https://www.instagram.com/j9kebapp/ ; https://www.instagram.com/p/DMi
 ## BLAK COFFEE CO. KAMEROĞLU ID 6416 HOLD
 BLAK’ın resmi şube sayfası/blogu Hentzer ile Cumhuriyet Mh. Onur Sk. No:3T adresini; Instagram, Tumİşyeri ve Yandex `0538 449 39 18` telefonunu destekliyor. Ancak resmi kaynaklarda fiyatlı şube menüsü yok ve bulunan Yemeksepeti vendorlarının Kameroğlu exact şubesi/telefonu doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://blakcoffee.co/pages/subelerimiz ; https://blakcoffee.co/blog/kameroglu ; https://www.instagram.com/explore/locations/401489583052899/blak-coffee-co-kameroglu/
+
+## SLICEGUY PIZZA BEŞİKTAŞ ID 6415 HOLD
+Yandex ve SliceGuy sosyal medya içerikleri Hentzer ile Beşiktaş/Kazan Sokak ve `+90 530 865 16 30` bilgisini destekliyor; ancak kapı numarası 20/18A olarak çelişiyor. Yemeksepeti `ii9p/fhe3` vendorlarının Hentzer Beşiktaş şubesiyle adres/telefon parity’si doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://pizzasliceguy.com/ ; https://yandex.com.tr/maps/org/sliceguy_pizza_besiktas/86196373384/ ; https://www.yemeksepeti.com/restaurant/ii9p/sliceguy-pizza-ii9p ; https://www.yemeksepeti.com/restaurant/fhe3/sliceguy-pizza-fhe3
