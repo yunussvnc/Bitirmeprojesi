@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6302": {
+    "name": "TONE İSTANBUL",
+    "sourceUrl": "https://tone-istanbul.com/__static/jdj5jdewjdflruxvnjlevkjeskxms2qy/TONE-MENU(3).pdf",
+    "sourceName": "Resmi TONE İstanbul PDF menüsü ve resmi tone.istanbul profili; Asmalı Mescit General Yazgan Sk. No:6 / 0530 040 72 39 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Tone Breakfast Plate", "price": "1050 TL", "category": "Kahvaltı" },
+      { "name": "Croissant Benedict", "price": "1100 TL", "category": "Kahvaltı" },
+      { "name": "Brioche with Guacamole", "price": "900 TL", "category": "Kahvaltı" },
+      { "name": "Scrambled Eggs", "price": "850 TL", "category": "Kahvaltı" },
+      { "name": "Menemen", "price": "700 TL", "category": "Kahvaltı" },
+      { "name": "Acai Bowl", "price": "1000 TL", "category": "Kahvaltı" },
+      { "name": "Homemade Pancake", "price": "750 TL", "category": "Kahvaltı" },
+      { "name": "Granola", "price": "900 TL", "category": "Kahvaltı" },
+      { "name": "Arugula Salad", "price": "650 TL", "category": "Salatalar" },
+      { "name": "Burrata", "price": "850 TL", "category": "Salatalar" },
+      { "name": "Caesar Salad (Tavuksuz)", "price": "600 TL", "category": "Salatalar" },
+      { "name": "Green Salad", "price": "450 TL", "category": "Salatalar" },
+      { "name": "Smoked Labneh", "price": "600 TL", "category": "Başlangıçlar" },
+      { "name": "Grilled Artichoke Heart", "price": "750 TL", "category": "Başlangıçlar" },
+      { "name": "Truffle & Parmesan French Fries", "price": "500 TL", "category": "Başlangıçlar" },
+      { "name": "Hummus", "price": "450 TL", "category": "Başlangıçlar" },
+      { "name": "Miso Eggplant", "price": "700 TL", "category": "Başlangıçlar" },
+      { "name": "Dynamite Shrimp", "price": "750 TL", "category": "Başlangıçlar" },
+      { "name": "Crispy Veggie Pizza", "price": "800 TL", "category": "Pizzalar" },
+      { "name": "Crispy Pizza", "price": "850 TL", "category": "Pizzalar" }
+    ]
+  },
   "6309": {
     "name": "MOGAF DÖNER BEYLİKDÜZÜ KAVAKLI ŞUBESİ",
     "sourceUrl": "https://mogafdoner.com/wp-content/uploads/2026/03/Mogaf-_a3_menu_v3_fiyatli-2026-Mart-Gel-Al.pdf",
