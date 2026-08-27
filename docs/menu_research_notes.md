@@ -3785,3 +3785,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6294 ; https://www.corner.inc/pla
 ## MEKANPLUS ID 6293 — HOLD
 Hentzer kaydı `Gümüşsuyu, Kirazlı Yayla Cd. 104/3, 34820 Beykoz/İstanbul`, telefon `+90 553 837 75 87`. Restoranim, DliPlace, Menu-TR, Kaçıyor ve 2026 tarihli yorumlar exact adres/telefonu doğruluyor. Ancak mevcut kaynaklarda güncel ve fiyatı okunabilir 20 benzersiz gıda ürünü bulunamadı; Menu-TR/Restoranim fiyat listesi sunmuyor, Kaçıyor yalnızca kalori referansları içeriyor. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6293 ; https://restoranim.net/istanbul/beykoz/restoran/mekanplus ; https://www.dliplace.com/info-place/132023 ; https://www.menu-tr.com/istanbul/beykoz/restoran/mekanplus ; https://kaciyor.com/mekanplus
+
+## ARET'İN YERİ ID 6292 — HOLD
+Hentzer kaydı `Hüseyinağa/Çatma? Balıkpazarı Kameriye Sk., Nevizade Sk. No:9, 34435 Beyoğlu/İstanbul`, telefon `+90 212 292 10 10`. Wanderlog, Wheree, Pearl, RestaurantGuru ve Yelp No:9 varyantını destekliyor; ancak işletmenin 18.04.2026 tarihli resmi Instagram paylaşımı güncel adresi `Hüseyinağa Mah. Kameriye Sk. N:7 Beyoğlu` olarak veriyor. Bu güncel resmi adres ile Hentzer No:9 exact eşleşmediğinden ve güncel 20 ürün/fiyat listesi doğrulanamadığından **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6292 ; https://www.instagram.com/reel/DXRBb5mDCBl/ ; https://www.pearl.com/restaurants/istanbul/aret-in-yeri ; https://restaurantguru.com/Aretin-Yeri-Istanbul-3 ; https://www.yelp.com/biz/aretin-yeri-nevizade-istanbul
