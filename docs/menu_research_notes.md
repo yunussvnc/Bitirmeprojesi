@@ -3525,3 +3525,7 @@ Kaynaklar: https://umitet.com/iletisim/ ; https://yandex.com.tr/maps/org/umit_et
 ## POINT LOUNGE BEŞİKTAŞ ID 6359 HOLD
 Dijital menü exact Point Lounge Beşiktaş adı/adres çevresi ve güncel fiyatlı yiyecek menüsü sunuyor; fakat telefon alanı boş, Yandex `0544 800 34 04` gösterirken Hentzer `0541 270 54 88` gösteriyor. Zorunlu exact phone parity sağlanamadığı için menü eklenmedi; **strict HOLD**.
 Kaynaklar: https://pointlounge.dijital.menu/26236 ; https://pointlounge.dijital.menu/26229 ; https://nr.maptons.com/p/12867820538 ; https://www.menu-tr.com/istanbul/besiktas/nargile-salonu/point-lounge-besiktas-nargileoyun-salonu
+
+## GÜN BAKERY BEŞİKTAŞ ID 6358
+Hentzer `No:34, Sinanpaşa, Şair Nedim Cd., 34353 Beşiktaş/İstanbul` ve `+90 212 260 70 78`; resmi Gün Bakery sitesi aynı adres ve telefonu yayımlıyor. Yemeksepeti `s1q8` More info `Şair Nedim Cd. 34 B` gösteriyor ve canlı menüde 4 kruvasan, 6 Ekşi Maya Tost ve 3 Glutensiz Tost olmak üzere 13 benzersiz güncel fiyatlı yiyecek ürünü sunuyor. Resmi sitede ayrıca 2026 fiyatlı Pastel de Nata 120 TL ve paket ürünleri bulunuyor. **Override kabul edildi.**
+Kaynaklar: https://www.gunbakery.com/ ; https://www.yemeksepeti.com/en/restaurant/s1q8/gun-bakery-s1q8

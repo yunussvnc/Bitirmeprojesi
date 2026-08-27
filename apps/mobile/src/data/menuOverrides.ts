@@ -92315,6 +92315,27 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6358": {
+    "name": "GÜN BAKERY BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/s1q8/gun-bakery-s1q8",
+    "sourceName": "Canlı Yemeksepeti exact Gün Bakery Beşiktaş menüsü; resmi Gün Bakery sitesi ile Sinanpaşa Mah. Şair Nedim Cd. No:34 / 0212 260 70 78 doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Frankfurter Sosisli Cheddar Peynirli Trüflü Mayonezli Kruvasan (Fırınlanmış)", "price": "475 TL", "category": "Kruvasanlı Lezzet" },
+      { "name": "Fesleğen Pestolu Peynir Soslu Mozzarella Peynirli Domatesli Kruvasan (Fırınlanmış)", "price": "435 TL", "category": "Kruvasanlı Lezzet" },
+      { "name": "Baconlu Cheddar Peynirli Susurluk Peynirli Trüflü Mayonezli Kruvasan (Fırınlanmış)", "price": "475 TL", "category": "Kruvasanlı Lezzet" },
+      { "name": "Kruvasan Arası Kavurma & Çırpılmış Yumurta", "price": "565 TL", "category": "Kruvasanlı Lezzet" },
+      { "name": "Vegan Tost", "price": "445 TL", "category": "Ekşi Maya Tost" },
+      { "name": "Domates Pesto Tost", "price": "445 TL", "category": "Ekşi Maya Tost" },
+      { "name": "Hemşin Kavurmalı Tost", "price": "490 TL", "category": "Ekşi Maya Tost" },
+      { "name": "Füme Antrikotlu Tost", "price": "490 TL", "category": "Ekşi Maya Tost" },
+      { "name": "Avokado Tost", "price": "455 TL", "category": "Ekşi Maya Tost" },
+      { "name": "Gün Akdeniz Tost", "price": "350 TL", "category": "Ekşi Maya Tost" },
+      { "name": "Glutensiz Domates Pesto Tost", "price": "500 TL", "category": "Glutensiz Tost" },
+      { "name": "Glutensiz Avokado Tost", "price": "510 TL", "category": "Glutensiz Tost" },
+      { "name": "Glutensiz Vegan Tost", "price": "500 TL", "category": "Glutensiz Tost" }
+    ]
+  },
   "6361": {
     "name": "KAFFEE SCHÜTZ BEŞİKTAŞ",
     "sourceUrl": "https://www.migros.com.tr/yemek/kaffee-schutz-besiktas-cihannuma-mah-st-2be36",
