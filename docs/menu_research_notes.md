@@ -3314,3 +3314,7 @@ Kaynaklar: https://restoranim.net/istanbul/beykoz/kafe/mini-coffee-food-bakery ;
 ## ID 6411 ŞAARİ EL İFTAR Fİ BEŞİKTAŞ HOLD
 Hentzer kaydı Arapça `شارع الإفطار في بشكتاش` adıyla Sinanpaşa, Çelebi Oğlu Sk. No:17 adresinde ancak telefon alanı boş. Cybo yalnız aynı adı/adresi listeliyor; gerçek işletme adı, telefon, exact şube kimliği ve son bir yıl fiyatlı 20 ürün menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynak: https://bedrijvengids.cybo.com/TR/be%C5%9Fikta%C5%9F-(district)/ontbijt-en-brunch
+
+## DIGMA RESTAURANT ID 6410 HOLD
+Digma resmi sitesi Hentzer ile İshaklı, Bozhane Yolu Sok. No:9 adresini ve `+90 533 223 15 54` telefonunu doğruluyor; Yandex, Instagram, Aramabul ve Tripadvisor destekliyor. Resmi Kahvaltı/Steakhouse sayfaları fiyat yayımlamıyor ve son bir yıl içinde doğrulanmış 20 ürünlü fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://digma.com.tr/ ; https://digma.com.tr/kahvalti ; https://yandex.com.tr/maps/org/digma/207965128830/ ; https://www.instagram.com/digma_ist/
