@@ -3437,3 +3437,7 @@ Kaynaklar: https://www.instagram.com/areyouchocolate/ ; https://www.facebook.com
 ## YILDIRIM PETSHOP ID 6381 HOLD
 Kayıt restoran değil petshop olarak doğrulandı; adres `Bosna Sk No:33A` ve `0545 441 00 34` kaynaklarla eşleşiyor. Gıda ürün menüsü kapsam dışı olduğundan **override eklenmedi; strict HOLD.**
 Kaynaklar: https://patimahallesi.com/rehber/yildirim-petshop-bayrampasa-istanbul ; https://www.yerelesnaf.com/istanbul/bayrampasa/petshop/yildirim-petshop/ ; https://www.instagram.com/p/DaLLqWVisE5/ ; https://www.instagram.com/reel/DSHbleQipL7/
+
+## CHIMI CHIMNEY CAKE ID 6380 HOLD
+Adres 2026 Instagram/TikTok ve DocentPro ile `Sinanpaşa, Yeni Hamam Sok. No:7` olarak doğrulandı; güncel fiyatlı içerik de mevcut. Fakat Hentzer telefon alanı boş olduğundan zorunlu exact telefon paritesi sağlanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.instagram.com/reel/DaS8o4koE3B/ ; https://www.instagram.com/p/DbazDOdDODd/ ; https://www.facebook.com/istanbulburadatr/videos/1346094074404947/ ; https://docentpro.com/places/chimi-chimney-cake_NTg2MDgz
