@@ -3421,3 +3421,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/d93w/pizzalive-kafeterya ; 
 ## ÖZİKİZLER KÜNEFE BEYLİKDÜZÜ BEYKENT ID 6385 HOLD
 Resmi Beylikdüzü şube sayfası ve Yandex/Bulurum `Avrupa Cad. Vista Dört Evleri 89LC8` ile `0212 855 12 12` bilgisini doğruluyor. Fakat dijikep menüsü Gaziantep Batıkent adres/0342 telefonu taşıyor; fiyatlı içerik wrong-branch olduğu için **override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.ozikizlerkunefe.com/beylikduzu-subesi.php ; https://yandex.com.tr/maps/org/ozikizler_kunefe_beylikduzu_subesi/135194570362/ ; https://ozikizlerkunefemenu.dijikep.com/ ; https://www.bulurum.com/details/3b61ai60db0h7707707k3cab643j7e16
+
+## MANDABATMAZ ID 6384 HOLD
+Resmi site exact `Asmalımescit Mah. İstiklal Cad. Olivia Geçidi Çıkmazı No:1/A` ve `0212 243 77 37` bilgilerini doğruluyor. Ancak son bir yıl içinde şubeye ait ürün bazlı güncel fiyatlı menü bulunamadı; 2023 menü görseli ve yaklaşık fiyat kaynakları yeterli değil. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.mandabatmaz.com.tr/iletisim ; https://www.mandabatmaz.com.tr/ ; https://gurmerehber.com/mandabatmaz-beyoglu/ ; https://mesprestiges.com/tr/istanbul/places/mandabatmaz/menu
