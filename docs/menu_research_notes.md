@@ -3805,3 +3805,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6287 ; https://winniey.com/spots/
 ## SMASHCRAFT BURGER ID 6286 — HOLD
 Hentzer kaydı `Aktel AVM, Adnan Kahveci, Avrupa Cd. D:82-13, 34000 Beylikdüzü/İstanbul`, telefon `+90 531 818 53 12`. Yandex Maps aynı Smashcraft Burger ve Avrupa Cad. 82/13 / +90 531 818 53 12 paritesini destekliyor. Buna karşın son bir yıl içinde exact şubeye ait erişilebilir 20 ürün/fiyat menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6286 ; https://yandex.com.tr/maps/org/smashcraft_burger/13725695861/
+
+## CİĞERCİ BAHATTİN ESENYURT / BEYLİKDÜZÜ ID 6285 — HOLD
+Hentzer `Barbaros Hayrettin Paşa, Şehitler Cd. No:3, 34515 Esenyurt` / `+90 538 870 60 33` bilgisi 2026 resmi sosyal paylaşımları ve çoklu dizinlerle doğrulandı. Canlı Yemeksepeti vendorunda Popüler ve Kebaplar & Izgaralar kategorileri aynı ürünleri tekrarlıyor; yalnızca 7 benzersiz gıda ürünü (Ciğer Şiş, Et Şiş, Adana, Yürek, Tavuk Kanat, Tavuk Şiş, Urfa) var. Çorba/tatlı/içecek eklense de 20 benzersiz gıda ürünü şartı sağlanamıyor. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6285 ; https://www.yemeksepeti.com/en/restaurant/dy6z/cigerci-bahattin-dy6z ; https://www.instagram.com/p/DT-p5UIiMvp/ ; https://restaurantguru.com/Cigerci-Bahattin-Istanbul-2 ; https://www.menu-tr.com/istanbul/esenyurt/restoran/cigerci-bahattin-esenyurt-beylikduzu
