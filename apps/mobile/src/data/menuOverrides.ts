@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6326": {
+    "name": "PIZZA V FULYA",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pizza-v-sisli-fulya-mah-st-2fabd",
+    "sourceName": "Canlı Migros Yemek Pizza V Şişli (Fulya Mah.) menüsü; Pizza V resmi Linktree/şube bağlantıları ve resmi Pizza V kanalları ile 19 Mayıs Öğretmen Haşim Çeken Cd. No:7A / 0212 916 28 26 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "V Margherita (Orta)", "price": "545 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "V Funghi (Orta)", "price": "545 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "V Broccoli (Orta)", "price": "545 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "V Aubergine (Orta)", "price": "545 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "V White Cheese (Orta)", "price": "545 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "V Mozzarella (Orta)", "price": "595 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "V Hellim (Orta)", "price": "595 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "V Quattro Formaggio (Orta)", "price": "665 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "V Pesto (Orta)", "price": "685 TL", "category": "Vejetaryen Orta Boy Pizzalar" },
+      { "name": "Pizza V (Orta)", "price": "615 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Mexican (Orta)", "price": "615 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Venus (Orta)", "price": "615 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Hercules (Orta)", "price": "665 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Pepperoni (Orta)", "price": "675 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Kick (Orta)", "price": "675 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Pineapple (Orta)", "price": "665 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Anatolia (Orta)", "price": "665 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Taco (Orta)", "price": "685 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V In The Ny (Orta)", "price": "685 TL", "category": "Dana Etli Orta Boy Pizzalar" },
+      { "name": "V Steaky (Orta)", "price": "685 TL", "category": "Dana Etli Orta Boy Pizzalar" }
+    ]
+  },
   "6327": {
     "name": "ETİLER KEBAPÇI",
     "sourceUrl": "https://fndn.mn/kebapci-etiler",

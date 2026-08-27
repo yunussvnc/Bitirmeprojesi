@@ -3649,3 +3649,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/r84w/sweety-vaffel ; https:
 ## ETİLER KEBAPÇI ID 6327
 Hentzer kaydı `Etiler, Nisbetiye Cd No:76, 34337 Beşiktaş/İstanbul` ve `+90 212 257 02 09`; Etiler Kebapçı resmi sitesi adresi, 0212 257 02 09/10/11 telefonlarını ve resmi Finedine dijital menü bağlantısını yayınlıyor. Restaurant Guru da aynı adres ve 0212 257 02 09 telefonunu doğruluyor. Resmi Finedine menüsü fiyatların TL ve KDV dahil olduğunu, **3 Temmuz 2026’dan itibaren uygulandığını** belirtiyor. Mezeler, ara sıcaklar ve kebap çeşitlerinden 20 benzersiz gıda ürünü/fiyatı alındı; değişken porsiyon aralıkları, içecekler ve meyveler dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.etilerkebapci.com.tr/en ; https://fndn.mn/kebapci-etiler ; https://restaurantguru.com/Etiler-Kebapci-Istanbul/menu
+
+## PIZZA V FULYA ID 6326
+Hentzer kaydı `19 Mayıs, Öğretmen Haşim Çeken Cd. No:7A, 34360 Şişli/İstanbul` ve `+90 212 916 28 26`; Pizza V resmi Linktree’si Fulya şubesini aynı adresle listeliyor, resmi Pizza V kanalları ve Migros/Yemeksepeti kaydı Fulya menüsünü doğruluyor. Canlı Migros Yemek menüsünden vejetaryen ve dana etli orta boy kategorilerinden 20 benzersiz pizza ürünü/fiyatı alındı. Kampanya menüleri, içecekler, soslar ve paket ürünler dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.migros.com.tr/yemek/pizza-v-sisli-fulya-mah-st-2fabd ; https://www.yemeksepeti.com/restaurant/qdap/pizza-v-qdap ; https://linktr.ee/pizzav ; https://www.pizzav.com.tr/
