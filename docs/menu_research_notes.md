@@ -3621,3 +3621,7 @@ Kaynaklar: https://restaurantguru.com/Zeytuna-Istanbul/menu ; https://restaurant
 ## TELLA KEBAP BEYLİKDÜZÜ ID 6334
 Hentzer kaydı `Cumhuriyet Mah. Aytekin Kotil Sok, Cumhuriyet, Bizim Çarşı No:2, 34520 Beylikdüzü/İstanbul` ve `+90 212 780 04 04`; Tella’nın resmi şubelerimiz sayfası aynı adres ve telefonu, resmi ana sayfa ve Nasilbiryer de aynı bilgileri doğruluyor. Canlı Yemeksepeti exact Tella Kebap menüsünden başlangıç, lahmacun, kebap/ızgara, tava, salata ve tatlı kategorilerinden 20 benzersiz gıda ürünü/fiyatı alındı. Promosyonlu çift fiyatlı dürümler, içecekler ve poşet dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.tellakebap.com/subelerimiz/ ; https://www.tellakebap.com/ ; https://www.yemeksepeti.com/restaurant/z88g/tella-kebap ; https://nasilbiryer.com.tr/yerler/tella-kebap-beylikduzu/
+
+## HOLD — BOMBACI FATİH ID 6333
+Hentzer kaydı `Sinanpaşa, Beşiktaş Cd. No:15, 34353 Beşiktaş/İstanbul` ve `+90 532 151 77 34`; Yandex Maps, Waze, Tripadvisor ve Restaurant Guru aynı şube adresi/telefonunu doğruluyor. Restaurant Guru’da en yeni menü sürümü 3 ay önce eklenmiş görünse de ürün/fiyat içeriği erişilebilir metin olarak alınamadı; 20 benzersiz son bir yıl fiyatlı ürün bağımsız doğrulanamadı. Bu nedenle tahmini fiyat kullanılmadan **strict HOLD; override eklenmedi.**
+Kaynaklar: https://yandex.com.tr/maps/org/bombaci_fatih/166011845821/ ; https://restaurantguru.com/Bombaci-Fatih-Istanbul/menu ; https://www.tripadvisor.com.tr/Restaurant_Review-g23701958-d24970494-Reviews-Bombaci_Fatih-Besiktas.html
