@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6301": {
+    "name": "MY FRIED CHICKEN - İSTANBUL BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/y0ue/my-fried-chicken-y0ue",
+    "sourceName": "Canlı Yemeksepeti menüsü ve resmi My Fried Chicken şubeler sayfası; Adnan Kahveci Kışla Cd. No:32/1 / 0212 912 23 83 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Small Burger Menu", "price": "350 TL", "category": "Burger Menüleri" },
+      { "name": "Medium Burger Menu", "price": "440 TL", "category": "Burger Menüleri" },
+      { "name": "Xlarge Burger Menu", "price": "790 TL", "category": "Burger Menüleri" },
+      { "name": "Super Duo", "price": "810 TL", "category": "İki Kişilik Menüler" },
+      { "name": "Gourmet Duo", "price": "830 TL", "category": "İki Kişilik Menüler" },
+      { "name": "Favorite Duo", "price": "820 TL", "category": "İki Kişilik Menüler" },
+      { "name": "2-Piece Chicken Wing Menu", "price": "420 TL", "category": "Kanat Menüleri" },
+      { "name": "4-Piece Chicken Wing Menu", "price": "560 TL", "category": "Kanat Menüleri" },
+      { "name": "6-Piece Chicken Wing Menu", "price": "730 TL", "category": "Kanat Menüleri" },
+      { "name": "8-Piece Tenders Bucket Menu", "price": "890 TL", "category": "Kova Menüleri" },
+      { "name": "10-Pack Tenders Bucket Menu", "price": "950 TL", "category": "Kova Menüleri" },
+      { "name": "12-Piece Tenders Bucket Menu", "price": "1010 TL", "category": "Kova Menüleri" },
+      { "name": "My Tako", "price": "180 TL", "category": "My Tako" },
+      { "name": "Tenders Dürüm", "price": "250 TL", "category": "Dürüm Menüleri" },
+      { "name": "Tenders Wrap Menu", "price": "390 TL", "category": "Dürüm Menüleri" },
+      { "name": "2-Piece Tenders Menu", "price": "410 TL", "category": "Tenders Menüleri" },
+      { "name": "4-Piece Tenders Menu", "price": "550 TL", "category": "Tenders Menüleri" },
+      { "name": "6-Piece Tenders Menu", "price": "670 TL", "category": "Tenders Menüleri" },
+      { "name": "Sandviç", "price": "250 TL", "category": "Sandviç Menüleri" },
+      { "name": "Sandwich Menu", "price": "390 TL", "category": "Sandviç Menüleri" }
+    ]
+  },
   "6302": {
     "name": "TONE İSTANBUL",
     "sourceUrl": "https://tone-istanbul.com/__static/jdj5jdewjdflruxvnjlevkjeskxms2qy/TONE-MENU(3).pdf",
