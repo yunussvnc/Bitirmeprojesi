@@ -3553,3 +3553,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/adana_mestanzade_kebap/205920581210/ ;
 ## VOSVOS CAFE BAR BEYOĞLU ID 6352 HOLD
 Resmi Vosvos sitesi ve Yandex, `Erol Dernek Sk. No:11/A Beyoğlu` adresini ve `0212 243 65 66` telefonunu doğruluyor; ancak Hentzer telefon alanı boş/null. Son bir yıl içinde exact şubeye bağlı güvenilir ürün bazlı TL fiyatlı menü de bulunamadı; eski Quandoo fiyatları kullanılmadı. **Strict HOLD**.
 Kaynaklar: https://vosvoscafebar.com/ ; https://yandex.com.tr/maps/org/vosvos_cafe_bar/1318276109/ ; https://www.quandoo.com.tr/en/place/vos-vos-cafe-bar-19218/menu
+
+## B & B BAKERY — BURCU & BETÜL ID 6351 HOLD
+İşletme adı ve Beylikdüzü/Kavaklı kimliği arama sonuçlarıyla destekleniyor; ancak resmi Instagram giriş duvarı nedeniyle exact güncel iletişim doğrulanamadı. Son bir yıl exact şube ürün bazlı TL menüsü bulunamadı. **Strict HOLD**.
+Kaynaklar: https://www.instagram.com/b.bbakery/ ; https://restoranim.net/istanbul/istanbul/pastane/b-b-bakery-burcu-betul
