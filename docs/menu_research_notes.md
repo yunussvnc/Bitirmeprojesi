@@ -3937,3 +3937,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6254 ; https://biiskembe1978.com/
 ## İSKARMOZ RESTAURANT ID 6253 — HOLD
 Hentzer `Marmara, Ulusum Cd. No:34, 34524 Beylikdüzü`, telefon `+90 533 314 08 39`. Resmi iskarmoz.com ve çoklu dizinler exact adres/telefonu destekliyor. Resmi site fiyat içermiyor; içerik görselleri çoğunlukla Ekim/Kasım 2024 tarihli. Nearby-res menü ürün adlarını veriyor ancak fiyat göstermiyor. 20 güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6253 ; https://www.iskarmoz.com/ ; https://iskarmoz-restaurant.nearby-res.com/menu ; https://restoranim.net/istanbul/beylikduzu/restoran/iskarmoz-restaurant ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/restoran/iskarmoz-restaurant-qhvT-4.html
+
+## BEŞİKTAŞ BARBAROS COFFY ID 6252 — HOLD
+Hentzer `Cihannüma, Barbaros Blv. 45/B, 34022 Beşiktaş`, telefon `+90 212 919 00 66`; Kaçıyor, RestaurantGuru, Tumİşyeri ve servis listeleri destekliyor. Migros `Coffy, Beşiktaş (Cihannüma Mah.)` vendoru çok sayıda güncel fiyat gösteriyor fakat 45/B adres numarası ve onaylı telefon vendor sayfasında görünmüyor. %100 exact branch paritesi sağlanamadığı için **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6252 ; https://www.migros.com.tr/yemek/coffy-besiktas-cihannuma-mah-st-25d3b ; https://coffy.com.tr/ ; https://kaciyor.com/besiktas-barbaros-coffy ; https://restaurantguru.com/Besiktas-Barbaros-Coffy-Istanbul
