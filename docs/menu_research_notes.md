@@ -3545,3 +3545,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/ozcitirim_ekmek_ve_unlu_mamulleri/1286
 ## ENBEY DÖNER KEBAP BEYLİKDÜZÜ ID 6354 HOLD
 Resmi Enbey sitesi Beykent şubesini `Adnan Kahveci Mah. Yavuz Sultan Selim Blv. No:23` gösterirken Hentzer `Perlavista AVM No:1 No:48` gösteriyor. Telefon `444 62 21` eşleşse de exact adres paritesi kesin değil; güncel Yemeksepeti menüsü yanlış şubeye uygulanmadı. **Strict HOLD**.
 Kaynaklar: https://enbeydoner.com.tr/subelerimiz/ ; https://enbeydoner.com.tr/ ; https://www.instagram.com/reel/Dcd65LAsvmA/ ; https://www.yemeksepeti.com/restaurant/j0cl/enbey-doner-beylikduzu
+
+## ADANA MESTANZADE KEBAP ID 6353 HOLD
+Hentzer `Onur Sk. Demir Romance Sitesi Akik 4`, Yandex `Onur Sok. No:8` gösteriyor; telefon Instagram ile eşleşse ve Migros’ta güncel menü bulunsa da exact adres/ünite paritesi kesin değil. Yanlış şubeye menü uygulanmadı; **strict HOLD**.
+Kaynaklar: https://yandex.com.tr/maps/org/adana_mestanzade_kebap/205920581210/ ; https://www.instagram.com/mestanzadekebap/ ; https://www.migros.com.tr/yemek/adana-mestanzade-kebap-beylikduzu-cumhuriyet-mah-st-2ade2
