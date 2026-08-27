@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6363": {
+    "name": "ESMER CAFE TAKSİM",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/xf1p/esmer-cafe",
+    "sourceName": "Canlı Yemeksepeti exact Esmer Cafe menüsü; resmi Esmer Cafe iletişim sayfası ile Şehit Muhtar İstiklal Cd. No:40 / 0212 245 56 56 doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Peynir Sigara Böreği (10 Adet)", "price": "160 TL", "category": "Börekler" },
+      { "name": "Kaşarlı Tost", "price": "160 TL", "category": "Tostlar" },
+      { "name": "Karışık Tost", "price": "200 TL", "category": "Tostlar" },
+      { "name": "Sucuklu Tost", "price": "176 TL", "category": "Tostlar" },
+      { "name": "Kaşarlı Gözleme", "price": "200 TL", "category": "Gözlemeler" },
+      { "name": "Karışık Gözleme", "price": "240 TL", "category": "Gözlemeler" },
+      { "name": "Peynirli Gözleme", "price": "200 TL", "category": "Gözlemeler" },
+      { "name": "Klasik Burger", "price": "280 TL", "category": "Burgerler" },
+      { "name": "Mantı", "price": "224 TL", "category": "Mantılar" },
+      { "name": "Patates Kızartması", "price": "120 TL", "category": "Yan Ürünler" },
+      { "name": "Kazandibi", "price": "160 TL", "category": "Tatlılar" },
+      { "name": "Karamelli Trileçe", "price": "160 TL", "category": "Tatlılar" },
+      { "name": "Fırın Sütlaç", "price": "136 TL", "category": "Tatlılar" },
+      { "name": "Profiterol", "price": "160 TL", "category": "Tatlılar" },
+      { "name": "Supangle", "price": "136 TL", "category": "Tatlılar" },
+      { "name": "Muzlu Mag", "price": "160 TL", "category": "Tatlılar" },
+      { "name": "Çilekli Mag", "price": "160 TL", "category": "Tatlılar" },
+      { "name": "Oreolu Mag", "price": "160 TL", "category": "Tatlılar" },
+      { "name": "Klasik Waffle", "price": "224 TL", "category": "Waffles" },
+      { "name": "Dubai Waffle", "price": "304 TL", "category": "Waffles" }
+    ]
+  },
   "6364": {
     "name": "BEYKOZ PİDE VE BÖREK SALONU",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vphh/beykoz-pide-and-borek",

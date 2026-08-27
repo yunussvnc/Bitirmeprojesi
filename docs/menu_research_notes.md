@@ -3505,3 +3505,7 @@ Kaynaklar: https://www.migros.com.tr/yemek/kofteci-yusuf-bayrampasa-muratpasa-ma
 ## BEYKOZ PİDE VE BÖREK SALONU ID 6364
 Hentzer `Merkez, Hacı Alibey Sk. No:1, 34820 Beykoz/İstanbul` ve `+90 505 035 62 83`; resmi Beykoz Pide sitesi, Facebook ve Kaçıyor aynı Merkez şube adresi/telefonu doğruluyor. Canlı Yemeksepeti `vphh` menüsünden 2026-08-27 tarihinde 20 benzersiz güncel fiyatlı börek, poğaça ve pide ürünü alındı; içecekler ve Popular carousel tekrarları dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/vphh/beykoz-pide-and-borek ; https://beykozpide.com.tr/ ; https://www.facebook.com/BeykozPideBorek/ ; https://kaciyor.com/beykoz-pide-ve-borek-salonu ; https://www.instagram.com/p/CjP1D15gx7J/
+
+## ESMER CAFE TAKSİM ID 6363
+Hentzer `Şehit Muhtar, İstiklal Cd. No:40, 34430 Beyoğlu/İstanbul` ve `+90 212 245 56 56`; resmi Esmer Cafe iletişim sayfası aynı adres/telefonu doğruluyor, Yandex ve Bulurum da eşleşiyor. Canlı Yemeksepeti `xf1p` menüsünden 2026-08-27 tarihinde 20 benzersiz güncel fiyatlı börek, tost, gözleme, burger, mantı, yan ürün, tatlı ve waffle alındı; içecek, poşet ve kampanyalı tekrarlar dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.esmercafe.com/tr/contact ; https://www.yemeksepeti.com/en/restaurant/xf1p/esmer-cafe ; https://yandex.com/maps/org/esmer_cafe_restaurant/1378262552/ ; https://www.bulurum.com/details/50a_126b5idg43cdcd4g_i4k_0bi167g
