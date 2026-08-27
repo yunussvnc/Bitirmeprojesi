@@ -3833,3 +3833,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6280 ; https://yandex.com.tr/maps
 ## BURGER MUNCH ID 6278 — HOLD
 Hentzer `Adnan Kahveci, Anadolu Cd. No:2, 34528 Beylikdüzü/İstanbul`, telefon `+90 552 804 83 42`. Resmi Instagram `@burgermunchtr` 09.08.2026 paylaşımı Burger Munch Beylikdüzü’nü ve yalnızca 399 TL kampanyasını doğruluyor; ürün bazlı fiyat listesi sunmuyor. Exact telefon/adres için yeterli bağımsız parite ve son bir yıl içinde 20 benzersiz fiyatlı gıda ürünü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6278 ; https://www.instagram.com/burgermunchtr/reel/Db04_t_IjBk/
+
+## ESMER CHEF BEYOĞLU ID 6277 — HOLD
+Hentzer `Asmalı Mescit, İstiklal Cd. 126A, 34430 Beyoğlu/İstanbul`, telefon `+90 212 249 69 99`. Waze, Wanderboat, Tadar, Snapchat ve Servis Listeleri exact adres/telefonu destekliyor; resmi sitedeki Taksim harita kartı da 126A’yı gösteriyor. Fakat resmi sitenin genel iletişim alanı başka şube bilgisi taşıyor (`Hobyar Mah. Ankara Cd. 73/B`, `0212 513 65 35`). Resmi menü PDF’si tarihsiz görsel PDF ve düşük/eski görünümlü fiyatlar içeriyor; son bir yıl fiyat doğrulaması yapılamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6277 ; https://esmerchef.com.tr/ ; https://esmerchef.com.tr/Content/Men%C3%BCPdf.pdf ; https://www.waze.com/tr/live-map/directions/tr/i%C3%BCstanbul/esmer-chef-beyoglu?navigate ; https://servislisteleri.com/istanbul/beyoglu/restoran/esmer-chef-beyoglu-n1ca2Y.html
