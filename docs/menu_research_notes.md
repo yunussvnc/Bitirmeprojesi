@@ -3461,3 +3461,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/vl4l/hane-cikolata-and-kahv
 ## BEY KEBAP RESTAURANT ID 6375 HOLD
 Hentzer/FB `Altocasa sitesi, Avrupa Cd. 1A`; resmi Instagram `Avrupa Caddesi No:73`; Yandex `73A3` veriyor. Telefon eşleşse de exact adres çelişkisi nedeniyle Migros/Yemeksepeti fiyatlı menüsü bu kayda güvenle bağlanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.instagram.com/beykebaprestaurant/ ; https://www.facebook.com/p/Bey-kebap-restaurant-100077318215493/ ; https://yandex.com.tr/maps/org/bey_kebap_restaurant/183583620459/ ; https://www.migros.com.tr/yemek/bey-restaurant-kebap-beylikduzu-pinartepe-mah-st-23210 ; https://www.yemeksepeti.com/restaurant/gf8m/bey-restaurant-and-kebap
+
+## HACİVAT ID 6374 HOLD
+Adres/telefon resmi Instagram ve firma rehberleriyle eşleşiyor; fakat Menuburada menü olmadığını bildiriyor, resmi Eatbu sayfasında da son bir yıl ürün bazlı TL fiyat bulunmuyor. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.instagram.com/hacivat_pastane_cafe/ ; https://enkalitelifirmalar.com.tr/hacivat ; https://www.servisisletmebul.com/istanbul/bayrampasa/pastane-tatlici/hacivat-s8qh8p.html ; https://menuburada.com/hacivat-ismet-pasa-istanbul/ ; https://hacivat-pastanesi.eatbu.com/?lang=tr
