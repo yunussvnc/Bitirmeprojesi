@@ -3825,3 +3825,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6282 ; https://kilovich.com/ ; ht
 ## ÇEVİKOĞLU TAVUK DÖNER & KOVA TAVUK PİLAV ID 6281 — HOLD
 Hentzer `İnci Konak, Adnan Kahveci, Osmanlı Cd. No:1 No:35D, 34528 Beylikdüzü` / `+90 541 193 83 00`; işletme sosyal kaynakları telefonu destekliyor. Yemeksepeti Çevikoğlu Döner vendoru erişilebilir olsa da exact adres/telefon görünmüyor ve içecekler dışarıda bırakıldığında 20 benzersiz gıda ürünü sunmuyor. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6281 ; https://www.yemeksepeti.com/en/restaurant/lx34/cevikoglu-doner-lx34 ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/restoran/cevikoglu-yaprak-et-tavuk-doner-by-donerci-abi-Yu1tjY.html ; https://www.instagram.com/cevikogludoner/
+
+## PASTA VERA BEŞİKTAŞ ID 6280 — HOLD
+Hentzer `Sinanpaşa, Şht. Dursun Bakan Sk. 25/A, 34330 Beşiktaş/İstanbul`, telefon `+90 551 825 34 01`. Yandex ve yerel/sosyal içerikler Pasta Vera Beşiktaş’ı ve 25/A çevresini destekliyor. Ancak bulunan Migros menüsü Çanakkale Merkez, Yemeksepeti menüsü Diyarbakır şubesine ait; erişilebilir resmi Instagram profili login duvarında. Exact Beşiktaş şubesi için son bir yıldan 20 fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6280 ; https://yandex.com.tr/maps/org/pasta_vera/62031771452/ ; https://www.migros.com.tr/yemek/pasta-vera-merkez-barbaros-mah-st-30fe3 ; https://www.instagram.com/pastaverabesiktas/ ; https://restoranim.net/istanbul/besiktas/restoran/pasta-vera-besiktas
