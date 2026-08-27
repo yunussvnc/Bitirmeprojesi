@@ -3933,3 +3933,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6255 ; https://yandex.com.tr/maps
 ## BI' İŞKEMBE | 1978 ID 6254 — HOLD
 Hentzer `İsmet Paşa, İsmet Paşa Cd. No:2 D:A, 34040 Bayrampaşa`, telefon `+90 212 430 50 50`. Resmi biiskembe1978.com menü ve Bayrampaşa sayfası exact adres/telefonu doğruluyor; resmi sitede ürün kategorileri var ancak ürün bazlı fiyat listesi yok. Son bir yıl içinde 20 benzersiz fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6254 ; https://biiskembe1978.com/menu-restaurant/ ; https://biiskembe1978.com/bayrampasa/ ; https://www.snapchat.com/place/bi-ikembe-1978/d63dce86-653c-11e9-a495-b3bc48c95bd6 ; https://restaurantguru.com/BiIskembe-Istanbul
+
+## İSKARMOZ RESTAURANT ID 6253 — HOLD
+Hentzer `Marmara, Ulusum Cd. No:34, 34524 Beylikdüzü`, telefon `+90 533 314 08 39`. Resmi iskarmoz.com ve çoklu dizinler exact adres/telefonu destekliyor. Resmi site fiyat içermiyor; içerik görselleri çoğunlukla Ekim/Kasım 2024 tarihli. Nearby-res menü ürün adlarını veriyor ancak fiyat göstermiyor. 20 güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6253 ; https://www.iskarmoz.com/ ; https://iskarmoz-restaurant.nearby-res.com/menu ; https://restoranim.net/istanbul/beylikduzu/restoran/iskarmoz-restaurant ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/restoran/iskarmoz-restaurant-qhvT-4.html
