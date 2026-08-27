@@ -3477,3 +3477,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/chty/hazarfen-kebap ; https
 ## LANDSCAPE CAFE / MANZARA CAFE ID 6371 HOLD
 Menu-TR, Bulurum, Yandex ve Facebook exact adres `Çiğdem, Karagöz Sırtı Cd. No:14` ve `0216 322 97 70` bilgisini destekliyor; ancak açık/kapalı durumu kaynaklarda çelişkili. Son bir yıl içinde ürün bazlı 20 kalem güncel fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.menu-tr.com/istanbul/beykoz/kafe/manzara-cafe ; https://www.bulurum.com/en/details/map/0g13436i21cfc462d46f2j57_2c3a1bg ; https://yandex.ru/maps/org/manzara_cafe/17381294030/ ; https://www.facebook.com/TURGUT1917/ ; https://mekanlar.com/mekan/manzara-cafe-cigdem/menu
+
+## PİLAVCI İSLAM USTA BEYLİKDÜZÜ ID 6370 HOLD
+Ana site Hentzer adres/telefonunu doğruluyor; ancak fiyat güncellemesi 07.05.2026 olan Beykent dijital menüsünün iletişim bölümünde başka şube (`Mimarsinan Mah. E5 Londra Asfaltı Cd. No:66/D`, `0530 943 71 47`) yer alıyor. Wrong-branch riski nedeniyle **override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.pilavciislamusta.com/ ; https://beykent.pilavciislamusta.com/ ; https://beykent.pilavciislamusta.com/DesktopV2/CategoryChildTr/12 ; https://beykent.pilavciislamusta.com/DesktopV2/CategoryChildTr/10 ; https://www.instagram.com/pilavciislamusta/ ; https://www.yemeksepeti.com/restaurant/a319/pilavci-islam-usta
