@@ -3473,3 +3473,7 @@ Kaynaklar: https://www.metro-tr.com/magazalar/bayrampasa ; https://www.bulurum.c
 ## HAZARFEN KEBAP ID 6372
 Hentzer `Hacımimi, Lüleci Hendek Cd. No:13, 34425 Beyoğlu/İstanbul` ve `+90 541 220 70 53`; Restoranim, Wanderboat ve Yandex aynı işletme/adres/telefonu doğruluyor. Canlı Yemeksepeti `chty` sayfasından 2026-08-27 tarihinde 20 benzersiz güncel fiyatlı çorba, pide, kebap ve dürüm ürünü alındı; içecek ve poşet kalemleri dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/chty/hazarfen-kebap ; https://restoranim.net/istanbul/beyoglu/kebapci/hazarfen-kebap ; https://yandex.com.tr/maps/org/hazarfen_kebap/210305914928/ ; https://wanderboat.ai/local-businesses/turkey/beyo%C4%9Flu/hazarfen-kebap/ksGpqhAuQEWn6QBI-NhNEw
+
+## LANDSCAPE CAFE / MANZARA CAFE ID 6371 HOLD
+Menu-TR, Bulurum, Yandex ve Facebook exact adres `Çiğdem, Karagöz Sırtı Cd. No:14` ve `0216 322 97 70` bilgisini destekliyor; ancak açık/kapalı durumu kaynaklarda çelişkili. Son bir yıl içinde ürün bazlı 20 kalem güncel fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.menu-tr.com/istanbul/beykoz/kafe/manzara-cafe ; https://www.bulurum.com/en/details/map/0g13436i21cfc462d46f2j57_2c3a1bg ; https://yandex.ru/maps/org/manzara_cafe/17381294030/ ; https://www.facebook.com/TURGUT1917/ ; https://mekanlar.com/mekan/manzara-cafe-cigdem/menu
