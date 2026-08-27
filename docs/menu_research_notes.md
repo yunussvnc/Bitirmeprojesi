@@ -3887,3 +3887,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6266 ; https://www.yemeksepeti.co
 ## ORTAKÖY OVEN ID 6265 — HOLD
 Hentzer `Mecidiye, Eski Bahçe Sk. 26/A, 34347 Ortaköy-Beşiktaş`, telefon `+90 212 236 10 10`. RestaurantGuru exact adres ve telefonu gösteriyor; resmi menü bağlantısı `Ortaköy Fırını` Facebook sayfasına yönleniyor ve aynı telefon ile Ortaköy/Eskibahçe bilgisini doğruluyor. RestaurantGuru’da üç ay önce eklenmiş bir menü görseli bulunsa da ürün/fiyat metni okunabilir değil; son bir yıl içinde 20 benzersiz fiyatlı ürün bağımsız olarak doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6265 ; https://restaurantguru.com/Ortakoy-Firin-Istanbul/menu ; https://www.facebook.com/ortakoyfirini/ ; https://www.tumisyeri.com/ortakoy-oven-0212-236-10-10
+
+## CULİ COFFEE CO. ID 6264 — HOLD
+Hentzer `Yıldırım, Şehir Parkı Caddesi No:13/A, 34045 Bayrampaşa`, telefon `null`. Menu-TR aynı isim ve exact adresi, Yandex aynı işletmeyi destekliyor; resmi Instagram bağlantısı mevcut. Ancak doğrulanabilir telefon ve son bir yıl içinde 20 benzersiz fiyatlı gıda/içecek ürünü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6264 ; https://www.menu-tr.com/istanbul/bayrampasa/kafe/culi-coffee-co ; https://yandex.com.tr/maps/org/culi_coffee_co/121308386132/ ; https://www.instagram.com/culicoffeeco/
