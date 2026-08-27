@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6315": {
+    "name": "HALİL USTA KEBAP & LAHMACUN",
+    "sourceUrl": "https://www.migros.com.tr/yemek/aciktim-halil-usta-kebap-lahmacun-beyoglu-katipmustafa-celebi-mah-st-2268a",
+    "sourceName": "Canlı Migros Yemek Acıktım Halil Usta Kebap & Lahmacun Beyoğlu (Katipmustafa Çelebi Mah.) menüsü; MekanZade, Bulurum ve NearBy ile Sıraselviler/Hocazade Sk. No:7/A / 0212 252 34 87 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Mercimek Çorbası", "price": "140 TL", "category": "Çorbalar" },
+      { "name": "Ezogelin Çorbası", "price": "140 TL", "category": "Çorbalar" },
+      { "name": "Domatesli Kebap", "price": "600 TL", "category": "Kebaplar" },
+      { "name": "Karışık Kebap", "price": "1200 TL", "category": "Kebaplar" },
+      { "name": "Urfa Kebap", "price": "470 TL", "category": "Kebaplar" },
+      { "name": "Adana Kebap", "price": "470 TL", "category": "Kebaplar" },
+      { "name": "Tavuk Pirzola", "price": "450 TL", "category": "Izgaralar" },
+      { "name": "Izgara Köfte", "price": "470 TL", "category": "Izgaralar" },
+      { "name": "Çöp Şiş", "price": "600 TL", "category": "Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "450 TL", "category": "Izgaralar" },
+      { "name": "Lahmacun", "price": "160 TL", "category": "Lahmacunlar" },
+      { "name": "Fındık Lahmacun", "price": "120 TL", "category": "Lahmacunlar" },
+      { "name": "Kaşarlı Lahmacun", "price": "200 TL", "category": "Lahmacunlar" },
+      { "name": "Antep Lahmacun", "price": "170 TL", "category": "Lahmacunlar" },
+      { "name": "Kaşarlı Pide", "price": "300 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Pide", "price": "350 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Kaşarlı Pide", "price": "400 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Sucuklu Pide", "price": "350 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Mantarlı Pide", "price": "350 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sebzeli Pide", "price": "370 TL", "category": "Fırın Ürünleri" }
+    ]
+  },
   "6317": {
     "name": "RAPHAEL PIZZA BEŞİKTAŞ",
     "sourceUrl": "https://www.migros.com.tr/yemek/raphael-pizza-besiktas-sinanpasa-mah-st-3123f",
