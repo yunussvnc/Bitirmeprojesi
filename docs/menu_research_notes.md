@@ -3701,3 +3701,7 @@ Kaynaklar: https://www.migros.com.tr/yemek/aciktim-halil-usta-kebap-lahmacun-bey
 ## HOLD — ALİ BABA KEBAP KARAKÖY ID 6314
 Hentzer kaydı `Kemankeş Karamustafa Paşa, Kılıç Ali Paşa Mescidi Sk. No:8, 34421 Beyoğlu/İstanbul` ve `+90 212 250 60 61`; Restoranim, Wanderlog, resmi Instagram ve çeşitli harita kayıtları aynı exact adres/telefonu doğruluyor. Erişilebilir sosyal menü içeriği 2023 tarihli ve tam fiyat listesi değil; Restoranim güncel yorumları doğrulasa da 20 benzersiz son bir yıl fiyatlı ürün sunmuyor. Güncel menü fiyatları güvenilir biçimde doğrulanamadığından **strict HOLD; override eklenmedi.**
 Kaynaklar: https://restoranim.net/istanbul/beyoglu/restoran/ali-baba-kebap-karakoy ; https://wanderlog.com/place/details/9714161/ali-baba-kebap-karak%C3%B6y ; https://www.instagram.com/p/CqbAdcZLhvY/
+
+## HOLD — DEDECAN OCAKBAŞI KAVACIK ID 6313
+Hentzer kaydı `Rüzgarlıbahçe, Şık Sok. No:3, 34805 Beykoz/İstanbul` ve `+90 216 413 03 63`; doğrulanmış Dedecan Instagram hesabı, 21.08.2026 tarihli resmi paylaşım, Facebook, TikTok ve Restaurant Guru aynı exact şube/adres/telefonu doğruluyor. Resmi sosyal profilde güncel Menü ve Lezzetlerimiz öne çıkanları mevcut, fakat erişilebilir metinde fiyat listesi yok; 2026 paylaşımlarından 20 benzersiz fiyatlı ürün çıkarılamadı. **Strict HOLD; override eklenmedi.**
+Kaynaklar: https://www.instagram.com/dedecankavacik/ ; https://www.instagram.com/p/Db-tu5kg6DY/ ; https://restaurantguru.com/Dedecan-Ocakbasi-Turkey-2 ; https://www.facebook.com/p/Dedecan-Ocakba%C5%9F%C4%B1-Kavac%C4%B1k-100085712526274/
