@@ -3912,3 +3912,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6260 ; https://www.menu-tr.com/is
 ## BİZİM ZURNA DÜRÜM ID 6259 — HOLD
 Hentzer `Çubuklu, Öztürk Sk. No:19, 34805 Beykoz`, telefon `+90 542 501 00 65`. RestaurantGuru, Cybo, İstanbul Servis Listesi ve 2026 sosyal içerikleri exact adres/telefonu destekliyor. Güncel kanıtlarda yalnız sınırlı fiyat bilgisi (70 TL çorba) bulundu; 20 benzersiz fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6259 ; https://restaurantguru.com/Bizim-Zurna-DurumHalit-Ustadan-Ozel-Soslu-70cm-Tavuk-Durum-Istanbul ; https://www.instagram.com/reel/DZrr5gttiV/ ; https://istanbulservislistesi.com.tr/istanbul/beykoz/restoran/bizim-zurna-durumozel-soslu-70cm-tavuk-durum-8iiq00.html
+
+## HERO'S PIZZA&WAFFLE BEŞİKTAŞ ID 6258 — HOLD
+Hentzer `Cihannüma, Barbaros Blv. 8/A, 34353 Beşiktaş`, telefon `+90 212 626 07 07`. 2026 Instagram, Marmara Live, RestaurantGuru ve Restoranim exact şubeyi destekliyor. Migros Yemek vendoru CAPTCHA ile engellendi; sosyal içerikte yalnızca 300 TL sınırsız konsept fiyatı görülüyor. 20 güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6258 ; https://www.migros.com.tr/yemek/heros-pizza-besiktas-cihannuma-mah-st-2f997 ; https://www.instagram.com/p/DMFVp_ztGYo/ ; https://marmaralive.com/heros-pizza-besiktas-sinirsiz-lezzet-ve-keyif-dolu-bir-deneyim/ ; https://restaurantguru.com/Heros-Pizza-Besiktas-Subesi-Istanbul
