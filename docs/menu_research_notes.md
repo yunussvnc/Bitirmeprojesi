@@ -3869,3 +3869,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6270 ; https://www.snapchat.com/p
 ## LORESIMA GARDEN POLONEZKÖY ID 6269 — HOLD
 Hentzer `Bozhane, Boğaziçi Cd. No:22/A, 34829 Beykoz`, telefon `+90 539 557 98 28`. Restoranim, RestaurantGuru, Yenifirma ve Onedio exact adresi destekliyor. Arama sonucunda görünen 27.05.2026 Instagram paylaşımı açıldığında `Uzunpark Et-Mangal Cumhuriyetköy` adlı farklı işletmeye ait çıktı; menü/fiyat kanıtı exact kabul edilmedi. Son bir yıl içinde 20 benzersiz fiyatlı ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6269 ; https://restoranim.net/istanbul/beykoz/restoran/loresima-garden-polonezkoy ; https://restaurantguru.com/Loresima-Garden-Cumhuriyet-Koyu ; https://www.instagram.com/p/DY6dxknt7It/ ; https://onedio.com/haber/beykoz-da-gune-guzel-bir-baslangic-yapabileceginiz-en-iyi-kahvalti-mekanlari-1299940
+
+## MR. SIMONE ID 6268 — HOLD
+Hentzer `Balmumcu, Şevki Bey Caddesi No:2/A, 34349 Beşiktaş`, telefon `+90 551 824 57 60`. Çoklu yerel kaynak ve 27.01.2026 sosyal sonucu adres/telefonu destekliyor; ancak resmi mrsimone.com.tr sitesi aynı adres için `0552 828 6571` telefonunu veriyor. Bu telefon uyuşmazlığı nedeniyle 100% exact şube şartı sağlanmadı; menü QR’sı olsa da override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6268 ; https://www.mrsimone.com.tr/en/ ; https://www.mrsimone.com.tr/menu-qr/ ; https://restoranim.net/istanbul/besiktas/kahvaltici/mr-simone ; https://www.snapchat.com/place/mrsimone/c5ff03ee-39d4-11ed-8afe-bbabc125c708
