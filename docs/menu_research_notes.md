@@ -3561,3 +3561,7 @@ Kaynaklar: https://www.instagram.com/b.bbakery/ ; https://restoranim.net/istanbu
 ## İLLA BURGER KAVACIK ID 6350 HOLD
 Yandex exact işletme/telefonu (`+90 542 298 86 28`) doğruluyor; ancak Hentzer `Yayabeyi Sk. No:27/A`, Yandex `Yaya Beyi Sok. No:27` gösteriyor. Yemeksepeti güncel fiyatlı menü sunsa da zorunlu exact kapı paritesi sağlanmadı. **Strict HOLD**.
 Kaynaklar: https://yandex.com.tr/maps/org/illa_burger/44651607770/ ; https://www.yemeksepeti.com/en/restaurant/m89o/illa-burger-m89o ; https://merkezzirveservis.com.tr/firma/3/illa-burger-beykoz/
+
+## RIDERS ZONE COFFEE MAKARNA&PIZZA ID 6349 HOLD
+Yandex exact işletme ve `+90 532 596 47 73` telefonu doğruluyor; ancak Hentzer `Peyami Safa Sokağı Semerkand Line Sitesi`, Yandex `Mehmetçik Cad. 14` gösteriyor. Son bir yıl exact şube fiyatlı menü bulunamadı. **Strict HOLD**.
+Kaynaklar: https://yandex.com.tr/maps/org/riders_zone_coffee_makarna_pizza/2185252977/ ; https://www.instagram.com/riderszoneco/ ; https://firmaatlas.com/istanbul/buyukcekmece/firma/riders-zone-coffee-makarna-pizza-2497048
