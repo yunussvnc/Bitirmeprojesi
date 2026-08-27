@@ -3925,3 +3925,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6257 ; https://www.yemeksepeti.co
 ## ÇINARALTI RESTAURANT ORTAKÖY ID 6256 — HOLD
 Hentzer `Ortaköy, İskele Meydanı No:28, 34347 Beşiktaş`, telefon `+90 212 261 46 16`. Yandex, Restoranim, Bulurum ve Tripadvisor exact adresi; Yandex telefonu destekliyor. Resmi alan adı GoDaddy satış sayfasına yönleniyor, RestaurantGuru sonucu farklı Yıldız Çınar işletmesine gitti ve güncel fiyatlı exact menü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6256 ; https://yandex.com.tr/maps/org/cinaralti_restaurant/1042089312/ ; https://restoranim.net/istanbul/besiktas/restoran/cinaralti-restaurant-ortakoy ; https://www.bulurum.com/dir/restoranlar/istanbul ; http://www.cinaralti.com/
+
+## LIMOS PIZZA ID 6255 — HOLD
+Hentzer `Cihannüma, Ressam Hamdi Bey Sk. 2-C, 34353 Beşiktaş`, telefon `+90 212 236 03 19`; Yandex ve Restoranim destekliyor. Canlı Yemeksepeti `g186` vendoru ise `Sinanpaşa Mahallesi Çelebioğlu Sokak No:9-11A Beşiktaş` adresini gösteriyor. Adres exact eşleşmediği için canlı fiyatlı menü kullanılmadı; **HOLD, override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6255 ; https://yandex.com.tr/maps/org/limos_pizza/217979651243/ ; https://restoranim.net/istanbul/besiktas/pizzaci/limos-pizza ; https://www.yemeksepeti.com/restaurant/g186/limos-pizza
