@@ -1,71 +1,22 @@
-# routers/stories.py — Hikaye endpoint'leri
-
 import json as _json
 from typing import Optional
-
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
-
 import models, schemas, crud
 from app.dependencies import get_db, get_current_user, get_optional_user
+from app.routers.story_helpers import (
+    StoryReactRequest,
+    StoryReplyRequest,
+    StoryReportRequest,
+    StoryShareRequest,
+    _parse_mentioned_ids,
+    _story_to_schema,
+    check_story_view_access,
+)
 
 router = APIRouter(tags=["Stories"])
 
-
-def _parse_mentioned_ids(raw: str | None) -> list[int] | None:
-    if not raw:
-        return None
-    try:
-        return _json.loads(raw)
-    except Exception:
-        return None
-
-
-def _story_to_schema(s, db: Session, current_user_id: Optional[int] = None):
-    author = None
-    if s.user:
-        author = schemas.UserSummary(
-            id=s.user.id,
-            username=s.user.username,
-            first_name=s.user.first_name,
-            avatar_url=s.user.avatar_url,
-        )
-    place = None
-    if s.place:
-        place = schemas.PlaceSummary(id=s.place.id, name=s.place.name, category=s.place.category)
-
-    view_count = crud.get_story_views_count(db, s.id)
-    is_viewed = crud.is_story_viewed_by_user(db, s.id, current_user_id) if current_user_id else False
-    reaction_count = db.query(models.StoryReaction).filter(models.StoryReaction.story_id == s.id).count()
-    my_reaction = crud.get_my_story_reaction(db, s.id, current_user_id) if current_user_id else None
-
-    return schemas.Story(
-        id=s.id,
-        user_id=s.user_id,
-        place_id=s.place_id,
-        media_type=s.media_type,
-        media_url=s.media_url,
-        thumbnail_url=s.thumbnail_url,
-        is_archived=s.is_archived,
-        privacy_type=s.privacy_type,
-        is_close_friends=getattr(s, "is_close_friends", False),
-        mentioned_user_ids=_parse_mentioned_ids(s.mentioned_user_ids),
-        link_type=s.link_type,
-        link_id=s.link_id,
-        link_label=s.link_label,
-        created_at=s.created_at,
-        expires_at=s.expires_at,
-        author=author,
-        place=place,
-        view_count=view_count,
-        is_viewed=is_viewed,
-        reaction_count=reaction_count,
-        my_reaction=my_reaction,
-    )
-
-
-# ─── Story Oluşturma ────────────────────────────────────────────────────────
 
 @router.post("/stories", response_model=schemas.Story)
 def create_story(
@@ -102,8 +53,6 @@ def create_story(
 
     return _story_to_schema(story, db, current_user.id)
 
-
-# ─── Feed ve Listeleme ──────────────────────────────────────────────────────
 
 @router.get("/places/{place_id}/stories", response_model=schemas.PaginatedStories)
 def get_place_stories(
@@ -218,53 +167,6 @@ def get_user_stories(
     stories = base_q.offset((page - 1) * page_size).limit(page_size).all()
     items = [_story_to_schema(s, db, viewer_id) for s in stories]
     return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
-
-
-# ─── Görüntüleme (View) ─────────────────────────────────────────────────────
-
-def check_story_view_access(db: Session, story: models.Story, viewer_id: int):
-    """Kullanıcının hikayeyi görüntüleme yetkisi (Gizlilik, Engel vb.) olup olmadığını kontrol eder."""
-    if story.user_id == viewer_id:
-        return
-
-    # Engel Kontrolü
-    is_blocked = db.query(models.UserBlock).filter(
-        (
-            (models.UserBlock.blocker_id == story.user_id) & (models.UserBlock.blocked_id == viewer_id)
-        ) | (
-            (models.UserBlock.blocker_id == viewer_id) & (models.UserBlock.blocked_id == story.user_id)
-        )
-    ).first()
-    if is_blocked:
-        raise HTTPException(status_code=403, detail="Bu hikayeyi görüntüleme yetkiniz yok.")
-
-    # Gizli Hesap Kontrolü
-    prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == story.user_id).first()
-    is_private = prefs.is_private_account if prefs else False
-    is_follower = db.query(models.Follow).filter(
-        models.Follow.follower_id == viewer_id,
-        models.Follow.following_id == story.user_id
-    ).first() is not None
-
-    if is_private and not is_follower:
-        raise HTTPException(status_code=403, detail="Gizli hesapların hikayelerini sadece takipçileri görebilir.")
-
-    # Yakın Arkadaş Kontrolü (Mevcut mantıkta mutual follow)
-    if story.privacy_type == "close_friends":
-        is_mutual = db.query(models.Follow).filter(
-            models.Follow.follower_id == story.user_id,
-            models.Follow.following_id == viewer_id
-        ).first() is not None
-        if not is_mutual:
-            raise HTTPException(status_code=403, detail="Bu hikaye sadece Yakın Arkadaşlara özeldir.")
-
-    # Gizli (Hide from) Kontrolü
-    is_hidden = db.query(models.StoryHiddenUser).filter(
-        models.StoryHiddenUser.user_id == story.user_id,
-        models.StoryHiddenUser.hidden_user_id == viewer_id
-    ).first()
-    if is_hidden:
-        raise HTTPException(status_code=403, detail="Bu hikaye sizden gizlenmiş.")
 
 
 @router.post("/stories/{story_id}/view")
@@ -408,12 +310,6 @@ def get_story_viewers_endpoint(
     )
 
 
-# ─── Tepkiler (Reactions) ───────────────────────────────────────────────────
-
-class StoryReactRequest(BaseModel):
-    emoji: str = Field(..., description="❤️ 🔥 😍 👏 😂")
-
-
 @router.post("/stories/{story_id}/react")
 async def react_to_story(
     story_id: int,
@@ -551,12 +447,6 @@ def get_story_reactions_endpoint(
     return schemas.StoryReactionListResponse(items=items, total=len(items), counts=counts)
 
 
-# ─── Yanıt (Reply) ─────────────────────────────────────────────────────────
-
-class StoryReplyRequest(BaseModel):
-    text: str = Field(..., min_length=1, max_length=500)
-
-
 @router.post("/stories/{story_id}/reply")
 async def reply_to_story(
     story_id: int,
@@ -654,8 +544,6 @@ async def reply_to_story(
     }
 
 
-# ─── Arşiv ─────────────────────────────────────────────────────────────────
-
 @router.get("/me/stories/archive", response_model=schemas.PaginatedStories)
 def get_my_story_archive(
     page: int = Query(1, ge=1),
@@ -675,8 +563,6 @@ def get_my_story_archive(
     return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
 
 
-# ─── Hikaye Silme ──────────────────────────────────────────────────────────
-
 @router.delete("/stories/{story_id}")
 def delete_story(
     story_id: int,
@@ -695,177 +581,12 @@ def delete_story(
     return {"ok": True, "deleted_id": story_id}
 
 
-# ─── Hikaye Paylaşma (DM Forward) ─────────────────────────────────────────
-
-class StoryShareRequest(BaseModel):
-    target_user_id: int = Field(..., description="Hikayenin gönderileceği kullanıcı ID'si")
-
-
-@router.post("/stories/{story_id}/share")
-async def share_story_via_dm(
-    story_id: int,
-    data: StoryShareRequest,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user),
-):
-    """
-    Bir hikayeyi başka bir kullanıcıya DM üzerinden paylaşır.
-    Gizli/close_friends hikayeler paylaşılamaz.
-    """
-    from datetime import datetime, timezone
-
-    story = db.query(models.Story).filter(models.Story.id == story_id).first()
-    if not story:
-        raise HTTPException(status_code=404, detail="Hikaye bulunamadı.")
-    if story.expires_at.replace(tzinfo=timezone.utc) < datetime.now(timezone.utc):
-        raise HTTPException(status_code=410, detail="Bu hikayenin süresi dolmuş.")
-
-    # Gizlilik kontrolü — close_friends hikayeler paylaşılamaz
-    if story.privacy_type == "close_friends":
-        raise HTTPException(status_code=403, detail="Yakın arkadaşlara özel hikayeler paylaşılamaz.")
-
-    # Gizli hesap hikayesi paylaşılamaz
-    owner_prefs = db.query(models.UserPreferences).filter(
-        models.UserPreferences.user_id == story.user_id
-    ).first()
-    if owner_prefs and owner_prefs.is_private_account:
-        raise HTTPException(status_code=403, detail="Gizli hesapların hikayeleri paylaşılamaz.")
-
-    # Hedef kullanıcı kontrolü
-    target_user = db.query(models.User).filter(models.User.id == data.target_user_id).first()
-    if not target_user:
-        raise HTTPException(status_code=404, detail="Hedef kullanıcı bulunamadı.")
-    if data.target_user_id == current_user.id:
-        raise HTTPException(status_code=400, detail="Kendinize hikaye gönderemezsiniz.")
-
-    # Engel kontrolü
-    is_blocked = db.query(models.UserBlock).filter(
-        (
-            (models.UserBlock.blocker_id == current_user.id) & (models.UserBlock.blocked_id == data.target_user_id)
-        ) | (
-            (models.UserBlock.blocker_id == data.target_user_id) & (models.UserBlock.blocked_id == current_user.id)
-        )
-    ).first()
-    if is_blocked:
-        raise HTTPException(status_code=403, detail="Bu kullanıcıyla iletişim kuramazsınız.")
-
-    # DM konuşması bul veya oluştur
-    conv = db.query(models.Conversation).filter(
-        (
-            (models.Conversation.user1_id == current_user.id) &
-            (models.Conversation.user2_id == data.target_user_id)
-        ) | (
-            (models.Conversation.user1_id == data.target_user_id) &
-            (models.Conversation.user2_id == current_user.id)
-        )
-    ).first()
-
-    if not conv:
-        conv = models.Conversation(
-            user1_id=current_user.id,
-            user2_id=data.target_user_id,
-            is_active=True,
-        )
-        db.add(conv)
-        db.flush()
-
-    snapshot_url = story.thumbnail_url or story.media_url
-    author_name = ""
-    if story.user:
-        author_name = story.user.first_name or story.user.username or f"user_{story.user_id}"
-
-    msg = models.Message(
-        conversation_id=conv.id,
-        sender_id=current_user.id,
-        content=f"📸 {author_name} adlı kişinin hikayesini paylaştı",
-        message_type="story_share",
-        parent_story_id=story.id,
-        story_snapshot_url=snapshot_url,
-        status="sent",
-    )
-    db.add(msg)
-    conv.last_message_at = datetime.now(timezone.utc)
-    db.commit()
-    db.refresh(msg)
-
-    # WebSocket bildirimi
-    from app.websocket.manager import manager
-    sender_name = current_user.first_name or current_user.username or f"User {current_user.id}"
-    msg_data = {
-        "id": msg.id,
-        "conversation_id": conv.id,
-        "sender_id": msg.sender_id,
-        "content": msg.content,
-        "message_type": "story_share",
-        "parent_story_id": story.id,
-        "story_snapshot_url": snapshot_url,
-        "is_read": False,
-        "status": "sent",
-        "created_at": msg.created_at.isoformat() if msg.created_at else None,
-    }
-    await manager.send_global_notification(data.target_user_id, {
-        "type": "new_message",
-        "message": msg_data,
-        "sender_name": sender_name,
-        "content": f"Bir hikaye paylaştı",
-        "conversation_id": conv.id,
-    })
-
-    return {
-        "ok": True,
-        "conversation_id": conv.id,
-        "message_id": msg.id,
-    }
-
-
-# ─── Hikaye Şikayet Etme ──────────────────────────────────────────────────
-
 STORY_REPORT_REASONS = {"spam", "inappropriate", "violence", "harassment", "other"}
 
+from app.routers.story_sharing import (
+    router as sharing_router,
+    report_story,
+    share_story_via_dm,
+)
 
-class StoryReportRequest(BaseModel):
-    reason: str = Field(..., description="Şikayet nedeni: spam, inappropriate, violence, harassment, other")
-    description: str | None = Field(None, max_length=500, description="Ek açıklama (isteğe bağlı)")
-
-
-@router.post("/stories/{story_id}/report")
-def report_story(
-    story_id: int,
-    data: StoryReportRequest,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user),
-):
-    """Bir hikayeyi şikayet eder. Aynı kullanıcı aynı hikayeyi birden fazla kez şikayet edemez."""
-    if data.reason not in STORY_REPORT_REASONS:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Geçersiz şikayet nedeni. İzin verilenler: {', '.join(STORY_REPORT_REASONS)}"
-        )
-
-    story = db.query(models.Story).filter(models.Story.id == story_id).first()
-    if not story:
-        raise HTTPException(status_code=404, detail="Hikaye bulunamadı.")
-    if story.user_id == current_user.id:
-        raise HTTPException(status_code=400, detail="Kendi hikayenizi şikayet edemezsiniz.")
-
-    # Aynı kullanıcı daha önce bu hikayeyi şikayet etmiş mi?
-    existing = db.query(models.Report).filter(
-        models.Report.reporter_id == current_user.id,
-        models.Report.target_type == "story",
-        models.Report.target_id == story_id,
-    ).first()
-    if existing:
-        raise HTTPException(status_code=409, detail="Bu hikayeyi zaten şikayet ettiniz.")
-
-    report = models.Report(
-        reporter_id=current_user.id,
-        target_type="story",
-        target_id=story_id,
-        reason=data.reason,
-        description=data.description,
-        status="pending",
-    )
-    db.add(report)
-    db.commit()
-
-    return {"ok": True, "report_id": report.id}
+router.include_router(sharing_router)
