@@ -6334,6 +6334,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+  "6329": {
+    "name": "CHOCOLATE SARAYI BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/htjp/chocolate-sarayi",
+    "sourceName": "Canlı Yemeksepeti Chocolate Sarayı menüsü; Waze ve Restaurant Guru ile Türkali Ihlamurdere Cd. No:104 / 0212 261 61 67 exact şube doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Brownie Krep", "price": "457.60 TL", "category": "Krepler" },
+      { "name": "Fettuccine Krep (Large)", "price": "468 TL", "category": "Krepler" },
+      { "name": "Fettuccine Krep (Orta Boy)", "price": "353.60 TL", "category": "Krepler" },
+      { "name": "Lotus Krep", "price": "478.40 TL", "category": "Krepler" },
+      { "name": "Lotus Special Krep", "price": "520 TL", "category": "Krepler" },
+      { "name": "Lotus Sushi Krep", "price": "468 TL", "category": "Krepler" },
+      { "name": "Lüks Special Krep", "price": "540.80 TL", "category": "Krepler" },
+      { "name": "Meyveli Krep", "price": "509.60 TL", "category": "Krepler" },
+      { "name": "Muzlu Rulo Krep", "price": "395.20 TL", "category": "Krepler" },
+      { "name": "Oreo Krep", "price": "478.40 TL", "category": "Krepler" },
+      { "name": "Saray Bohça Krep", "price": "509.60 TL", "category": "Krepler" },
+      { "name": "Special Krep", "price": "509.60 TL", "category": "Krepler" },
+      { "name": "Sushi Krep", "price": "468 TL", "category": "Krepler" },
+      { "name": "Üç Çeşit Çikolatalı Krep", "price": "374.40 TL", "category": "Krepler" },
+      { "name": "Zarif Sushi Krep", "price": "468 TL", "category": "Krepler" },
+      { "name": "Special Brownie Krep", "price": "499.20 TL", "category": "Krepler" },
+      { "name": "Çubuk Mini Pancake", "price": "270.40 TL", "category": "Pankekler" },
+      { "name": "Saray Mini Pancake", "price": "530.40 TL", "category": "Pankekler" },
+      { "name": "Meyveli Pancake", "price": "530.40 TL", "category": "Pankekler" },
+      { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
+    ]
+  },
   "6332": {
     "name": "ESKİ BABEL OCAKBAŞI RESTAURANT",
     "sourceUrl": "https://eskibabel.com/menu/menu.php",
