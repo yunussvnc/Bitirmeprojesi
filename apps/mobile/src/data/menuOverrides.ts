@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6343": {
+    "name": "BEŞİKTAŞ MEYHANESİ",
+    "sourceUrl": "https://karekodrestaurantmenu.com/menu/20212",
+    "sourceName": "İşletmenin resmi Instagram profilindeki Beşiktaş Şube QR menüsü; Restaurant Guru/Cybo exact Şht. Asım Cd. No:33/A ve 0212 261 51 91 doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Adana Dürüm", "price": "600 TL", "category": "Dürümler" },
+      { "name": "Urfa Dürüm", "price": "600 TL", "category": "Dürümler" },
+      { "name": "Tavuk Dürüm", "price": "550 TL", "category": "Dürümler" },
+      { "name": "Adana Kebap", "price": "1150 TL", "category": "Kebaplar" },
+      { "name": "Urfa Kebap", "price": "1150 TL", "category": "Kebaplar" },
+      { "name": "Beyti Kebabı Sarma", "price": "1500 TL", "category": "Kebaplar" },
+      { "name": "Ali Nazik Kebabi", "price": "1350 TL", "category": "Kebaplar" },
+      { "name": "Karışık Kebap", "price": "3800 TL", "category": "Kebaplar" },
+      { "name": "Ciğer Şiş", "price": "1150 TL", "category": "Kebaplar" },
+      { "name": "Kaburga", "price": "1600 TL", "category": "Kebaplar" },
+      { "name": "Patlıcan Kebabı", "price": "1100 TL", "category": "Kebaplar" },
+      { "name": "Kuzu Pirzola", "price": "1600 TL", "category": "Kırmızı Etler" },
+      { "name": "Kuzu Şiş", "price": "1250 TL", "category": "Kırmızı Etler" },
+      { "name": "Çöp Şiş", "price": "1250 TL", "category": "Kırmızı Etler" },
+      { "name": "Beyti", "price": "1350 TL", "category": "Kırmızı Etler" },
+      { "name": "Izgara Köfte", "price": "1200 TL", "category": "Kırmızı Etler" },
+      { "name": "Tavuk Şiş", "price": "1000 TL", "category": "Beyaz Etler" },
+      { "name": "Tavuk Kanat", "price": "1100 TL", "category": "Beyaz Etler" },
+      { "name": "Deniz Börülcesi", "price": "250 TL", "category": "Mezeler" },
+      { "name": "Acılı Ezme", "price": "250 TL", "category": "Mezeler" }
+    ]
+  },
   "6348": {
     "name": "PASAPORT PİZZA BEYLİKDÜZÜ",
     "sourceUrl": "https://www.migros.com.tr/yemek/pasaport-pizza-beylikduzu-kavakli-mah-st-220b6",
