@@ -3485,3 +3485,7 @@ Kaynaklar: https://www.pilavciislamusta.com/ ; https://beykent.pilavciislamusta.
 ## TWOBROTHERS BURGER KAVACIK ID 6369
 Hentzer `Rüzgarlıbahçe Mah, Kavacık, Şht. Erdal Yulalı Sk. No:5, 34805 Beykoz/İstanbul` ve `+90 505 712 31 36`; resmi TwoBrothers Instagram, Restoranim ve Yandex aynı Kavacık adres/telefonu doğruluyor. Canlı Yemeksepeti `q3oc` sayfasından 2026-08-27 tarihinde Popular carousel tekrarları dışlanarak 9 burger, 6 menü ve 5 yan ürün olmak üzere 20 benzersiz güncel fiyatlı yiyecek ürünü alındı; içecek, sos ve poşet kalemleri dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/q3oc/twobrothers-q3oc ; https://www.instagram.com/twobrothersburger_/ ; https://yandex.com.tr/maps/org/twobrothers_burger/145659543103/ ; https://restoranim.net/istanbul/istanbul/fast-food/twobrothers-burger
+
+## GÜNGÖR PASTANELERİ BAYRAMPAŞA ID 6368 HOLD
+Bulurum ve resmi Instagram adres/telefonu doğruluyor; resmi site menüsüz/under construction. Son bir yıl exact Terazidere şube fiyatlı menüsü bulunamadı; Malatya aynı isimli menü yanlış şube. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.bulurum.com/details/ac36akc0063a276ca65cacb_d_740cc0 ; https://www.instagram.com/gungorpastaneleri/ ; https://gungorpastaneleri.com/ ; https://www.yemeksepeti.com/restaurant/jqsq/gungor-pastanesi-jqsq
