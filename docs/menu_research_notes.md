@@ -3290,3 +3290,7 @@ Kaynaklar: https://www.instagram.com/kazan__37/ ; https://www.yemeksepeti.com/en
 ## J9 KÖFTE KEBAP ID 6417 HOLD
 J9 resmi Instagram profili ve paylaşımları Hentzer ile Cumhuriyet Köy/Beykoz Cd. No:1 ve `+90 530 683 13 34` exact parity’sini destekliyor. Ancak son bir yıl içinde doğrulanmış 20 benzersiz gıda ürünü yok; yalnız birkaç sosyal medya fiyatı mevcut ve exact delivery vendoru bulunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.instagram.com/j9kebapp/ ; https://www.instagram.com/p/DMimQ_5taKv/ ; https://www.instagram.com/p/DS9vs0_DtDO/
+
+## BLAK COFFEE CO. KAMEROĞLU ID 6416 HOLD
+BLAK’ın resmi şube sayfası/blogu Hentzer ile Cumhuriyet Mh. Onur Sk. No:3T adresini; Instagram, Tumİşyeri ve Yandex `0538 449 39 18` telefonunu destekliyor. Ancak resmi kaynaklarda fiyatlı şube menüsü yok ve bulunan Yemeksepeti vendorlarının Kameroğlu exact şubesi/telefonu doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://blakcoffee.co/pages/subelerimiz ; https://blakcoffee.co/blog/kameroglu ; https://www.instagram.com/explore/locations/401489583052899/blak-coffee-co-kameroglu/
