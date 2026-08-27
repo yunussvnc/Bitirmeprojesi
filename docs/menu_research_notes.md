@@ -3873,3 +3873,8 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6269 ; https://restoranim.net/ist
 ## MR. SIMONE ID 6268 — HOLD
 Hentzer `Balmumcu, Şevki Bey Caddesi No:2/A, 34349 Beşiktaş`, telefon `+90 551 824 57 60`. Çoklu yerel kaynak ve 27.01.2026 sosyal sonucu adres/telefonu destekliyor; ancak resmi mrsimone.com.tr sitesi aynı adres için `0552 828 6571` telefonunu veriyor. Bu telefon uyuşmazlığı nedeniyle 100% exact şube şartı sağlanmadı; menü QR’sı olsa da override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6268 ; https://www.mrsimone.com.tr/en/ ; https://www.mrsimone.com.tr/menu-qr/ ; https://restoranim.net/istanbul/besiktas/kahvaltici/mr-simone ; https://www.snapchat.com/place/mrsimone/c5ff03ee-39d4-11ed-8afe-bbabc125c708
+
+
+## SORISO PIZZA BEŞİKTAŞ ID 6267 — ACCEPTED
+Hentzer: `Sinanpaşa, Köyiçi Mektep Sk. No:10, 34353 Beşiktaş/İstanbul`, telefon `+90 212 205 20 40`. 20.06.2026 açılışını duyuran sosyal içerikler adres ve telefonu destekliyor; 06.08.2026 Yemek.com içeriği de No:10 adresini doğruluyor. Canlı Yemeksepeti vendoru `wjds` restoran bilgisi modalında `Köyiçi Mektep Sokak 10, 34022, Sinanpaşa, Beşiktaş/İstanbul` exact adresini gösteriyor ve çorba, küçük/orta/büyük pizza, makarna, salata ve tatlı kategorileri sunuyor. İçecek/soslar dışlanarak 20 benzersiz gıda ürünü seçildi; fiyatlar 27.08.2026 canlı vendor görünümünden alındı. **Override eklendi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6267 ; https://www.yemeksepeti.com/restaurant/wjds/soriso-pizza-and-pasta-wjds ; https://yemek.com/besiktasta-en-iyi-pizza-nerede-yenir/ ; https://www.instagram.com/p/DZ1iRlyDLOq/ ; https://www.instagram.com/p/DZiGxWojLtj/

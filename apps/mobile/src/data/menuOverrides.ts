@@ -93383,4 +93383,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Shot Wings", "price": "340 TL", "category": "Hot Wings" }
     ]
   },
+  "6267": {
+    "name": "SORISO PIZZA BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/wjds/soriso-pizza-and-pasta-wjds",
+    "sourceName": "27.08.2026 canlı Yemeksepeti exact Köyiçi Mektep Sokak 10 vendor menüsü; resmi açılış/sosyal kaynak ve Hentzer telefonu ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Köz Domates Çorbası", "price": "170 TL", "category": "Çorbalar" },
+      { "name": "Diavolo Pizza (22 cm.)", "price": "260 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Quattro Formaggi (22 cm.)", "price": "260 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Arrosto Di Manzo (22 cm.)", "price": "360 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Spinaci Pizza (22 cm.)", "price": "210 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Karışık Pizza (22 cm.)", "price": "290 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Funghi Pizza (22 cm.)", "price": "220 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Salsiccia Pizza (22 cm.)", "price": "260 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Bascaiola Pizza (22 cm.)", "price": "220 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Antipasti Pizza (22 cm.)", "price": "220 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Ortalana Pizza (22 cm.)", "price": "300 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Margaritha Pizza (22 cm.)", "price": "200 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Della Casa (22 cm.)", "price": "265 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Bufalina Pizza (22 cm.)", "price": "260 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Con Pollo Barbeque (22 cm.)", "price": "275 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Mostarda Pizza (22 cm.)", "price": "240 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Tonno E'cipolla (22 cm.)", "price": "250 TL", "category": "Küçük Boy Pizzalar" },
+      { "name": "Antipasti Pizza (30 cm.)", "price": "450 TL", "category": "Orta Boy Pizzalar" },
+      { "name": "Mostarda Pizza (Orta) (30 cm.)", "price": "490 TL", "category": "Orta Boy Pizzalar" },
+      { "name": "Arrosto Di Manzo Pizza (30 cm.)", "price": "710 TL", "category": "Orta Boy Pizzalar" }
+    ]
+  },
 };
