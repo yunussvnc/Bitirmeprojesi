@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6327": {
+    "name": "ETİLER KEBAPÇI",
+    "sourceUrl": "https://fndn.mn/kebapci-etiler",
+    "sourceName": "Etiler Kebapçı resmi sitesi ve Finedine dijital menüsü (03.07.2026 fiyatları); resmi site, Waze ve Restaurant Guru ile Etiler Mah. Nispetiye Cd. No:76 / 0212 257 02 09 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Kinoalı Tabule", "price": "410 TL", "category": "Mezeler" },
+      { "name": "Humus", "price": "410 TL", "category": "Mezeler" },
+      { "name": "Pastırmalı Humus", "price": "600 TL", "category": "Mezeler" },
+      { "name": "Panço", "price": "410 TL", "category": "Mezeler" },
+      { "name": "Çiğ Köfte", "price": "600 TL", "category": "Mezeler" },
+      { "name": "Muhammara", "price": "475 TL", "category": "Mezeler" },
+      { "name": "Şakşuka", "price": "410 TL", "category": "Mezeler" },
+      { "name": "Antibiyotik", "price": "540 TL", "category": "Mezeler" },
+      { "name": "Atom (Mevsimsel)", "price": "670 TL", "category": "Mezeler" },
+      { "name": "Acılı Atom", "price": "410 TL", "category": "Mezeler" },
+      { "name": "Fındık Lahmacun", "price": "265 TL", "category": "Ara Sıcaklar" },
+      { "name": "Lahmacun", "price": "490 TL", "category": "Ara Sıcaklar" },
+      { "name": "Başpınar Lahmacun", "price": "980 TL", "category": "Ara Sıcaklar" },
+      { "name": "Porsiyon Döner", "price": "1050 TL", "category": "Kebap Çeşitleri" },
+      { "name": "Dürüm Döner", "price": "1050 TL", "category": "Kebap Çeşitleri" },
+      { "name": "İskender", "price": "1275 TL", "category": "Kebap Çeşitleri" },
+      { "name": "Dürüm Beyti Kebap (soslu)", "price": "1125 TL", "category": "Kebap Çeşitleri" },
+      { "name": "Yoğurtlu Kebap", "price": "1275 TL", "category": "Kebap Çeşitleri" },
+      { "name": "Sebzeli Kebap", "price": "1100 TL", "category": "Kebap Çeşitleri" },
+      { "name": "Oruk Kebap", "price": "1100 TL", "category": "Kebap Çeşitleri" }
+    ]
+  },
   "6332": {
     "name": "ESKİ BABEL OCAKBAŞI RESTAURANT",
     "sourceUrl": "https://eskibabel.com/menu/menu.php",
