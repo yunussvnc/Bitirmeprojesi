@@ -3262,3 +3262,7 @@ Kaynaklar: https://yandex.com/maps/org/kasap_bahattin_ustanin_yeri/134509666489/
 ## PIZZA LOCALE BEYLİKDÜZÜ ID 6424 HOLD
 Pizza Locale resmi şube sayfası Hentzer ile `Marmara, Ulusum Cd. 14S, Beylikdüzü` ve `0212 924 17 72` exact parity’sini doğruluyor. Ancak Yemeksepeti `x5kr` vendor sayfasının erişilebilir adresi `Ferit Tek Sok. No:2-B` olduğundan Moda/Kadıköy şubesine ait; Beylikdüzü şubesiyle eşleşmiyor. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.pizzalocale.net/sube ; https://www.yemeksepeti.com/en/restaurant/x5kr/pizza-locale-x5kr
+
+## VERA CAFE BISTRO ID 6423 HOLD
+Polomap, Bulurum ve Vera Bistro Cafe Instagram kayıtları Hentzer ile Nevizade Sk. No:1 ve `+90 212 244 27 33` exact parity’sini destekliyor. Ancak mevcut ürün/fiyat içerikleri 2024 tarihli; son bir yıl şartına uyan güncel şube bazlı 20 ürünlü menü ve exact Yemeksepeti vendoru bulunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://tr.polomap.com/zh-CN/istanbul/224175 ; https://www.bulurum.com/details/260j00afd5_73_164f2hdcck_j2eb61j ; https://www.instagram.com/p/C3P9pU8IFf8/
