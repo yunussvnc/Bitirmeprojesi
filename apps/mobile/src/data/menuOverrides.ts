@@ -93467,4 +93467,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Yarım Ekmek Arası Kuzu Kokoreç", "price": "500 TL", "category": "Kokoreçler" }
     ]
   },
+  "6257": {
+    "name": "KAZDALLAR hitit fırın (MERKEZ)",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/bjyv/kazdallar-hitit-firin",
+    "sourceName": "Canlı Yemeksepeti exact Cemiyet Cd. No:10 vendor menüsü",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Simit", "price": "32 TL", "category": "Açmalar & Simitler" },
+      { "name": "Sade Açma", "price": "32 TL", "category": "Açmalar & Simitler" },
+      { "name": "Çikolatalı Açma", "price": "36 TL", "category": "Açmalar & Simitler" },
+      { "name": "Patatesli Açma", "price": "32 TL", "category": "Açmalar & Simitler" },
+      { "name": "Zeytinli Açma", "price": "32 TL", "category": "Açmalar & Simitler" },
+      { "name": "Sucuklu Simit", "price": "60 TL", "category": "Açmalar & Simitler" },
+      { "name": "Kaşarlı Simit", "price": "60 TL", "category": "Açmalar & Simitler" },
+      { "name": "Sade Poğaça", "price": "32 TL", "category": "Poğaçalar" },
+      { "name": "Peynirli Poğaça", "price": "32 TL", "category": "Poğaçalar" },
+      { "name": "Dereotlu Poğaça", "price": "36 TL", "category": "Poğaçalar" },
+      { "name": "Kaşarlı Poğaça", "price": "32 TL", "category": "Poğaçalar" },
+      { "name": "Zeytinli Poğaça", "price": "32 TL", "category": "Poğaçalar" },
+      { "name": "Patatesli Poğaça", "price": "32 TL", "category": "Poğaçalar" },
+      { "name": "Kıymalı Gül Böreği", "price": "80 TL", "category": "Börekler" },
+      { "name": "Patatesli Gül Böreği", "price": "80 TL", "category": "Börekler" },
+      { "name": "Peynirli Gül Böreği", "price": "80 TL", "category": "Börekler" },
+      { "name": "Tam Buğday Ekmek", "price": "80 TL", "category": "Ekmek Çeşitleri" },
+      { "name": "Çavdar Ekmeği", "price": "40 TL", "category": "Ekmek Çeşitleri" },
+      { "name": "Mısır Ekmeği", "price": "80 TL", "category": "Ekmek Çeşitleri" },
+      { "name": "Susamlı Sandiviç Ekmeği", "price": "24 TL", "category": "Ekmek Çeşitleri" }
+    ]
+  },
 };

@@ -3916,3 +3916,8 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6259 ; https://restaurantguru.com
 ## HERO'S PIZZA&WAFFLE BEŞİKTAŞ ID 6258 — HOLD
 Hentzer `Cihannüma, Barbaros Blv. 8/A, 34353 Beşiktaş`, telefon `+90 212 626 07 07`. 2026 Instagram, Marmara Live, RestaurantGuru ve Restoranim exact şubeyi destekliyor. Migros Yemek vendoru CAPTCHA ile engellendi; sosyal içerikte yalnızca 300 TL sınırsız konsept fiyatı görülüyor. 20 güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6258 ; https://www.migros.com.tr/yemek/heros-pizza-besiktas-cihannuma-mah-st-2f997 ; https://www.instagram.com/p/DMFVp_ztGYo/ ; https://marmaralive.com/heros-pizza-besiktas-sinirsiz-lezzet-ve-keyif-dolu-bir-deneyim/ ; https://restaurantguru.com/Heros-Pizza-Besiktas-Subesi-Istanbul
+
+
+## KAZDALLAR HITIT FIRIN (MERKEZ) ID 6257 — ACCEPTED
+Hentzer: `Muratpaşa, Cemiyet Cd. No:10, 34040 Bayrampaşa/İstanbul`, telefon `+90 555 553 51 29`. Restoranim aynı adres ve telefonu doğruluyor. Canlı Yemeksepeti `bjyv` vendoru fırın menüsünde mevcut fiyatları gösteriyor; 20 benzersiz fırın ürünü seçildi. İlk 20 gıda ürünü (simit, açma, poğaça, börek ve ekmek) eklendi; indirimli/mevcut fiyatlar kullanıldı, poşet dışlandı. Fiyat doğrulama tarihi 27.08.2026. **Override eklendi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6257 ; https://www.yemeksepeti.com/restaurant/bjyv/kazdallar-hitit-firin ; https://restoranim.net/istanbul/bayrampasa/firin/kazdallar-hitit-firin-merkez
