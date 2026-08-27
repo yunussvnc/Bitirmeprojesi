@@ -3899,3 +3899,8 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6263 ; https://www.menu-tr.com/is
 ## LA VIA BELLA ID 6262 — HOLD
 Hentzer `Sinanpaşa, Şht. Asım Cd. 41/A, 34353 Beşiktaş`, telefon `+90 538 975 61 84`. Restoranim, İsteburası, İstanbul Servis Listesi ve Polomap exact adres/telefonu destekliyor. Yemeksepeti `ape4` vendoru CAPTCHA ile engellendi; Pardon alternatif menüsü ürün/fiyat metni vermedi. Son bir yıl içinde exact şubeye ait 20 benzersiz fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6262 ; https://www.yemeksepeti.com/restaurant/ape4/la-via-bella-cafe ; https://webmenu.pardonapp.co/la-via-bella/menu/burgerler ; https://restoranim.net/istanbul/besiktas/kafe/la-via-bella ; https://la-via-bella.isteburasi.com.tr/
+
+
+## ÖZ BEYKOZ İŞKEMBE ID 6261 — ACCEPTED
+Hentzer: `Rüzgarlıbahçe Mah., Kavacık, Cumhuriyet Cd. Hasoğlu Plaza No:39/12, 34805 Beykoz/İstanbul`, telefon `+90 216 413 12 12`. QRDOS exact kaydı aynı adres ve telefonu doğrudan gösteriyor; RestaurantGuru ve arama kaynakları işletmeyi destekliyor. Canlı Yemeksepeti `ccjk` vendoru aynı Hasoğlu Plaza No:39/12 şubesini gösteriyor ve 17.08.2026 tarihli yorum içeriyor. Çorba, ızgara ve kokoreç kategorilerinden Popüler carousel tekrarları, içecekler ve poşet dışlanarak 20 benzersiz yenilebilir ürün/fiyat alındı; fiyatlar 27.08.2026 canlı snapshot’ından doğrulandı. **Override eklendi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6261 ; https://qrdos.tr/oz-beykoz-iskembe ; https://www.yemeksepeti.com/restaurant/ccjk/oz-beykoz-iskembe ; https://restaurantguru.com/Oez-Beykoz-Istanbul ; https://www.instagram.com/reel/C9fqcdhOXLj/

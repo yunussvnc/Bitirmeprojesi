@@ -93439,4 +93439,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Ekşi Mayalı Tam Buğday Ekmeği (700 gr.)", "price": "260 TL", "category": "Ekmekler" }
     ]
   },
+  "6261": {
+    "name": "ÖZ BEYKOZ İŞKEMBE",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/ccjk/oz-beykoz-iskembe",
+    "sourceName": "17.08.2026 canlı Yemeksepeti exact Hasoğlu Plaza No:39/12 vendor menüsü; QRDOS ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Mercimek Çorbası", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "İşkembe Çorbası", "price": "500 TL", "category": "Çorbalar" },
+      { "name": "Double İşkembe Çorbası", "price": "580 TL", "category": "Çorbalar" },
+      { "name": "Ayak Paça Çorbası", "price": "550 TL", "category": "Çorbalar" },
+      { "name": "Special Karışık Çorba", "price": "720 TL", "category": "Çorbalar" },
+      { "name": "Kelle Paça Çorbası", "price": "570 TL", "category": "Çorbalar" },
+      { "name": "Double Kelle Paça Çorbası", "price": "675 TL", "category": "Çorbalar" },
+      { "name": "Tuzlama Çorbası", "price": "550 TL", "category": "Çorbalar" },
+      { "name": "Double Tuzlama Çorbası", "price": "620 TL", "category": "Çorbalar" },
+      { "name": "Şırdan Tuzlama Çorbası", "price": "550 TL", "category": "Çorbalar" },
+      { "name": "Double Şırdan Tuzlama Çorbası", "price": "620 TL", "category": "Çorbalar" },
+      { "name": "Damar Tuzlama Çorbası", "price": "620 TL", "category": "Çorbalar" },
+      { "name": "Double Damar Tuzlama Çorbası", "price": "750 TL", "category": "Çorbalar" },
+      { "name": "Tavuk Suyu Çorba", "price": "260 TL", "category": "Çorbalar" },
+      { "name": "Kuzu Gerdanlı Beyran Çorbası", "price": "650 TL", "category": "Çorbalar" },
+      { "name": "Karışık Çorba", "price": "720 TL", "category": "Çorbalar" },
+      { "name": "Izgara Köfte", "price": "700 TL", "category": "Izgaralar" },
+      { "name": "Halka Kuzu Kokoreç", "price": "850 TL", "category": "Kokoreçler" },
+      { "name": "Kuzu Kokoreç (İnce Kıyım)", "price": "750 TL", "category": "Kokoreçler" },
+      { "name": "Yarım Ekmek Arası Kuzu Kokoreç", "price": "500 TL", "category": "Kokoreçler" }
+    ]
+  },
 };
