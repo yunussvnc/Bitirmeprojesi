@@ -3457,3 +3457,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/pvzf/fivebites-burger ; htt
 ## HANE ÇİKOLATA & KAHVE AKARETLER ID 6376
 Hentzer `Vişnezade, Şair Nedim Cd., 34357 Beşiktaş/İstanbul` ve `+90 534 395 94 24`; Restoranim, Yandex ve Akaretler sosyal hesapları aynı işletme/telefon/adres bölgesini doğruluyor. Canlı Yemeksepeti `vl4l` menüsünden 2026-08-27 tarihinde 4 tatlı, 8 sıcak kahve, 4 sıcak içecek ve 4 soğuk kahve olmak üzere 20 benzersiz güncel fiyatlı ürün alındı; poşet dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/vl4l/hane-cikolata-and-kahve ; https://yandex.com/maps/org/hane_ikolata_kahve_akaretler_istanbul/57058511154/ ; https://restoranim.net/istanbul/besiktas/kafe/hane-cikolata-kahve-akaretler-istanbul ; https://www.instagram.com/hanecikolata/
+
+## BEY KEBAP RESTAURANT ID 6375 HOLD
+Hentzer/FB `Altocasa sitesi, Avrupa Cd. 1A`; resmi Instagram `Avrupa Caddesi No:73`; Yandex `73A3` veriyor. Telefon eşleşse de exact adres çelişkisi nedeniyle Migros/Yemeksepeti fiyatlı menüsü bu kayda güvenle bağlanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.instagram.com/beykebaprestaurant/ ; https://www.facebook.com/p/Bey-kebap-restaurant-100077318215493/ ; https://yandex.com.tr/maps/org/bey_kebap_restaurant/183583620459/ ; https://www.migros.com.tr/yemek/bey-restaurant-kebap-beylikduzu-pinartepe-mah-st-23210 ; https://www.yemeksepeti.com/restaurant/gf8m/bey-restaurant-and-kebap
