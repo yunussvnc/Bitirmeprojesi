@@ -3845,3 +3845,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6276 ; https://www.menu-tr.com/is
 ## DOSTLAR MEYHANESİ ID 6275 — HOLD
 Hentzer `Kavacık, Otağtepe Cd. 15 B, 34810 Beykoz/İstanbul`, telefon `+90 216 465 83 99`. Menu-TR aynı adres/telefonu doğrudan doğruluyor; Yandex ve Yaka.la da adresi destekliyor. Ancak son bir yıl içinde fiyatları görünen en az 20 benzersiz ürünlü menü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6275 ; https://www.menu-tr.com/istanbul/beykoz/restoran/dostlar-meyhanesi ; https://yaka.la/detail/istanbul/beykoz/dostlar-meyhanesi/adres?uuid ; https://yandex.com.tr/maps/115694/beykoz/category/restaurant/184106394/
+
+## SÜTLÜCE KADAYIF BEYLİKDÜZÜ ID 6274 — HOLD
+Hentzer `Kavaklı Mah. Ayasofya Cad, Kavaklı, İhlas Cd. Marmara Evleri No: 17/3F, 34520 Beylikdüzü`, telefon `+90 535 866 70 34`. 23.07.2026 Facebook paylaşımı ve AramaBul exact adres/telefonu doğruluyor. Migros Yemek exact vendor URL’si mevcut; ancak sayfa internal server error/boş içerik döndürdüğü için 20 güncel ürün/fiyat okunamadı. Eski toplu menü bilgisi güncel ve yeterli değil. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6274 ; https://www.facebook.com/61556326174239/videos/1544424480512682/ ; https://aramabul.com/venue-detail.html?slug=sutluce-kadayif-beylikduzu-beylikduzu-zqt0-c ; https://www.migros.com.tr/yemek/sutluce-kadayif-beylikduzu-kavakli-mah-st-32611
