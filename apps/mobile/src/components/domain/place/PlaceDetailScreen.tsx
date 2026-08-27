@@ -5,22 +5,17 @@
  * Premium dark-first design with rich information architecture.
  */
 
-import { getTranslatedCategory, normalizePlaceCategory } from '@/src/utils/categories';
-import { router, useLocalSearchParams, Stack } from "expo-router";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { getTranslatedCategory } from '@/src/utils/categories';
+import { router, Stack } from "expo-router";
+import { useRef, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Linking,
   Pressable,
-  Platform,
   Dimensions,
-  PanResponder,
-  Animated as RNAnimated,
-  Share,
   ActivityIndicator,
 } from "react-native";
 import { useScrollToTop } from '@react-navigation/native';
@@ -38,17 +33,12 @@ import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { getPlaceById, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction, logInteraction } from "@/src/services/mekanService";
 import { lightImpact, success } from "@/src/utils/haptics";
-import { logger } from "@/src/utils/logger";
-import { apiGet } from "@/src/utils/apiClient";
-import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
-import { PlaceDetailOverlays, type Review, type ReviewGalleryData } from './place-detail/PlaceDetailOverlays';
+import { PlaceDetailOverlays, type ReviewGalleryData } from './place-detail/PlaceDetailOverlays';
 import { styles } from './place-detail/styles';
+import { usePlaceDetail } from './place-detail/usePlaceDetail';
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
-const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
-const REVIEW_SHEET_EXPANDED = SCREEN_HEIGHT * 0.72;
 
 export default function PlaceDetailScreen({
   providedId,
@@ -58,385 +48,61 @@ export default function PlaceDetailScreen({
   isVenueDashboard?: boolean
 } = {}) {
   const { colors } = useTheme();
-  const params = useLocalSearchParams();
-  const id = providedId || String(params?.id ?? "");
   const { t } = useTranslation();
   const settings = useSettingsStore();
+  const currentUser = useAuthStore((s) => s.user);
+
+  const {
+    id,
+    place,
+    showHeroImage,
+    setShowHeroImage,
+    reviews,
+    reviewsLoading,
+    reviewsError,
+    hasMoreReviews,
+    reviewsLoadingMore,
+    onLoadMoreReviews,
+    averageRating,
+    similarPlaces,
+
+    showReviews,
+    setShowReviews,
+    reviewSheetHeight,
+    reviewPanHandlers,
+    reviewScrollOffsetRef,
+
+    showMenu,
+    setShowMenu,
+    menuSheetHeight,
+    menuPanHandlers,
+
+    isFollowing,
+    followerCount,
+    followLoading,
+    handleFollow,
+
+    placePosts,
+    placeStories,
+    selectedStoryIndex,
+    setSelectedStoryIndex,
+    showStoriesModal,
+    setShowStoriesModal,
+
+    navigateToPlace,
+    handleNavigate,
+    handleShare,
+    handleCall,
+    heroSource,
+  } = usePlaceDetail({ providedId });
 
   const savedIds = useAppStore((s) => s.savedIds);
   const toggleSaved = useAppStore((s) => s.toggleSave);
   const saved = savedIds.includes(id);
-  const currentUser = useAuthStore((s) => s.user);
-
-  const [place, setPlace] = useState<any>(() => {
-    if (params && (params.name || params.title)) {
-      return {
-        id: Number(id),
-        name: params.name || params.title || "",
-        category: params.category || "",
-        photo_url: params.photo_url || params.image || "",
-        description: params.description || "",
-        subtitle: params.subtitle || "",
-        address: params.address || "",
-        gallery_urls: [],
-        menu_items: [],
-        review_count: 0,
-        saved_count: 0,
-        follower_count: 0,
-        is_following: false,
-      };
-    }
-    return null;
-  });
-  const [showHeroImage, setShowHeroImage] = useState(false);
-
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [reviewsLoading, setReviewsLoading] = useState(false);
-  const [reviewsError, setReviewsError] = useState<string | null>(null);
-  const [reviewsPage, setReviewsPage] = useState(1);
-  const [hasMoreReviews, setHasMoreReviews] = useState(true);
-  const [reviewsLoadingMore, setReviewsLoadingMore] = useState(false);
-  const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
-  const [showReviews, setShowReviews] = useState(false);
   const [reviewGalleryData, setReviewGalleryData] = useState<ReviewGalleryData | null>(null);
-
-  // Takip & Sosyal İçerik
-  // null = henüz API'den yüklenmedi → buton disabled görünür, "Takip Et" flash'ı önlenir
-  const [isFollowing, setIsFollowing] = useState<boolean | null>(null);
-  const [followerCount, setFollowerCount] = useState<number | null>(null);
-  const [followLoading, setFollowLoading] = useState(false);
-  const [placePosts, setPlacePosts] = useState<any[]>([]);
-  const [placeStories, setPlaceStories] = useState<any[]>([]);
-  const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
-  const [showStoriesModal, setShowStoriesModal] = useState(false);
 
   const screenRef = useRef<ScreenRef>(null);
   useScrollToTop(screenRef as any);
-
-  // Çift tıklama koruması — 600ms içinde tekrar navigasyona izin vermez
-  const navGuard = useRef(false);
-  const navigateToPlace = useCallback((placeData: Record<string, string>) => {
-    if (navGuard.current) return;
-    navGuard.current = true;
-    router.push({ pathname: "/place/[id]", params: placeData } as any);
-    setTimeout(() => { navGuard.current = false; }, 600);
-  }, []);
-
-  const reviewSheetHeight = useRef(new RNAnimated.Value(REVIEW_SHEET_COLLAPSED)).current;
-  const reviewStartHeightRef = useRef(REVIEW_SHEET_COLLAPSED);
-  const reviewScrollOffsetRef = useRef(0);
-
-  const [showMenu, setShowMenu] = useState(false);
-  const menuSheetHeight = useRef(new RNAnimated.Value(REVIEW_SHEET_COLLAPSED)).current;
-  const menuStartHeightRef = useRef(REVIEW_SHEET_COLLAPSED);
-
-  const handleAreaPanResponder = useMemo(
-    () =>
-      PanResponder.create({
-        onStartShouldSetPanResponder: () => true,
-        onMoveShouldSetPanResponder: () => true,
-        onPanResponderTerminationRequest: () => false,
-        onPanResponderMove: (_, g) => {
-          const nextH = reviewStartHeightRef.current - g.dy;
-          const clamped = Math.max(0, Math.min(REVIEW_SHEET_EXPANDED, nextH));
-          reviewSheetHeight.setValue(clamped);
-        },
-        onPanResponderRelease: (_, g) => {
-          const currentH = reviewStartHeightRef.current - g.dy;
-
-          // Eğer çok aşağı çekildiyse veya hızlı aşağı çekildiyse, kapat
-          if (currentH < REVIEW_SHEET_COLLAPSED * 0.3 || (g.dy > 50 && g.vy > 0.5)) {
-            setShowReviews(false);
-            setTimeout(() => {
-              reviewSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
-              reviewStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
-            }, 50);
-            return;
-          }
-
-          // Yukarı çekme: eğer genişletilmiş sınıra yakınsa, tam genişlet
-          if (g.dy < -30 && currentH > REVIEW_SHEET_COLLAPSED + 50) {
-            reviewStartHeightRef.current = REVIEW_SHEET_EXPANDED;
-            RNAnimated.spring(reviewSheetHeight, {
-              toValue: REVIEW_SHEET_EXPANDED,
-              useNativeDriver: false,
-              friction: 10,
-              tension: 60,
-            }).start();
-            return;
-          }
-
-          // Diğer durumlarda, mevcut konumda kal
-          const clampedH = Math.max(REVIEW_SHEET_COLLAPSED, Math.min(REVIEW_SHEET_EXPANDED, currentH));
-          reviewStartHeightRef.current = clampedH;
-          RNAnimated.spring(reviewSheetHeight, {
-            toValue: clampedH,
-            useNativeDriver: false,
-            friction: 10,
-            tension: 60,
-          }).start();
-        },
-      }),
-    [reviewSheetHeight]
-  );
-
-  const handleMenuPanResponder = useMemo(
-    () =>
-      PanResponder.create({
-        onStartShouldSetPanResponder: () => true,
-        onMoveShouldSetPanResponder: () => true,
-        onPanResponderTerminationRequest: () => false,
-        onPanResponderMove: (_, g) => {
-          const nextH = menuStartHeightRef.current - g.dy;
-          const clamped = Math.max(0, Math.min(REVIEW_SHEET_EXPANDED, nextH));
-          menuSheetHeight.setValue(clamped);
-        },
-        onPanResponderRelease: (_, g) => {
-          const currentH = menuStartHeightRef.current - g.dy;
-          if (currentH < REVIEW_SHEET_COLLAPSED * 0.3 || (g.dy > 50 && g.vy > 0.5)) {
-            setShowMenu(false);
-            setTimeout(() => {
-              menuSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
-              menuStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
-            }, 50);
-            return;
-          }
-          if (g.dy < -30 && currentH > REVIEW_SHEET_COLLAPSED + 50) {
-            menuStartHeightRef.current = REVIEW_SHEET_EXPANDED;
-            RNAnimated.spring(menuSheetHeight, {
-              toValue: REVIEW_SHEET_EXPANDED,
-              useNativeDriver: false,
-              friction: 10,
-              tension: 60,
-            }).start();
-            return;
-          }
-          const clampedH = Math.max(REVIEW_SHEET_COLLAPSED, Math.min(REVIEW_SHEET_EXPANDED, currentH));
-          menuStartHeightRef.current = clampedH;
-          RNAnimated.spring(menuSheetHeight, {
-            toValue: clampedH,
-            useNativeDriver: false,
-            friction: 10,
-            tension: 60,
-          }).start();
-        },
-      }),
-    [menuSheetHeight]
-  );
-
-  useEffect(() => {
-    if (showReviews) {
-      reviewSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
-      reviewStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
-    } else {
-      reviewSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
-      reviewStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
-    }
-  }, [showReviews, reviewSheetHeight]);
-
-  useEffect(() => {
-    if (showMenu) {
-      menuSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
-      menuStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
-    } else {
-      menuSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
-      menuStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
-    }
-  }, [showMenu, menuSheetHeight]);
-
-  // Load place data
-  useEffect(() => {
-    const cancelled = { current: false };
-    loadPlaceData(cancelled);
-    loadReviews(1, false, cancelled);
-    loadSocialContent(cancelled);
-    return () => {
-      cancelled.current = true;
-    };
-  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps -- loadPlaceData/loadReviews stable by design
-
-  const loadPlaceData = async (cancelled: { current: boolean } = { current: false }) => {
-    try {
-      const foundPlace = await getPlaceById(id);
-      if (!cancelled.current && foundPlace) {
-        const normalizedCat = normalizePlaceCategory(foundPlace.category);
-        setPlace({
-          ...foundPlace,
-          category: normalizedCat || foundPlace.category,
-        });
-        // Takip durumunu place verisiyle al (is_following zaten enrich'de geliyor)
-        if (typeof foundPlace.is_following === 'boolean') {
-          setIsFollowing(foundPlace.is_following);
-        }
-        if (typeof foundPlace.follower_count === 'number') {
-          setFollowerCount(foundPlace.follower_count);
-        }
-      }
-      // Etkileşimi arka planda kaydet (algoritmik boost)
-        // Analitik ve Öneri Motoru için etkileşimi kaydet
-        recordPlaceInteraction(id, 'view').catch(() => {});
-        logInteraction(id, 'CARD_VIEW', 3).catch(() => {});
-      } catch (err) {
-        console.error("Error loading place detail:", err);
-    }
-  };
-
-  const loadSocialContent = async (cancelled: { current: boolean } = { current: false }) => {
-    if (!id) return;
-    try {
-      const [postsData, storiesData] = await Promise.all([
-        getPlacePosts(id, 1, 18),
-        getPlaceStories(id),
-      ]);
-      if (!cancelled.current) {
-        setPlacePosts(postsData?.items || []);
-        setPlaceStories(storiesData?.items || []);
-      }
-    } catch (error) {
-      if (!cancelled.current) logger.error("Error loading social content:", error);
-    }
-  };
-
-  const handleFollow = async () => {
-    if (followLoading || isFollowing === null) return;
-
-    // ──── OPTİMİSTİK GÜNCELLEME ────
-    // UI'ı hemen güncelle — API cevabı bekleme
-    const prevFollowing = isFollowing;
-    const prevCount = followerCount ?? 0;
-    const newFollowing = !isFollowing;
-    setIsFollowing(newFollowing);
-    setFollowerCount(prev => newFollowing ? (prev ?? 0) + 1 : Math.max(0, (prev ?? 0) - 1));
-    lightImpact();
-    if (newFollowing) success();
-    // ──────────────────────────────
-
-    setFollowLoading(true);
-    try {
-      const result = await togglePlaceFollow(id);
-      // API'den gelen gerçek değeri uygula (sayı tutarsızlığı olmaması için)
-      setIsFollowing(result.followed);
-      setFollowerCount(result.follower_count);
-    } catch (error) {
-      // Hata durumunda eski duruma geri dön (rollback)
-      setIsFollowing(prevFollowing);
-      setFollowerCount(prevCount);
-      logger.error("Error toggling follow:", error);
-    } finally {
-      setFollowLoading(false);
-    }
-  };
-
-
-  const loadReviews = async (pageToLoad = 1, append = false, cancelled: { current: boolean } = { current: false }) => {
-    if (!id) return;
-    if (pageToLoad === 1) {
-      setReviewsLoading(true);
-    } else {
-      setReviewsLoadingMore(true);
-    }
-    setReviewsError(null);
-    try {
-      const data = await apiGet<Review[]>(`/places/${id}/reviews?page=${pageToLoad}&page_size=20`);
-      if (!cancelled.current) {
-        if (append) {
-          setReviews(prev => [...prev, ...(data || [])]);
-        } else {
-          setReviews(data || []);
-        }
-        setHasMoreReviews((data?.length || 0) === 20);
-        setReviewsPage(pageToLoad);
-      }
-    } catch (error) {
-      if (!cancelled.current) {
-        logger.error("Error loading reviews:", error);
-        if (pageToLoad === 1) setReviewsError(t("explore.no_comments"));
-      }
-    } finally {
-      if (!cancelled.current) {
-        setReviewsLoading(false);
-        setReviewsLoadingMore(false);
-      }
-    }
-  };
-
-
-
-  const loadSimilarPlaces = async (cancelled: { current: boolean } = { current: false }) => {
-    if (!place?.category) return;
-    try {
-      // Sadece aynı kategorideki 6 mekanu çek — minimal=true ile enrich atlanır
-      const data = await apiGet<any>(`/places/search?category=${encodeURIComponent(place.category)}&page_size=6&minimal=true`);
-      if (cancelled.current) return;
-      const items: any[] = data?.items ?? [];
-      const filtered = items.filter((p: any) => String(p.id) !== id).slice(0, 5);
-      setSimilarPlaces(filtered.map((p: any) => ({
-        id: p.id,
-        name: p.name,
-        category: p.category,
-        photo_url: p.photo_url,
-        average_rating: p.average_rating,
-        address: p.address,
-      })));
-    } catch (error) {
-      if (!cancelled.current) logger.error("Error loading similar places:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (!place?.category) return;
-    const cancelled = { current: false };
-    // Benzer mekanları hemen yükle (gecikme kaldırıldı — performans optimizasyonu)
-    loadSimilarPlaces(cancelled);
-    return () => {
-      cancelled.current = true;
-    };
-  }, [place?.id, place?.category]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleNavigate = () => {
-    if (place?.latitude != null && place?.longitude != null) {
-      const lat = place.latitude;
-      const lng = place.longitude;
-      const url =
-        Platform.OS === "ios"
-          ? `maps://maps.apple.com/?daddr=${lat},${lng}`
-          : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-      Linking.openURL(url).catch(() => {
-        Alert.alert(t("common.error"), t("place_extra.map_app_err"));
-      });
-    }
-  };
-
-  const handleShare = async () => {
-    try {
-      await Share.share({
-        message: `${place?.name || "Mekan"} - ${place?.address || ""}`,
-        url: `asemos://place/${id}`,
-      });
-    } catch (error) {
-      logger.error("Error sharing:", error);
-    }
-  };
-
-  const handleCall = () => {
-    // TODO: Mekan telefon numarası eklenmeli
-    Alert.alert(t("place_extra.info"), t("place_detail.phone_not_added"));
-  };
-
-  const heroSource = useMemo(() => {
-    // API'den gelen photo_url'yi öncelikle kullan
-    if (place?.photo_url) {
-      return { uri: place.photo_url };
-    }
-    // Yoksa default place image generator kullan
-    return getPlaceImageSource(place || id);
-  }, [place, id]);
-
-  const averageRating = useMemo(() => {
-    if (!reviews.length) return null;
-    const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0);
-    return (sum / reviews.length).toFixed(1);
-  }, [reviews]);
 
   // Typography styles - inline to avoid type issues
   const h1Style = { fontSize: 24, fontWeight: "700" as const, color: colors.text.primary };
@@ -620,7 +286,7 @@ export default function PlaceDetailScreen({
                   setShowMenu(true);
                 }}
               >
-                <View style={[styles.reviewIconContainer, { backgroundColor: "transparent" }]}>
+                <View style={[styles.reviewIconContainer, { backgroundColor: "transparent" }] }>
                   <IconSymbol name="list.bullet.clipboard.fill" size={14} color="#10b981" />
                   <Text style={{ fontSize: 14, color: "#10b981", fontWeight: "600", marginLeft: 4 }}>{t("place_detail.menu")}</Text>
                 </View>
@@ -988,7 +654,7 @@ export default function PlaceDetailScreen({
         showReviews={showReviews}
         onCloseReviews={() => setShowReviews(false)}
         reviewSheetHeight={reviewSheetHeight}
-        reviewPanHandlers={handleAreaPanResponder.panHandlers}
+        reviewPanHandlers={reviewPanHandlers}
         reviewScrollOffsetRef={reviewScrollOffsetRef}
         reviews={reviews}
         reviewsLoading={reviewsLoading}
@@ -996,7 +662,7 @@ export default function PlaceDetailScreen({
         averageRating={averageRating}
         hasMoreReviews={hasMoreReviews}
         reviewsLoadingMore={reviewsLoadingMore}
-        onLoadMoreReviews={() => loadReviews(reviewsPage + 1, true)}
+        onLoadMoreReviews={onLoadMoreReviews}
         reviewGalleryData={reviewGalleryData}
         setReviewGalleryData={setReviewGalleryData}
         showHeroImage={showHeroImage}
@@ -1007,7 +673,7 @@ export default function PlaceDetailScreen({
         showMenu={showMenu}
         onCloseMenu={() => setShowMenu(false)}
         menuSheetHeight={menuSheetHeight}
-        menuPanHandlers={handleMenuPanResponder.panHandlers}
+        menuPanHandlers={menuPanHandlers}
         place={place}
         placeStories={placeStories}
         selectedStoryIndex={selectedStoryIndex}
