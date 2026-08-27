@@ -3685,3 +3685,7 @@ Kaynaklar: https://cikobalik.com/menu/ ; https://www.tripadvisor.com/Restaurant_
 ## HOLD — BALIKÇI HASAN BEŞİKTAŞ ID 6318
 Hentzer kaydı `Sinanpaşa, Köyiçi Cd No:6, 34330 Beşiktaş/İstanbul` ve `+90 532 369 13 19`; resmi Instagram hesabı, 08.01.2026 tarihli resmi paylaşım, RenkMobil ve diğer kaynaklar aynı adres/telefonu doğruluyor. Resmi sosyal paylaşımlarda güncel fix menü fiyatları ve sınırlı ürün-fiyat metinleri görüldü, ancak Instagram gönderileri tam menü olarak erişilebilir değil ve 20 benzersiz güncel fiyatlı ürün çıkarılamadı. Fiyat uydurmamak için **strict HOLD; override eklenmedi.**
 Kaynaklar: https://www.instagram.com/balikcihasanbesiktas/ ; https://www.instagram.com/reel/DTP7CErjFpB/ ; https://renkmobil.com/restaurant/istanbul/balikci-hasan-besiktas/?lang=en
+
+## RAPHAEL PIZZA BEŞİKTAŞ ID 6317
+Hentzer kaydı `Sinanpaşa, Küçük Remzi Sk. No:3/A, 34353 Beşiktaş/İstanbul` ve `+90 212 258 55 63`; resmi Raphael Pizza Instagram hesabı, 26.09.2025 ve 29.09.2025 tarihli paylaşımlarında aynı adres ve telefonu veriyor, Restoranim/Yaka.la da şube adresini destekliyor. Canlı Migros Yemek Raphael Pizza Beşiktaş (Sinanpaşa Mah.) menüsünden 20 benzersiz orta boy pizza ürünü/fiyatı alındı. İçecekler ve yan ürünler dışlandı; ürün/fiyatlar uydurulmadı. **Override kabul edildi.**
+Kaynaklar: https://www.migros.com.tr/yemek/raphael-pizza-besiktas-sinanpasa-mah-st-3123f ; https://www.instagram.com/reel/DPEB7qcDCy4/ ; https://www.instagram.com/reel/DPMVRa7jAlu/ ; https://restoranim.net/istanbul/besiktas/pizzaci/raphael-pizza

@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6317": {
+    "name": "RAPHAEL PIZZA BEŞİKTAŞ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/raphael-pizza-besiktas-sinanpasa-mah-st-3123f",
+    "sourceName": "Canlı Migros Yemek Raphael Pizza Beşiktaş (Sinanpaşa Mah.) menüsü; resmi Raphael Pizza Instagram, Restoranim ve arama kaynakları ile Sinanpaşa Küçük Remzi Sk. No:3/A / 0212 258 55 63 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Margherita Pizza (Orta Boy)", "price": "276 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Arka Bahçe Pizza (Orta Boy)", "price": "296 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Ege Pizza (Orta Boy)", "price": "276 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Funghi Pizza (Orta Boy)", "price": "276 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Ispanaklı Pizza (Orta Boy)", "price": "284 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Köz Patlıcanlı Pizza (Orta Boy)", "price": "284 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Mantarlı Peynirli Pizza (Orta Boy)", "price": "296 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Pesto Soslu Kabaklı Pizza (Orta Boy)", "price": "292 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Sebzeli Pizza (Orta Boy)", "price": "280 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Vegan Pizza (Orta Boy)", "price": "256 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Domates Kurusu Pizza (Orta Boy)", "price": "284 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Buffalo Raphel Pizza (Orta Boy)", "price": "316 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Barbekü Soslu Pizza (Orta Boy)", "price": "316 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Çıtır Tavuklu Pizza (Orta Boy)", "price": "316 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "4 Peynirli Pizza (Orta Boy)", "price": "296 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Favori Pizza (Orta Boy)", "price": "320 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Jambon Pizza (Orta Boy)", "price": "316 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Mantarlı Sosisli Pizza (Orta Boy)", "price": "304 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Sucuklu Sosisli Pizza (Orta Boy)", "price": "304 TL", "category": "Pizzalar (Orta Boy)" },
+      { "name": "Sucuk Sever Pizza (Orta Boy)", "price": "304 TL", "category": "Pizzalar (Orta Boy)" }
+    ]
+  },
   "6326": {
     "name": "PIZZA V FULYA",
     "sourceUrl": "https://www.migros.com.tr/yemek/pizza-v-sisli-fulya-mah-st-2fabd",
