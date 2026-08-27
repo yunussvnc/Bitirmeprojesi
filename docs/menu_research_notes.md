@@ -3381,3 +3381,7 @@ Kaynaklar: http://www.hisarbalikcisi.com.tr/iletisim.php ; http://www.hisarbalik
 ## İYB BUBBLE WAFFLE BAYRAMPAŞA YILDIRIM ID 6395
 Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:44/A, 34045 Bayrampaşa/İstanbul` ve `0536 949 98 32`. Resmi Bayrampaşa Instagram hesabı aynı şube için `Şht. Kamil Balkan Caddesi, Şehit Ulubatlı Sokak No:44/A` bilgisini, Yandex aynı telefonu doğruluyor. Canlı Yemeksepeti SQB7 menüsünde 2026-08-27 tarihinde 20 benzersiz fiyatlı ürün alındı: 5 waffle, 7 sıcak kahve, 4 soğuk kahve, 4 kutu içecek. Poşet kalemi dışlandı; QR menüdeki Beylikdüzü hesabı bu şube için kullanılmadı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/sqb7/iyb-bubble-waffle-sqb7 ; https://www.instagram.com/iybbubblewafflebayrampasaa/ ; https://yandex.com.tr/maps/org/iyb_bubble_waffle_bayrampa_a_y_ld_r_m/66425716485/
+
+## VAHA COFFEE AND MORE BEYLİKDÜZÜ ID 6394 HOLD
+Menu-tr ve 2026-05-26 tarihli İstanbul Servis Listesi exact `Barış, Beylikdüzü OSB, Kır Sk. No:9` ve `0542 329 53 65` bilgilerini destekliyor. Resmi site 2025 menüsüne yönlendiriyor; ancak menü sayfası rate-limit nedeniyle okunamadı, WordPress arama uç noktasında işletmeyle ilgisiz spam içerik bulundu ve son bir yıl içinde güvenilir ürün bazlı TL fiyat doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://vahacoffee.com/ ; https://vahacoffee.com/menu/ ; https://www.menu-tr.com/istanbul/beylikduzu/kafe/vaha-coffee-and-more-beylikduzu ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/kafe/vaha-coffee-and-more-beylikduzu-EbCopA.html
