@@ -4,7 +4,7 @@
  * Share, Delete, Report, Close Friends indicator dahil.
  */
 
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -14,39 +14,21 @@ import {
   StyleSheet,
   Platform,
   Animated,
-  PanResponder,
   TextInput,
   ActivityIndicator,
-  Keyboard,
   useWindowDimensions,
-  Alert,
 } from 'react-native';
 import { Image } from 'expo-image';
 import Video from 'react-native-video';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { Avatar } from '@/src/components/ui/Avatar';
-import { lightImpact, success } from '@/src/utils/haptics';
-import {
-  replyToStory,
-  reactToStory,
-  updateStoryViewAnalytics,
-  recordStoryView,
-  getStoryViewers,
-  deleteStory,
-  reportStory,
-  STORY_EMOJIS,
-  type Story,
-  type StoryEmoji,
-  type StoryViewerItem,
-  type StoryReportReason,
-} from '@/src/services/storyService';
-import { timeAgo } from '@/src/utils/timeAgo';
-import { useTranslation } from 'react-i18next';
 import { styles } from './story-viewer/styles';
 import { StoryViewerOverlays } from './story-viewer/StoryViewerOverlays';
-
-const STORY_DURATION_MS = 5000;
-const LONG_PRESS_DELAY = 200;
+import { STORY_EMOJIS, type Story } from '@/src/services/storyService';
+import { timeAgo } from '@/src/utils/timeAgo';
+import { useTranslation } from 'react-i18next';
+import { useStoryViewerController } from './story-viewer/useStoryViewerController';
+import { getProgressFillColor, isStoryCloseFriends } from './story-viewer/storyViewerUtils';
 
 export interface StoryViewerModalProps {
   stories: Story[];
@@ -74,224 +56,73 @@ export function StoryViewerModal({
   onStoryDeleted,
 }: StoryViewerModalProps) {
   const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
-  const [index, setIndex] = useState(initialIndex);
-  const [replyText, setReplyText] = useState('');
-  const [replySending, setReplySending] = useState(false);
-  const [showEmojiTray, setShowEmojiTray] = useState(false);
-  const [myReaction, setMyReaction] = useState<string | null>(null);
-  const [reactionSending, setReactionSending] = useState(false);
-  const [uiVisible, setUiVisible] = useState(true);
-  const [videoPaused, setVideoPaused] = useState(false);
-  const isPausedRef = useRef(false);
-  const progressValueRef = useRef(0);
-  const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const keyboardVisibleRef = useRef(false);
-  const openedAtRef = useRef<number>(Date.now());
-  const progressAnim = useRef(new Animated.Value(0)).current;
   const { t } = useTranslation();
 
-  const [viewersModalVisible, setViewersModalVisible] = useState(false);
-  const [viewers, setViewers] = useState<StoryViewerItem[]>([]);
-  const [viewersLoading, setViewersLoading] = useState(false);
-  const [shareSheetVisible, setShareSheetVisible] = useState(false);
+  const {
+    index,
+    story,
+    progressAnim,
+    dragY,
+    panHandlers,
+    uiVisible,
+    videoPaused,
+    goPrev,
+    goNext,
+    handlePressIn,
+    handlePressOut,
+    handleVideoProgress,
+    handleVideoEnd,
+    handleAuthorPress,
+    handlePlacePress,
+    handleLinkSticker,
+    replyText,
+    setReplyText,
+    replySending,
+    handleSendReply,
+    showEmojiTray,
+    setShowEmojiTray,
+    myReaction,
+    reactionSending,
+    handleReaction,
+    viewersModalVisible,
+    viewers,
+    viewersLoading,
+    openViewersList,
+    closeViewersList,
+    showOwnMenu,
+    openOwnMenu,
+    closeOwnMenu,
+    handleDeleteStory,
+    showOtherMenu,
+    openOtherMenu,
+    closeOtherMenu,
+    openReportMenu,
+    showReportMenu,
+    closeReportMenu,
+    handleReport,
+    shareSheetVisible,
+    handleSharePress,
+    handleShareSheetClose,
+    animKeyboard,
+  } = useStoryViewerController({
+    stories,
+    initialIndex,
+    visible,
+    onClose,
+    onStoryViewed,
+    onAuthorNavigate,
+    onPlaceNavigate,
+    currentUserId,
+    onStoryDeleted,
+    screenHeight: SCREEN_HEIGHT,
+  });
 
-  // Menü state'leri
-  const [showOwnMenu, setShowOwnMenu] = useState(false);
-  const [showOtherMenu, setShowOtherMenu] = useState(false);
-  const [showReportMenu, setShowReportMenu] = useState(false);
+  if (!story) return null;
 
-  // initialIndex veya stories değiştiğinde index'i sıfırla
-  useEffect(() => {
-    setIndex(initialIndex);
-    openedAtRef.current = Date.now();
-  }, [initialIndex, stories]);
-
-  // Hikaye değişince reaction'u güncelle
-  useEffect(() => {
-    const s = stories[index];
-    setMyReaction(s?.my_reaction ?? null);
-    openedAtRef.current = Date.now();
-  }, [index, stories]);
-
-  const dragY = useRef(new Animated.Value(0)).current;
-  const animKeyboard = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    progressAnim.addListener(({ value }) => {
-      progressValueRef.current = value;
-    });
-    return () => progressAnim.removeAllListeners();
-  }, [progressAnim]);
-
-  // Fix #4: Keyboard açılınca hikaye progress durdur
-  useEffect(() => {
-    const showSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => {
-      keyboardVisibleRef.current = true;
-      Animated.timing(animKeyboard, { toValue: e.endCoordinates.height, duration: 250, useNativeDriver: false }).start();
-      isPausedRef.current = true;
-      setVideoPaused(true);
-      if (isImageRef.current) {
-        progressAnim.stopAnimation();
-      }
-    });
-    const hideSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
-      keyboardVisibleRef.current = false;
-      Animated.timing(animKeyboard, { toValue: 0, duration: 250, useNativeDriver: false }).start();
-      isPausedRef.current = false;
-      setVideoPaused(false);
-      if (isImageRef.current) {
-        startProgressFromCurrent();
-      }
-    });
-    return () => { showSub.remove(); hideSub.remove(); };
-  }, [animKeyboard, progressAnim]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const story = stories[index];
-  const isImage = story?.media_type !== 'video';
-  const isImageRef = useRef(isImage);
-  isImageRef.current = isImage;
-  const isCloseFriends = story?.privacy_type === 'close_friends' || story?.is_close_friends;
-
-  const goNext = useCallback(() => {
-    if (index < stories.length - 1) {
-      setIndex((i) => i + 1);
-    } else {
-      onClose();
-    }
-  }, [index, stories.length, onClose]);
-
-  const goPrev = useCallback(() => {
-    if (index > 0) {
-      setIndex((i) => i - 1);
-    } else {
-      onClose();
-    }
-  }, [index, onClose]);
-
-  useEffect(() => {
-    if (story) {
-      onStoryViewed?.(story.id);
-      recordStoryView(story.id, 'feed').catch(() => {});
-    }
-  }, [index, story?.id]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Analitik
-  const sendAnalytics = useCallback((opts?: { visitedProfile?: boolean; visitedPlace?: boolean }) => {
-    const s = stories[index];
-    if (!s) return;
-    const duration = Math.round((Date.now() - openedAtRef.current) / 1000);
-    updateStoryViewAnalytics(s.id, {
-      watch_duration_seconds: duration,
-      did_visit_profile: opts?.visitedProfile ?? false,
-      did_visit_place: opts?.visitedPlace ?? false,
-    }).catch(() => {});
-  }, [stories, index]);
-
-  // İmage progress
-  const startProgress = useCallback((fromValue = 0) => {
-    if (!isImage) return;
-    const remainingDuration = STORY_DURATION_MS * (1 - fromValue);
-    progressAnim.setValue(fromValue);
-    Animated.timing(progressAnim, {
-      toValue: 1,
-      duration: remainingDuration,
-      useNativeDriver: false,
-    }).start(({ finished }) => {
-      if (finished && visible && !isPausedRef.current) {
-        goNext();
-      }
-    });
-  }, [isImage, progressAnim, visible, goNext]);
-
-  const startProgressFromCurrent = useCallback(() => {
-    startProgress(progressValueRef.current);
-  }, [startProgress]);
-
-  const resumeProgress = useCallback(() => {
-    if (!story || viewersModalVisible) return;
-    const remaining = Math.max(0, STORY_DURATION_MS - progressValueRef.current);
-    Animated.timing(progressAnim, {
-      toValue: STORY_DURATION_MS,
-      duration: remaining,
-      useNativeDriver: false,
-    }).start(({ finished }) => {
-      if (finished) {
-        goNext();
-      }
-    });
-  }, [story, progressAnim, goNext, viewersModalVisible]);
-
-  useEffect(() => {
-    if (!story || !isImage || !visible) return;
-    progressValueRef.current = 0;
-    startProgress(0);
-    return () => {
-      progressAnim.stopAnimation();
-    };
-  }, [story, isImage, visible, startProgress, progressAnim]);
-
-  useEffect(() => {
-    if (!isImage) {
-      progressAnim.stopAnimation();
-      progressAnim.setValue(0);
-      progressValueRef.current = 0;
-    }
-  }, [index, isImage, progressAnim]);
-
-  useEffect(() => {
-    if (!visible) dragY.setValue(0);
-  }, [visible, dragY]);
-
-  const handleVideoProgress = useCallback(({ currentTime, seekableDuration }: { currentTime: number; seekableDuration: number }) => {
-    if (seekableDuration > 0) {
-      const fraction = currentTime / seekableDuration;
-      progressAnim.setValue(fraction);
-      progressValueRef.current = fraction;
-    }
-  }, [progressAnim]);
-
-  const handleVideoEnd = useCallback(() => {
-    if (!isPausedRef.current) {
-      goNext();
-    }
-  }, [goNext]);
-
-  const handlePressIn = useCallback(() => {
-    if (viewersModalVisible || showOwnMenu || showOtherMenu || showReportMenu) return;
-    longPressTimerRef.current = setTimeout(() => {
-      setUiVisible(false);
-      setVideoPaused(true);
-      isPausedRef.current = true;
-      progressAnim.stopAnimation();
-    }, LONG_PRESS_DELAY);
-  }, [progressAnim, viewersModalVisible, showOwnMenu, showOtherMenu, showReportMenu]);
-
-  const handlePressOut = useCallback(() => {
-    if (longPressTimerRef.current) {
-      clearTimeout(longPressTimerRef.current);
-      longPressTimerRef.current = null;
-    }
-    if (isPausedRef.current) {
-      isPausedRef.current = false;
-      setVideoPaused(false);
-      setUiVisible(true);
-      if (isImage) {
-        startProgress(progressValueRef.current);
-      }
-    }
-  }, [isImage, startProgress]);
-
-  const animateClose = useCallback(() => {
-    sendAnalytics();
-    Animated.timing(dragY, {
-      toValue: SCREEN_HEIGHT,
-      duration: 180,
-      useNativeDriver: true,
-    }).start(() => {
-      dragY.setValue(0);
-      onClose();
-    });
-  }, [dragY, onClose, sendAnalytics, SCREEN_HEIGHT]);
+  const isCloseFriends = isStoryCloseFriends(story);
+  const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
+  const showReplyBar = !isOwnStory;
+  const canShare = !isCloseFriends;
 
   const overlayOpacity = dragY.interpolate({
     inputRange: [0, SCREEN_HEIGHT * 0.4],
@@ -299,251 +130,7 @@ export function StoryViewerModal({
     extrapolate: 'clamp',
   });
 
-  const panResponder = useMemo(
-    () =>
-      PanResponder.create({
-        onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 12 && Math.abs(g.dy) > Math.abs(g.dx),
-        onPanResponderMove: (_, g) => {
-          if (g.dy > 0) dragY.setValue(g.dy);
-        },
-        onPanResponderRelease: (_, g) => {
-          if (g.dy > 90 || g.vy > 0.8) {
-            animateClose();
-            return;
-          }
-          Animated.spring(dragY, {
-            toValue: 0,
-            useNativeDriver: true,
-            friction: 7,
-            tension: 80,
-          }).start();
-        },
-        onPanResponderTerminate: () => {
-          Animated.spring(dragY, {
-            toValue: 0,
-            useNativeDriver: true,
-            friction: 7,
-            tension: 80,
-          }).start();
-        },
-      }),
-    [dragY, animateClose]
-  );
-
-  const handleAuthorPress = useCallback(() => {
-    if (!story?.user_id) return;
-    lightImpact();
-    sendAnalytics({ visitedProfile: true });
-    onAuthorNavigate?.(`/user/${story.user_id}`, index);
-  }, [story?.user_id, index, onAuthorNavigate, sendAnalytics]);
-
-  const handlePlacePress = useCallback(() => {
-    const pid = story?.place_id ?? story?.place?.id;
-    if (!pid) return;
-    lightImpact();
-    sendAnalytics({ visitedPlace: true });
-    onPlaceNavigate?.(`/place/${pid}`, index);
-  }, [story?.place_id, story?.place?.id, index, onPlaceNavigate, sendAnalytics]);
-
-  const handleSendReply = useCallback(async () => {
-    if (!replyText.trim() || !story || replySending) return;
-    setReplySending(true);
-    try {
-      await replyToStory(story.id, replyText.trim());
-      success();
-      setReplyText('');
-      setShowEmojiTray(false);
-    } catch (e: any) {
-      const detail = e?.response?.data?.detail || e?.message || 'Yanıt gönderilemedi.';
-      Alert.alert('Hata', detail);
-    } finally {
-      setReplySending(false);
-    }
-  }, [replyText, story, replySending]);
-
-  const handleReaction = useCallback(async (emoji: StoryEmoji) => {
-    if (!story || reactionSending) return;
-    setReactionSending(true);
-    lightImpact();
-    try {
-      const res = await reactToStory(story.id, emoji);
-      if (res.action === 'removed') {
-        setMyReaction(null);
-      } else {
-        setMyReaction(emoji);
-      }
-      setShowEmojiTray(false);
-    } catch (e: any) {
-      const detail = e?.response?.data?.detail || e?.message || 'Tepki gönderilemedi.';
-      Alert.alert('Hata', detail);
-    } finally {
-      setReactionSending(false);
-    }
-  }, [story, reactionSending]);
-
-  const handleLinkSticker = useCallback(() => {
-    if (!story?.link_type || !story?.link_id) return;
-    lightImpact();
-    sendAnalytics({ visitedPlace: story.link_type === 'place' });
-    if (story.link_type === 'place') {
-      onPlaceNavigate?.(`/place/${story.link_id}`, index);
-    } else if (story.link_type === 'profile') {
-      onAuthorNavigate?.(`/user/${story.link_id}`, index);
-    }
-  }, [story, index, onPlaceNavigate, onAuthorNavigate, sendAnalytics]);
-
-  // Başkasının hikayesinde mi?
-  const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
-  const showReplyBar = !isOwnStory;
-  const canShare = !isCloseFriends;
-
-  // ── Silme ──
-  const handleDeleteStory = useCallback(async () => {
-    if (!story) return;
-    setShowOwnMenu(false);
-    Alert.alert(
-      'Hikayeyi Sil',
-      'Bu hikaye kalıcı olarak silinecek. Emin misiniz?',
-      [
-        { text: 'İptal', style: 'cancel', onPress: () => {
-          isPausedRef.current = false;
-          setVideoPaused(false);
-          if (isImage) startProgress(progressValueRef.current);
-        }},
-        {
-          text: 'Sil',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await deleteStory(story.id);
-              success();
-              onStoryDeleted?.(story.id);
-              goNext();
-            } catch {
-              Alert.alert('Hata', 'Hikaye silinemedi.');
-              isPausedRef.current = false;
-              setVideoPaused(false);
-              if (isImage) startProgress(progressValueRef.current);
-            }
-          },
-        },
-      ]
-    );
-  }, [story, goNext, onStoryDeleted, isImage, startProgress]);
-
-  // ── Şikayet ──
-  const handleReport = useCallback(async (reason: StoryReportReason) => {
-    if (!story) return;
-    setShowReportMenu(false);
-    try {
-      await reportStory(story.id, reason);
-      success();
-      Alert.alert('Teşekkürler', 'Şikayetiniz incelenmek üzere alındı.');
-    } catch (e: any) {
-      const detail = e?.response?.data?.detail || 'Şikayet gönderilemedi.';
-      Alert.alert('Hata', detail);
-    } finally {
-      isPausedRef.current = false;
-      setVideoPaused(false);
-      if (isImage) startProgress(progressValueRef.current);
-    }
-  }, [story, isImage, startProgress]);
-
-  // ── Paylaş — ShareStorySheet aç ──
-  const handleSharePress = useCallback(() => {
-    if (!story) return;
-    lightImpact();
-    isPausedRef.current = true;
-    setVideoPaused(true);
-    progressAnim.stopAnimation();
-    setShareSheetVisible(true);
-  }, [story, progressAnim]);
-
-  const handleShareSheetClose = useCallback(() => {
-    setShareSheetVisible(false);
-    isPausedRef.current = false;
-    setVideoPaused(false);
-    if (isImage) startProgress(progressValueRef.current);
-  }, [isImage, startProgress]);
-
-  // ── Menü Açma/Kapama ──
-  const openOwnMenu = useCallback(() => {
-    isPausedRef.current = true;
-    setVideoPaused(true);
-    progressAnim.stopAnimation();
-    setShowOwnMenu(true);
-  }, [progressAnim]);
-
-  const closeOwnMenu = useCallback(() => {
-    setShowOwnMenu(false);
-    isPausedRef.current = false;
-    setVideoPaused(false);
-    if (isImage) startProgress(progressValueRef.current);
-  }, [isImage, startProgress]);
-
-  const openOtherMenu = useCallback(() => {
-    isPausedRef.current = true;
-    setVideoPaused(true);
-    progressAnim.stopAnimation();
-    setShowOtherMenu(true);
-  }, [progressAnim]);
-
-  const closeOtherMenu = useCallback(() => {
-    setShowOtherMenu(false);
-    isPausedRef.current = false;
-    setVideoPaused(false);
-    if (isImage) startProgress(progressValueRef.current);
-  }, [isImage, startProgress]);
-
-  const openReportMenu = useCallback(() => {
-    setShowOtherMenu(false);
-    setShowReportMenu(true);
-  }, []);
-
-  const closeReportMenu = useCallback(() => {
-    setShowReportMenu(false);
-    isPausedRef.current = false;
-    setVideoPaused(false);
-    if (isImage) startProgress(progressValueRef.current);
-  }, [isImage, startProgress]);
-
-  const openViewersList = useCallback(async () => {
-    if (!story) return;
-    setVideoPaused(true);
-    isPausedRef.current = true;
-    progressAnim.stopAnimation();
-    setViewersModalVisible(true);
-    setViewersLoading(true);
-    try {
-      const res = await getStoryViewers(story.id);
-      const sorted = (res.items || []).sort((a, b) => {
-        const aHasHeart = a.reaction === '❤️';
-        const bHasHeart = b.reaction === '❤️';
-        if (aHasHeart && !bHasHeart) return -1;
-        if (!aHasHeart && bHasHeart) return 1;
-        const aTime = new Date(a.viewed_at).getTime();
-        const bTime = new Date(b.viewed_at).getTime();
-        return bTime - aTime;
-      });
-      setViewers(sorted);
-    } catch (e) {
-      console.warn('Failed to load viewers', e);
-    } finally {
-      setViewersLoading(false);
-    }
-  }, [story, progressAnim]);
-
-  const closeViewersList = useCallback(() => {
-    setViewersModalVisible(false);
-    setVideoPaused(false);
-    isPausedRef.current = false;
-    resumeProgress();
-  }, [resumeProgress]);
-
-  if (!story) return null;
-
-  // Progress bar renkleri
-  const progressFillColor = isCloseFriends ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.9)';
+  const progressFillColor = getProgressFillColor(isCloseFriends);
 
   return (
     <Modal
@@ -561,7 +148,7 @@ export function StoryViewerModal({
             transform: [{ translateY: dragY }],
           },
         ]}
-        {...panResponder.panHandlers}
+        {...panHandlers}
       >
         {story.media_type === 'video' ? (
           <Video
@@ -586,7 +173,6 @@ export function StoryViewerModal({
           <Pressable style={styles.tapRight} onPress={goNext} onPressIn={handlePressIn} onPressOut={handlePressOut} />
         </View>
 
-        {/* ── Progress Bar ── */}
         {uiVisible && (
           <View style={styles.progressRow}>
             {stories.map((_, i) => {
@@ -617,7 +203,6 @@ export function StoryViewerModal({
           </View>
         )}
 
-        {/* ── Author Bar ── */}
         {uiVisible && (
           <View style={styles.authorBar}>
             {onAuthorNavigate ? (
@@ -664,7 +249,6 @@ export function StoryViewerModal({
               )}
             </View>
 
-            {/* 3-Nokta Menü Butonu */}
             <TouchableOpacity
               style={styles.moreBtn}
               onPress={isOwnStory ? openOwnMenu : openOtherMenu}
@@ -673,7 +257,6 @@ export function StoryViewerModal({
               <IconSymbol name="ellipsis" size={20} color="#fff" />
             </TouchableOpacity>
 
-            {/* Close butonu */}
             <TouchableOpacity
               style={styles.closeBtn}
               onPress={onClose}
@@ -684,7 +267,6 @@ export function StoryViewerModal({
           </View>
         )}
 
-        {/* ── Link Sticker ── */}
         {story.link_type && story.link_id && uiVisible && (
           <TouchableOpacity
             style={styles.linkSticker}
@@ -698,10 +280,8 @@ export function StoryViewerModal({
           </TouchableOpacity>
         )}
 
-        {/* ── Yanıt Kutusu + Emoji Tray + Share (başkasının hikayesinde) ── */}
         {showReplyBar && uiVisible && (
           <Animated.View style={[styles.replyBar, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
-            {/* Emoji Tepki Tray */}
             {showEmojiTray && (
               <View style={styles.emojiTray}>
                 {STORY_EMOJIS.map((emoji) => (
@@ -722,7 +302,6 @@ export function StoryViewerModal({
             )}
 
             <View style={styles.replyInputRow}>
-              {/* Emoji toggle butonu */}
               <TouchableOpacity
                 style={styles.emojiToggleBtn}
                 onPress={() => setShowEmojiTray((v) => !v)}
@@ -754,7 +333,6 @@ export function StoryViewerModal({
                   >
                     <IconSymbol name={myReaction === '❤️' ? "heart.fill" : "heart"} size={26} color={myReaction === '❤️' ? "#ef4444" : "#fff"} />
                   </TouchableOpacity>
-                  {/* Paylaş butonu */}
                   {canShare && (
                     <TouchableOpacity
                       style={styles.shareBtn}
@@ -786,7 +364,6 @@ export function StoryViewerModal({
           </Animated.View>
         )}
 
-        {/* ── İzleyenler Butonu (Kendi Hikayesinde) — Sayı ile birlikte ── */}
         {isOwnStory && uiVisible && (
           <Animated.View style={[styles.viewersBtnWrap, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
             <TouchableOpacity style={styles.viewersBtn} onPress={openViewersList} activeOpacity={0.8}>
