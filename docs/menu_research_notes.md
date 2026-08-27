@@ -3801,3 +3801,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6288 ; https://zubeyirocakbasi.co
 ## ÇITIR FIRIN ID 6287 — HOLD
 Hentzer kaydı `Adnan Kahveci, Yavuz Sultan Selim Blv. Atrium City No:51-1A, 34536 Beylikdüzü/İstanbul`, telefon `+90 533 693 11 53`. Arama sonuçlarında exact adresi destekleyen genel bir liste mevcut; ancak Menu-TR’de çıkan Çıtır Fırın Esenyurt/Piri Reis Mah. 1982 Sk. No:3 adresindeki farklı şube. Hentzer telefonu için bağımsız doğrulama ve son bir yıl içinde 20 fiyatlı ürün bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6287 ; https://winniey.com/spots/istanbul-beylikduzu-pastane?view ; https://www.menu-tr.com/istanbul/esenyurt/firin/citir-firin
+
+## SMASHCRAFT BURGER ID 6286 — HOLD
+Hentzer kaydı `Aktel AVM, Adnan Kahveci, Avrupa Cd. D:82-13, 34000 Beylikdüzü/İstanbul`, telefon `+90 531 818 53 12`. Yandex Maps aynı Smashcraft Burger ve Avrupa Cad. 82/13 / +90 531 818 53 12 paritesini destekliyor. Buna karşın son bir yıl içinde exact şubeye ait erişilebilir 20 ürün/fiyat menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6286 ; https://yandex.com.tr/maps/org/smashcraft_burger/13725695861/
