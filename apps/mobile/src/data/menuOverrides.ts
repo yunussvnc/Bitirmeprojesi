@@ -6334,6 +6334,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+  "6334": {
+    "name": "TELLA KEBAP BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/z88g/tella-kebap",
+    "sourceName": "Canlı Yemeksepeti Tella Kebap menüsü; Tella resmi şubelerimiz sayfası ve Nasilbiryer ile Cumhuriyet Mah. Aytekin Kotil Sk. Bizim Çarşı No:2 / 0212 780 04 04 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Ezogelin Çorbası (300 gr.)", "price": "220 TL", "category": "Başlangıçlar" },
+      { "name": "Bulgur Pilavı (160 gr.)", "price": "160 TL", "category": "Başlangıçlar" },
+      { "name": "Süryani Usulü Haşlama İçli Köfte (Adet) (80 gr.)", "price": "270 TL", "category": "Başlangıçlar" },
+      { "name": "Tabak Altı Lahmacun (22 cm.)", "price": "210 TL", "category": "Lahmacunlar" },
+      { "name": "Urfa Lahmacun (32 cm.)", "price": "230 TL", "category": "Lahmacunlar" },
+      { "name": "Tella Kebap (180 gr.)", "price": "780 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Çöp Şiş Leblebi (180 gr.)", "price": "790 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Şiş Kestane (200 gr.)", "price": "910 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Ciğer Şiş (195 gr.)", "price": "820 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş (300 gr.)", "price": "710 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Har Kanat (300 gr.)", "price": "730 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kemikli Kuzu Şiş (280 gr.)", "price": "1020 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Urfa Tava (300 gr.) (2 Kişilik)", "price": "1300 TL", "category": "Tepsi Kebaplar" },
+      { "name": "Tella Tava (2 Kişilik)", "price": "1410 TL", "category": "Tepsi Kebaplar" },
+      { "name": "Siverek Tava (300 gr.) (2 Kişilik)", "price": "1300 TL", "category": "Tepsi Kebaplar" },
+      { "name": "Tella Salata (400 gr.)", "price": "180 TL", "category": "Salatalar" },
+      { "name": "Tablacı Salatası (250 gr.)", "price": "180 TL", "category": "Salatalar" },
+      { "name": "Fıstıklı Antep Baklava (1 kg.)", "price": "2205 TL", "category": "Tatlılar" },
+      { "name": "Fıstıklı Antep Baklava (500 gr.)", "price": "1105 TL", "category": "Tatlılar" },
+      { "name": "Fırın Katmer Tatlısı", "price": "430 TL", "category": "Tatlılar" }
+    ]
+  },
   "6338": {
     "name": "Cemil Hoca Restoran",
     "sourceUrl": "https://cemilhoca.com.tr/wp-content/uploads/2026/08/menu_10.html",
