@@ -3891,3 +3891,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6265 ; https://restaurantguru.com
 ## CULİ COFFEE CO. ID 6264 — HOLD
 Hentzer `Yıldırım, Şehir Parkı Caddesi No:13/A, 34045 Bayrampaşa`, telefon `null`. Menu-TR aynı isim ve exact adresi, Yandex aynı işletmeyi destekliyor; resmi Instagram bağlantısı mevcut. Ancak doğrulanabilir telefon ve son bir yıl içinde 20 benzersiz fiyatlı gıda/içecek ürünü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6264 ; https://www.menu-tr.com/istanbul/bayrampasa/kafe/culi-coffee-co ; https://yandex.com.tr/maps/org/culi_coffee_co/121308386132/ ; https://www.instagram.com/culicoffeeco/
+
+## NIZAM COFFEE & FOOD ID 6263 — HOLD
+Hentzer `Anadolu Kavağı, Molla Mehmet Sk. No:1, 34000 Beykoz`, telefon `+90 542 693 45 32`. Kaçıyor, Menu-TR ve Yandex exact şubeyi destekliyor; Menu-TR’de gerçek ürün/fiyat menüsü yerine yalnız QR Menü Oluştur bağlantısı bulunuyor. Son bir yıl içinde exact şubeye ait 20 benzersiz fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6263 ; https://www.menu-tr.com/istanbul/beykoz/kafe/nizam-coffee-food ; https://kaciyor.com/nizam-coffee-food ; https://restoranim.net/istanbul/istanbul/kafe/nizam-coffee-food
