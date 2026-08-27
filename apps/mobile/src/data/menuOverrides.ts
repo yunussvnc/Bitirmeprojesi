@@ -93411,4 +93411,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Arrosto Di Manzo Pizza (30 cm.)", "price": "710 TL", "category": "Orta Boy Pizzalar" }
     ]
   },
+  "6266": {
+    "name": "ZERON BAKERY BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/x0t0/zeron-bakery-x0t0",
+    "sourceName": "27.08.2026 canlı Yemeksepeti exact Asariye Cad. 11 D vendor menüsü; resmi Zeron Bakery sitesi ve yerel kaynaklarla adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Simit", "price": "70 TL", "category": "Açmalar & Poğaçalar & Simitler" },
+      { "name": "Zeytinli Açma (Büyük)", "price": "75 TL", "category": "Açmalar & Poğaçalar & Simitler" },
+      { "name": "Sade Açma (Büyük)", "price": "75 TL", "category": "Açmalar & Poğaçalar & Simitler" },
+      { "name": "Mix Pizza", "price": "250 TL", "category": "Açmalar & Poğaçalar & Simitler" },
+      { "name": "Peynirli Poğaça (Büyük)", "price": "75 TL", "category": "Açmalar & Poğaçalar & Simitler" },
+      { "name": "Ispanaklı Börek", "price": "400 TL", "category": "Börekler" },
+      { "name": "Peynirli Bagel Sandviç", "price": "320 TL", "category": "Sandviçler" },
+      { "name": "Beyaz Peynirli Sandviç Kruvasan", "price": "450 TL", "category": "Sandviçler" },
+      { "name": "Hindi Fümeli Sandviç Kruvasan", "price": "450 TL", "category": "Sandviçler" },
+      { "name": "Kepek Ekmeğinde Hindi Fümeli Sandviç", "price": "450 TL", "category": "Sandviçler" },
+      { "name": "Dana Jambonlu Sandviç Kruvasan", "price": "450 TL", "category": "Sandviçler" },
+      { "name": "Sade Kruvasan (110 gr.)", "price": "280 TL", "category": "Kruvasanlar" },
+      { "name": "Çikolatalı Kruvasan (110 gr.)", "price": "300 TL", "category": "Kruvasanlar" },
+      { "name": "Siyez Ekmek", "price": "400 TL", "category": "Ekmekler" },
+      { "name": "Ekşi Mayalı Sade Baget Ekmeği (350 gr.)", "price": "100 TL", "category": "Ekmekler" },
+      { "name": "Ekşi Mayalı Çavdar Ekmeği (350 gr.)", "price": "260 TL", "category": "Ekmekler" },
+      { "name": "Ekşi Mayalı Sade Ekmek (700 gr.)", "price": "270 TL", "category": "Ekmekler" },
+      { "name": "Ekşi Mayalı Zeytinli Ekmek (700 gr.)", "price": "260 TL", "category": "Ekmekler" },
+      { "name": "Ekşi Mayalı Domatesli Ekmek (700 gr.)", "price": "260 TL", "category": "Ekmekler" },
+      { "name": "Ekşi Mayalı Tam Buğday Ekmeği (700 gr.)", "price": "260 TL", "category": "Ekmekler" }
+    ]
+  },
 };
