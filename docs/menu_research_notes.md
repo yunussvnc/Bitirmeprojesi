@@ -3351,3 +3351,7 @@ Kaynaklar: https://celorestaurant.com/ ; https://www.celorestaurant.com/menu ; h
 ## KEBAP HAUS LOUNGE ID 6402 HOLD
 Hentzer kaydı Büyükşehir, Anadolu Cd. No:30 ve `+90 212 873 12 12` veriyor; ancak bu exact ad/telefon için doğrulanabilir resmi işletme kaydı bulunamadı. Yemeksepeti `gaw7/rutr` güncel fiyatlı Kebap Haus menüleri sunsa da exact Beylikdüzü adres/telefon parity’si gösterilmedi. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/gaw7/kebap-haus-gaw7 ; https://www.yemeksepeti.com/en/restaurant/rutr/kebap-haus
+
+## BAZLAMA İSTASYONU BEYLİKDÜZÜ ID 6401 HOLD
+Resmi Instagram ve Yandex Hentzer ile Adnan Kahveci, Çamlıtepe Cd. No:20A D:3 ve `+90 555 046 60 56` exact parity’sini destekliyor. Yemeksepeti `asj2` vendoru Fahrettin Kerim Gökay Cd. (farklı şube) gösterdiği için kullanılmadı. Exact Migros Yemek sayfası bulundu ancak dinamik ürün fiyatları güvenilir biçimde çıkarılamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.instagram.com/bazlamaistasyonu_beylikduzu/ ; https://yandex.com.tr/maps/org/bazlama_istasyonu_beylikduzu/207958770340/ ; https://www.migros.com.tr/yemek/bazlama-istasyonu-beylikduzu-adnan-kahveci-mah-st-1a15f ; https://www.yemeksepeti.com/en/restaurant/asj2/bazlama-istasyonu-asj2
