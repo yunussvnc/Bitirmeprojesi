@@ -3342,3 +3342,8 @@ Kaynaklar: https://istakozi.com/ ; https://istakozi.com/menu/ ; https://www.yeme
 ## BAHAR UNLU MAMÜLLERİ ID 6404 HOLD
 Yandex, Servis Kayıt Listesi ve Instagram Hentzer ile Yıldırım, Şht. Kamil Balkan Cd. No:82 ve `+90 212 618 20 06` bilgisini büyük ölçüde destekliyor; ancak kapı eki 82A ve aynı telefon Bulurum’da Ali Fuat Başgil Cd. 102/A olarak çelişiyor. Yemeksepeti `ubl4` vendoru exact Bayrampaşa adres/telefonuyla doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://yandex.com.tr/maps/org/bahar_unlu_mamulleri/219418331114/ ; https://serviskayitlistesi.com/istanbul/bayrampasa/kafe/bahar-unlu-mamulleri-_rSngQ.html ; https://www.instagram.com/bugdayci_baharpasta/ ; https://www.yemeksepeti.com/en/restaurant/ubl4/bahar-firin-and-unlu-mamuller
+
+
+## CELO RESTAURANT ID 6403 KABUL
+CELO resmi sitesi ve `/menu` sayfası Hentzer ile `Kavaklı, Oğuzhan Cd. No:22, 34520 Beylikdüzü/İstanbul` ve `+90 530 171 34 52` exact adres/telefon parity’sini doğruluyor. Canlı Yemeksepeti `kug4` vendorunda 11 kebap/ızgara, 7 fırın, 4 dürüm, 3 çorba, 3 yan ürün ve tatlı kategorilerinde güncel TL fiyatları görüldü. İçecekler, poşet ve tatlı dışlanarak 20 benzersiz gıda ürünü override’a aktarıldı; menü tarihi kaynakta görünmediği için `verifiedAt` erişim/doğrulama tarihi olarak `2026-08-27` tutuldu.
+Kaynaklar: https://celorestaurant.com/ ; https://www.celorestaurant.com/menu ; https://www.yemeksepeti.com/en/restaurant/kug4/celo-kebap-and-lahmacun-and-pide ; https://www.instagram.com/celokebap/

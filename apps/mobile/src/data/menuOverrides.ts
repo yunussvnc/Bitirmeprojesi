@@ -92287,6 +92287,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Mia Sade Tatlım", "price": "300 TL", "category": "Tatlılar" }
     ]
   },
+  "6403": {
+    "name": "CELO RESTAURANT",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/kug4/celo-kebap-and-lahmacun-and-pide",
+    "sourceName": "Canlı Yemeksepeti exact CELO vendor menüsü; CELO resmi sitesi ile Kavaklı, Oğuzhan Cd. No:22 ve +90 530 171 34 52 şube parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Adana Kebap", "price": "799 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Efsane Patlıcanlı Kebap", "price": "999 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Alinazik", "price": "999 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Şiş", "price": "999 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Sarma Beyti Kebap", "price": "999 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Domatesli Kebap", "price": "899 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Ciğer Şiş", "price": "899 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "ÇÖP ŞİŞ", "price": "899 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "699 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "699 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Yoğurtlu Kebap", "price": "899 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kaşarlı Pide menü", "price": "399 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Kaşarlı Pide MENÜ", "price": "449 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sucuklu Kaşarlı Pide", "price": "449 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Pide", "price": "695 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Kaşarlı Pide MENÜ", "price": "499 TL", "category": "Fırın Ürünleri" },
+      { "name": "Karışık Pide MENÜ", "price": "499 TL", "category": "Fırın Ürünleri" },
+      { "name": "Lahmacun", "price": "255 TL", "category": "Fırın Ürünleri" },
+      { "name": "Adana Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" },
+      { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
+    ]
+  },
   "6511": {
     "name": "SALT FRIED CHICKEN BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pehr/salt-fried-chicken-pehr",
