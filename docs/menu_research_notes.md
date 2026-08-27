@@ -3397,3 +3397,7 @@ Kaynaklar: https://duayen.menuluka.com/ ; https://www.bulurum.com/details/2a16df
 ## MISS KOKORECH BEYLİKDÜZÜ ID 6391
 Resmi Miss Kokorech menüsü exact Adnan Kahveci şubesini `Adnan Kahveci Mah. Anadolu Cd. No:11/19 Beylikdüzü / İstanbul` ve `+90 212 856 02 84` ile tanımlıyor; bu bilgiler Hentzer `Anadolu Cd. No:11` ve telefonu ile exact şube bağını doğruluyor. Resmi menüden 2026-08-27 tarihinde 20 benzersiz fiyatlı kokoreç ürünü alındı. **Override kabul edildi.**
 Kaynaklar: https://misskokorechmidye.com/menu/ ; https://www.instagram.com/miss.kokorech/ ; https://www.yemeksepeti.com/restaurant/ovj5/miss-kokorech-ovj5
+
+## FLÂN BAKERY AKARETLER ID 6390 HOLD
+Yandex ve resmi Instagram exact Akaretler adres/telefonunu doğruluyor: `Vişnezade, Süleyman Seba Cd. No:32/1` ve `0533 359 35 26`. Ancak resmi Flan şube listesinde Akaretler bulunmuyor; Yemeksepeti `zd30` ve FineDine fiyatlı menüleri marka düzeyinde olup exact Akaretler şubesini adres/telefonla bağlamıyor. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.flan.com.tr/subelerimiz/ ; https://www.instagram.com/p/DIoXs5ZAZp1/ ; https://yandex.com/maps/org/flan_bakery_akaretler/18910502885/ ; https://www.yemeksepeti.com/en/restaurant/zd30/flan-bakery-zd30 ; https://qr.finedinemenu.com/flan-bakery-and-coffee
