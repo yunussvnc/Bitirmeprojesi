@@ -3497,3 +3497,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/wf7p/kilciksiz-balik ; http
 ## BEYKOZ KAHVECİSİ ID 6366 HOLD
 Hentzer telefon alanı null; belediye kaydı 31/A ve 444 6 661 verir. Resmi Kimyon bağlantısı `Gümüşsuyu Kahvecisi` alt şubesini gösteriyor, exact şube/telefon paritesi sağlanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.beykoz.bel.tr/tesisler/detay/beykoz-kahvecisi ; https://app.kimyon.app/beykozkahvecisi ; https://yandex.com.tr/maps/org/beykoz_kahvecisi/50563162710/ ; https://restoranim.net/istanbul/beykoz/kafe/beykoz-kahvecisi
+
+## KÖFTECİ YUSUF BAYRAMPAŞA PASHADOR ID 6365
+Hentzer `Muratpaşa, Eski Edirne Asf. No:1, 34040 Bayrampaşa/İstanbul` ve `+90 444 61 62`; resmi Köfteci Yusuf iletişim/şube kaynakları ve Apple Maps aynı Pashador adres/telefonu doğruluyor. Canlı Migros Yemek exact Bayrampaşa (Muratpaşa Mah.) menüsünden 2026-08-27 tarihinde 20 benzersiz güncel fiyatlı pişmiş ürün alındı; çiğ ürün, içecek, sos ve Popüler carousel tekrarları dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.migros.com.tr/yemek/kofteci-yusuf-bayrampasa-muratpasa-mah-st-1eb6e ; https://kofteciyusuf.com/subelerimiz/ ; https://kofteciyusuf.com/iletisim/ ; https://maps.apple.com/place?place-id=IDB60B7139E18C418 ; https://www.facebook.com/kofteciyusuftr/posts/t%C3%BCm-de%C4%9Ferli-misafirlerimizi-bekliyoruzadres-muratpa%C5%9Fa-mh-eski-edirne-asfalt%C4%B1-no1/407940796459154/

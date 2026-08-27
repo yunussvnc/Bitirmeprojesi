@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6365": {
+    "name": "KÖFTECİ YUSUF BAYRAMPAŞA PASHADOR",
+    "sourceUrl": "https://www.migros.com.tr/yemek/kofteci-yusuf-bayrampasa-muratpasa-mah-st-1eb6e",
+    "sourceName": "Canlı Migros Yemek exact Köfteci Yusuf Bayrampaşa (Muratpaşa Mah.) menüsü; resmi Köfteci Yusuf şube/iletişim ve Apple Maps ile Eski Edirne Asf. No:1 / 444 61 62 doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Çift Köfte Burger Menü", "price": "365 TL", "category": "Burger Menüleri" },
+      { "name": "Tek Köfte Burger Menü", "price": "260 TL", "category": "Burger Menüleri" },
+      { "name": "Patatesli Tek Köfte Burger Menü", "price": "325 TL", "category": "Burger Menüleri" },
+      { "name": "Patatesli Çift Köfte Burger Menü", "price": "430 TL", "category": "Burger Menüleri" },
+      { "name": "Dört Dörtlük Tek Köfte Burger Menü", "price": "535 TL", "category": "Burger Menüleri" },
+      { "name": "1 Porsiyon Döner (130 G)", "price": "340 TL", "category": "Döner" },
+      { "name": "1.5 Porsiyon Döner (200 G)", "price": "495 TL", "category": "Döner" },
+      { "name": "Köfte (500 G)", "price": "845 TL", "category": "Köfteler" },
+      { "name": "Köfte (1 Kg)", "price": "1690 TL", "category": "Köfteler" },
+      { "name": "Köfte-sucuk (200 G)", "price": "340 TL", "category": "Köfteler" },
+      { "name": "Sucuk (200 G)", "price": "340 TL", "category": "Sucuklar" },
+      { "name": "Sucuk (300 G)", "price": "500 TL", "category": "Sucuklar" },
+      { "name": "Porsiyon Piyaz", "price": "90 TL", "category": "Atıştırmalıklar" },
+      { "name": "İçli Köfte (Adet)", "price": "45 TL", "category": "Atıştırmalıklar" },
+      { "name": "Soğan Halkası (6 Adet)", "price": "32 TL", "category": "Atıştırmalıklar" },
+      { "name": "Soğan Halkası (3 Adet)", "price": "16 TL", "category": "Atıştırmalıklar" },
+      { "name": "Cacık", "price": "80 TL", "category": "Atıştırmalıklar" },
+      { "name": "Yoğurt (Porsiyon)", "price": "90 TL", "category": "Atıştırmalıklar" },
+      { "name": "Üçlü İçli Köfte", "price": "115 TL", "category": "Atıştırmalıklar" },
+      { "name": "Az Yoğurt", "price": "60 TL", "category": "Atıştırmalıklar" }
+    ]
+  },
   "6367": {
     "name": "KILÇIKSIZ BALIK - SICAK MEZE DÜNYASI",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/wf7p/kilciksiz-balik",
