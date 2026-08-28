@@ -4017,3 +4017,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6234 ; https://yandex.com.tr/maps
 ## PİKAP ID 6233 — HOLD
 Hentzer `Sinanpaşa, Ortabahçe Cd. No:21 D:C, 34535 Beşiktaş`, `+90 212 227 19 29`; RestaurantGuru ve Nerdeler exact adres/telefonu doğruluyor. Ancak son bir yıl içinde exact şubeye ait erişilebilir fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6233 ; https://restaurantguru.com/Pikap-Pub-Istanbul ; https://nerdeler.com.tr/pikap ; https://www.meyhankoli.com/restoran/istanbul-besiktas-pikap-1343
+
+## SMASH DÉ BURGER ID 6232 — HOLD
+Hentzer `Barış Mah. Samsun Cad. Dışkapı, Makyol Yaşam Sitesi, No:14/6 Daire:0078, 34520 Beylikdüzü`, `+90 555 640 78 64`. Menu-TR/Yandex genel Makyol konumunu destekliyor; fakat resmi Instagram 2026 içeriklerinde No:14/1 geçiyor. Exact kapı birimi 14/6/D:0078 ile eşleşmedi; ayrıca 20+ benzersiz güncel fiyatlı ürün listesi ve Hentzer telefon paritesi doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6232 ; https://www.menu-tr.com/istanbul/beylikduzu/hamburger-restorani/smash-de-burger ; https://www.instagram.com/p/DYpp_KhDa0I/ ; https://www.instagram.com/p/DbS5wIjDYhK/
