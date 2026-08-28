@@ -4105,3 +4105,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6212 ; https://www.yemeksepeti.co
 ## YENİ LOKANTA ID 6211 — HOLD
 Hentzer `Tomtom, Kumbaracı Yokuşu Sok. No:66/B, 34433 Beyoğlu`, `+90 212 292 25 50`; resmi site, Michelin, Yelp ve Indagare exact işletme/adres/telefonu destekliyor. Resmi sitede menü ürün-fiyat listesi yok; son bir yıl fiyatlı 20+ benzersiz ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6211 ; https://www.yenilokanta.com/ ; https://guide.michelin.com/tr/tr/istanbul-province/istanbul/restaurant/yeni-lokanta ; https://www.yelp.com/biz/yeni-lokanta-istanbul-2 ; https://indagare.com/restaurant/yeni-lokanta
+
+## SHINE İST RESTAURANT & CAFE ID 6210 — HOLD
+Hentzer `Gümüşsuyu, Kirazlı Yayla Cd., 34820 Beykoz`, `+90 533 637 72 30`; Restoranim ve resmi Instagram telefon/genel adresi destekliyor. Ancak resmi Instagram ve Yemeksepeti exact vendoru kapı numarasını `136/1` gösterirken Hentzer kaydı numarasız. Güncel menüde 20+ fiyatlı ürün olsa da zorunlu exact adres/şube paritesi sağlanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6210 ; https://www.yemeksepeti.com/en/restaurant/k9uh/shine-ist-restaurant ; https://restoranim.net/istanbul/beykoz/restoran/shine-ist-restaurant-cafe ; https://www.instagram.com/shineist_/ ; https://restaurantguru.com/Karlitepe-Kule-Restaurant-Istanbul/menu
