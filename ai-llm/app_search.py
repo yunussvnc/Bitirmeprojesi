@@ -162,7 +162,21 @@ def parse_natural_query(query: str) -> Dict:
         if key in query_lower:
             detected_district = proper_name
             break
-    
+
+    if not detected_district:
+        # Typo toleransı: exact substring bulunamadıysa (örn. "kadiköyde" gibi
+        # karışık/hatalı yazım — "kadikoy" ASCII haliyle bile substring olarak
+        # eşleşmiyor), sorgudaki yeterince uzun kelimeleri ilçe isimleriyle
+        # fuzzy karşılaştır. Yüksek eşik (85/100) ve minimum kelime uzunluğu
+        # (5) ile yanlış pozitif riski düşük tutuluyor.
+        from rapidfuzz import fuzz, process
+        tokens = [t for t in re.findall(r'\w+', query_lower, flags=re.UNICODE) if len(t) >= 5]
+        for token in tokens:
+            match = process.extractOne(token, district_map.keys(), scorer=fuzz.partial_ratio, score_cutoff=85)
+            if match:
+                detected_district = district_map[match[0]]
+                break
+
     # Özellik algılama
     features = []
     feature_keywords = {
@@ -234,7 +248,6 @@ def parse_natural_query(query: str) -> Dict:
     
     # 1. Yasaklı/Alakasız Konular (Siyaset, Din, Küfür vb.)
     inappropriate_keywords = ['siyaset', 'din', 'küfür', 'argo', 'kavga', 'seçim', 'oy', 'başkan']
-    import re
     words = set(re.findall(r'\w+', query_lower, flags=re.UNICODE))
     if any(kw in words for kw in inappropriate_keywords):
         is_inappropriate = True
