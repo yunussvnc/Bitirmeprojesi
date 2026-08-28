@@ -4249,3 +4249,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6175 ; https://www.yemeksepeti.co
 ## NİL DÖNER ID 6174 — HOLD
 Hentzer `Kartaltepe, Fatih Cd. No:40/B, 34000 Bayrampaşa/İstanbul`, `+90 212 616 27 37`; Restoranim ve Tumİşyeri exact adres/telefonu doğruluyor. Yemeksepeti `i2jd` sayfası bu kontrolde yalnızca vendor başlığı ve benzer restoranları gösterdi; menü ürün/fiyatları render edilmedi. Arama önizlemesinde birkaç ürün/fiyat görünse de exact ve tam 20+ ürün listesi doğrulanamadığından override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6174 ; https://www.yemeksepeti.com/restaurant/i2jd/nil-doner ; https://restoranim.net/istanbul/istanbul/donerci/nil-doner ; https://www.tumisyeri.com/nil-d%C3%B6ner_2F-0212-616-27-37
+
+## ATARA ID 6173 — HOLD
+Hentzer `Yıldız, Serencebey Ykş. No:1 D:A, 34353 Beşiktaş/İstanbul`, `+90 505 586 41 72`; RestaurantGuru, Mainja ve diğer kaynaklar exact adres/telefonu doğruluyor. Migros exact Yıldız Mah. vendorunda 20 civarı ürün adı var ancak fiyatlar erişilebilir metinde yok; Yemeksepeti `bn0r` bu kontrolde yalnızca benzer restoranları gösterdi, ürün-fiyat menüsü render edilmedi. 20+ son bir yıl fiyatlı ürün doğrulanamadı. **HOLD; fiyatı olmayan menü aktarılmadı.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6173 ; https://www.migros.com.tr/yemek/atara-besiktas-yildiz-mah-st-2bc49 ; https://www.yemeksepeti.com/restaurant/bn0r/atara ; https://restaurantguru.com/ATARA-Istanbul ; https://mainja.com/en/restaurant/1287-atara
