@@ -3957,3 +3957,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6249 ; https://restoranim.net/ist
 ## MIDWAY RESTAURANT & CAFE ID 6248 — HOLD
 Hentzer `Kocatepe, Abdülhak Hamit Cd. No:11/A, 34437 Beyoğlu`, `+90 212 245 20 20`. RestaurantGuru exact adresi doğruluyor; Yandex aynı telefonu farklı formatta listeliyor. Resmi The Nest Hotel sayfasında fiyatlı menü yok; resmi Instagram `0505 626 49 56` telefonunu veriyor. 20+ güncel fiyatlı ürün ve tekil telefon paritesi sağlanamadığından **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6248 ; https://restaurantguru.com/Midway-Cafe-and-Brasserie-Istanbul ; https://thenesthotel.com.tr/midwayrestaurant.html ; https://www.instagram.com/midwayrestauranttaksim/
+
+## VOIMOSS COFFEE ID 6247 — HOLD
+Hentzer `Altıntepsi, Yahya Kemal Cd. No:35A, 34035 Bayrampaşa`, `+90 552 842 22 22`; Restoranim exact adres ve telefonu, İstanbul Servis Listesi exact adresi destekliyor. Canlı Yemeksepeti menüsünde 19 uygun gıda/içecek ürünü ve güncel görünen fiyatlar var; 20. uygun ürün bulunmadığından poşet gibi gıda dışı kalem eklenmedi. Minimum 20 ürün şartı sağlanamadığı için **HOLD; override eklenmedi**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6247 ; https://www.yemeksepeti.com/en/restaurant/gpzs/voimoss-coffee ; https://restoranim.net/istanbul/istanbul/kafe/voimoss-coffee ; https://istanbulservislistesi.com.tr/istanbul/bayrampasa/kafe/voimoss-coffee-a3lkNc.html

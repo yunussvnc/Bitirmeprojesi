@@ -93494,5 +93494,5 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Mısır Ekmeği", "price": "80 TL", "category": "Ekmek Çeşitleri" },
       { "name": "Susamlı Sandiviç Ekmeği", "price": "24 TL", "category": "Ekmek Çeşitleri" }
     ]
-  },
+  }
 };
