@@ -121,7 +121,7 @@ def parse_natural_query(query: str) -> Dict:
     # Kategori algılama
     categories = {
         'kafe': ['kafe', 'kahve', 'coffee', 'cafe'],
-        'restoran': ['restoran', 'restaurant', 'yemek', 'lokanta', 'restorant', 'kebap', 'et', 'balık'],
+        'restoran': ['restoran', 'restaurant', 'yemek', 'lokanta', 'restorant', 'kebap', 'et yemeği', 'etli', 'izgara et', 'kırmızı et', ' balık', 'balıkçı', 'balık restoranı'],
         'bar': ['bar', 'drink', 'pub', 'meyhane', 'içki', 'bira', 'şarap', 'gece', 'night'],
         'tatlı': ['tatlı', 'pasta', 'dessert', 'tatli', 'baklava'],
         'pizza': ['pizza'],
@@ -186,7 +186,7 @@ def parse_natural_query(query: str) -> Dict:
     mood_map = {
         'yorgun':    ['yorgun', 'yoruğum', 'bitik', 'dinlenmek', 'dinginlik', 'stresliyim'],
         'mutlu':     ['mutlu', 'kutlama', 'kutlamak', 'eğlence', 'eğlenmek', 'parti'],
-        'romantik':  ['romantik', 'sevgili', 'sevgilimle', 'kız arkadaşımla', 'kız arkadaşım', 'erkek arkadaşımla', 'erkek arkadaşım', 'özel gün', 'yıldönümü', 'evlilik teklifi', 'aşk'],
+        'romantik':  ['romantik', 'sevgili', 'sevgilimle', 'kız arkadaşımla', 'kız arkadaşım', 'erkek arkadaşımla', 'erkek arkadaşım', 'eşimle', 'eşim', 'karımla', 'karım', 'kocamla', 'kocam', 'özel gün', 'yıldönümü', 'evlilik teklifi', 'aşk'],
         'çalışma':  ['müşteri toplantısı', 'iş toplantısı', 'proje', 'online toplantı'],
         'kahvaltı': ['sabah', 'kahvaltı', 'uyandım', 'kahvaltıya', 'serpme'],
     }
@@ -205,9 +205,9 @@ def parse_natural_query(query: str) -> Dict:
     group_keywords = {
         'aile':       ['aileyle', 'aile olarak', 'çocuklar', 'aileçe', 'anne baba'],
         'arkadaş':   ['arkadaşlarla', 'grup halinde', 'ekip'],
-        'iş':         ['iş yemeği', 'meslektaş', 'patron', 'toplantı sonrası'],
-        'sevgili':    ['sevgilimle', 'sevgiliye', 'çift olarak', 'romantik', 'kız arkadaşımla', 'kız arkadaşım', 'erkek arkadaşımla', 'erkek arkadaşım'],
-        'kalabalık': ['kalabalık grup', '10 kişi', 'organizasyon', 'toplantı']
+        'iş':         ['iş yemeği', 'meslektaş', 'patron', 'toplantı sonrası', 'toplantı', 'iş toplantısı'],
+        'sevgili':    ['sevgilimle', 'sevgiliye', 'çift olarak', 'romantik', 'kız arkadaşımla', 'kız arkadaşım', 'erkek arkadaşımla', 'erkek arkadaşım', 'eşimle', 'eşim', 'karımla', 'karım', 'kocamla', 'kocam'],
+        'kalabalık': ['kalabalık grup', '10 kişi', 'organizasyon']
     }
     for gtype, keywords in group_keywords.items():
         if any(kw in query_lower for kw in keywords):
