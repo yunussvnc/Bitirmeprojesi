@@ -4053,3 +4053,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6225 ; https://www.migros.com.tr/
 ## BEYKOZ KORU SOSYAL TESİSİ ID 6224 — HOLD
 Hentzer `Merkez, Kelle İbrahim Cd. 17/A, 34820 Beykoz`, phone boş; resmi İBB rezervasyon sayfası exact No:17/A adresini doğruluyor. 2025–2026 genel içerikler mevcut ancak exact şubeye ait son bir yıl fiyatlı 20+ ürün menüsü bulunamadı; RestaurantGuru fiyatlı menü sunmadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6224 ; https://tesislerrezervasyon.ibb.istanbul/ ; https://fr.restaurantguru.com/Beykoz-Koru-Social-Facilities-Istanbul/menu?param ; https://www.instagram.com/p/DUyeVK7CJs_/
+
+## HAMBURGER7 BEYLİKDÜZÜ ID 6223 — ACCEPTED
+Hentzer `Adnan Kahveci Mahallesi Çamlıtepe Caddesi Dorapark 5, No:17/6 İç Kapı No:11, 34519 Beylikdüzü`, `+90 541 308 97 29`; Restoranim ve 2026 tarihli resmi sosyal paylaşımlar exact adres/telefonu doğruluyor. Migros Yemek exact Adnan Kahveci vendorunda 2026-08-28 tarihinde 20 benzersiz güncel fiyatlı gıda ürünü bulundu. Soslar, içecekler ve tekrarlar yerine burger, tavuk burger ve atıştırmalık kalemleri seçildi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6223 ; https://www.migros.com.tr/yemek/hamburger-7-beylikduzu-adnan-kahveci-mah-st-2f57a ; https://restoranim.net/istanbul/beylikduzu/burgerci/hamburger7 ; https://www.instagram.com/p/DZXhVUGo4T5/

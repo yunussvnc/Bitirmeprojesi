@@ -93634,5 +93634,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Et Dönerli Kaşarlı Pide (Kapalı)", "price": "550 TL", "category": "Özel Pide" },
       { "name": "Et Dönerli Kaşarlı, Cheddarlı Pide (Kapalı)", "price": "555 TL", "category": "Özel Pide" }
     ]
+  },
+  "6223": {
+    "name": "HAMBURGER7 BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/hamburger-7-beylikduzu-adnan-kahveci-mah-st-2f57a",
+    "sourceName": "Canlı Migros Yemek exact Adnan Kahveci vendoru; Restoranim ve resmi Instagram ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Hamburger Menü", "price": "450 TL", "category": "Et Hamburger" },
+      { "name": "Cheese Burger Menü", "price": "470 TL", "category": "Et Hamburger" },
+      { "name": "Mexican Fire Menü", "price": "530 TL", "category": "Et Hamburger" },
+      { "name": "Truffle Burger Menü", "price": "570 TL", "category": "Et Hamburger" },
+      { "name": "7 Burger Menü", "price": "550 TL", "category": "Et Hamburger" },
+      { "name": "Bacon Burger Menü", "price": "550 TL", "category": "Et Hamburger" },
+      { "name": "Cafe De Burger Menü", "price": "530 TL", "category": "Et Hamburger" },
+      { "name": "Mushroom Burger Menü", "price": "530 TL", "category": "Et Hamburger" },
+      { "name": "Double Trouble Burger Menü", "price": "750 TL", "category": "Et Hamburger" },
+      { "name": "Blueberry Smash", "price": "550 TL", "category": "Et Hamburger" },
+      { "name": "Bbq Crunch", "price": "480 TL", "category": "Et Hamburger" },
+      { "name": "Chicken Burger Menü", "price": "360 TL", "category": "Tavuk Hamburger" },
+      { "name": "Chicken Chesee Burger", "price": "380 TL", "category": "Tavuk Hamburger" },
+      { "name": "Coleslaw", "price": "410 TL", "category": "Tavuk Hamburger" },
+      { "name": "Xtream Burger", "price": "410 TL", "category": "Tavuk Hamburger" },
+      { "name": "Madame Curry", "price": "410 TL", "category": "Tavuk Hamburger" },
+      { "name": "Ceaser Burger", "price": "410 TL", "category": "Tavuk Hamburger" },
+      { "name": "Chicken Mushroom", "price": "410 TL", "category": "Tavuk Hamburger" },
+      { "name": "Bbq Chicken", "price": "410 TL", "category": "Tavuk Hamburger" },
+      { "name": "Crispy Chicken", "price": "350 TL", "category": "Atıştırmalık" }
+    ]
   }
 };
