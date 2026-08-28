@@ -4357,3 +4357,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6148 ; https://www.tripadvisor.co
 ## HEYBE PASTANESİ ID 6147 — HOLD
 Hentzer `Kocatepe, Kocatepe Cd. No:39, 34045 Bayrampaşa/İstanbul`, `+90 212 640 50 37`; Bulurum ve Nerdeler exact adres/telefonu doğruluyor. Aralık 2025 Instagram hesabı ve Restoranim kaydı bulunmasına rağmen erişilebilir ürün bazlı güncel fiyat menüsü, exact Yemeksepeti/Migros vendoru veya 20+ son bir yıl fiyatlı ürün listesi doğrulanamadı. Override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6147 ; https://www.bulurum.com/details/5d_6a3c11b7b151g57b32i3a73_a604h ; https://nerdeler.com.tr/heybe-pastanesi ; https://restoranim.net/istanbul/bayrampasa/pastane/heybe-pastanesi
+
+## IDYL GELATO ID 6146 — HOLD
+Hentzer `Yıldız, Çırağan Cd. No:5A, 34342 Beşiktaş/İstanbul`, `+90 549 375 50 50`; Idyl resmi sitesi Beşiktaş/Nişantaşı şubelerini doğruluyor. Canlı Yemeksepeti `f2xx` menüsünde 13 benzersiz güncel fiyatlı dondurma-sorbe ürünü ve gıda olmayan 1 TL poşet satırı bulundu. 20+ benzersiz gıda ürünü koşulu sağlanamadığı için override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6146 ; https://idylgelato.com/ ; https://www.yemeksepeti.com/restaurant/f2xx/idyl-gelato
