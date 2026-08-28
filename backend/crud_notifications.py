@@ -226,3 +226,23 @@ def get_user_stats(db: Session, user_id: int) -> dict:
         "favorite_category": row.favorite_category,
         "favorite_region": row.favorite_region,
     }
+
+
+def limit_user_notifications(db: Session, user_id: int):
+    """Kullanıcının bildirim sayısını en fazla 50'da tutar, eskileri siler."""
+    total_count = db.query(models.Notification).filter(models.Notification.user_id == user_id).count()
+    if total_count > 50:
+        excess = total_count - 50
+        oldest_notifications = (
+            db.query(models.Notification.id)
+            .filter(models.Notification.user_id == user_id)
+            .order_by(models.Notification.created_at.asc())
+            .limit(excess)
+            .all()
+        )
+        oldest_ids = [notif[0] for notif in oldest_notifications]
+        if oldest_ids:
+            db.query(models.Notification).filter(
+                models.Notification.id.in_(oldest_ids)
+            ).delete(synchronize_session=False)
+            db.commit()

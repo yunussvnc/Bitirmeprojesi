@@ -31,6 +31,7 @@ class User(Base):
     role = Column(String, default="standard")
     is_active = Column(Boolean, default=True)
     is_email_verified = Column(Boolean, default=False)
+    has_synced_contacts = Column(Boolean, default=False)
     push_token = Column(String, nullable=True)  # ExponentPushToken[xxx]
     push_token_updated_at = Column(DateTime(timezone=True), nullable=True)
 

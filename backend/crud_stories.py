@@ -298,17 +298,23 @@ def is_following(db: Session, follower_id: int, following_id: int) -> bool:
 
 
 def get_follower_ids(db: Session, user_id: int) -> list[int]:
-    return [r[0] for r in db.query(models.Follow.follower_id).filter(
+    return [r[0] for r in db.query(models.Follow.follower_id).join(
+        models.User, models.User.id == models.Follow.follower_id
+    ).filter(
         models.Follow.following_id == user_id,
-        models.Follow.status == "accepted"
-    ).all()]
+        models.Follow.status == "accepted",
+        models.User.is_active == True
+    ).order_by(models.Follow.created_at.desc()).all()]
 
 
 def get_following_ids(db: Session, user_id: int) -> list[int]:
-    return [r[0] for r in db.query(models.Follow.following_id).filter(
+    return [r[0] for r in db.query(models.Follow.following_id).join(
+        models.User, models.User.id == models.Follow.following_id
+    ).filter(
         models.Follow.follower_id == user_id,
-        models.Follow.status == "accepted"
-    ).all()]
+        models.Follow.status == "accepted",
+        models.User.is_active == True
+    ).order_by(models.Follow.created_at.desc()).all()]
 
 
 def get_mutual_friend_ids(db: Session, user_id: int) -> list[int]:

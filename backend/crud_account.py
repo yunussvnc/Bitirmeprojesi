@@ -144,9 +144,61 @@ def toggle_block_user(db: Session, blocker_id: int, blocked_id: int) -> bool:
             (models.Follow.follower_id == blocker_id) & 
             (models.Follow.following_id == blocked_id)
         ) | (
-            (models.Follow.follower_id == blocked_id) & 
+            (models.Follow.follower_id == blocked_id) &
             (models.Follow.following_id == blocker_id)
         )
+    ).delete(synchronize_session=False)
+
+    # Bildirimlerin silinmesi (Her iki yönde)
+    db.query(models.Notification).filter(
+        (
+            (models.Notification.user_id == blocker_id) &
+            (models.Notification.actor_id == blocked_id)
+        ) | (
+            (models.Notification.user_id == blocked_id) &
+            (models.Notification.actor_id == blocker_id)
+        )
+    ).delete(synchronize_session=False)
+
+    # Blocker'ın Blocked'a ait postlardaki beğenilerini sil
+    blocker_likes_on_blocked = db.query(models.PostLike.post_id).filter(
+        models.PostLike.user_id == blocker_id,
+        models.PostLike.post_id.in_(db.query(models.Post.id).filter(models.Post.user_id == blocked_id))
+    ).all()
+    post_ids_1 = [r[0] for r in blocker_likes_on_blocked]
+    if post_ids_1:
+        db.query(models.PostLike).filter(
+            models.PostLike.user_id == blocker_id,
+            models.PostLike.post_id.in_(post_ids_1)
+        ).delete(synchronize_session=False)
+        db.query(models.Post).filter(models.Post.id.in_(post_ids_1)).update(
+            {"like_count": models.Post.like_count - 1}, synchronize_session=False
+        )
+
+    # Blocked'ın Blocker'a ait postlardaki beğenilerini sil
+    blocked_likes_on_blocker = db.query(models.PostLike.post_id).filter(
+        models.PostLike.user_id == blocked_id,
+        models.PostLike.post_id.in_(db.query(models.Post.id).filter(models.Post.user_id == blocker_id))
+    ).all()
+    post_ids_2 = [r[0] for r in blocked_likes_on_blocker]
+    if post_ids_2:
+        db.query(models.PostLike).filter(
+            models.PostLike.user_id == blocked_id,
+            models.PostLike.post_id.in_(post_ids_2)
+        ).delete(synchronize_session=False)
+        db.query(models.Post).filter(models.Post.id.in_(post_ids_2)).update(
+            {"like_count": models.Post.like_count - 1}, synchronize_session=False
+        )
+
+    # Hikaye reaksiyonlarının silinmesi (Her iki yönde)
+    db.query(models.StoryReaction).filter(
+        models.StoryReaction.user_id == blocker_id,
+        models.StoryReaction.story_id.in_(db.query(models.Story.id).filter(models.Story.user_id == blocked_id))
+    ).delete(synchronize_session=False)
+
+    db.query(models.StoryReaction).filter(
+        models.StoryReaction.user_id == blocked_id,
+        models.StoryReaction.story_id.in_(db.query(models.Story.id).filter(models.Story.user_id == blocker_id))
     ).delete(synchronize_session=False)
 
     db.commit()

@@ -114,3 +114,23 @@ class UserPlaceInteraction(Base):
 
     user = relationship("User")
     place = relationship("Place")
+
+
+class UserContact(Base):
+    """
+    Kullanıcının telefon rehberinden senkronize ettiği kişiler.
+    Kullanıcının rehberindeki bir numara, sistemde kayıtlı bir kullanıcıyla eşleşirse matched_user_id dolar.
+    """
+    __tablename__ = "user_contacts"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    contact_name = Column(String, nullable=True)
+    phone_hash = Column(String, nullable=False, index=True)
+    matched_user_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", foreign_keys=[user_id])
+    matched_user = relationship("User", foreign_keys=[matched_user_id])
+    __table_args__ = (
+        UniqueConstraint("user_id", "phone_hash", name="uq_user_contact"),
+    )
