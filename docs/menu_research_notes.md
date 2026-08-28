@@ -4089,3 +4089,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6216 ; https://efendygroup.com/br
 ## TOPAZ İSTANBUL ID 6215 — HOLD
 Hentzer `Ömer Avni, İnönü Cd. No:42, 34437 Beyoğlu`, `+90 531 329 41 11`; resmi/RestaurantGuru/Indagare/Gault&Millau kaynakları exact adres ve telefonu doğruluyor. RestaurantGuru güncel menü sürümleri listelese de ürün-fiyat metni erişilebilir değil; resmi sitede de fiyatlı menü listesi yok. Son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6215 ; https://www.topazistanbul.com/index-en.html ; https://restaurantguru.com/Topaz-Istanbul-2/menu ; https://indagare.com/restaurant/topaz-istanbul ; https://www.gault-millau.com.tr/en/efendy-istanbul/
+
+## FERA COFFEE BEYLİKDÜZÜ ID 6214 — HOLD
+Hentzer `Barış Mahallesi, Beylikdüzü OSB, Kır Sk. No:14 D:2D, 34520 Beylikdüzü`, `+90 530 580 82 70`; Servis Listesi, Merkez Zirve Servis ve resmi Instagram exact adres/telefonu destekliyor. 2026-04-19 Instagram paylaşımında yalnızca kahve + tatlı 350 TL kampanyası var; 20 benzersiz güncel ürün/fiyat listesi yok. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6214 ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/kafe/fera-coffee-beylikduzu-hd8V0k.html ; https://merkezzirveservis.com.tr/firma/1/fera-coffee-beylikduzu-beylikduzu/ ; https://www.instagram.com/reel/DXUV51iiuJu/
