@@ -4185,3 +4185,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6192 ; https://restoranim.net/ist
 ## TERRACE PARK BEYLİKDÜZÜ ID 6190 — HOLD
 Hentzer kaydı `Büyükşehir Mh., Anadolu Bulvarı No:31, 34520 Beylikdüzü/İstanbul`; telefon alanı boş ve kategori Restoran olsa da arama kaynakları Terrace Park’ı alışveriş merkezi/departman mağazası olarak gösteriyor. Dış dizinlerde telefonlar birbirinden farklı (`+90 554 542 09 05`, `+90 543 733 53 51`); Hentzer ile exact telefon paritesi kurulamadı. Ayrıca exact işletme/şube için son bir yıl içinde 20+ fiyatlı gıda ürünü menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6190 ; https://www.dliplace.com/info-place/104808 ; https://tr.cybo.com/TR-posta-kodu/34520_beylikd%C3%BCz%C3%BC/al%C4%B1%C5%9Fveri%C5%9F-merkezleri/ ; https://www.tumisyeri.com/terrace-park-beylikd%C3%BCz%C3%BC_2y-0543-733-53-51
+
+## RUNGE COFFEE ROASTERY ID 6189 — HOLD
+Hentzer `Kanlıca, Halide Edip Adıvar Cd. No:42/A, 34810 Beykoz/İstanbul`, `+90 216 680 96 59`; Restoranim exact adres/telefonu doğruluyor. Resmi Runge sitesi Kanlıca `Halide Edip Adıvar Cad. No:42A` kaydını ve ayrıca Üsküdar şubesini listeliyor; resmi ana sayfada ürün/fiyat metni yok, yalnızca menü görselleri bağlantıları bulunuyor. Restoranim’de 1 Mart 2026 tarihli latte fiyatı (295 TL) gibi tekil yorum bilgileri var, fakat 20+ benzersiz güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6189 ; https://runge.com.tr/ ; https://restoranim.net/istanbul/beykoz/kafe/runge-coffee-roastery
