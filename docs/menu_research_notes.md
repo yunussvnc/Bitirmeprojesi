@@ -4329,3 +4329,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6155 ; https://www.kempinski.com/
 ## SÜLEYMAN USTA DÖNER FAST-FOOD ID 6154 — HOLD
 Hentzer `Kartaltepe, Ordu Cd. No:154, 34040 Bayrampaşa/İstanbul`, `+90 212 640 08 88`; Restoranim, Tümİşyeri ve ServisKayıtları exact adres/telefonu doğruluyor. Resmi `donercisuleymanusta.com` sitesinde 51 ürünlü güncel fiyat menüsü var, fakat site yalnızca İskenderun’daki Muradiye ve Savaş şubelerini listeliyor; Bayrampaşa şubesiyle branch parity yok. Farklı şube menüsü aktarılmadı. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6154 ; https://restoranim.net/istanbul/bayrampasa/donerci/suleyman-usta-doner-fast-food ; https://www.tumisyeri.com/s%C3%BCleyman-usta-d%C3%B6ner-fast-food-0212-640-08-88 ; https://donercisuleymanusta.com/
+
+## PERA PORT LOUNGE ID 6153 — HOLD
+Hentzer `Kemankeş Karamustafa Paşa, Ali Paşa Değirmeni Sk. No:22, 34425 Beyoğlu/İstanbul`, `+90 543 446 40 65`; Tümİşyeri, Restoranim’deki Pera Port Kebab & Yemek ve Tripadvisor exact adres/telefonu doğruluyor. Mart 2026 tarihli restoran yorumları mevcut olsa da ürün bazlı güncel fiyat listesi erişilebilir değil. 20+ son bir yıl fiyatlı ürün doğrulanamadığı için override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6153 ; https://restoranim.net/istanbul/beyoglu/restoran/pera-port-kebab-yemek ; https://www.tumisyeri.com/pera-port-lounge-0543-446-40-65 ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d26659783-Reviews-Pera_Port_Lounge-Istanbul.html
