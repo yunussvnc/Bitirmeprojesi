@@ -70,13 +70,15 @@ class EmbeddingModel:
             return []
         
         try:
-            embeddings = self.model.encode(
-                texts,
-                convert_to_numpy=True,
-                normalize_embeddings=True,
-                batch_size=batch_size,
-                show_progress_bar=len(texts) > 10
-            )
+            import torch
+            with torch.no_grad():
+                embeddings = self.model.encode(
+                    texts,
+                    convert_to_numpy=True,
+                    normalize_embeddings=True,
+                    batch_size=batch_size,
+                    show_progress_bar=len(texts) > 10
+                )
             return embeddings.tolist()
         except Exception as e:
             logger.error(f"Embedding oluşturulurken hata: {e}")
@@ -96,12 +98,14 @@ class EmbeddingModel:
             raise ValueError("Boş metin embedding'e dönüştürülemez")
         
         try:
-            embedding = self.model.encode(
-                text,
-                convert_to_numpy=True,
-                normalize_embeddings=True,
-                show_progress_bar=False
-            )
+            import torch
+            with torch.no_grad():
+                embedding = self.model.encode(
+                    text,
+                    convert_to_numpy=True,
+                    normalize_embeddings=True,
+                    show_progress_bar=False
+                )
             return embedding.tolist()
         except Exception as e:
             logger.error(f"Tek embedding oluşturulurken hata: {e}")
