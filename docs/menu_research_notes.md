@@ -4145,3 +4145,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6202 ; https://bayramogludoner.co
 ## CİĞERCİ YILMAZ ID 6201 — HOLD
 Hentzer `Park Teras, Büyükşehir, Anadolu Cd. No:30, 34520 Beylikdüzü`, `+90 531 648 03 93`; Maptons/Kaçıyor/Jefedes No:30’u destekliyor, ancak sosyal kaynaklarda Atatürk Bulvarı No:29 ve ek telefonlar bulunuyor. Kaçıyor’da fiyat yerine kalori/besin bilgisi var; 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6201 ; https://kaciyor.com/cigerci-yilmaz ; https://sj.maptons.com/p/13185605014 ; https://www.jefedes.com/rezervasyon/isletme/istanbul/buyukcekmece/2a25ed60-b8cf-4177-b401-4ea866068340 ; https://www.instagram.com/reel/DZaNT99Khql/
+
+## MILADA ID 6200 — HOLD
+Hentzer `Anadolu Hisarı, Körfez Cd. No:8, 34810 Beykoz`, `+90 532 484 85 10`; Restoranim exact adres/telefonu doğruluyor, MorRehber ve Instagram aynı işletmeyi destekliyor. Tripadvisor kahve/tatlı/kahvaltı menüsünü anlatıyor ancak güncel satış fiyatı sunmuyor; son bir yıl fiyatlı 20+ benzersiz ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6200 ; https://restoranim.net/istanbul/beykoz/kafe/milada ; https://morrehber.com/mekanlar/milada-coffee-anadolu-hisari-beykoz-istanbul/ ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d17815097-Reviews-Milada_Istanbul-Istanbul.html ; https://www.instagram.com/miladaistanbul/?hl=en
