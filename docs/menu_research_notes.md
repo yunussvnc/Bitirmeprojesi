@@ -4001,3 +4001,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6238 ; https://allzinapp.com/Moic
 ## TADINDA TÜRK MUTFAĞI ID 6237 — HOLD
 Hentzer `DORA EVLERI ABLOK, Adnan Kahveci, Buse Sk. NO:5 A D:9 NOLU DÜKKAN, 34528 Beylikdüzü`, telefon alanı boş. Yemeksepeti ve RestaurantGuru adresi doğruluyor; Facebook snippet’inde 0544 761 25 06 görülse de Hentzer phone parity yok. Yemeksepeti’nde Şef Tabağı Popular carouselde tekrarlandığı için çıkarılınca yalnızca 19 benzersiz uygun ürün kalıyor; 20 ürün şartı sağlanmadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6237 ; https://www.yemeksepeti.com/en/restaurant/pgx9/tadinda-turk-mutfagi-pgx9 ; https://restaurantguru.com/Tadinda-Turk-Mutfagi-Buyukcekmece ; https://www.facebook.com/p/Tad%C4%B1nda-T%C3%BCrk-Mutfa%C4%9F%C4%B1-61584114371692/
+
+## KAFEKA NARGİLE CAFE RESTAURANT ID 6236 — HOLD
+Hentzer `Katip Mustafa Çelebi, Küçük Parmakkapı Sk. No:2/B, 34430 Beyoğlu`, `+90 212 249 12 82`; Trip.com, RestaurantGuru, Cybo ve Menu-TR çoğunlukla eşleşiyor, ancak Bulurum aynı telefonu No:6 olarak veriyor. Erişilebilir menü kaynaklarında son bir yıl içinde fiyatlı 20+ ürün listesi yok. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6236 ; https://sg.trip.com/restaurant/trkiye/istanbul/detail/kafeka-nargile-cafe-restaurant-17094931/ ; https://restaurantguru.com/Kafika-Kacirdiginiz-Filmler-Kahvesi-Istanbul/menu ; https://www.menu-tr.com/istanbul/beyoglu/nargile-salonu/kafeka-cafe-restaurant-beyoglu-2
