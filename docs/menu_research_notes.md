@@ -4189,3 +4189,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6190 ; https://www.dliplace.com/i
 ## RUNGE COFFEE ROASTERY ID 6189 — HOLD
 Hentzer `Kanlıca, Halide Edip Adıvar Cd. No:42/A, 34810 Beykoz/İstanbul`, `+90 216 680 96 59`; Restoranim exact adres/telefonu doğruluyor. Resmi Runge sitesi Kanlıca `Halide Edip Adıvar Cad. No:42A` kaydını ve ayrıca Üsküdar şubesini listeliyor; resmi ana sayfada ürün/fiyat metni yok, yalnızca menü görselleri bağlantıları bulunuyor. Restoranim’de 1 Mart 2026 tarihli latte fiyatı (295 TL) gibi tekil yorum bilgileri var, fakat 20+ benzersiz güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6189 ; https://runge.com.tr/ ; https://restoranim.net/istanbul/beykoz/kafe/runge-coffee-roastery
+
+## ŞEKER DÜRÜM ID 6188 — HOLD
+Hentzer `Adnan Kahveci, Çalışlar Cd. D:No 23 A, 34528 Beylikdüzü/İstanbul`, `+90 537 208 06 26`; Restoranim aynı adres ve telefonu doğruluyor. Restoranim’de 2025 tarihli tekil fiyat yorumu (2 Adana dürüm 350 TL) mevcut ancak son bir yıl sınırının dışında; 2026 yorumlarında fiyat yok. 20+ güncel fiyatlı ürün menüsü doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6188 ; https://restoranim.net/istanbul/beylikduzu/durumcu/seker-durum ; https://www.reklamsayfaniz.com/seker-durum-beylikduzu-de-durum-siparisi/
