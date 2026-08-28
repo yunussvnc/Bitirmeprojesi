@@ -4197,3 +4197,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6188 ; https://restoranim.net/ist
 ## BEYKOZ LAHMACUN TANTUNİ ID 6187 — ACCEPTED (28 ürün)
 Hentzer `Rüzgarlıbahçe, Cumhuriyet Cd. No:101, 34805 Beykoz/İstanbul`, `+90 216 322 30 61`; resmi Beykoz Lahmacun & Tantuni sitesi aynı konumu, telefonu ve WhatsApp hattını yayımlıyor. Resmi sitede 28 benzersiz gıda/alkolsüz içecek ürünü fiyatlarıyla listelenmiş: çorbalar, tavuk/biftek tantuniler, fırın ürünleri, tatlılar ve içecekler. Site footer’ı `© 2026` ve menü canlı olarak erişilebilir; fiyatlar 28.08.2026 tarihinde doğrulandı. Popüler etiketi taşıyan Lahmacun ve Biftek Tantuni Dürüm tekilleştirilerek birer kez alındı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6187 ; https://beykozlahmacuntantuni.com/ ; https://restoranim.net/istanbul/beykoz/fast-food/beykoz-lahmacun-tantuni
+
+## ANTAKYA KEBAP ASMALI ID 6186 — HOLD
+Hentzer `Asmalı Mescit, Asmalı Mescit Cd. No:17/C, 34430 Beyoğlu/İstanbul`, `+90 212 292 18 43`; resmi Instagram, Restoranim ve diğer dizinler exact adres/telefonu doğruluyor. Wheree menü sayfası aynı işletmeyi gösterse de yalnızca işletme/menü fotoğrafları ve fiyatların değişebileceği uyarısı var; ürün-fiyat tablosu yok. Restoranim’deki fiyatlı yorumlar 2025–2022 döneminden ve 20+ güncel ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6186 ; https://antakya-kebap-asmali.wheree.com/menu ; https://restoranim.net/istanbul/beyoglu/kebapci/antakya-kebap-asmali ; https://www.instagram.com/antakyakebab/
