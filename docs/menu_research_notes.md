@@ -4113,3 +4113,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6210 ; https://www.yemeksepeti.co
 ## PERLO’S BURGER&MORE BEYLİKDÜZÜ ID 6209 — HOLD
 Hentzer `Saklı Vadi Konakları, Adnan Kahveci, Esentepe Cd., 34528 Beylikdüzü`, `+90 850 259 3030`; resmi Perlo’s sitesi adres/telefonu doğruluyor. Yemeksepeti `wkl0` vendoru ise `Kalkan Sk. İnşaat D Blok No:13/7 İç Kapı No:24` adresini veriyor. Exact sokak/kapı eşleşmediğinden güncel vendor menüsü kullanılmadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6209 ; https://perlos.com.tr/hakkimizda/ ; https://perlos.com.tr/en/sube/perlos-beylikduzu/ ; https://www.yemeksepeti.com/restaurant/wkl0/perlos-burger-and-more
+
+## OTLANGAÇ KAHVALTI ID 6208 — HOLD
+Hentzer `Sinanpaşa, Şair Veysi Sk. No:20 D:B, 34353 Beşiktaş`, `+90 212 327 05 00`; dijital menü ve Yemeksepeti `No:20/B` adres/telefon paritesini destekliyor. Ancak erişilebilir dijital menüde yaklaşık 11 fiyatlı ürün var; 20 benzersiz güncel gıda ürününün fiyatı eksiksiz doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6208 ; https://otlangaccafe.dijital.menu/22497 ; https://www.yemeksepeti.com/restaurant/fw7z/otlangac-kahvalti-and-cafe ; https://restaurantguru.com/Otlangac-Kahvalti-Istanbul ; https://www.instagram.com/reel/DBeBli6A1rB/
