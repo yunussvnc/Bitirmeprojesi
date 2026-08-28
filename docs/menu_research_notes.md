@@ -3993,3 +3993,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6240 ; https://www.yemeksepeti.co
 ## YES KARDEŞLER FULYA DÜRÜMCÜSÜ ID 6239 — ACCEPTED (20 ürün)
 Hentzer `Teşvikiye Mahallesi Hakkı Yeten Caddesi, Kıvanç Sk. No:26, 34357 Beşiktaş`, `+90 212 240 79 32`; Restoranim aynı adres/telefonu, resmi Instagram aynı telefonu ve tek şube bilgisini doğruluyor. Canlı Migros Yemek exact Teşvikiye vendorunda 20 benzersiz gıda/içecek ürünü ve fiyat mevcut; poşet dahil edilmedi. Fiyatlar 2026-08-28 tarihinde doğrulandı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6239 ; https://www.migros.com.tr/yemek/yes-kardesler-fulya-durumcusu-sisli-tesvikiye-mah-st-18ec1 ; https://restoranim.net/istanbul/besiktas/restoran/yes-kardesler ; https://www.instagram.com/yeskardeslerrr/
+
+## MOICANO COFFEE ROASTERS ID 6238 — HOLD
+Hentzer `Türkali, Ihlamurdere Cd. No:34, 34357 Beşiktaş`, telefon alanı boş. Allzin aynı No:34 adresini doğrularken Yandex No:32A listeliyor; Instagram konumunda +90 552 634 04 86 görülüyor ancak Hentzer telefon boş olduğu için exact phone parity yok. Erişilebilir son bir yıl fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6238 ; https://allzinapp.com/Moicano/delivery_and_return ; https://yandex.com.tr/maps/org/moicano_coffee_roasters/233761794700/ ; https://www.instagram.com/explore/locations/382228682310618/moicano-coffee-roasters/
