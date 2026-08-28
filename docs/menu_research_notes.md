@@ -4245,3 +4245,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6176 ; https://mikelcoffee.com.tr
 ## PERAST COFFEE CO. ID 6175 — ACCEPTED (20 ürün)
 Hentzer `Yıldırım, Şht. Kamil Balkan Cd. No:76B, 34035 Bayrampaşa/İstanbul`, `+90 538 307 99 79`; resmi Instagram hesabı, Kaçıyor ve servis dizini exact Yıldırım şubesini, adresi ve telefonu doğruluyor. Canlı Yemeksepeti `spqw` vendorunda yemek, tatlı ve kahve kategorilerinden 20 benzersiz ürünün fiyatları erişilebilir; 28.08.2026’da doğrulandı. Popüler carousel kopyaları ana ürün listesine alınmadı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6175 ; https://www.yemeksepeti.com/restaurant/spqw/perast-coffee-co ; https://www.kaciyor.com/perast-coffee-co ; https://www.instagram.com/perastcoffeeco/?hl=en ; https://istanbulservislistesi.com.tr/istanbul/bayrampasa/kafe/perast-coffee-co-FgPeXQ.html
+
+## NİL DÖNER ID 6174 — HOLD
+Hentzer `Kartaltepe, Fatih Cd. No:40/B, 34000 Bayrampaşa/İstanbul`, `+90 212 616 27 37`; Restoranim ve Tumİşyeri exact adres/telefonu doğruluyor. Yemeksepeti `i2jd` sayfası bu kontrolde yalnızca vendor başlığı ve benzer restoranları gösterdi; menü ürün/fiyatları render edilmedi. Arama önizlemesinde birkaç ürün/fiyat görünse de exact ve tam 20+ ürün listesi doğrulanamadığından override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6174 ; https://www.yemeksepeti.com/restaurant/i2jd/nil-doner ; https://restoranim.net/istanbul/istanbul/donerci/nil-doner ; https://www.tumisyeri.com/nil-d%C3%B6ner_2F-0212-616-27-37
