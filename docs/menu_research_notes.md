@@ -4353,3 +4353,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6149 ; https://www.gurmerehber.co
 ## BEŞİKTAŞ KAZAN ID 6148 — HOLD
 Hentzer `Sinanpaşa, Beşiktaş Cd. No:35, 34353 Beşiktaş/İstanbul`, telefon `+90 212 000 00 00`; Tripadvisor ve Waze/harita aynı adresi doğruluyor ancak Facebook kaydında telefon `+90 212 258 38 90` olduğundan Hentzer telefonu bağımsız eşleşmiyor. Tripadvisor işletmeyi bar/bira restoranı olarak sınıflandırıyor ve fiyatlı menü sunmuyor. Exact telefon ve 20+ son bir yıl fiyatlı gıda ürünü koşulları sağlanmadığı için override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6148 ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d19310481-Reviews-Besiktas_Kazan-Istanbul.html ; https://www.facebook.com/KazanBesiktas/about/ ; https://www.waze.com/live-map/directions/tr/i%CC%87stanbul/besiktas-kazan?to
+
+## HEYBE PASTANESİ ID 6147 — HOLD
+Hentzer `Kocatepe, Kocatepe Cd. No:39, 34045 Bayrampaşa/İstanbul`, `+90 212 640 50 37`; Bulurum ve Nerdeler exact adres/telefonu doğruluyor. Aralık 2025 Instagram hesabı ve Restoranim kaydı bulunmasına rağmen erişilebilir ürün bazlı güncel fiyat menüsü, exact Yemeksepeti/Migros vendoru veya 20+ son bir yıl fiyatlı ürün listesi doğrulanamadı. Override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6147 ; https://www.bulurum.com/details/5d_6a3c11b7b151g57b32i3a73_a604h ; https://nerdeler.com.tr/heybe-pastanesi ; https://restoranim.net/istanbul/bayrampasa/pastane/heybe-pastanesi
