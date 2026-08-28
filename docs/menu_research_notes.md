@@ -4181,3 +4181,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6193 ; https://restoranim.net/ist
 ## BEŞİKTAŞ WAFFLE ID 6192 — HOLD
 Hentzer `Şair Nedim Caddesi, Sinanpaşa, Hattat Tahsin Sk. No:39, 34351 Beşiktaş`, `+90 549 737 19 36`; Restoranim exact adres/telefonu doğruluyor. Yemeksepeti vendoru aynı şubenin `Hattat Tahsin Sok. No:39/a` adresini ve 2026 tarihli yorumları gösteriyor; fakat ürün-fiyat listesi CAPTCHA nedeniyle erişilemedi. 20+ güncel fiyatlı ürün bağımsız biçimde doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6192 ; https://restoranim.net/istanbul/istanbul/tatlici/besiktas-waffle ; https://www.yemeksepeti.com/en/restaurant/sv7b/besiktas-waffle
+
+## TERRACE PARK BEYLİKDÜZÜ ID 6190 — HOLD
+Hentzer kaydı `Büyükşehir Mh., Anadolu Bulvarı No:31, 34520 Beylikdüzü/İstanbul`; telefon alanı boş ve kategori Restoran olsa da arama kaynakları Terrace Park’ı alışveriş merkezi/departman mağazası olarak gösteriyor. Dış dizinlerde telefonlar birbirinden farklı (`+90 554 542 09 05`, `+90 543 733 53 51`); Hentzer ile exact telefon paritesi kurulamadı. Ayrıca exact işletme/şube için son bir yıl içinde 20+ fiyatlı gıda ürünü menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6190 ; https://www.dliplace.com/info-place/104808 ; https://tr.cybo.com/TR-posta-kodu/34520_beylikd%C3%BCz%C3%BC/al%C4%B1%C5%9Fveri%C5%9F-merkezleri/ ; https://www.tumisyeri.com/terrace-park-beylikd%C3%BCz%C3%BC_2y-0543-733-53-51
