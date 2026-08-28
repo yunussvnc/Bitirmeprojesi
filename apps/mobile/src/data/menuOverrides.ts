@@ -94006,5 +94006,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Karışık Kebap (1 Kişilik)", "price": "1.275 TL", "category": "Kebaplar" },
       { "name": "Karışık Kebap (2 Kişilik)", "price": "2.900 TL", "category": "Kebaplar" }
     ]
+  },
+  "6164": {
+    "name": "ADİLE SULTAN EV YEMEKLERİ - BAYRAMPAŞA",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/og6z/adile-sultan-ev-yemekleri-og6z",
+    "sourceName": "Canlı Yemeksepeti og6z vendoru; resmi Bayrampaşa şube sayfası",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Yemeksepeti Özel 200 TL Menü", "price": "200 TL", "category": "Günlük Menüler" },
+      { "name": "Düşük Kalorili Fitness Menü", "price": "355 TL", "category": "Günlük Menüler" },
+      { "name": "Etli Sebzeli Yemek Menü", "price": "425 TL", "category": "Günlük Menüler" },
+      { "name": "Et Yemekleri Menü", "price": "495 TL", "category": "Günlük Menüler" },
+      { "name": "Sebze Yemeği Menü", "price": "355 TL", "category": "Günlük Menüler" },
+      { "name": "Tavuklu ve Etli Güveç Menü", "price": "455 TL", "category": "Günlük Menüler" },
+      { "name": "Vejetaryen Menü", "price": "355 TL", "category": "Günlük Menüler" },
+      { "name": "Mantı Menü", "price": "375 TL", "category": "Günlük Menüler" },
+      { "name": "Pilav Üstü Menü", "price": "275 TL", "category": "Günlük Menüler" },
+      { "name": "Makarna Menü", "price": "275 TL", "category": "Günlük Menüler" },
+      { "name": "Tarhana Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Köz Patlıcan Çorbası", "price": "165 TL", "category": "Çorbalar" },
+      { "name": "Fırın Mercimek Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Ezogelin Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Antep Usulü Kelle Paça Çorbası", "price": "425 TL", "category": "Çorbalar" },
+      { "name": "Sebze Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Yoğurt Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Kaşarlı Domates Çorbası", "price": "165 TL", "category": "Çorbalar" },
+      { "name": "Soğuk Yoğurtlu Naneli Çorba", "price": "195 TL", "category": "Çorbalar" },
+      { "name": "Patlıcan Beğendili Izgara Köfte", "price": "495 TL", "category": "Etli Yemekler" }
+    ]
   }
 };

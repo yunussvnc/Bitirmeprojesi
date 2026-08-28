@@ -4285,3 +4285,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6166 ; https://www.yemeksepeti.co
 ## KARADENİZ DÖNER ASIM USTA ID 6165 — HOLD
 Hentzer `Sinanpaşa, Köyiçi Cd No:6, 34353 Beşiktaş/İstanbul`, `+90 212 261 76 93`; Best Döner in Istanbul, Hangi Mekan, Gurmerehber ve güncel sosyal içerikler exact adres/telefonu doğruluyor. Gurmerehber’deki fiyatlı menü yalnızca Porsiyon Döner, Büyük Tombik Döner, Açık Ayran ve Kapalı Ayran olmak üzere 4 ürün içeriyor ve açıkça Mayıs 2025 fiyatı olarak belirtilmiş; son bir yıl koşulunu karşılamıyor. **HOLD; 20+ güncel fiyatlı menü yok.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6165 ; https://www.bestdonerinistanbul.com/en/place/karadeniz-doner-asim-usta ; https://www.gurmerehber.com/tarihi-karadeniz-doner-besiktas/ ; https://www.hangimekan.com.tr/yeme-icme/istanbul/besiktas/karadeniz-doner-asim-usta/
+
+## ADİLE SULTAN EV YEMEKLERİ BAYRAMPAŞA ID 6164 — ACCEPTED (20 ürün)
+Hentzer `Kocatepe, Şehir Parkı Caddesi No:151A, 34000 Bayrampaşa/İstanbul`, `+90 212 912 92 09`; resmi Bayrampaşa şube sayfası telefon/adres bilgisini, Yemeksepeti `og6z` vendoru aynı adresi doğruluyor. Canlı Yemeksepeti menüsünde günlük menüler ve çorbalar kategorilerinden 20 benzersiz güncel fiyatlı gıda ürünü doğrulandı; 28.08.2026’da kontrol edildi. Popüler carousel tekrarları ayrıca alınmadı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6164 ; https://adilesultanevyemekleri.com/sube/bayrampasa/ ; https://www.yemeksepeti.com/en/restaurant/og6z/adile-sultan-ev-yemekleri-og6z ; https://www.sikayetvar.com/adile-sultan-ev-yemekleri
