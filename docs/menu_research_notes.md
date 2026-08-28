@@ -4177,3 +4177,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6194 ; https://www.waze.com/live-
 ## FOUR SEASONS CAFE BISTRO ID 6193 — HOLD
 Hentzer `Vişnezade, Süleyman Seba Cd. No:65 A, 34357 Beşiktaş`, `+90 533 387 12 34`; Restoranim exact adres ve telefonu doğruluyor, RestaurantGuru aynı restoran/adresi destekliyor. Erişilebilir kaynaklarda güncel ürün-fiyat tablosu yok; yalnızca menü çeşitliliği, yorumlar ve kişi başı fiyat aralığı var. 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6193 ; https://restoranim.net/istanbul/besiktas/restoran/four-seasons-cafe-bistro ; https://restaurantguru.com/amp/FOUR-SEASONS-CAFE-BISTRO-Istanbul ; https://www.instagram.com/fourseasonscafebistro/
+
+## BEŞİKTAŞ WAFFLE ID 6192 — HOLD
+Hentzer `Şair Nedim Caddesi, Sinanpaşa, Hattat Tahsin Sk. No:39, 34351 Beşiktaş`, `+90 549 737 19 36`; Restoranim exact adres/telefonu doğruluyor. Yemeksepeti vendoru aynı şubenin `Hattat Tahsin Sok. No:39/a` adresini ve 2026 tarihli yorumları gösteriyor; fakat ürün-fiyat listesi CAPTCHA nedeniyle erişilemedi. 20+ güncel fiyatlı ürün bağımsız biçimde doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6192 ; https://restoranim.net/istanbul/istanbul/tatlici/besiktas-waffle ; https://www.yemeksepeti.com/en/restaurant/sv7b/besiktas-waffle
