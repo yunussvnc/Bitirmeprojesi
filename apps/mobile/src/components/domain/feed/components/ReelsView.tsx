@@ -12,7 +12,6 @@ import {
   Dimensions,
   RefreshControl,
   ViewToken,
-  Platform,
   Share,
 } from "react-native";
 import { FlashList } from "@shopify/flash-list";

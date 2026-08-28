@@ -3,20 +3,15 @@
  *
  * Sosyal akış - mekan deneyimi paylaşımları.
  */
-
 import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import {
   View,
   Text,
-  StyleSheet,
-  RefreshControl,
   TouchableOpacity,
   Animated,
   Easing,
   Share,
-  Platform,
 } from "react-native";
-import Reanimated, { FadeInUp } from "react-native-reanimated";
 import { FlashList, FlashListRef } from "@shopify/flash-list";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -46,17 +41,15 @@ import { createReport } from "@/src/services/moderationService";
 import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
-import { RadialMenu } from "@/src/components/ui/RadialMenu";
 import { SuggestedUsersCarousel } from '../explore/SuggestedUsersCarousel';
 import { ContactSyncPromptCard } from '../explore/ContactSyncPromptCard';
-
+import styles from "./FeedScreen.styles";
 export default function FeedScreen() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [filter, setFilter] = useState<FeedFilter>("all");
@@ -98,7 +91,7 @@ export default function FeedScreen() {
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
   /** FlashList viewability callback — sadece görünen kartlardaki videolar oynatılır */
-  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: Array<{ item: Post }> }) => {
+  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: { item: Post }[] }) => {
     setViewableIds(new Set(viewableItems.map((v) => v.item.id)));
   }).current;
   const viewabilityConfig = useMemo(() => ({ itemVisiblePercentThreshold: 50 }), []);
@@ -154,9 +147,8 @@ export default function FeedScreen() {
 
         const res = await getFeed(activeCursor, PAGE_SIZE, filter);
 
-        // nextCursor'u hem state hem ref olarak sakla
+        // Cursor ref üzerinden tutulur; böylece pagination callback'i yeniden oluşturulmaz.
         nextCursorRef.current = res.next_cursor;
-        setNextCursor(res.next_cursor);
         setHasMore(res.has_more);
 
         if (refresh) {
@@ -194,7 +186,6 @@ export default function FeedScreen() {
 
   useEffect(() => {
     // Filtre değişince baştan başla
-    setNextCursor(null);
     setHasMore(true);
     loadFeed(true);
     flatListRef.current?.scrollToOffset({ offset: 0, animated: false });
@@ -252,7 +243,6 @@ export default function FeedScreen() {
   const handleRefresh = useCallback(() => {
     lightImpact();
     setRefreshing(true);
-    setNextCursor(null);
     setHasMore(true);
     loadFeed(true);
   }, [loadFeed]);
@@ -305,6 +295,15 @@ export default function FeedScreen() {
     setSharePost(post);
   }, []);
 
+  const submitReport = useCallback(async (postId: number, reason: "spam" | "inappropriate" | "harassment" | "other") => {
+    try {
+      await createReport({ target_type: "post", target_id: postId, reason });
+      Alert.alert(t("feed.reported"), t("feed.reported_desc"));
+    } catch {
+      Alert.alert(t("feed.report_title"), t("feed.reported_desc"));
+    }
+  }, [t]);
+
   const handleReportPost = useCallback(() => {
     if (!optionsPost) return;
     const postId = optionsPost.id;
@@ -314,16 +313,7 @@ export default function FeedScreen() {
       { text: t("feed.inappropriate"), onPress: () => submitReport(postId, "inappropriate") },
       { text: t("feed.harassment"), onPress: () => submitReport(postId, "harassment") },
     ]);
-  }, [optionsPost, t]);
-
-  const submitReport = useCallback(async (postId: number, reason: "spam" | "inappropriate" | "harassment" | "other") => {
-    try {
-      await createReport({ target_type: "post", target_id: postId, reason });
-      Alert.alert(t("feed.reported"), t("feed.reported_desc"));
-    } catch {
-      Alert.alert(t("feed.report_title"), t("feed.reported_desc"));
-    }
-  }, [t]);
+  }, [optionsPost, submitReport, t]);
 
   const handleMuteAuthor = useCallback(() => {
     if (!optionsPost) return;
@@ -538,7 +528,7 @@ export default function FeedScreen() {
         }
       }
     },
-    [animateHeader, animateMiniBar, animateStory, headerHeight, storyHeight]
+    [animateHeader, animateMiniBar, animateStory, fadeIn, fadeOut, headerHeight, storyHeight]
   );
 
   const titleStyle = createTextStyle("title", colors.text.primary);
@@ -732,7 +722,6 @@ export default function FeedScreen() {
           }}
         />
 
-
         <CommentBottomSheet
           visible={!!commentPostId}
           onClose={() => setCommentPostId(null)}
@@ -762,122 +751,3 @@ export default function FeedScreen() {
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-  },
-  list: {
-    flex: 1,
-    width: "100%",
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: spacing.base,
-    overflow: "visible",
-    position: "relative",
-    paddingHorizontal: spacing.md,
-  },
-  title: { fontSize: 26, fontWeight: "700" },
-  headerRight: { flexDirection: "row", alignItems: "center", gap: 10 },
-  headerWrap: {
-    overflow: "visible",
-    zIndex: 20,
-  },
-  iconBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  badge: {
-    position: "absolute",
-    top: 4,
-    right: 4,
-    minWidth: 18,
-    height: 18,
-    borderRadius: 9,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  badgeText: {
-    fontSize: 10,
-    fontWeight: "700",
-  },
-  dropdownWrap: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    zIndex: 20,
-    alignItems: "center",
-    pointerEvents: "box-none",
-  },
-  dropdownBackdrop: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 30,
-  },
-  dropdownTrigger: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 6,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
-    minWidth: 140,
-  },
-  dropdownLabel: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-  dropdownMenu: {
-    position: "absolute",
-    left: "50%",
-    transform: [{ translateX: -90 }],
-    width: 180,
-    borderRadius: 14,
-    borderWidth: StyleSheet.hairlineWidth,
-    overflow: "hidden",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 10,
-    zIndex: 31,
-  },
-  dropdownItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 13,
-  },
-  dropdownItemText: {
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  topWrap: {
-    overflow: "hidden",
-  },
-  createBtn: {
-    width: 44,
-    height: 44,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 22,
-  },
-  listContent: {
-    gap: spacing.xl,
-  },
-  listEmpty: { flexGrow: 1 },
-  center: { flex: 1, justifyContent: "center", minHeight: 300 },
-
-});

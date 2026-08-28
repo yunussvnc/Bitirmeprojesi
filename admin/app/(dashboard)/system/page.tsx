@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { api } from '@/lib/api';
-import { SystemHealth, RedisStats, QdrantStats } from '@/types';
+import { AdminAuditLog, SystemHealth, RedisStats, QdrantStats } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { 
   Table, 
@@ -21,9 +21,6 @@ import {
   HardDrive, 
   RefreshCw, 
   TrendingUp, 
-  Activity, 
-  CheckCircle,
-  AlertOctagon,
   Settings
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -32,11 +29,11 @@ export default function SystemDiagnostics() {
   const [health, setHealth] = useState<SystemHealth | null>(null);
   const [redis, setRedis] = useState<RedisStats | null>(null);
   const [qdrant, setQdrant] = useState<QdrantStats | null>(null);
-  const [auditLogs, setAuditLogs] = useState<any[]>([]);
+  const [auditLogs, setAuditLogs] = useState<AdminAuditLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const [healthRes, redisRes, qdrantRes, logsRes] = await Promise.all([
         api.get('/admin/system/health'),
@@ -49,25 +46,27 @@ export default function SystemDiagnostics() {
       setRedis(redisRes.data);
       setQdrant(qdrantRes.data);
       setAuditLogs(logsRes.data);
-    } catch (err: any) {
-      console.error(err);
+    } catch {
       toast.error('Sistem durumu verileri alınırken hata oluştu.');
     } finally {
       setLoading(false);
       setRefreshing(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchData();
+    const initialLoad = setTimeout(() => void fetchData(), 0);
     // Poll system health every 15 seconds
-    const interval = setInterval(fetchData, 15000);
-    return () => clearInterval(interval);
-  }, []);
+    const interval = setInterval(() => void fetchData(), 15000);
+    return () => {
+      clearTimeout(initialLoad);
+      clearInterval(interval);
+    };
+  }, [fetchData]);
 
   const triggerRefresh = () => {
     setRefreshing(true);
-    fetchData();
+    void fetchData();
   };
 
   return (

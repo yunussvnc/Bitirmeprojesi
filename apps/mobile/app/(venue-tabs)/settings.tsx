@@ -79,7 +79,7 @@ export default function VenueSettingsScreen() {
             await deleteAccount();
             logout();
             router.replace('/login');
-          } catch (err) {
+          } catch {
             Alert.alert(t('settings.error_title'), t('settings.error_body'));
           }
         },

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
-import { DashboardStats } from '@/types';
+import { AdminAuditLog, AIChartPoint, DashboardStats } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { 
@@ -12,7 +12,6 @@ import {
   BrainCircuit, 
   TrendingUp, 
   Activity, 
-  ShieldAlert,
   Terminal
 } from 'lucide-react';
 import { 
@@ -22,17 +21,14 @@ import {
   YAxis, 
   CartesianGrid, 
   Tooltip, 
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell
+  ResponsiveContainer
 } from 'recharts';
 import { toast } from 'sonner';
 
 export default function DashboardOverview() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
-  const [chartData, setChartData] = useState<any[]>([]);
-  const [recentLogs, setRecentLogs] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<AIChartPoint[]>([]);
+  const [recentLogs, setRecentLogs] = useState<AdminAuditLog[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -47,8 +43,7 @@ export default function DashboardOverview() {
         setStats(statsRes.data);
         setChartData(aiStatsRes.data.daily);
         setRecentLogs(logsRes.data);
-      } catch (err: any) {
-        console.error(err);
+      } catch {
         toast.error('Dashboard verileri yüklenirken hata oluştu.');
       } finally {
         setLoading(false);
@@ -88,8 +83,6 @@ export default function DashboardOverview() {
       color: 'from-violet-500/10 to-purple-500/10 text-purple-600 dark:text-purple-400',
     },
   ];
-
-  const COLORS = ['#6366f1', '#14b8a6', '#f59e0b', '#ef4444'];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">

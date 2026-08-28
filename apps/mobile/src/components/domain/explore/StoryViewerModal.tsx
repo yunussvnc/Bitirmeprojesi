@@ -4,7 +4,7 @@
  * Share, Delete, Report, Close Friends indicator dahil.
  */
 
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
   View,
   Text,
@@ -14,15 +14,10 @@ import {
   StyleSheet,
   Platform,
   Animated,
-  PanResponder,
   TextInput,
   ActivityIndicator,
-  Keyboard,
   useWindowDimensions,
-  ScrollView,
-  Alert,
 } from 'react-native';
-import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { runOnJS } from "react-native-reanimated";
 import { SnapbackZoom } from "react-native-zoom-toolkit";
@@ -30,30 +25,13 @@ import { Image } from 'expo-image';
 import Video from 'react-native-video';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { Avatar } from '@/src/components/ui/Avatar';
-import { lightImpact, success } from '@/src/utils/haptics';
-import type { Story } from '@/src/services/storyService';
-import {
-  replyToStory,
-  reactToStory,
-  updateStoryViewAnalytics,
-  recordStoryView,
-  getStoryViewers,
-  deleteStory,
-  reportStory,
-  STORY_EMOJIS,
-  type StoryEmoji,
-  type StoryViewerItem,
-  type StoryReportReason,
-} from '@/src/services/storyService';
-import { ShareStorySheet } from '@/src/components/domain/stories/ShareStorySheet';
-import { router } from 'expo-router';
-
-const STORY_DURATION_MS = 5000;
-const LONG_PRESS_DELAY = 200;
-const TOP_INSET = Platform.OS === 'ios' ? 54 : 40;
-
+import { styles } from './story-viewer/styles';
+import { StoryViewerOverlays } from './story-viewer/StoryViewerOverlays';
+import { STORY_EMOJIS, type Story } from '@/src/services/storyService';
 import { timeAgo } from '@/src/utils/timeAgo';
 import { useTranslation } from 'react-i18next';
+import { useStoryViewerController } from './story-viewer/useStoryViewerController';
+import { getProgressFillColor, isStoryCloseFriends } from './story-viewer/storyViewerUtils';
 
 export interface StoryViewerModalProps {
   stories: Story[];
@@ -81,225 +59,74 @@ export function StoryViewerModal({
   onStoryDeleted,
 }: StoryViewerModalProps) {
   const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
-  const [index, setIndex] = useState(initialIndex);
-  const [replyText, setReplyText] = useState('');
-  const [replySending, setReplySending] = useState(false);
-  const [showEmojiTray, setShowEmojiTray] = useState(false);
-  const [myReaction, setMyReaction] = useState<string | null>(null);
-  const [reactionSending, setReactionSending] = useState(false);
-  const [uiVisible, setUiVisible] = useState(true);
-  const [videoPaused, setVideoPaused] = useState(false);
-  const isPausedRef = useRef(false);
-  const isPinchedRef = useRef(false);
-  const progressValueRef = useRef(0);
-  const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const keyboardVisibleRef = useRef(false);
-  const openedAtRef = useRef<number>(Date.now());
-  const progressAnim = useRef(new Animated.Value(0)).current;
   const { t } = useTranslation();
 
-  const [viewersModalVisible, setViewersModalVisible] = useState(false);
-  const [viewers, setViewers] = useState<StoryViewerItem[]>([]);
-  const [viewersLoading, setViewersLoading] = useState(false);
-  const [shareSheetVisible, setShareSheetVisible] = useState(false);
+  const {
+    index,
+    story,
+    progressAnim,
+    dragY,
+    panHandlers,
+    uiVisible,
+    videoPaused,
+    goPrev,
+    goNext,
+    handlePressIn,
+    handlePressOut,
+    handleVideoProgress,
+    handleVideoEnd,
+    handleAuthorPress,
+    handlePlacePress,
+    handleLinkSticker,
+    replyText,
+    setReplyText,
+    replySending,
+    handleSendReply,
+    showEmojiTray,
+    setShowEmojiTray,
+    myReaction,
+    reactionSending,
+    handleReaction,
+    viewersModalVisible,
+    viewers,
+    viewersLoading,
+    openViewersList,
+    closeViewersList,
+    showOwnMenu,
+    openOwnMenu,
+    closeOwnMenu,
+    handleDeleteStory,
+    showOtherMenu,
+    openOtherMenu,
+    closeOtherMenu,
+    openReportMenu,
+    showReportMenu,
+    closeReportMenu,
+    handleReport,
+    shareSheetVisible,
+    handleSharePress,
+    handleShareSheetClose,
+    animKeyboard,
+    isPinchedRef,
+  } = useStoryViewerController({
+    stories,
+    initialIndex,
+    visible,
+    onClose,
+    onStoryViewed,
+    onAuthorNavigate,
+    onPlaceNavigate,
+    currentUserId,
+    onStoryDeleted,
+    screenHeight: SCREEN_HEIGHT,
+  });
 
-  // Menü state'leri
-  const [showOwnMenu, setShowOwnMenu] = useState(false);
-  const [showOtherMenu, setShowOtherMenu] = useState(false);
-  const [showReportMenu, setShowReportMenu] = useState(false);
+  if (!story) return null;
 
-  // initialIndex veya stories değiştiğinde index'i sıfırla
-  useEffect(() => {
-    setIndex(initialIndex);
-    openedAtRef.current = Date.now();
-  }, [initialIndex, stories]);
-
-  // Hikaye değişince reaction'u güncelle
-  useEffect(() => {
-    const s = stories[index];
-    setMyReaction(s?.my_reaction ?? null);
-    openedAtRef.current = Date.now();
-  }, [index, stories]);
-
-  const dragY = useRef(new Animated.Value(0)).current;
-  const animKeyboard = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    progressAnim.addListener(({ value }) => {
-      progressValueRef.current = value;
-    });
-    return () => progressAnim.removeAllListeners();
-  }, [progressAnim]);
-
-  // Fix #4: Keyboard açılınca hikaye progress durdur
-  useEffect(() => {
-    const showSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => {
-      keyboardVisibleRef.current = true;
-      Animated.timing(animKeyboard, { toValue: e.endCoordinates.height, duration: 250, useNativeDriver: false }).start();
-      isPausedRef.current = true;
-      setVideoPaused(true);
-      if (isImageRef.current) {
-        progressAnim.stopAnimation();
-      }
-    });
-    const hideSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
-      keyboardVisibleRef.current = false;
-      Animated.timing(animKeyboard, { toValue: 0, duration: 250, useNativeDriver: false }).start();
-      isPausedRef.current = false;
-      setVideoPaused(false);
-      if (isImageRef.current) {
-        startProgressFromCurrent();
-      }
-    });
-    return () => { showSub.remove(); hideSub.remove(); };
-  }, [animKeyboard, progressAnim]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const story = stories[index];
-  const isImage = story?.media_type !== 'video';
-  const isImageRef = useRef(isImage);
-  isImageRef.current = isImage;
-  const isCloseFriends = story?.privacy_type === 'close_friends' || story?.is_close_friends;
-
-  const goNext = useCallback(() => {
-    if (index < stories.length - 1) {
-      setIndex((i) => i + 1);
-    } else {
-      onClose();
-    }
-  }, [index, stories.length, onClose]);
-
-  const goPrev = useCallback(() => {
-    if (index > 0) {
-      setIndex((i) => i - 1);
-    } else {
-      onClose();
-    }
-  }, [index, onClose]);
-
-  useEffect(() => {
-    if (story) {
-      onStoryViewed?.(story.id);
-      recordStoryView(story.id, 'feed').catch(() => {});
-    }
-  }, [index, story?.id]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Analitik
-  const sendAnalytics = useCallback((opts?: { visitedProfile?: boolean; visitedPlace?: boolean }) => {
-    const s = stories[index];
-    if (!s) return;
-    const duration = Math.round((Date.now() - openedAtRef.current) / 1000);
-    updateStoryViewAnalytics(s.id, {
-      watch_duration_seconds: duration,
-      did_visit_profile: opts?.visitedProfile ?? false,
-      did_visit_place: opts?.visitedPlace ?? false,
-    }).catch(() => {});
-  }, [stories, index]);
-
-  // İmage progress
-  const startProgress = useCallback((fromValue = 0) => {
-    if (!isImage) return;
-    const remainingDuration = STORY_DURATION_MS * (1 - fromValue);
-    progressAnim.setValue(fromValue);
-    Animated.timing(progressAnim, {
-      toValue: 1,
-      duration: remainingDuration,
-      useNativeDriver: false,
-    }).start(({ finished }) => {
-      if (finished && visible && !isPausedRef.current) {
-        goNext();
-      }
-    });
-  }, [isImage, progressAnim, visible, goNext]);
-
-  const startProgressFromCurrent = useCallback(() => {
-    startProgress(progressValueRef.current);
-  }, [startProgress]);
-
-  const resumeProgress = useCallback(() => {
-    if (!story || viewersModalVisible) return;
-    const remaining = Math.max(0, STORY_DURATION_MS - progressValueRef.current);
-    Animated.timing(progressAnim, {
-      toValue: STORY_DURATION_MS,
-      duration: remaining,
-      useNativeDriver: false,
-    }).start(({ finished }) => {
-      if (finished) {
-        goNext();
-      }
-    });
-  }, [story, progressAnim, goNext, viewersModalVisible]);
-
-  useEffect(() => {
-    if (!story || !isImage || !visible) return;
-    progressValueRef.current = 0;
-    startProgress(0);
-    return () => {
-      progressAnim.stopAnimation();
-    };
-  }, [index, story?.id, isImage, visible, startProgress, progressAnim]);
-
-  useEffect(() => {
-    if (!isImage) {
-      progressAnim.stopAnimation();
-      progressAnim.setValue(0);
-      progressValueRef.current = 0;
-    }
-  }, [index, isImage, progressAnim]);
-
-  useEffect(() => {
-    if (!visible) dragY.setValue(0);
-  }, [visible, dragY]);
-
-  const handleVideoProgress = useCallback(({ currentTime, seekableDuration }: { currentTime: number; seekableDuration: number }) => {
-    if (seekableDuration > 0) {
-      const fraction = currentTime / seekableDuration;
-      progressAnim.setValue(fraction);
-      progressValueRef.current = fraction;
-    }
-  }, [progressAnim]);
-
-  const handleVideoEnd = useCallback(() => {
-    if (!isPausedRef.current) {
-      goNext();
-    }
-  }, [goNext]);
-
-  const handlePressIn = useCallback(() => {
-    if (viewersModalVisible || showOwnMenu || showOtherMenu || showReportMenu) return;
-    longPressTimerRef.current = setTimeout(() => {
-      setUiVisible(false);
-      setVideoPaused(true);
-      isPausedRef.current = true;
-      progressAnim.stopAnimation();
-    }, LONG_PRESS_DELAY);
-  }, [progressAnim, viewersModalVisible, showOwnMenu, showOtherMenu, showReportMenu]);
-
-  const handlePressOut = useCallback(() => {
-    if (longPressTimerRef.current) {
-      clearTimeout(longPressTimerRef.current);
-      longPressTimerRef.current = null;
-    }
-    if (isPausedRef.current && !isPinchedRef.current) {
-      isPausedRef.current = false;
-      setVideoPaused(false);
-      setUiVisible(true);
-      if (isImage) {
-        startProgress(progressValueRef.current);
-      }
-    }
-  }, [isImage, startProgress]);
-
-  const animateClose = useCallback(() => {
-    sendAnalytics();
-    Animated.timing(dragY, {
-      toValue: SCREEN_HEIGHT,
-      duration: 180,
-      useNativeDriver: true,
-    }).start(() => {
-      dragY.setValue(0);
-      onClose();
-    });
-  }, [dragY, onClose, sendAnalytics, SCREEN_HEIGHT]);
+  const isCloseFriends = isStoryCloseFriends(story);
+  const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
+  const showReplyBar = !isOwnStory;
+  const canShare = !isCloseFriends;
 
   const overlayOpacity = dragY.interpolate({
     inputRange: [0, SCREEN_HEIGHT * 0.4],
@@ -307,239 +134,7 @@ export function StoryViewerModal({
     extrapolate: 'clamp',
   });
 
-  const panResponder = useMemo(
-    () =>
-      PanResponder.create({
-        onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 12 && Math.abs(g.dy) > Math.abs(g.dx),
-        onPanResponderMove: (_, g) => {
-          if (g.dy > 0) dragY.setValue(g.dy);
-        },
-        onPanResponderRelease: (_, g) => {
-          if (g.dy > 90 || g.vy > 0.8) {
-            animateClose();
-            return;
-          }
-          Animated.spring(dragY, {
-            toValue: 0,
-            useNativeDriver: true,
-            friction: 7,
-            tension: 80,
-          }).start();
-        },
-        onPanResponderTerminate: () => {
-          Animated.spring(dragY, {
-            toValue: 0,
-            useNativeDriver: true,
-            friction: 7,
-            tension: 80,
-          }).start();
-        },
-      }),
-    [dragY, animateClose]
-  );
-
-  const handleAuthorPress = useCallback(() => {
-    if (!story?.user_id) return;
-    lightImpact();
-    sendAnalytics({ visitedProfile: true });
-    onAuthorNavigate?.(`/user/${story.user_id}`, index);
-  }, [story?.user_id, index, onAuthorNavigate, sendAnalytics]);
-
-  const handlePlacePress = useCallback(() => {
-    const pid = story?.place_id ?? story?.place?.id;
-    if (!pid) return;
-    lightImpact();
-    sendAnalytics({ visitedPlace: true });
-    onPlaceNavigate?.(`/place/${pid}`, index);
-  }, [story?.place_id, story?.place?.id, index, onPlaceNavigate, sendAnalytics]);
-
-  const handleSendReply = useCallback(async () => {
-    if (!replyText.trim() || !story || replySending) return;
-    setReplySending(true);
-    try {
-      await replyToStory(story.id, replyText.trim());
-      success();
-      setReplyText('');
-      setShowEmojiTray(false);
-    } catch (e: any) {
-      const detail = e?.response?.data?.detail || e?.message || 'Yanıt gönderilemedi.';
-      Alert.alert('Hata', detail);
-    } finally {
-      setReplySending(false);
-    }
-  }, [replyText, story, replySending]);
-
-  const handleReaction = useCallback(async (emoji: StoryEmoji) => {
-    if (!story || reactionSending) return;
-    setReactionSending(true);
-    lightImpact();
-    try {
-      const res = await reactToStory(story.id, emoji);
-      if (res.action === 'removed') {
-        setMyReaction(null);
-      } else {
-        setMyReaction(emoji);
-      }
-      setShowEmojiTray(false);
-    } catch (e: any) {
-      const detail = e?.response?.data?.detail || e?.message || 'Tepki gönderilemedi.';
-      Alert.alert('Hata', detail);
-    } finally {
-      setReactionSending(false);
-    }
-  }, [story, reactionSending]);
-
-  const handleLinkSticker = useCallback(() => {
-    if (!story?.link_type || !story?.link_id) return;
-    lightImpact();
-    sendAnalytics({ visitedPlace: story.link_type === 'place' });
-    if (story.link_type === 'place') {
-      onPlaceNavigate?.(`/place/${story.link_id}`, index);
-    } else if (story.link_type === 'profile') {
-      onAuthorNavigate?.(`/user/${story.link_id}`, index);
-    }
-  }, [story, index, onPlaceNavigate, onAuthorNavigate, sendAnalytics]);
-
-  // Başkasının hikayesinde mi?
-  const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
-  const showReplyBar = !isOwnStory;
-  const canShare = !isCloseFriends;
-
-  // ── Silme ──
-  const handleDeleteStory = useCallback(async () => {
-    if (!story) return;
-    setShowOwnMenu(false);
-    Alert.alert(
-      'Hikayeyi Sil',
-      'Bu hikaye kalıcı olarak silinecek. Emin misiniz?',
-      [
-        { text: 'İptal', style: 'cancel', onPress: () => {
-          isPausedRef.current = false;
-          setVideoPaused(false);
-          if (isImage) startProgress(progressValueRef.current);
-        }},
-        {
-          text: 'Sil',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await deleteStory(story.id);
-              success();
-              onStoryDeleted?.(story.id);
-              goNext();
-            } catch (e) {
-              Alert.alert('Hata', 'Hikaye silinemedi.');
-              isPausedRef.current = false;
-              setVideoPaused(false);
-              if (isImage) startProgress(progressValueRef.current);
-            }
-          },
-        },
-      ]
-    );
-  }, [story, goNext, onStoryDeleted, isImage, startProgress]);
-
-  // ── Şikayet ──
-  const handleReport = useCallback(async (reason: StoryReportReason) => {
-    if (!story) return;
-    setShowReportMenu(false);
-    try {
-      await reportStory(story.id, reason);
-      success();
-      Alert.alert('Teşekkürler', 'Şikayetiniz incelenmek üzere alındı.');
-    } catch (e: any) {
-      const detail = e?.response?.data?.detail || 'Şikayet gönderilemedi.';
-      Alert.alert('Hata', detail);
-    } finally {
-      isPausedRef.current = false;
-      setVideoPaused(false);
-      if (isImage) startProgress(progressValueRef.current);
-    }
-  }, [story, isImage, startProgress]);
-
-  // ── Paylaş — ShareStorySheet aç ──
-  const handleSharePress = useCallback(() => {
-    if (!story) return;
-    lightImpact();
-    isPausedRef.current = true;
-    setVideoPaused(true);
-    progressAnim.stopAnimation();
-    setShareSheetVisible(true);
-  }, [story, progressAnim]);
-
-  const handleShareSheetClose = useCallback(() => {
-    setShareSheetVisible(false);
-    isPausedRef.current = false;
-    setVideoPaused(false);
-    if (isImage) startProgress(progressValueRef.current);
-  }, [isImage, startProgress]);
-
-  // ── Menü Açma/Kapama ──
-  const openOwnMenu = useCallback(() => {
-    isPausedRef.current = true;
-    setVideoPaused(true);
-    progressAnim.stopAnimation();
-    setShowOwnMenu(true);
-  }, [progressAnim]);
-
-  const closeOwnMenu = useCallback(() => {
-    setShowOwnMenu(false);
-    isPausedRef.current = false;
-    setVideoPaused(false);
-    if (isImage) startProgress(progressValueRef.current);
-  }, [isImage, startProgress]);
-
-  const openOtherMenu = useCallback(() => {
-    isPausedRef.current = true;
-    setVideoPaused(true);
-    progressAnim.stopAnimation();
-    setShowOtherMenu(true);
-  }, [progressAnim]);
-
-  const closeOtherMenu = useCallback(() => {
-    setShowOtherMenu(false);
-    isPausedRef.current = false;
-    setVideoPaused(false);
-    if (isImage) startProgress(progressValueRef.current);
-  }, [isImage, startProgress]);
-
-  const openViewersList = useCallback(async () => {
-    if (!story) return;
-    setVideoPaused(true);
-    isPausedRef.current = true;
-    progressAnim.stopAnimation();
-    setViewersModalVisible(true);
-    setViewersLoading(true);
-    try {
-      const res = await getStoryViewers(story.id);
-      const sorted = (res.items || []).sort((a, b) => {
-        const aHasReaction = !!a.reaction;
-        const bHasReaction = !!b.reaction;
-        if (aHasReaction && !bHasReaction) return -1;
-        if (!aHasReaction && bHasReaction) return 1;
-        const aTime = new Date(a.viewed_at).getTime();
-        const bTime = new Date(b.viewed_at).getTime();
-        return bTime - aTime;
-      });
-      setViewers(sorted);
-    } catch (e) {
-      console.warn('Failed to load viewers', e);
-    } finally {
-      setViewersLoading(false);
-    }
-  }, [story, progressAnim]);
-
-  const closeViewersList = useCallback(() => {
-    setViewersModalVisible(false);
-    setVideoPaused(false);
-    isPausedRef.current = false;
-    resumeProgress();
-  }, [resumeProgress]);
-
-  if (!story) return null;
-
-  // Progress bar renkleri
-  const progressFillColor = isCloseFriends ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.9)';
+  const progressFillColor = getProgressFillColor(isCloseFriends);
 
   const singleTap = useMemo(() => {
     return Gesture.Tap().onEnd((e) => {
@@ -586,19 +181,19 @@ export function StoryViewerModal({
             transform: [{ translateY: dragY }],
           },
         ]}
-        {...panResponder.panHandlers}
+        {...panHandlers}
       >
         <GestureDetector gesture={composedGestures}>
           <View style={StyleSheet.absoluteFillObject} pointerEvents="auto">
             <SnapbackZoom
               timingConfig={{ duration: 200 }}
-              onPinchStart={() => { 
+              onPinchStart={() => {
                 isPinchedRef.current = true;
-                runOnJS(handlePressIn)(); 
+                runOnJS(handlePressIn)();
               }}
-              onGestureEnd={() => { 
+              onGestureEnd={() => {
                 isPinchedRef.current = false;
-                runOnJS(handlePressOut)(); 
+                runOnJS(handlePressOut)();
               }}
             >
               {story.media_type === 'video' ? (
@@ -622,7 +217,6 @@ export function StoryViewerModal({
           </View>
         </GestureDetector>
 
-        {/* ── Progress Bar ── */}
         {uiVisible && (
           <View style={styles.progressRow}>
             {stories.map((_, i) => {
@@ -653,7 +247,6 @@ export function StoryViewerModal({
           </View>
         )}
 
-        {/* ── Author Bar ── */}
         {uiVisible && (
           <View style={styles.authorBar}>
             {onAuthorNavigate ? (
@@ -700,7 +293,6 @@ export function StoryViewerModal({
               )}
             </View>
 
-            {/* 3-Nokta Menü Butonu */}
             <TouchableOpacity
               style={styles.moreBtn}
               onPress={isOwnStory ? openOwnMenu : openOtherMenu}
@@ -709,7 +301,6 @@ export function StoryViewerModal({
               <IconSymbol name="ellipsis" size={20} color="#fff" />
             </TouchableOpacity>
 
-            {/* Close butonu */}
             <TouchableOpacity
               style={styles.closeBtn}
               onPress={onClose}
@@ -720,7 +311,6 @@ export function StoryViewerModal({
           </View>
         )}
 
-        {/* ── Link Sticker ── */}
         {story.link_type && story.link_id && uiVisible && (
           <TouchableOpacity
             style={styles.linkSticker}
@@ -734,10 +324,8 @@ export function StoryViewerModal({
           </TouchableOpacity>
         )}
 
-        {/* ── Yanıt Kutusu + Emoji Tray + Share (başkasının hikayesinde) ── */}
         {showReplyBar && uiVisible && (
           <Animated.View style={[styles.replyBar, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
-            {/* Emoji Tepki Tray */}
             {showEmojiTray && (
               <View style={styles.emojiTray}>
                 {STORY_EMOJIS.map((emoji) => (
@@ -758,7 +346,6 @@ export function StoryViewerModal({
             )}
 
             <View style={styles.replyInputRow}>
-              {/* Emoji toggle butonu */}
               <TouchableOpacity
                 style={styles.emojiToggleBtn}
                 onPress={() => setShowEmojiTray((v) => !v)}
@@ -790,7 +377,6 @@ export function StoryViewerModal({
                   >
                     <IconSymbol name={myReaction === '❤️' ? "heart.fill" : "heart"} size={26} color={myReaction === '❤️' ? "#ef4444" : "#fff"} />
                   </TouchableOpacity>
-                  {/* Paylaş butonu */}
                   {canShare && (
                     <TouchableOpacity
                       style={styles.shareBtn}
@@ -822,7 +408,6 @@ export function StoryViewerModal({
           </Animated.View>
         )}
 
-        {/* ── İzleyenler Butonu (Kendi Hikayesinde) — Sayı ile birlikte ── */}
         {isOwnStory && uiVisible && (
           <Animated.View style={[styles.viewersBtnWrap, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
             <TouchableOpacity style={styles.viewersBtn} onPress={openViewersList} activeOpacity={0.8}>
@@ -837,479 +422,24 @@ export function StoryViewerModal({
         )}
       </Animated.View>
 
-      {/* ── Viewers List Modal ── */}
-      <Modal
-        visible={viewersModalVisible}
-        transparent
-        animationType="slide"
-        onRequestClose={closeViewersList}
-      >
-        <TouchableOpacity style={styles.viewersModalOverlay} activeOpacity={1} onPress={closeViewersList}>
-          <TouchableOpacity style={styles.viewersModalContent} activeOpacity={1}>
-            <View style={styles.viewersHeader}>
-              <Text style={styles.viewersTitle}>{t('story.viewers_title', { defaultValue: 'Görüntüleyenler' })}</Text>
-              <TouchableOpacity onPress={closeViewersList} style={styles.viewersCloseBtn}>
-                <IconSymbol name="xmark" size={20} color="#fff" />
-              </TouchableOpacity>
-            </View>
-            {viewersLoading ? (
-              <View style={styles.viewersLoading}>
-                <ActivityIndicator size="small" color="#fff" />
-              </View>
-            ) : viewers.length > 0 ? (
-              <ScrollView style={styles.viewersList} contentContainerStyle={{ paddingBottom: 40 }}>
-                {viewers.map((v, i) => (
-                  <View key={i} style={styles.viewerItem}>
-                    <Avatar source={v.user.avatar_url ? { uri: v.user.avatar_url } : undefined} name={v.user.first_name || v.user.username || 'U'} size={40} />
-                    <View style={styles.viewerInfo}>
-                      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                        <Text style={styles.viewerName}>{v.user.first_name || v.user.username || 'U'}</Text>
-                      </View>
-                    </View>
-                    {!!v.reaction && (
-                      <View style={styles.viewerReactionWrap}>
-                        {v.reaction === '❤️' ? (
-                          <IconSymbol name="heart.fill" size={20} color="#ef4444" />
-                        ) : (
-                          <Text style={{ fontSize: 20 }}>{v.reaction}</Text>
-                        )}
-                      </View>
-                    )}
-                  </View>
-                ))}
-              </ScrollView>
-            ) : (
-              <View style={styles.viewersEmpty}>
-                <Text style={styles.viewersEmptyText}>{t('story.no_viewers', { defaultValue: 'Henüz görüntüleyen yok' })}</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        </TouchableOpacity>
-      </Modal>
-
-      {/* ── Kendi Hikayem — 3-Nokta Menü ── */}
-      <Modal
-        visible={showOwnMenu}
-        transparent
-        animationType="fade"
-        onRequestClose={closeOwnMenu}
-      >
-        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={closeOwnMenu}>
-          <View style={styles.menuContent}>
-            <TouchableOpacity style={styles.menuItem} onPress={handleDeleteStory}>
-              <IconSymbol name="trash" size={20} color="#ef4444" />
-              <Text style={[styles.menuItemText, { color: '#ef4444' }]}>Hikayeyi Sil</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={closeOwnMenu}>
-              <IconSymbol name="xmark" size={20} color="#fff" />
-              <Text style={styles.menuItemText}>İptal</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </Modal>
-
-      {/* ── Başkasının Hikayesi — 3-Nokta Menü ── */}
-      <Modal
-        visible={showOtherMenu}
-        transparent
-        animationType="fade"
-        onRequestClose={closeOtherMenu}
-      >
-        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={closeOtherMenu}>
-          <View style={styles.menuContent}>
-            <TouchableOpacity style={styles.menuItem} onPress={() => {
-              setShowOtherMenu(false);
-              setShowReportMenu(true);
-            }}>
-              <IconSymbol name="exclamationmark.triangle" size={20} color="#f59e0b" />
-              <Text style={styles.menuItemText}>Şikayet Et</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={closeOtherMenu}>
-              <IconSymbol name="xmark" size={20} color="#fff" />
-              <Text style={styles.menuItemText}>İptal</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </Modal>
-
-      {/* ── Şikayet Nedeni Seçimi ── */}
-      <Modal
-        visible={showReportMenu}
-        transparent
-        animationType="fade"
-        onRequestClose={() => {
-          setShowReportMenu(false);
-          isPausedRef.current = false;
-          setVideoPaused(false);
-          if (isImage) startProgress(progressValueRef.current);
-        }}
-      >
-        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={() => {
-          setShowReportMenu(false);
-          isPausedRef.current = false;
-          setVideoPaused(false);
-          if (isImage) startProgress(progressValueRef.current);
-        }}>
-          <View style={styles.menuContent}>
-            <Text style={styles.menuTitle}>Şikayet Nedeni</Text>
-            {[
-              { key: 'spam' as StoryReportReason, label: 'Spam', icon: 'envelope.badge' },
-              { key: 'inappropriate' as StoryReportReason, label: 'Uygunsuz İçerik', icon: 'eye.slash' },
-              { key: 'violence' as StoryReportReason, label: 'Şiddet', icon: 'exclamationmark.shield' },
-              { key: 'harassment' as StoryReportReason, label: 'Taciz', icon: 'person.crop.circle.badge.exclamationmark' },
-              { key: 'other' as StoryReportReason, label: 'Diğer', icon: 'questionmark.circle' },
-            ].map((r) => (
-              <TouchableOpacity key={r.key} style={styles.menuItem} onPress={() => handleReport(r.key)}>
-                <IconSymbol name={r.icon as any} size={18} color="#fff" />
-                <Text style={styles.menuItemText}>{r.label}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </TouchableOpacity>
-      </Modal>
-      <ShareStorySheet
-        visible={shareSheetVisible}
-        onClose={handleShareSheetClose}
+      <StoryViewerOverlays
         story={story}
+        viewersModalVisible={viewersModalVisible}
+        viewers={viewers}
+        viewersLoading={viewersLoading}
+        onCloseViewers={closeViewersList}
+        showOwnMenu={showOwnMenu}
+        onCloseOwnMenu={closeOwnMenu}
+        onDeleteStory={handleDeleteStory}
+        showOtherMenu={showOtherMenu}
+        onCloseOtherMenu={closeOtherMenu}
+        onOpenReportMenu={openReportMenu}
+        showReportMenu={showReportMenu}
+        onCloseReportMenu={closeReportMenu}
+        onReport={handleReport}
+        shareSheetVisible={shareSheetVisible}
+        onCloseShareSheet={handleShareSheetClose}
       />
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  tapZones: {
-    ...StyleSheet.absoluteFillObject,
-    flexDirection: 'row',
-    zIndex: 1,
-  },
-  tapLeft: {
-    flex: 1,
-  },
-  tapRight: {
-    flex: 1,
-  },
-  authorBar: {
-    position: 'absolute',
-    top: TOP_INSET + 14,
-    left: 12,
-    right: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 6,
-    paddingHorizontal: 8,
-    borderRadius: 12,
-    gap: 10,
-    zIndex: 10,
-  },
-  closeBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  moreBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  authorText: { flex: 1 },
-  authorNameRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  authorName: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#fff',
-  },
-  timeAgo: {
-    fontSize: 12,
-    color: 'rgba(255,255,255,0.6)',
-  },
-  closeFriendsBadge: {
-    fontSize: 12,
-    color: '#4ade80',
-    fontWeight: '700',
-  },
-  placeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    marginTop: 2,
-  },
-  placeName: {
-    fontSize: 12,
-    color: 'rgba(255,255,255,0.8)',
-  },
-  progressRow: {
-    position: 'absolute',
-    top: TOP_INSET,
-    left: 12,
-    right: 12,
-    flexDirection: 'row',
-    gap: 3,
-    zIndex: 15,
-  },
-  progressSegment: {
-    height: 2.5,
-    borderRadius: 1.5,
-    overflow: 'hidden',
-  },
-  progressBg: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255,255,255,0.3)',
-  },
-  progressFillCompleted: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255,255,255,0.9)',
-  },
-  progressFillActive: {
-    backgroundColor: 'rgba(255,255,255,0.9)',
-  },
-  progressActiveWrap: {
-    ...StyleSheet.absoluteFillObject,
-    flexDirection: 'row',
-  },
-  // ── Reply Bar ──
-  replyBar: {
-    position: 'absolute',
-    left: 16,
-    right: 16,
-    zIndex: 20,
-  },
-  replyInputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    backgroundColor: 'rgba(255,255,255,0.15)',
-    borderRadius: 28,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-  },
-  replyInput: {
-    flex: 1,
-    color: '#fff',
-    fontSize: 15,
-    paddingVertical: 6,
-    minHeight: 36,
-  },
-  replySendBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  replySendBtnActive: {
-    backgroundColor: '#4ade80',
-  },
-  likeBtn: {
-    padding: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  shareBtn: {
-    padding: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  // ── Emoji Reaction Tray ──
-  emojiTray: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 8,
-    marginBottom: 10,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 32,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    alignSelf: 'center',
-  },
-  emojiBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.08)',
-  },
-  emojiBtnActive: {
-    backgroundColor: 'rgba(255,255,255,0.28)',
-    transform: [{ scale: 1.15 }],
-  },
-  emojiText: {
-    fontSize: 22,
-  },
-  emojiToggleBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.15)',
-  },
-  emojiToggleText: {
-    fontSize: 18,
-  },
-  // ── Link Sticker ──
-  linkSticker: {
-    position: 'absolute',
-    bottom: 190,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 6,
-    zIndex: 15,
-  },
-  linkStickerText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#000',
-    maxWidth: 200,
-  },
-  // Viewers Modal Styles
-  viewersBtnWrap: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-    zIndex: 3,
-  },
-  viewersBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 20,
-    gap: 8,
-  },
-  viewersBtnText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  viewersModalOverlay: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'transparent',
-  },
-  viewersModalContent: {
-    backgroundColor: '#1a1a1a',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    height: '60%',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  viewersHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingBottom: 16,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#333',
-  },
-  viewersTitle: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  viewersCloseBtn: {
-    padding: 4,
-  },
-  viewersLoading: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  viewersList: {
-    flex: 1,
-    paddingTop: 12,
-  },
-  viewerItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-    gap: 12,
-  },
-  viewerInfo: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  viewerName: {
-    color: '#fff',
-    fontSize: 15,
-    fontWeight: '600',
-    marginBottom: 2,
-  },
-  viewerReactionWrap: {
-    marginLeft: 'auto',
-    paddingLeft: 12,
-  },
-  viewerTime: {
-    color: 'rgba(255,255,255,0.6)',
-    fontSize: 12,
-  },
-  viewersEmpty: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  viewersEmptyText: {
-    color: 'rgba(255,255,255,0.6)',
-    fontSize: 14,
-  },
-  // ── Menü Modal Styles ──
-  menuOverlay: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.6)',
-  },
-  menuContent: {
-    backgroundColor: '#1a1a1a',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: Platform.OS === 'ios' ? 40 : 24,
-  },
-  menuTitle: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '700',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 14,
-    paddingVertical: 14,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#333',
-  },
-  menuItemText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-});

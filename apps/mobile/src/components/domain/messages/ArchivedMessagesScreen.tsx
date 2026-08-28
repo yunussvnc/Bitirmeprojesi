@@ -61,7 +61,7 @@ export default function ArchivedMessagesScreen() {
         setSelectedIds([]);
     };
 
-    const renderRightActions = (id: string) => {
+    const renderRightActions = React.useCallback((id: string) => {
         return (
             <View style={styles.swipeActionsContainer}>
                 <TouchableOpacity
@@ -88,7 +88,7 @@ export default function ArchivedMessagesScreen() {
                 </TouchableOpacity>
             </View>
         );
-    };
+    }, [colors.semantic.error, colors.semantic.info, deleteConversation, t, unarchiveConversation]);
 
     const renderSeparator = React.useCallback(() => (
         <View style={styles.separator}>
@@ -181,7 +181,7 @@ export default function ArchivedMessagesScreen() {
                 {content}
             </Swipeable>
         );
-    }, [colors, router, isEditMode, selectedIds]);
+    }, [colors, router, isEditMode, renderRightActions, selectedIds]);
 
     const listEmpty = React.useMemo(() => (
         <View style={styles.emptyState}>
@@ -193,7 +193,7 @@ export default function ArchivedMessagesScreen() {
                 {t("messages.archive_empty_desc")}
             </Text>
         </View>
-    ), [colors]);
+    ), [colors, t]);
 
     return (
         <View style={[styles.container, { backgroundColor: colors.background.primary }]}>

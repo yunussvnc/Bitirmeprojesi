@@ -28,7 +28,7 @@ import { EmptyState, AnimatedPlaceCard } from "@/src/components/ui";
 import { FeedCard, SharePostSheet } from "@/src/components/domain/feed";
 import { useAppStore, type SavedPlace } from "@/src/store/useAppStore";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
-import { createTextStyle, spacing as designSpacing } from "@/src/constants/design";
+import { spacing as designSpacing } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { logger } from "@/src/utils/logger";
 import { lightImpact } from "@/src/utils/haptics";
@@ -36,7 +36,6 @@ import { getAllPlaces } from "@/src/services/mekanService";
 import type { Place } from "@/src/services/mekanService";
 import type { Post } from "@/src/services/feedService";
 import { getSavedPlaces, getSavedPosts } from "@/src/services/savedService";
-import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -55,13 +54,11 @@ export default function SavedScreen() {
   const [tab, setTab] = useState<"places" | "posts">("places");
   const ids = useAppStore((s) => s.savedIds);
   const byId = useAppStore((s) => s.savedById);
-  const clear = useAppStore((s) => s.clearSaved);
   const remove = useAppStore((s) => s.removeSaved);
   const removePost = useAppStore((s) => s.removeSavedPost);
   const toggleSavePost = useAppStore((s) => s.toggleSavePost);
   const postIds = useAppStore((s) => s.savedPostIds);
   const postsById = useAppStore((s) => s.savedPostsById);
-  const clearSavedPosts = useAppStore((s) => s.clearSavedPosts);
   const [refreshing, setRefreshing] = useState(false);
   const [sharePost, setSharePost] = useState<Post | null>(null);
   const [placesData, setPlacesData] = useState<Record<string, Place>>({});
@@ -179,25 +176,6 @@ export default function SavedScreen() {
   const postItems: Post[] = useMemo(() => {
     return postIds.map((id) => postsById[id]).filter(Boolean) as Post[];
   }, [postIds, postsById]);
-
-  const titleStyle = createTextStyle("title", colors.text.primary);
-
-  const handleClear = useCallback(() => {
-    if (tab === "places" && !items.length) return;
-    if (tab === "posts" && !postItems.length) return;
-    Alert.alert(t("common.clear"), tab === "posts" ? t("saved_extra.clear_posts_confirm") : t("saved_extra.clear_places_confirm"), [
-      { text: t("common.cancel"), style: "cancel" },
-      {
-        text: t("common.delete"),
-        style: "destructive",
-        onPress: () => {
-          lightImpact();
-          if (tab === "posts") clearSavedPosts();
-          else clear();
-        },
-      },
-    ]);
-  }, [items.length, postItems.length, clear, clearSavedPosts, tab, t]);
 
   const handleRemove = useCallback(
     (id: string | number) => {
@@ -387,13 +365,14 @@ export default function SavedScreen() {
     [
       items.length,
       postItems.length,
-      titleStyle,
+      colors.background.primary,
+      colors.semantic.error,
+      colors.surface.border,
+      colors.surface.default,
       colors.surface.elevated,
+      colors.text.primary,
       colors.text.secondary,
-      colors.accent.primary,
-      colors.accent.onPrimary,
-      handleClear,
-      colors.text.tertiary,
+      isSelectionMode,
       tab,
       t,
     ]

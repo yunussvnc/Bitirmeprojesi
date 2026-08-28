@@ -35,7 +35,7 @@ export type CachedPost = {
   content?: string;
   post_type?: string;
   created_at?: string;
-  media?: Array<{ media_url: string; media_type: string }>;
+  media?: { media_url: string; media_type: string }[];
   user?: { id: number; username?: string; avatar_url?: string };
 };
 
@@ -153,7 +153,7 @@ export const useOfflineCache = create<OfflineCacheState>()(
             set({ cachedNearbyPlaces: places, nearbyLastSync: Date.now() });
             logger.info(`[OfflineCache] ${places.length} yakın mekan cache'lendi`);
           }
-        } catch (error) {
+        } catch {
           logger.warn("[OfflineCache] Nearby sync başarısız (muhtemelen offline)");
         } finally {
           set({ isSyncing: false });

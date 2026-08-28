@@ -23,7 +23,7 @@ export async function toggleBlockUser(userId: number): Promise<{ blocked: boolea
     return apiPost(`/users/${userId}/block`);
 }
 
-export async function getBlockedUsers(): Promise<{ items: Array<{ id: number; username: string | null; first_name: string | null; avatar_url: string | null }>; total: number }> {
+export async function getBlockedUsers(): Promise<{ items: { id: number; username: string | null; first_name: string | null; avatar_url: string | null }[]; total: number }> {
     return apiGet("/users/blocked");
 }
 

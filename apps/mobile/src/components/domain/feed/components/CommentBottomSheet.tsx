@@ -33,7 +33,6 @@ import { timeAgo } from "@/src/utils/timeAgo";
 import { deleteComment } from "@/src/services/moderationService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
-import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { useTranslation } from "react-i18next";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
@@ -59,7 +58,6 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [text, setText] = useState("");
   const { t } = useTranslation();
 
@@ -73,11 +71,9 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
 
   useEffect(() => {
     const showSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => {
-      setKeyboardHeight(e.endCoordinates.height);
       Animated.timing(animKeyboard, { toValue: e.endCoordinates.height, duration: 250, useNativeDriver: false }).start();
     });
     const hideSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
-      setKeyboardHeight(0);
       Animated.timing(animKeyboard, { toValue: 0, duration: 250, useNativeDriver: false }).start();
     });
     return () => { showSub.remove(); hideSub.remove(); };

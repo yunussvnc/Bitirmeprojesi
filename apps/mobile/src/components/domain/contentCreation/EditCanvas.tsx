@@ -3,7 +3,7 @@
  * Standart gönderi mantığına uygun: Sabit önizleme, alt tarafta filtreler
  */
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -16,7 +16,6 @@ import {
 import { Image as ExpoImage } from 'expo-image';
 import Video from 'react-native-video';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { useTranslation } from "react-i18next";
 import { radius } from '@/src/constants/design';
 import { lightImpact } from '@/src/utils/haptics';

@@ -23,7 +23,6 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact } from '@/src/utils/haptics';
 import { Button } from "@/src/components/ui/Button";
-import { useTranslation } from "react-i18next";
 import { GlassCard } from '@/src/components/ui/GlassCard';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -240,7 +239,6 @@ export function FilterBottomSheet({
 }: FilterBottomSheetProps) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
-  const { t } = useTranslation();
   const [draft, setDraft] = useState<FilterValues>(values);
   const [modalVisible, setModalVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(0)).current;

@@ -72,7 +72,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
                 c.name.toLowerCase().includes(q) ||
                 c.username.toLowerCase().includes(q)
         );
-    }, [conversations, query]);
+    }, [blockedUserIds, conversations, query]);
 
     // --- Animasyonlar ---
     const snapTo = useCallback(
@@ -186,7 +186,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
 
             setSentTo((prev) => new Set(prev).add(conversation.id));
         },
-        [post, addMessage, updateLastMessageAt]
+        [post, addMessage, updateLastMessageAt, t]
     );
 
     // Link ile paylaş (native Share API)

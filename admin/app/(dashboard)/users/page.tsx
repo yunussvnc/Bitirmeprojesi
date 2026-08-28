@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { api } from '@/lib/api';
+import { getApiErrorMessage } from '@/lib/api-error';
 import { User } from '@/types';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { 
   Table, 
   TableBody, 
@@ -60,10 +61,10 @@ export default function UsersPage() {
   const [banDialogOpen, setBanDialogOpen] = useState(false);
   const [banReason, setBanReason] = useState('');
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     setLoading(true);
     try {
-      const params: any = {
+      const params: Record<string, string | number | boolean> = {
         page,
         limit,
       };
@@ -74,20 +75,19 @@ export default function UsersPage() {
       const response = await api.get('/admin/users', { params });
       setUsers(response.data.items);
       setTotal(response.data.total);
-    } catch (err: any) {
-      console.error(err);
+    } catch {
       toast.error('Kullanıcılar yüklenirken bir hata oluştu.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [limit, page, roleFilter, search, statusFilter]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchUsers();
+      void fetchUsers();
     }, 300); // Debounce search
     return () => clearTimeout(timer);
-  }, [search, roleFilter, statusFilter, page]);
+  }, [fetchUsers]);
 
   const handleRoleChange = async () => {
     if (!selectedUser) return;
@@ -98,9 +98,9 @@ export default function UsersPage() {
       });
       setRoleDialogOpen(false);
       fetchUsers();
-    } catch (err: any) {
+    } catch (error: unknown) {
       toast.error('Rol güncellenemedi', {
-        description: err.response?.data?.detail || 'Bilinmeyen bir hata oluştu.',
+        description: getApiErrorMessage(error, 'Bilinmeyen bir hata oluştu.'),
       });
     }
   };
@@ -115,7 +115,7 @@ export default function UsersPage() {
       setBanDialogOpen(false);
       setBanReason('');
       fetchUsers();
-    } catch (err: any) {
+    } catch {
       toast.error('Kullanıcı askıya alınamadı');
     }
   };
@@ -127,7 +127,7 @@ export default function UsersPage() {
         description: `${user.username || user.email} kullanıcısı tekrar aktif edildi.`,
       });
       fetchUsers();
-    } catch (err: any) {
+    } catch {
       toast.error('Kullanıcı aktif edilemedi');
     }
   };
@@ -140,7 +140,7 @@ export default function UsersPage() {
         description: 'Kullanıcı hesabı soft-delete yöntemiyle devre dışı bırakıldı.',
       });
       fetchUsers();
-    } catch (err: any) {
+    } catch {
       toast.error('Kullanıcı silinemedi');
     }
   };
@@ -351,7 +351,14 @@ export default function UsersPage() {
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
-            <Select value={newRole} onValueChange={(val: any) => setNewRole(val)}>
+            <Select
+              value={newRole}
+              onValueChange={(value) => {
+                if (value === 'standard' || value === 'venue' || value === 'admin') {
+                  setNewRole(value);
+                }
+              }}
+            >
               <SelectTrigger className="w-full bg-zinc-950 border-zinc-800 text-white">
                 <SelectValue placeholder="Rol Seçin" />
               </SelectTrigger>

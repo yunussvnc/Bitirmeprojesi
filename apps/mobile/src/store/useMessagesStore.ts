@@ -19,11 +19,6 @@ export interface Conversation {
     lastMessageAt: number; // Son mesajın gerçek timestamp'i (sıralama için)
 }
 
-const now = Date.now();
-const MINUTE = 60 * 1000;
-const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
-
 const INITIAL_CONVERSATIONS: Conversation[] = [];
 
 type MessagesState = {

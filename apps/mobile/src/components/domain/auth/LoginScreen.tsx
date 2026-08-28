@@ -1,4 +1,4 @@
-import { showError, showSuccess } from "@/src/utils/toast";
+import { showError } from "@/src/utils/toast";
 /**
  * Premium Login Screen
  *
@@ -13,19 +13,17 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
   View,
-  ScrollView,
   Platform,
   Text,
   TouchableOpacity,
   Animated,
-  Dimensions,
   Image,
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Input, GlassCard } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { useTranslation } from 'react-i18next';
@@ -34,8 +32,6 @@ import { loginUser } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { useSocialAuth } from '@/src/hooks/useSocialAuth';
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
-
-const { width, height } = Dimensions.get('window');
 
 // API yoksa veya fotoÄŸraf yoksa kullanÄ±lacak aydÄ±nlÄ±k ve kaliteli mekan gÃ¶rselleri
 const FALLBACK_PLACE_IMAGES = [
@@ -50,7 +46,6 @@ const FALLBACK_PLACE_IMAGES = [
 const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function LoginScreen() {
-  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,7 +54,6 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const isSubmittingRef = useRef(false);
-  const [isAppleAvailable, setIsAppleAvailable] = useState(false);
 
   const { loading: socialLoading, promptGoogle, signInWithApple } = useSocialAuth(roleType, 'login');
   const formLoading = loading || socialLoading;
@@ -127,7 +121,7 @@ export default function LoginScreen() {
       isSubmittingRef.current = false;
       setLoading(false);
     }
-  }, [validateForm, email, password]);
+  }, [validateForm, email, password, roleType, t]);
 
   const handleSocialLogin = useCallback((provider: string) => {
     lightImpact();

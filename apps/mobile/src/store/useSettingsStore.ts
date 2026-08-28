@@ -4,6 +4,11 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { apiGet, apiPut } from "@/src/utils/apiClient";
 import i18n from "../i18n";
 import { getLocales } from "expo-localization";
+import type { AiSearchCityId } from '../constants/aiCities';
+import { DEFAULT_AI_SEARCH_CITY_ID } from '../constants/aiCities';
+import type { AiSearchDistrictId } from '../constants/aiDistricts';
+
+import { AppState } from "react-native";
 
 const getInitialLanguage = (): AppLanguage => {
   try {
@@ -24,9 +29,6 @@ export type UploadQuality = 'high' | 'auto' | 'data_saver';
 export type CameraToolbarSide = 'left' | 'right';
 export type Audience = 'everyone' | 'followers' | 'off';
 export type AppLanguage = 'tr' | 'en';
-import type { AiSearchCityId } from '../constants/aiCities';
-import { DEFAULT_AI_SEARCH_CITY_ID } from '../constants/aiCities';
-import type { AiSearchDistrictId } from '../constants/aiDistricts';
 export type { AiSearchCityId };
 export type { AiSearchDistrictId };
 
@@ -128,8 +130,6 @@ export type SettingsState = {
   pushToBackend: () => Promise<void>;
   _isSyncing: boolean;
 };
-
-import { AppState } from "react-native";
 
 /** Backend'e tek seferli push yapmak için debounce timer */
 let _pushDebounce: ReturnType<typeof setTimeout> | null = null;

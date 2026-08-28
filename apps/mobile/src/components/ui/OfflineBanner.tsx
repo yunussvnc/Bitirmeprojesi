@@ -13,7 +13,6 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  withDelay,
   Easing,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -23,16 +22,17 @@ export function OfflineBanner() {
   const { isConnected } = useNetworkStatus();
   const insets = useSafeAreaInsets();
   const translateY = useSharedValue(-80);
-  const [wasOffline, setWasOffline] = useState(false);
+  const wasOfflineRef = useRef(false);
   const [showBanner, setShowBanner] = useState(false);
   const [bannerText, setBannerText] = useState("İnternet bağlantısı yok");
   const [bannerColor, setBannerColor] = useState("#EF4444");
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const completionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (!isConnected) {
       // Offline oldu
-      setWasOffline(true);
+      wasOfflineRef.current = true;
       setShowBanner(true);
       setBannerText("İnternet bağlantısı yok");
       setBannerColor("#EF4444");
@@ -42,24 +42,30 @@ export function OfflineBanner() {
         clearTimeout(hideTimeoutRef.current);
         hideTimeoutRef.current = null;
       }
-    } else if (wasOffline) {
+      if (completionTimeoutRef.current) {
+        clearTimeout(completionTimeoutRef.current);
+        completionTimeoutRef.current = null;
+      }
+    } else if (wasOfflineRef.current) {
       // Online'a geri döndü
       setBannerText("Bağlantı sağlandı ✓");
       setBannerColor("#22C55E");
 
       hideTimeoutRef.current = setTimeout(() => {
         translateY.value = withTiming(-80, { duration: 300, easing: Easing.in(Easing.cubic) });
-        setTimeout(() => {
+        completionTimeoutRef.current = setTimeout(() => {
           setShowBanner(false);
-          setWasOffline(false);
+          wasOfflineRef.current = false;
+          completionTimeoutRef.current = null;
         }, 350);
       }, 2000);
     }
 
     return () => {
       if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+      if (completionTimeoutRef.current) clearTimeout(completionTimeoutRef.current);
     };
-  }, [isConnected]);
+  }, [isConnected, translateY]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: translateY.value }],

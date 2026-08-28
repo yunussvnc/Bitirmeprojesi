@@ -15,6 +15,46 @@ const ParticleBackground = lazy(() => import('./components/ParticleBackground'))
 const RealIstanbulMap = lazy(() => import('./components/RealIstanbulMap'))
 const VenueMapSection = lazy(() => import('./components/VenueMapSection'))
 
+function DeferredVenueMap() {
+  const sentinelRef = useRef<HTMLDivElement>(null)
+  const [shouldLoad, setShouldLoad] = useState(false)
+
+  useEffect(() => {
+    if (shouldLoad) return
+
+    const sentinel = sentinelRef.current
+    if (!sentinel || !('IntersectionObserver' in window)) {
+      setShouldLoad(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '600px 0px' },
+    )
+
+    observer.observe(sentinel)
+    return () => observer.disconnect()
+  }, [shouldLoad])
+
+  return (
+    <div ref={sentinelRef}>
+      {shouldLoad ? (
+        <Suspense fallback={<div className="venue-map-loading">Harita yükleniyor…</div>}>
+          <VenueMapSection />
+        </Suspense>
+      ) : (
+        <div className="venue-map-loading" aria-hidden="true">Harita yakında yüklenecek…</div>
+      )}
+    </div>
+  )
+}
+
 const fade: Variants = { hidden:{opacity:0,y:40}, visible:{opacity:1,y:0,transition:{duration:.7,ease:[.25,.46,.45,.94]}} }
 const stagger: Variants = { hidden:{opacity:0}, visible:{opacity:1,transition:{staggerChildren:.12}} }
 const scaleIn: Variants = { hidden:{opacity:0,scale:.88}, visible:{opacity:1,scale:1,transition:{duration:.8,ease:[.25,.46,.45,.94]}} }
@@ -135,9 +175,7 @@ export default function App() {
       </section>
 
       {/* INTERACTIVE VENUE MAP */}
-      <Suspense fallback={<div className="venue-map-loading">Harita yükleniyor…</div>}>
-        <VenueMapSection />
-      </Suspense>
+      <DeferredVenueMap />
 
       {/* POPULAR VENUES */}
       <PopularVenues />
@@ -166,7 +204,7 @@ export default function App() {
               </motion.ul>
             </motion.div>
             <motion.div className="showcase-img-wrap" variants={scaleIn}>
-              <img src="/feature-match.png" alt="Sosyal Eşleşme" className="showcase-img"/>
+              <img src="/feature-match.png" alt="Sosyal Eşleşme" className="showcase-img" loading="lazy" decoding="async"/>
             </motion.div>
           </motion.div>
         </div>
@@ -177,7 +215,7 @@ export default function App() {
         <div className="container">
           <motion.div className="showcase" initial="hidden" whileInView="visible" viewport={{once:true,amount:.25}} variants={stagger}>
             <motion.div className="showcase-img-wrap" variants={scaleIn}>
-              <img src="/feature-social.png" alt="Sosyal Akış" className="showcase-img"/>
+              <img src="/feature-social.png" alt="Sosyal Akış" className="showcase-img" loading="lazy" decoding="async"/>
             </motion.div>
             <motion.div className="showcase-content" variants={stagger}>
               <motion.h2 variants={fade}>Sosyal <em>Deneyim</em></motion.h2>
@@ -220,7 +258,7 @@ export default function App() {
               </motion.ul>
             </motion.div>
             <motion.div className="showcase-img-wrap" variants={scaleIn}>
-              <img src="/feature-ai.png" alt="AI Öneri" className="showcase-img"/>
+              <img src="/feature-ai.png" alt="AI Öneri" className="showcase-img" loading="lazy" decoding="async"/>
             </motion.div>
           </motion.div>
         </div>

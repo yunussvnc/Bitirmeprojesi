@@ -1,9 +1,7 @@
-import { showError, showSuccess } from "@/src/utils/toast";
+import { showError } from "@/src/utils/toast";
 import * as WebBrowser from 'expo-web-browser';
 import { useCallback, useEffect, useState } from 'react';
-
-WebBrowser.maybeCompleteAuthSession();
-import {  Platform } from 'react-native';
+import { Platform } from 'react-native';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as Google from 'expo-auth-session/providers/google';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +16,8 @@ import { useAuthStore } from '@/src/store/useAuthStore';
 import { getAuthUserMessage } from '@/src/utils/authErrors';
 import { success } from '@/src/utils/haptics';
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+
+WebBrowser.maybeCompleteAuthSession();
 
 type RoleType = 'user' | 'venue';
 type SocialAuthContext = 'login' | 'register';

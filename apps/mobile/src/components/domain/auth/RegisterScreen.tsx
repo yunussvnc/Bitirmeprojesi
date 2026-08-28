@@ -1,4 +1,3 @@
-import { showError, showSuccess } from "@/src/utils/toast";
 /**
  * Kayıt ekranı – Giriş ekranı ile aynı tasarım
  * Arka planda mekan carousel, koyu overlay, cam kart, onDark inputlar.
@@ -12,29 +11,22 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
   View,
-  ScrollView,
   Platform,
   Text,
   TouchableOpacity,
-  Animated,
-  Dimensions,
   Image,
   Keyboard,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { getAllPlaces } from '@/src/services/mekanService';
 import { registerUser, registerVenue, googleLogin, appleLogin } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
-import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
@@ -42,10 +34,9 @@ import { LegalModal } from '@/src/components/ui/LegalModal';
 import { googleAuthRequestConfig } from '@/src/config/socialAuth';
 import { validatePassword } from '@/src/utils/validators';
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+import styles from './RegisterScreen.styles';
 
 WebBrowser.maybeCompleteAuthSession();
-
-const { width, height } = Dimensions.get('window');
 
 const FALLBACK_PLACE_IMAGES = [
   'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
@@ -56,10 +47,7 @@ const FALLBACK_PLACE_IMAGES = [
   'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
 ];
 
-const CAROUSEL_INTERVAL_MS = 4500;
-
 export default function RegisterScreen() {
-  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -89,24 +77,19 @@ export default function RegisterScreen() {
   // venueStep: 'place-search' (1. adım) | 'account' (2. adım)
   const [venueStep, setVenueStep] = useState<'place-search' | 'account'>('place-search');
   const [placeSearchQuery, setPlaceSearchQuery] = useState('');
-  const [placeSearchResults, setPlaceSearchResults] = useState<Array<{id: number; name: string; address: string; category: string}>>([]);
+  const [placeSearchResults, setPlaceSearchResults] = useState<{id: number; name: string; address: string; category: string}[]>([]);
   const [selectedPlace, setSelectedPlace] = useState<{id: number; name: string; address: string} | null>(null);
   const [placeSearchLoading, setPlaceSearchLoading] = useState(false);
   const placeSearchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handledGoogleTokenRef = useRef<string | null>(null);
 
   // Google Auth Setup
-  const [request, response, promptAsync] = Google.useAuthRequest({
+  const [, response, promptAsync] = Google.useAuthRequest({
     ...googleAuthRequestConfig,
     scopes: [...googleAuthRequestConfig.scopes],
   });
 
-  useEffect(() => {
-    if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
-    }
-  }, [response]);
-
-  const handleGoogleSuccess = async (token: string) => {
+  const handleGoogleSuccess = useCallback(async (token: string) => {
     if (!token) return;
     setLoading(true);
     try {
@@ -137,9 +120,18 @@ export default function RegisterScreen() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [roleType, t]);
 
-  const signInWithApple = async () => {
+  useEffect(() => {
+    if (response?.type === 'success' && response.authentication) {
+      const token = response.authentication.idToken || response.authentication.accessToken;
+      if (!token || handledGoogleTokenRef.current === token) return;
+      handledGoogleTokenRef.current = token;
+      void handleGoogleSuccess(token);
+    }
+  }, [response, handleGoogleSuccess]);
+
+  const signInWithApple = useCallback(async () => {
     try {
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
@@ -181,7 +173,7 @@ export default function RegisterScreen() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [roleType, t]);
 
 
 
@@ -283,7 +275,7 @@ export default function RegisterScreen() {
       isSubmittingRef.current = false;
       setLoading(false);
     }
-  }, [validateForm, fullName, venueName, email, password, roleType, termsAccepted]);
+  }, [validateForm, fullName, venueName, email, password, roleType, termsAccepted, selectedPlace, t]);
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
@@ -292,7 +284,7 @@ export default function RegisterScreen() {
     } else if (provider === 'Google') {
       promptAsync();
     }
-  }, [promptAsync]);
+  }, [promptAsync, signInWithApple]);
 
   const clearFieldError = useCallback((field: keyof typeof errors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
@@ -668,201 +660,3 @@ export default function RegisterScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0a0a0a' },
-  safeArea: { flex: 1 },
-  keyboardView: { flex: 1 },
-  scrollView: { flex: 1 },
-  scrollContent: { flexGrow: 1, paddingBottom: 60 },
-  content: {
-    width: '100%',
-    paddingHorizontal: 24,
-    paddingTop: 28,
-    paddingBottom: 40,
-  },
-  topBlock: {
-    alignSelf: 'stretch',
-  },
-  backgroundImage: { width: '100%' as any, height: '100%' as any },  // kullanılmıyor
-  header: {
-    alignItems: 'center',
-    marginBottom: 36,
-  },
-
-  brandTitle: {
-    fontSize: 40,
-    fontWeight: '800',
-    color: '#ffffff',
-    letterSpacing: 3,
-    marginBottom: 10,
-    textShadowColor: 'rgba(0,0,0,0.4)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 8,
-  },
-  tagline: {
-    fontSize: 15,
-    fontWeight: '500',
-    color: 'rgba(255,255,255,0.95)',
-    letterSpacing: 0.4,
-    textAlign: 'center',
-    paddingHorizontal: 24,
-  },
-  card: {
-    alignSelf: 'stretch',
-    borderRadius: 28,
-    overflow: 'hidden',
-    marginTop: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.15)',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.4,
-    shadowRadius: 24,
-    elevation: 16,
-  },
-  cardInner: { padding: 20, backgroundColor: 'rgba(0,0,0,0.35)' },
-  inputContainer: { marginBottom: 14 },
-  passwordRulesText: {
-    color: 'rgba(255,255,255,0.6)',
-    fontSize: 12,
-    marginTop: -2,
-    marginBottom: 14,
-    marginLeft: 4,
-  },
-  strengthContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 10,
-    marginTop: -6,
-  },
-  strengthBar: {
-    flex: 1,
-    flexDirection: 'row',
-    gap: 4,
-    height: 4,
-  },
-  strengthSegment: {
-    flex: 1,
-    borderRadius: 2,
-  },
-  strengthLabel: {
-    fontSize: 12,
-    fontWeight: '700',
-    minWidth: 64,
-    textAlign: 'right',
-  },
-  toggleContainer: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    borderRadius: 24,
-    padding: 4,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.15)',
-  },
-  toggleBtn: {
-    flex: 1,
-    paddingVertical: 12,
-    borderRadius: 20,
-    alignItems: 'center',
-  },
-  toggleBtnActive: {
-    backgroundColor: '#fff',
-    shadowColor: '#fff',
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  toggleTxt: {
-    color: '#ccc',
-    fontSize: 15,
-    fontWeight: '600',
-    letterSpacing: 0.4,
-  },
-  toggleTxtActive: {
-    color: '#000',
-    fontWeight: '700',
-  },
-  termsContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginTop: 8,
-    marginBottom: 20,
-    paddingHorizontal: 4,
-    gap: 12,
-  },
-  checkbox: {
-    width: 20,
-    height: 20,
-    borderRadius: 6,
-    borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.4)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 2,
-  },
-  checkboxActive: {
-    backgroundColor: '#fff',
-    borderColor: '#fff',
-  },
-  termsText: {
-    flex: 1,
-    fontSize: 13,
-    color: 'rgba(255,255,255,0.75)',
-    lineHeight: 18,
-  },
-  termsLink: {
-    fontWeight: '600',
-    color: '#fff',
-    textDecorationLine: 'underline',
-  },
-  registerButton: { marginTop: 0 },
-  divider: { flexDirection: 'row', alignItems: 'center', marginVertical: 18 },
-  dividerLine: { flex: 1, height: 1, backgroundColor: 'rgba(255,255,255,0.25)' },
-  dividerLabel: { marginHorizontal: 18, fontSize: 13, fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: 0.8 },
-  socialRow: { flexDirection: 'row', gap: 14 },
-  socialBtnGoogle: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 14,
-    borderRadius: 14,
-    backgroundColor: 'rgba(255,255,255,0.95)',
-    gap: 10,
-  },
-  socialBtnApple: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 14,
-    borderRadius: 14,
-    backgroundColor: 'rgba(0,0,0,0.82)',
-    gap: 10,
-  },
-  socialIconG: { fontSize: 18, fontWeight: '700', color: '#4285F4' },
-  socialBtnTextGoogle: { fontSize: 16, fontWeight: '600', color: '#1a1a1a' },
-  socialBtnTextWhite: { fontSize: 16, fontWeight: '600', color: '#fff' },
-  footerStatic: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 16,
-    paddingHorizontal: 24,
-    backgroundColor: 'transparent',
-  },
-  loginRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    gap: 4,
-  },
-  footerLabel: { fontSize: 16, color: 'rgba(255,255,255,0.9)' },
-  footerLink: { fontSize: 16, fontWeight: '700', color: '#ffffff', textDecorationLine: 'underline', letterSpacing: 0.3 },
-});

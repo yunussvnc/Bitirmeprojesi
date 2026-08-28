@@ -26,8 +26,6 @@ import {
 
 // ── Constants ───────────────────────────────────────────────
 
-const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/heic', 'image/heif'];
-const ALLOWED_VIDEO_TYPES = ['video/mp4', 'video/quicktime', 'video/x-msvideo'];
 const MAX_CAPTION_LENGTH = 2200;
 const MAX_FILE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 

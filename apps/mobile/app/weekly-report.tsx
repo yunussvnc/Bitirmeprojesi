@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
@@ -9,8 +9,6 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { lightImpact } from "@/src/utils/haptics";
-
-const { width } = Dimensions.get("window");
 
 export default function WeeklyReportScreen() {
   const router = useRouter();

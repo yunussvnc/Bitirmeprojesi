@@ -97,8 +97,15 @@ export interface AdminAuditLog {
   action: string;
   target_type: string;
   target_id: number | null;
-  details: Record<string, any> | null;
+  details: Record<string, unknown> | null;
   created_at: string;
+}
+
+export interface AIChartPoint {
+  date: string;
+  total: number;
+  fallback: number;
+  blocked?: number;
 }
 
 export interface DashboardStats {

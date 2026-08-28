@@ -1,19 +1,11 @@
-# routers/users.py — Kullanıcı profil, takip ve arama endpoint'leri
-
-# pyrefly: ignore [missing-import]
 from typing import Optional
-# pyrefly: ignore [missing-import]
 from pydantic import BaseModel
-
-# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query
-# pyrefly: ignore [missing-import]
 from fastapi.concurrency import run_in_threadpool
 # pyrefly: ignore [missing-import]
 from sqlalchemy import case, or_, and_, func, desc
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
-
 import models, schemas, crud
 from app.dependencies import get_db, get_current_user, get_optional_user
 from app.services.rate_limiter import follow_rate_limiter
@@ -185,6 +177,7 @@ def search_users(
 
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
+
 class UserBatchRequest(BaseModel):
     user_ids: list[int]
 
@@ -223,7 +216,6 @@ def get_users_batch(
         items.append(_enrich_user_summary(db, u, current_uid))
 
     return {"items": items, "total": len(items)}
-
 
 
 @router.get("/users/blocked")
@@ -365,7 +357,6 @@ def get_user_stats_endpoint(
             raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
             
     return crud.get_user_stats(db, user_id)
-
 
 @router.post("/users/{user_id}/follow", dependencies=[Depends(follow_rate_limiter)])
 async def toggle_follow_user(

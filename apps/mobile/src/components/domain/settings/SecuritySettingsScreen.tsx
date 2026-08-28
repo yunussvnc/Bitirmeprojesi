@@ -16,7 +16,6 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
-import { BackButton } from "@/src/components/shared/navigation";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { changePassword, deleteAccount } from "@/src/services/authService";

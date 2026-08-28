@@ -12,7 +12,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
   ActivityIndicator,
   Platform,
 } from 'react-native';
@@ -20,7 +19,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Camera, useCameraDevice, useCameraPermission, useMicrophonePermission } from 'react-native-vision-camera';
 import { useTranslation } from 'react-i18next';
 import { Image as ExpoImage } from 'expo-image';
-import * as MediaLibrary from 'expo-media-library';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -37,7 +35,6 @@ import { MAX_VIDEO_DURATION_SEC } from '@/src/contentCreation/config';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export interface EmbeddedCameraProps {
   contentType: ContentType;
@@ -67,7 +64,6 @@ export function EmbeddedCamera({
   const [flash, setFlash] = useState<'off' | 'on' | 'auto'>('off');
   const [isRecording, setIsRecording] = useState(false);
   const [recordDuration, setRecordDuration] = useState(0);
-  const [capturing, setCapturing] = useState(false);
   const capturingRef = useRef(false);
   // Kamera hazır olana kadar deklanşör devre dışı
   const [isCameraReady, setIsCameraReady] = useState(false);
@@ -91,7 +87,7 @@ export function EmbeddedCamera({
     if (contentType === 'story' && !hasMicPermission) {
       requestMicPermission();
     }
-  }, [hasCamPermission, hasMicPermission, contentType]);
+  }, [hasCamPermission, hasMicPermission, contentType, requestCamPermission, requestMicPermission]);
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -114,13 +110,13 @@ export function EmbeddedCamera({
     } else {
       recordPulse.value = withTiming(1, { duration: 200 });
     }
-  }, [isRecording]);
+  }, [isRecording, recordPulse]);
 
   const handleFlipCamera = useCallback(() => {
     lightImpact();
     setFacing((prev) => (prev === 'back' ? 'front' : 'back'));
     flipRotation.value = withSpring(flipRotation.value + 180, { damping: 15, stiffness: 150 });
-  }, []);
+  }, [flipRotation]);
 
   const handleFlashToggle = useCallback(() => {
     lightImpact();
@@ -134,7 +130,6 @@ export function EmbeddedCamera({
   const takePhoto = useCallback(async () => {
     if (!cameraRef.current || capturingRef.current || !isCameraReady || !device) return;
     capturingRef.current = true;
-    setCapturing(true);
     mediumImpact();
     shutterScale.value = withSequence(
       withSpring(0.85, { damping: 15 }),
@@ -158,9 +153,8 @@ export function EmbeddedCamera({
       Alert.alert(t('home.error_title'), t('creation.capture_failed'));
     } finally {
       capturingRef.current = false;
-      setCapturing(false);
     }
-  }, [isCameraReady, onCapture, flash, device]);
+  }, [isCameraReady, onCapture, flash, device, shutterScale, t]);
 
   const stopRecording = useCallback(async () => {
     if (recordTimerRef.current) {
@@ -175,7 +169,7 @@ export function EmbeddedCamera({
     } catch {
       // Camera may already have stopped
     }
-  }, []);
+  }, [shutterRingProgress]);
 
   const startRecording = useCallback(async () => {
     if (!cameraRef.current || isRecordingRef.current || !device) return;
@@ -218,7 +212,7 @@ export function EmbeddedCamera({
       isRecordingRef.current = false;
       setIsRecording(false);
     }
-  }, [maxVideoSec, onCapture, stopRecording, flash, device]);
+  }, [maxVideoSec, onCapture, stopRecording, flash, device, shutterRingProgress]);
 
   // onPress ile fotoğraf çekimi (onPressIn çift tetiklenme sorununa yol açıyordu)
   const handleShutterPress = useCallback(() => {

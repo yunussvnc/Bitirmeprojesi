@@ -1,12 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { useFocusEffect } from 'expo-router';
-import { useAuthStore } from '@/src/store/useAuthStore';
 import { getMyVenue, Place } from '@/src/services/mekanService';
 import PlaceDetailScreen from '@/src/components/domain/place/PlaceDetailScreen';
 
 export default function VenueDashboardScreen() {
-  const { user } = useAuthStore();
   const [loading, setLoading] = useState(true);
   const [venue, setVenue] = useState<Place | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);

@@ -20,31 +20,21 @@ import {
   Keyboard,
   TextInput as NativeTextInput,
 } from 'react-native';
+import { requireOptionalNativeModule } from 'expo-modules-core';
 import Toast from 'react-native-toast-message';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { radius } from '@/src/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
 
-// ---------- Lazy / Safe import for expo-speech-recognition ----------
+// ---------- Safe access to expo-speech-recognition ----------
 // Native modül yoksa (eski build) uygulama çökmemeli.
-let SpeechModule: any = null;
-let useSpeechEvent: any = null;
-let speechAvailable = false;
+type SpeechRecognitionModule =
+  typeof import('expo-speech-recognition')['ExpoSpeechRecognitionModule'];
 
-try {
-  const sr = require('expo-speech-recognition');
-  SpeechModule = sr.ExpoSpeechRecognitionModule;
-  useSpeechEvent = sr.useSpeechRecognitionEvent;
-  speechAvailable = !!SpeechModule;
-} catch {
-  // Native modül yok — sessizce devam et
-}
-
-// Stub hook: native modül yokken crash önler
-function useNoopSpeechEvent(_event: string, _handler: any) {
-  // intentionally empty
-}
+const SpeechModule =
+  requireOptionalNativeModule<SpeechRecognitionModule>('ExpoSpeechRecognition');
+const speechAvailable = SpeechModule !== null;
 
 const MIN_HEIGHT = 64;
 const MAX_HEIGHT = 140;
@@ -79,41 +69,45 @@ export function ChatInput({
   const { colors } = useTheme();
 
   const inputRef = useRef<NativeTextInput>(null);
+  const onChangeTextRef = useRef(onChangeText);
+  onChangeTextRef.current = onChangeText;
   const [isListening, setIsListening] = useState(false);
-
-  // Use the real hook or the no-op stub
-  const useEvent = speechAvailable ? useSpeechEvent : useNoopSpeechEvent;
 
   // ---------- Speech Recognition Events ----------
 
-  useEvent('start', () => {
-    setIsListening(true);
-  });
+  useEffect(() => {
+    if (!SpeechModule) return;
 
-  useEvent('end', () => {
-    setIsListening(false);
-  });
+    const subscriptions = [
+      SpeechModule.addListener('start', () => {
+        setIsListening(true);
+      }),
+      SpeechModule.addListener('end', () => {
+        setIsListening(false);
+      }),
+      SpeechModule.addListener('result', (ev) => {
+        if (ev.results && ev.results.length > 0) {
+          const transcript = ev.results[0]?.transcript ?? '';
+          if (transcript) {
+            onChangeTextRef.current(transcript);
+          }
+        }
+      }),
+      SpeechModule.addListener('error', (ev) => {
+        console.error('[SpeechRecognition] Error:', ev.error, ev.message);
+        setIsListening(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Ses tanıma hatası',
+          text2: ev.message || 'Lütfen tekrar deneyin.',
+          position: 'top',
+          topOffset: 60,
+        });
+      }),
+    ];
 
-  useEvent('result', (ev: any) => {
-    if (ev.results && ev.results.length > 0) {
-      const transcript = ev.results[0]?.transcript ?? '';
-      if (transcript) {
-        onChangeText(transcript);
-      }
-    }
-  });
-
-  useEvent('error', (ev: any) => {
-    console.error('[SpeechRecognition] Error:', ev.error, ev.message);
-    setIsListening(false);
-    Toast.show({
-      type: 'error',
-      text1: 'Ses tanıma hatası',
-      text2: ev.message || 'Lütfen tekrar deneyin.',
-      position: 'top',
-      topOffset: 60,
-    });
-  });
+    return () => subscriptions.forEach((subscription) => subscription.remove());
+  }, []);
 
   // ---------- Start / Stop ----------
 

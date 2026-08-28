@@ -8,23 +8,15 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Text, StyleSheet, Animated, View } from 'react-native';
-import { IconSymbol, type IconSymbolName } from './icon-symbol';
+import type { IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/src/hooks/useTheme';
 import { Button } from './Button';
-import { createTextStyle, spacing, radius } from '@/src/constants/design';
+import { createTextStyle, spacing } from '@/src/constants/design';
 import LottieView from 'lottie-react-native';
 
 /** Preset variants for common empty states */
 export type EmptyStateVariant = 'feed' | 'saved' | 'reels' | 'notifications' | 'search' | 'places' | 'custom';
 
-const VARIANT_PRESETS: Record<Exclude<EmptyStateVariant, 'custom'>, { icon: IconSymbolName; accentIcon: boolean }> = {
-  feed: { icon: 'photo.on.rectangle.angled', accentIcon: true },
-  saved: { icon: 'bookmark', accentIcon: true },
-  reels: { icon: 'video.fill', accentIcon: true },
-  notifications: { icon: 'bell.slash', accentIcon: false },
-  search: { icon: 'magnifyingglass', accentIcon: true },
-  places: { icon: 'mappin.slash', accentIcon: false },
-};
 
 export interface EmptyStateProps {
   /**
@@ -81,22 +73,15 @@ export interface EmptyStateProps {
  * ```
  */
 export function EmptyState({
-  icon: iconProp,
   title,
   description,
   actionLabel,
   onAction,
-  accentIcon: accentIconProp = false,
   variant = 'custom',
 }: EmptyStateProps) {
   const { colors, spacing } = useTheme();
   const titleStyle = createTextStyle('heading', colors.text.primary);
   const descriptionStyle = createTextStyle('body', colors.text.secondary);
-  const preset = variant !== 'custom' ? VARIANT_PRESETS[variant] : null;
-  const icon = preset?.icon ?? iconProp ?? 'doc.text';
-  const accentIcon = preset ? preset.accentIcon : accentIconProp;
-  const iconColor = accentIcon ? colors.accent.primary : colors.text.tertiary;
-  const iconBgColor = accentIcon ? `${colors.accent.primary}18` : colors.surface.default;
   
   const opacity = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(24)).current;

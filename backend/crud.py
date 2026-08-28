@@ -1,10 +1,9 @@
+"""Backward-compatible facade for domain-specific CRUD modules."""
+
 from datetime import datetime, timedelta, timezone
 import logging
-# pyrefly: ignore [missing-import]
 from sqlalchemy import func, or_, and_
-# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session, joinedload
-# pyrefly: ignore [missing-import]
 import bcrypt
 import models, schemas
 from app.services.moderator import AIModerator

@@ -13,7 +13,6 @@
  */
 
 import Toast from "react-native-toast-message";
-import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 /**
  * Başarı mesajı göster (yeşil ✓)

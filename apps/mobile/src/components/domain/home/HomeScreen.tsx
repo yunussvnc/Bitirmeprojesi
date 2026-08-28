@@ -10,17 +10,11 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import {
   View,
   Text, Dimensions,
-  StyleSheet,
   TouchableOpacity,
-  Platform,
   RefreshControl,
-  ViewToken,
   Animated,
   Easing,
-  Keyboard,
-  TouchableWithoutFeedback,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import LottieView from "lottie-react-native";
 import { FlashList, FlashListRef } from "@shopify/flash-list";
 import * as Location from "expo-location";
@@ -40,8 +34,8 @@ import {
 } from "@/src/components/shared/ui";
 import { usePreferences } from "@/src/store/preferences";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
-import { createTextStyle, s } from "@/src/constants/design";
-import { getAllPlaces, getForYouPlaces, logInteraction } from "@/src/services/mekanService";
+import { createTextStyle } from "@/src/constants/design";
+import { getForYouPlaces } from "@/src/services/mekanService";
 import { recommendPlaces } from "@/src/services/api";
 import type { Place } from "@/src/services/mekanService";
 import type { RecommendItem, RecommendResponse } from "@/src/types/recommend";
@@ -52,6 +46,7 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+import styles from "./HomeScreen.styles";
 
 /* ── İlçe algılama (prompt'ta il/ilçe var mı?) ── */
 const DISTRICTS = [
@@ -247,7 +242,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const screenRef = useRef<ScreenRef>(null);
   const flatListRef = useRef<FlashListRef<any>>(null);
-  const { prefs, patchPrefs, resetPrefs } = usePreferences();
+  const { prefs, resetPrefs } = usePreferences();
   const savedIds = useAppStore((s) => s.savedIds);
 
   const [query, setQuery] = useState("");
@@ -269,7 +264,6 @@ export default function HomeScreen() {
   const lastDirection = useRef<"up" | "down" | null>(null);
   const miniBarVisibleRef = useRef(false);
   const { hide: hideTabBar, show: showTabBar, fadeOut, fadeIn } = useTabBarVisibility();
-  const insets = useSafeAreaInsets();
   const [filters, setFilters] = useState<FilterValues>({
     province: null,
     district: null,
@@ -416,7 +410,7 @@ export default function HomeScreen() {
         }
       }
     },
-    [animateMiniBar]
+    [animateMiniBar, fadeIn, fadeOut]
   );
 
   const miniBarOpacity = miniBarAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 1] });
@@ -543,7 +537,7 @@ export default function HomeScreen() {
         />
       );
     },
-    [placesById, handlePlacePress, displayMode]
+    [placesById, handlePlacePress, displayMode, t]
   );
 
   const listEmpty = useCallback(() => {
@@ -598,6 +592,7 @@ export default function HomeScreen() {
     filteredPlaces.length,
     hasActiveFilters,
     clearAll,
+    t,
   ]);
 
   const hasAnyFilter = hasActiveFilters || query.trim();
@@ -699,139 +694,3 @@ export default function HomeScreen() {
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  screen: { flex: 1 },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: s(4),
-    overflow: "visible",
-  },
-  headerLeft: { flex: 1 },
-  headerRight: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  clearAiBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderRadius: 20,
-    borderWidth: 1,
-  },
-  clearAiBtnText: {
-    fontSize: 13,
-    fontWeight: "600",
-  },
-  titleRow: { flexDirection: "row", alignItems: "center", gap: 8 },
-  dot: { width: 8, height: 8, borderRadius: 4 },
-  title: { fontSize: 26, fontWeight: "700", marginBottom: 0 },
-  subtitle: { fontSize: 13, marginTop: 4, marginLeft: 16 },
-  savedBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    overflow: "visible",
-  },
-  savedBadge: {
-    position: "absolute",
-    top: 2,
-    right: 2,
-    minWidth: 20,
-    height: 18,
-    borderRadius: 9,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 5,
-  },
-  savedBadgeText: {
-    fontSize: 11,
-    fontWeight: "700",
-  },
-  searchWrap: { marginBottom: s(3), minHeight: 72 },
-  chatInput: { alignSelf: "stretch", minHeight: 64 },
-  filterSummaryRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  filterTrigger: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
-    borderWidth: 1,
-  },
-  filterTriggerText: { fontSize: 13, fontWeight: "600" },
-  summaryTag: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 14,
-  },
-  summaryTagText: { fontSize: 12, fontWeight: "500" },
-  summaryBanner: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 10,
-    padding: 14,
-    borderRadius: 14,
-    borderWidth: 1,
-    marginBottom: s(3),
-    marginTop: s(5),
-  },
-  summaryBannerIcon: { marginTop: 2 },
-  summaryBannerText: { flex: 1, fontSize: 13, lineHeight: 19 },
-  aiLoadingWrap: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 8,
-    paddingVertical: 16,
-    borderRadius: 12,
-    marginBottom: s(3),
-  },
-  aiLoadingText: { fontSize: 14, fontWeight: "600" },
-  listHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: s(3),
-  },
-  sectionTitle: { fontSize: 16, fontWeight: "700", marginTop: s(5) },
-  count: { fontSize: 13 },
-  listContent: { gap: 12, paddingBottom: s(8) },
-  listContentEmpty: { flexGrow: 1 },
-  centerWrap: { minHeight: 320, justifyContent: "center" },
-  skeletonWrap: { paddingBottom: 24, gap: 12, paddingTop: 12 },
-  miniBar: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    zIndex: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  miniTitle: { flex: 1, fontSize: 16, fontWeight: "700", textAlign: "center" },
-  miniBarPlaceholder: { width: 34, height: 34 },
-  miniIconBtn: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -9,7 +9,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
-  Platform,
   Keyboard,
   Modal,
   Pressable,
@@ -213,7 +212,7 @@ export function PlacePickerSheet({ visible, onClose, onSelect }: PlacePickerShee
       setPlaces([]);
       fetchPlaces(1, true);
     }
-  }, [visible, debouncedQuery, locationLoaded]);
+  }, [visible, debouncedQuery, locationLoaded, fetchPlaces]);
 
   const handleSelect = useCallback(
     (place: Place) => {

@@ -6,7 +6,7 @@
  * Çoklu görsel → yatay kaydırmalı carousel + dot indicator
  */
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -82,13 +82,10 @@ const FeedCardComponent = ({
   const videoAutoplay = useSettingsStore((s) => s.videoAutoplay);
   const [isManuallyPaused, setIsManuallyPaused] = useState(!videoAutoplay);
 
-  // Double-tap kalp animasyonu — lastTap ref ile
+  // Double-tap kalp animasyonu Gesture.Tap tarafından tanınır.
   const heartScale = useSharedValue(0);
   const heartOpacity = useSharedValue(0);
   const [heartPos, setHeartPos] = useState({ x: 0, y: 0 });
-  const lastTapRef = useRef<number>(0);
-  const doubleTapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const DOUBLE_TAP_DELAY = 300; // ms
 
   const triggerHeartBurst = useCallback(
     (x: number, y: number) => {

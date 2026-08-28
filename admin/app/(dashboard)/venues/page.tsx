@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { api } from '@/lib/api';
+import { getApiErrorMessage } from '@/lib/api-error';
 import { Place } from '@/types';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { 
   Table, 
   TableBody, 
@@ -50,10 +51,10 @@ export default function VenuesPage() {
   const [indexingMap, setIndexingMap] = useState<Record<number, boolean>>({});
   const [bulkIndexing, setBulkIndexing] = useState(false);
 
-  const fetchVenues = async () => {
+  const fetchVenues = useCallback(async () => {
     setLoading(true);
     try {
-      const params: any = {
+      const params: Record<string, string | number> = {
         page,
         limit,
       };
@@ -64,20 +65,19 @@ export default function VenuesPage() {
       const response = await api.get('/admin/venues', { params });
       setVenues(response.data.items);
       setTotal(response.data.total);
-    } catch (err: any) {
-      console.error(err);
+    } catch {
       toast.error('Mekanlar yüklenirken bir hata oluştu.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [categoryFilter, districtFilter, limit, page, search]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchVenues();
+      void fetchVenues();
     }, 300);
     return () => clearTimeout(timer);
-  }, [search, categoryFilter, districtFilter, page]);
+  }, [fetchVenues]);
 
   const handleIndexSingle = async (venueId: number) => {
     setIndexingMap((prev) => ({ ...prev, [venueId]: true }));
@@ -87,9 +87,9 @@ export default function VenuesPage() {
         description: 'Mekan açıklamaları vektörleştirildi ve Qdrant DB güncellendi.',
       });
       fetchVenues();
-    } catch (err: any) {
+    } catch (error: unknown) {
       toast.error('Vektörleştirme hatası', {
-        description: err.response?.data?.detail || 'AI servisi yanıt vermiyor.',
+        description: getApiErrorMessage(error, 'AI servisi yanıt vermiyor.'),
       });
     } finally {
       setIndexingMap((prev) => ({ ...prev, [venueId]: false }));
@@ -105,7 +105,7 @@ export default function VenuesPage() {
         description: response.data?.message || 'Qdrant veri tabanındaki tüm vektörler güncelleniyor.',
       });
       fetchVenues();
-    } catch (err: any) {
+    } catch {
       toast.error('Toplu indeksleme hatası');
     } finally {
       setBulkIndexing(false);
@@ -120,7 +120,7 @@ export default function VenuesPage() {
         description: 'Mekan kaydı sistemden kalıcı olarak kaldırıldı.',
       });
       fetchVenues();
-    } catch (err: any) {
+    } catch {
       toast.error('Mekan silinemedi');
     }
   };

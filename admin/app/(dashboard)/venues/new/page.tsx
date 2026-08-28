@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { api } from '@/lib/api';
+import { getApiErrorMessage } from '@/lib/api-error';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -46,7 +47,7 @@ export default function NewVenuePage() {
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { errors },
   } = useForm<VenueFields>({
     resolver: zodResolver(venueSchema),
@@ -78,24 +79,24 @@ export default function NewVenuePage() {
         toast.success('Mekan Eklendi ve İndekslendi', {
           description: 'Mekan başarıyla kaydedildi ve Qdrant semantik veritabanına eklendi.',
         });
-      } catch (indexErr) {
+      } catch {
         toast.warning('Mekan Eklendi fakat İndekslenemedi', {
           description: 'Mekan kaydedildi ancak vektör veritabanına eklenirken hata oluştu. Daha sonra elle indeksleyebilirsiniz.',
         });
       }
 
       router.push('/venues');
-    } catch (err: any) {
+    } catch (error: unknown) {
       toast.error('Mekan eklenirken hata oluştu', {
-        description: err.response?.data?.detail || 'Lütfen bilgileri kontrol edip tekrar deneyin.',
+        description: getApiErrorMessage(error, 'Lütfen bilgileri kontrol edip tekrar deneyin.'),
       });
     } finally {
       setLoading(false);
     }
   };
 
-  const selectedCategory = watch('category');
-  const selectedDistrict = watch('city');
+  const selectedCategory = useWatch({ control, name: 'category' });
+  const selectedDistrict = useWatch({ control, name: 'city' });
 
   return (
     <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">

@@ -25,7 +25,7 @@ export type SavedPost = {
     like_count: number;
     comment_count: number;
     created_at: string;
-    media: Array<{ id: number; media_type: string; media_url: string }>;
+    media: { id: number; media_type: string; media_url: string }[];
     author?: { id: number; username: string; avatar_url: string | null };
     place?: { id: number; name: string; category: string | null } | null;
     is_liked?: boolean;

@@ -17,7 +17,6 @@ import { create } from 'zustand';
 import * as ImageManipulator from 'expo-image-manipulator';
 import type {
   UploadJob,
-  UploadStage,
   MediaItem,
   SanitizedPostPayload,
   SanitizedStoryPayload,

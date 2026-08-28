@@ -1,14 +1,25 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Platform,
   ActivityIndicator,
 } from 'react-native';
 import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
+import Animated, {
+  interpolate,
+  Extrapolation,
+  FadeIn,
+  FadeOut,
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BlurView } from 'expo-blur';
+import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { useTheme } from '@/src/hooks/useTheme';
+import { Place } from '@/src/services/mekanService';
+import { lightImpact } from '@/src/utils/haptics';
 // import { Magnetometer, Accelerometer } from 'expo-sensors';
 // Geçici olarak expo-sensors'ü mock'luyoruz (Expo Go veya Pedometer hatası veren ortamlarda crash olmaması için)
 interface SensorData {
@@ -29,21 +40,6 @@ const Accelerometer = {
   setUpdateInterval: (_interval: number) => undefined,
   addListener: (_callback: (data: SensorData) => void): SensorSubscription => ({ remove: () => undefined }),
 };
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-  interpolate,
-  Extrapolation,
-  FadeIn,
-  FadeOut,
-} from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BlurView } from 'expo-blur';
-import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { useTheme } from '@/src/hooks/useTheme';
-import { Place } from '@/src/services/mekanService';
-import { lightImpact } from '@/src/utils/haptics';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const FOV = 60; // Field of view in degrees (approximate)
@@ -104,7 +100,7 @@ export function ARView({ places, userLocation, onClose, onPlaceSelect }: ARViewP
     if (!hasPermission) {
       requestPermission();
     }
-  }, [hasPermission]);
+  }, [hasPermission, requestPermission]);
 
   useEffect(() => {
     let magSubscription: SensorSubscription;

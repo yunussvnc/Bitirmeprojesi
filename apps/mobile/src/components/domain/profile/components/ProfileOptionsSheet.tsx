@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Animated, P
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { lightImpact, mediumImpact } from "@/src/utils/haptics";
+import { mediumImpact } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
 
 export interface ProfileOptionsSheetProps {

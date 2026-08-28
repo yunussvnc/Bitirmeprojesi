@@ -8,7 +8,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { captureException, addBreadcrumb } from "@/src/services/sentryService";
+import { captureException } from "@/src/services/sentryService";
 import { analytics, AnalyticsEvents } from "@/src/services/analyticsService";
 
 interface Props {

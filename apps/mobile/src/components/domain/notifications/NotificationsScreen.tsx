@@ -9,7 +9,7 @@
  *  - Full i18n localization
  */
 
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
   Text,

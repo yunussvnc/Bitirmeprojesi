@@ -100,11 +100,6 @@ const clamp = (value: number, min: number, max: number): number => {
   return Math.min(Math.max(value, min), max);
 };
 
-const radToDeg = (rad: number): number => {
-  'worklet';
-  return rad * (180 / Math.PI);
-};
-
 // ── Ana Bileşen ────────────────────────────────────────────────────────
 export function StoryMediaEditor({
   uri,
@@ -245,7 +240,16 @@ export function StoryMediaEditor({
     translateY.value    = withSpring(0, { damping: 14 });
     savedTransY.value   = 0;
     transformRef.current = { scale: 1, translateX: 0, translateY: 0, rotationRad: 0, rotationDeg: 0 };
-  }, []);
+  }, [
+    rotation,
+    savedRotation,
+    savedScale,
+    savedTransX,
+    savedTransY,
+    scale,
+    translateX,
+    translateY,
+  ]);
 
   // ── AŞAMA 2: Görsel İşleme ────────────────────────────────────────────
   const handleConfirm = useCallback(async () => {
@@ -289,8 +293,6 @@ export function StoryMediaEditor({
       if (originalWidth && originalHeight) {
         // Ekranda görünen görüntünün gerçek piksel ölçeği
         const displayRatio = SW / originalWidth;
-        const scaledOrigW = originalWidth * td.scale;
-        const scaledOrigH = originalHeight * td.scale;
 
         // Kırpma merkezi (orijinal piksel koordinatında)
         const centerX = originalWidth / 2 - (td.translateX / displayRatio / td.scale);
@@ -345,7 +347,7 @@ export function StoryMediaEditor({
     } finally {
       setProcessing(false);
     }
-  }, [uri, originalWidth, originalHeight, onConfirm]);
+  }, [uri, originalWidth, originalHeight, onConfirm, texts.length]);
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (

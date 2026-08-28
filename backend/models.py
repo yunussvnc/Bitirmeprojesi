@@ -1,10 +1,9 @@
-# pyrefly: ignore [missing-import]
+"""Backward-compatible facade for split models definitions."""
+
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Text, Boolean, UniqueConstraint, Date, JSON
-# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import relationship
-from database import Base
-# pyrefly: ignore [missing-import]
 from sqlalchemy.sql import func
+from database import Base
 
 class User(Base):
     __tablename__ = "users"

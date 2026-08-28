@@ -10,25 +10,7 @@
 
 import { logger } from "@/src/utils/logger";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
-
-
-let Updates: any = null;
-
-/**
- * expo-updates modülünü yükle (kurulu değilse sessizce geç)
- */
-function getUpdatesModule(): any {
-  if (Updates) return Updates;
-  try {
-    Updates = require("expo-updates");
-    return Updates;
-  } catch {
-    if (__DEV__) {
-      console.log("[OTA] expo-updates modülü bulunamadı (development modunda normal)");
-    }
-    return null;
-  }
-}
+import * as Updates from "expo-updates";
 
 /**
  * OTA güncelleme kontrolü yap.
@@ -37,8 +19,7 @@ function getUpdatesModule(): any {
  * @param showAlert - Güncelleme varsa kullanıcıya bildirim göster (varsayılan: true)
  */
 export async function checkForOTAUpdate(showAlert: boolean = true): Promise<void> {
-  const mod = getUpdatesModule();
-  if (!mod) return;
+  const mod = Updates;
 
   // Development modunda OTA kontrol çalışmaz
   if (__DEV__) {
@@ -107,10 +88,7 @@ export function getCurrentUpdateInfo(): {
   channel: string | null;
   isEmbeddedLaunch: boolean;
 } {
-  const mod = getUpdatesModule();
-  if (!mod) {
-    return { updateId: null, channel: null, isEmbeddedLaunch: true };
-  }
+  const mod = Updates;
 
   return {
     updateId: mod.updateId || null,

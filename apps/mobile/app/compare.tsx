@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BlurView } from "expo-blur";
 import Animated, { FadeIn, SlideInDown } from "react-native-reanimated";
@@ -23,7 +22,6 @@ export default function CompareScreen() {
   const { ids } = useLocalSearchParams<{ ids: string }>();
   const router = useRouter();
   const { colors } = useTheme();
-  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
   const [place1, setPlace1] = useState<Place | null>(null);

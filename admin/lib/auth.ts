@@ -1,6 +1,12 @@
 // lib/auth.ts
 
-export function decodeToken(token: string): any {
+export interface DecodedToken {
+  exp?: number;
+  role?: string;
+  [claim: string]: unknown;
+}
+
+export function decodeToken(token: string): DecodedToken | null {
   try {
     if (!token) return null;
     const base64Url = token.split('.')[1];
@@ -9,19 +15,20 @@ export function decodeToken(token: string): any {
     const jsonPayload = decodeURIComponent(
       atob(base64)
         .split('')
-        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
+        .map((character) => `%${character.charCodeAt(0).toString(16).padStart(2, '0')}`)
+        .join(''),
     );
-    return JSON.parse(jsonPayload);
-  } catch (error) {
-    console.error('Failed to decode token:', error);
+    const decoded: unknown = JSON.parse(jsonPayload);
+    return decoded !== null && typeof decoded === 'object'
+      ? (decoded as DecodedToken)
+      : null;
+  } catch {
     return null;
   }
 }
 
 export function isTokenExpired(token: string): boolean {
   const decoded = decodeToken(token);
-  if (!decoded || !decoded.exp) return true;
-  // exp is in seconds, Date.now() is in milliseconds
+  if (!decoded || typeof decoded.exp !== 'number') return true;
   return decoded.exp * 1000 < Date.now();
 }

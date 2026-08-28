@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import {
   View,
   Text,
@@ -27,9 +27,8 @@ import {
 import { handleApiError } from "@/src/utils/errorHandler";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useAppStore } from "@/src/store/useAppStore";
-import { useTranslation } from "react-i18next";
 import debounce from "lodash/debounce";
-import PagerView from 'react-native-pager-view';
+import { togglePlaceFollow } from "@/src/services/mekanService";
 
 type TabKey = "followers" | "following" | "friends";
 
@@ -56,7 +55,7 @@ function NetworkTabContent({ tabKey, userId }: { tabKey: TabKey; userId: number 
   const visibleUsers = users.filter((u) => !blockedIds.includes(u.id));
 
   const fetchUsers = useCallback(
-    async (tab: TabKey, reset = false) => {
+    async (tab: TabKey, requestedPage: number, reset = false) => {
       if (!userId) return;
       try {
         if (reset) {
@@ -66,11 +65,10 @@ function NetworkTabContent({ tabKey, userId }: { tabKey: TabKey; userId: number 
         } else {
           setLoadingMore(true);
         }
-        const p = reset ? 1 : page;
         let res;
-        if (tab === "followers") res = await getFollowers(userId, p, 20);
-        else if (tab === "following") res = await getFollowing(userId, p, 20);
-        else res = await getFriends(userId, p, 20);
+        if (tab === "followers") res = await getFollowers(userId, requestedPage, 20);
+        else if (tab === "following") res = await getFollowing(userId, requestedPage, 20);
+        else res = await getFriends(userId, requestedPage, 20);
 
         const newItems = res.items || [];
         if (reset) setUsers(newItems);
@@ -90,19 +88,19 @@ function NetworkTabContent({ tabKey, userId }: { tabKey: TabKey; userId: number 
         setLoadingMore(false);
       }
     },
-    [userId, page]
+    [userId]
   );
 
   useFocusEffect(
     useCallback(() => {
-      fetchUsers(tabKey, true);
-    }, [tabKey, userId])
+      fetchUsers(tabKey, 1, true);
+    }, [fetchUsers, tabKey])
   );
 
   const handleRefresh = () => {
     lightImpact();
     setRefreshing(true);
-    fetchUsers(tabKey, true);
+    fetchUsers(tabKey, 1, true);
   };
 
   const loadMore = () => {
@@ -113,16 +111,21 @@ function NetworkTabContent({ tabKey, userId }: { tabKey: TabKey; userId: number 
 
   useEffect(() => {
     if (page > 1) {
-      fetchUsers(tabKey);
+      fetchUsers(tabKey, page);
     }
-  }, [page]);
+  }, [fetchUsers, page, tabKey]);
 
-  const handleToggleFollow = useCallback(
-    debounce(
+  const usersRef = useRef(users);
+  useEffect(() => {
+    usersRef.current = users;
+  }, [users]);
+
+  const handleToggleFollow = useMemo(
+    () => debounce(
       async (targetId: number, index: number) => {
         lightImpact();
         
-        const currentUsers = users;
+        const currentUsers = usersRef.current;
         const curUser = currentUsers[index];
         if (!curUser) return;
         
@@ -146,9 +149,8 @@ function NetworkTabContent({ tabKey, userId }: { tabKey: TabKey; userId: number 
         try {
           let res;
           if ((curUser as any).item_type === "place") {
-            const { togglePlaceFollow } = require("@/src/services/mekanService");
-            res = await togglePlaceFollow(targetId);
-            res = { status: res.following ? "accepted" : null };
+            const placeResult = await togglePlaceFollow(targetId);
+            res = { status: placeResult.followed ? "accepted" : null };
           } else {
             res = await toggleFollow(targetId);
           }
@@ -181,8 +183,10 @@ function NetworkTabContent({ tabKey, userId }: { tabKey: TabKey; userId: number 
       500,
       { leading: true, trailing: false }
     ),
-    [users]
+    []
   );
+
+  useEffect(() => () => handleToggleFollow.cancel(), [handleToggleFollow]);
 
   const renderFollowBtn = (item: UserSummary, index: number) => {
     const isSelf = authUser?.id === item.id;

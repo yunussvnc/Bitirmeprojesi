@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
@@ -12,31 +12,22 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
 import { BackButton } from "@/src/components/shared/navigation";
-import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { useSettingsStore, type Audience } from "@/src/store/useSettingsStore";
 import { lightImpact, success } from "@/src/utils/haptics";
 
-const AUDIENCE_LABELS: Record<Audience, string> = {
-  everyone: "Herkes",
-  followers: "Takipçiler",
-  off: "Kapalı",
-};
-
 export default function StorySettingsScreen() {
-  const { colors, isDark } = useTheme();
+  const { colors } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
 
   const storySaveToArchive = useSettingsStore((s) => s.storySaveToArchive);
-  const storySaveToCameraRoll = useSettingsStore((s) => s.storySaveToCameraRoll);
   const storyReplyAudience = useSettingsStore((s) => s.storyReplyAudience);
   const isPrivate = useSettingsStore((s) => s.isPrivateAccount);
 
 
   const setStorySaveToArchive = useSettingsStore((s) => s.setStorySaveToArchive);
-  const setStorySaveToCameraRoll = useSettingsStore((s) => s.setStorySaveToCameraRoll);
   const setStoryReply = useSettingsStore((s) => s.setStoryReplyAudience);
 
   const replyOptions: Audience[] = isPrivate ? ["followers", "off"] : ["everyone", "followers", "off"];

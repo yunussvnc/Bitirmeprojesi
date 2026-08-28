@@ -8,6 +8,9 @@ import { useAuthStore } from '@/src/store/useAuthStore';
 import { startGeofencing, stopGeofencing } from '@/src/services/geofenceService';
 import Constants from 'expo-constants';
 
+import { getSavedPlaces } from '@/src/services/savedService';
+import { useGeofenceStore } from '@/src/store/useGeofenceStore';
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -15,9 +18,6 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   } as any),
 });
-
-import { getSavedPlaces } from '@/src/services/savedService';
-import { useGeofenceStore } from '@/src/store/useGeofenceStore';
 
 export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const user = useAuthStore(s => s.user);
@@ -27,9 +27,11 @@ export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> =
   const setWatchedPlaces = useGeofenceStore(s => s.setWatchedPlaces);
 
   useEffect(() => {
+    let cancelled = false;
+
     if (user) {
       registerForPushNotificationsAsync().then(token => {
-        if (token) {
+        if (!cancelled && token) {
           apiPost('/auth/device-token', {
             token: token,
             platform: Platform.OS,
@@ -41,6 +43,7 @@ export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> =
       // Kaydedilmiş mekanları al ve Geofence izlemeye ekle
       getSavedPlaces(1, 100)
         .then((res) => {
+          if (cancelled) return;
           const watched = res.items
             .filter(p => p.latitude && p.longitude)
             .map(p => ({
@@ -88,6 +91,7 @@ export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> =
     });
 
     return () => {
+      cancelled = true;
       if (notificationListener.current) {
         notificationListener.current.remove();
       }
@@ -95,7 +99,7 @@ export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> =
         responseListener.current.remove();
       }
     };
-  }, [user]);
+  }, [user, router, setWatchedPlaces]);
 
   return <>{children}</>;
 };

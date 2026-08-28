@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Alert, ActivityIndicator, Touchable
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
-import { getMyVenue, updateMyVenue, Place } from '@/src/services/mekanService';
+import { getMyVenue, updateMyVenue } from '@/src/services/mekanService';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { useScrollToTop } from '@react-navigation/native';
 import { BlurView } from 'expo-blur';
@@ -15,7 +15,6 @@ import Animated, { FadeInDown, FadeIn } from 'react-native-reanimated';
 export default function VenueEditScreen() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [venue, setVenue] = useState<Place | null>(null);
   const scrollRef = useRef<ScrollView>(null);
   useScrollToTop(scrollRef);
 
@@ -69,7 +68,6 @@ export default function VenueEditScreen() {
       try {
         const data = await getMyVenue();
         if (data) {
-          setVenue(data);
           setName(data.name || '');
           setAddress(data.address || '');
           setCampaign(data.campaign_text || '');
@@ -119,11 +117,10 @@ export default function VenueEditScreen() {
         menu_items: menuPayload,
       });
       if (updated) {
-        setVenue(updated);
         success();
         Alert.alert("Başarılı", "İşletme bilgileriniz güncellendi.");
       }
-    } catch (error) {
+    } catch {
       Alert.alert("Hata", "İşletme detayları güncellenirken bir hata oluştu.");
     } finally {
       setSaving(false);

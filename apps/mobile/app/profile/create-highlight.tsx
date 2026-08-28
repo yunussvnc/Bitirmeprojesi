@@ -32,7 +32,7 @@ const DUMMY_ARCHIVE: ArchiveStory[] = [
 ];
 
 export default function CreateHighlightRoute() {
-    const { colors, isDark } = useTheme();
+    const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
     const { width } = useWindowDimensions();

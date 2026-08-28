@@ -29,10 +29,8 @@ export default function MediaQualityScreen() {
 
   const quality = useSettingsStore((s) => s.uploadQuality);
   const wifiAuto = useSettingsStore((s) => s.wifiAutoHighQuality);
-  const videoAutoplay = useSettingsStore((s) => s.videoAutoplay);
   const setQuality = useSettingsStore((s) => s.setUploadQuality);
   const setWifiAuto = useSettingsStore((s) => s.setWifiAutoHighQuality);
-  const setVideoAutoplay = useSettingsStore((s) => s.setVideoAutoplay);
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>

@@ -4,7 +4,7 @@
  * Profil ekranından "Hikaye Arşivi" butonuyla açılır.
  * Arşivdeki hikayeler silinebilir — uzun basarak silme, liste anında güncellenir.
  */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
   View, Text, StyleSheet, FlatList, ActivityIndicator,
   TouchableOpacity, Dimensions, RefreshControl, Alert,
@@ -28,17 +28,19 @@ export default function StoryArchiveScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const hasMoreRef = useRef(true);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
   const currentUser = useAuthStore((s) => s.user);
 
   const load = useCallback(async (p = 1, reset = false) => {
-    if (p > 1 && !hasMore) return;
+    if (p > 1 && !hasMoreRef.current) return;
     try {
       const res = await getMyStoryArchive(p, 30);
       const newItems = res.items;
       setStories((prev) => reset ? newItems : [...prev, ...newItems]);
-      setHasMore(newItems.length >= 30);
+      hasMoreRef.current = newItems.length >= 30;
+      setHasMore(hasMoreRef.current);
       setPage(p);
     } catch (e) {
       console.warn('[StoryArchive] Load failed:', e);
@@ -46,12 +48,15 @@ export default function StoryArchiveScreen() {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [hasMore]);
+  }, []);
 
-  useEffect(() => { load(1, true); }, []);
+  useEffect(() => {
+    load(1, true);
+  }, [load]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
+    hasMoreRef.current = true;
     setHasMore(true);
     load(1, true);
   }, [load]);

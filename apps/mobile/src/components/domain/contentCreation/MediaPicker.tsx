@@ -7,7 +7,7 @@
  * Instagram/TikTok seviyesinde Premium deneyim, kendi tasarım dilimiz.
  */
 
-import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -21,11 +21,7 @@ import { Image as ExpoImage } from 'expo-image';
 import Video from 'react-native-video';
 import * as MediaLibrary from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker';
-import Animated, {
-  FadeIn,
-  useSharedValue,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
@@ -35,15 +31,10 @@ import type { MediaItem, ContentType } from '@/src/contentCreation/types';
 import { MAX_MEDIA_COUNT } from '@/src/contentCreation/config';
 import { CustomGalleryGrid } from './CustomGalleryGrid';
 import { EmbeddedCamera } from './EmbeddedCamera';
-import { ImageCropper, ImageCropperRef } from './ImageCropper';
+import type { ImageCropperRef } from './ImageCropper';
 import { useTranslation } from "react-i18next";
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
-
-// Resizable split heights
-const MIN_PREVIEW_HEIGHT = 180;
-const MAX_PREVIEW_HEIGHT = SCREEN_HEIGHT * 0.55;
-const DEFAULT_PREVIEW_HEIGHT = SCREEN_HEIGHT * 0.42;
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export interface MediaPickerProps {
   contentType: ContentType;
@@ -87,13 +78,12 @@ export function MediaPicker({
 
   // Sync state when navigating back from share screen
   useEffect(() => {
-    if (selected.length > 0 && previewItem === null) {
-      setPreviewItem(selected[selected.length - 1]);
+    if (selected.length > 0) {
+      setPreviewItem((current) => current ?? selected[selected.length - 1]);
     }
-    if (selected.length > 1 && !isMultiSelect) {
+    if (selected.length > 1) {
       setIsMultiSelect(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
   // Load last photo for camera gallery shortcut

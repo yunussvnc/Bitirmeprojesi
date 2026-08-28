@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
   Modal,
   Pressable,
   Animated,
@@ -16,7 +15,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact } from '@/src/utils/haptics';
-import { useTranslation } from "react-i18next";
 import { getNotificationSubscription, updateNotificationSubscription } from '@/src/services/userService';
 import Toast from 'react-native-toast-message';
 
@@ -36,8 +34,7 @@ export function NotificationSettingsSheet({
   targetUserId,
   targetUsername,
 }: NotificationSettingsSheetProps) {
-  const { colors, typography } = useTheme();
-  const { t } = useTranslation();
+  const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
   const [loading, setLoading] = useState(true);
@@ -51,12 +48,27 @@ export function NotificationSettingsSheet({
   const overlayOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    if (visible) {
-      // Reset state and fetch
-      setLoading(true);
-      fetchSettings();
+    let cancelled = false;
 
-      // Open animations
+    if (visible) {
+      setLoading(true);
+      const fetchSettings = async () => {
+        try {
+          const res = await getNotificationSubscription(targetUserId);
+          if (!cancelled) {
+            setNotifyOnPost(res.notify_posts);
+            setNotifyOnStory(res.notify_stories);
+          }
+        } catch (err: any) {
+          if (!cancelled && err?.code !== 'NOT_FOUND') {
+            console.warn('Failed to fetch notification settings', err);
+          }
+        } finally {
+          if (!cancelled) setLoading(false);
+        }
+      };
+      void fetchSettings();
+
       Animated.parallel([
         Animated.spring(translateY, {
           toValue: 0,
@@ -71,7 +83,6 @@ export function NotificationSettingsSheet({
         }),
       ]).start();
     } else {
-      // Close animations
       Animated.parallel([
         Animated.timing(translateY, {
           toValue: SHEET_HEIGHT,
@@ -85,21 +96,11 @@ export function NotificationSettingsSheet({
         }),
       ]).start();
     }
-  }, [visible]);
 
-  const fetchSettings = async () => {
-    try {
-      const res = await getNotificationSubscription(targetUserId);
-      setNotifyOnPost(res.notify_posts);
-      setNotifyOnStory(res.notify_stories);
-    } catch (err: any) {
-      if (err?.code !== 'NOT_FOUND') {
-        console.warn('Failed to fetch notification settings', err);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+    return () => {
+      cancelled = true;
+    };
+  }, [overlayOpacity, targetUserId, translateY, visible]);
 
   const handleClose = () => {
     lightImpact();

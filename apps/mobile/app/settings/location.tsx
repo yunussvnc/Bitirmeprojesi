@@ -3,7 +3,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, Alert, Platform } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -12,7 +12,6 @@ import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
-import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useTranslation } from "react-i18next";
 import * as Location from "expo-location";
 

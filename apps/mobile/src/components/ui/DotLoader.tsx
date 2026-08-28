@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
-import { useTheme } from '@/src/hooks/useTheme';
 
 export interface DotLoaderProps {
   color?: string;
@@ -8,7 +7,6 @@ export interface DotLoaderProps {
 }
 
 export function DotLoader({ color, size = 12 }: DotLoaderProps) {
-  const { colors } = useTheme();
   // Default to a green shade if not provided, or use primary accent
   const dotColor = color || '#34C759'; // iOS green, or we can use colors.accent.primary
 

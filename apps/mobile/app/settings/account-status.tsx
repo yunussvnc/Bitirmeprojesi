@@ -87,7 +87,7 @@ export default function AccountStatusScreen() {
               await apiDelete("/auth/me");
               useAuthStore.getState().logout();
               router.replace("/login");
-            } catch (e) {
+            } catch {
               Alert.alert(t("common.error", "Hata"), t("account_status.delete_error", "Hesap silinirken bir hata oluştu."));
               setLoading(false);
             }

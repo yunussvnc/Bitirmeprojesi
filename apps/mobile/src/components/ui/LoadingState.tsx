@@ -7,7 +7,7 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, Dimensions, Text, Animated } from 'react-native';
+import { StyleSheet, Dimensions, Text, Animated } from 'react-native';
 
 import { useTheme } from '../../hooks/useTheme';
 import { createTextStyle, spacing } from '@/src/constants/design';

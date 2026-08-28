@@ -1,15 +1,12 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Skeleton } from "@/src/components/ui/Skeleton";
-import { useTheme } from "@/src/hooks/useTheme";
 
 export interface MessageListSkeletonProps {
   count?: number;
 }
 
 export function MessageListSkeleton({ count = 5 }: MessageListSkeletonProps) {
-  const { colors } = useTheme();
-
   return (
     <View style={styles.container}>
       {Array.from({ length: count }).map((_, index) => (

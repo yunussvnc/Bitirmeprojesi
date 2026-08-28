@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, useWindowDimensions, ScrollView, RefreshControl, Share, InteractionManager } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions, ScrollView, Share, InteractionManager } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useNavigation, useFocusEffect } from "expo-router";
 import { API_BASE_URL } from "@/src/constants/api";
@@ -21,7 +21,7 @@ import { getUserStories, type Story } from "@/src/services/storyService";
 import { StoryViewerModal } from "@/src/components/domain/explore/StoryViewerModal";
 import { LinearGradient } from "expo-linear-gradient";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
-import { CustomAlert as CustomAlertComponent } from '@/src/components/ui/CustomAlert';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
 
@@ -36,7 +36,6 @@ export default function ProfileScreen() {
   const scrollViewRef = useRef<ScrollView>(null);
   const insets = useSafeAreaInsets();
   const authUser = useAuthStore((s) => s.user);
-  const savedIds = useAppStore((s) => s.savedIds);
   const { fadeOut, fadeIn } = useTabBarVisibility();
   const lastScrollY = useRef(0);
 
@@ -104,7 +103,7 @@ export default function ProfileScreen() {
         setInitialLoading(false);
       }
     }
-  }, [authUser?.id]);
+  }, [authUser]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("tabPress" as any, (e: any) => {
