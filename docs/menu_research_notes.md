@@ -4129,3 +4129,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6206 ; https://www.yemeksepeti.co
 ## EVRENOS KEBAP ID 6205 — HOLD
 Hentzer `Barış, Bestekar Sk., 34520 Beylikdüzü`, `+90 212 853 07 05`; Mekanlar genel adres/telefonu doğruluyor. Resmi Instagram `Bestekar Sokak No:4C` ve aynı ana telefonu yanında ikinci telefon numarasını gösteriyor. Hentzer’de kapı numarası yok ve 20+ benzersiz güncel fiyatlı ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6205 ; https://mekanlar.com/mekan/evrenos-kebap-beylikduzu-baris ; https://www.instagram.com/reel/DKNGGl8slIr/ ; https://www.instagram.com/reel/DU5gPBzjHim/ ; https://www.bulurum.com/details/6567__1e74632j1h1_1_01142f1e601k
+
+## KURUÇEŞME BALIK ID 6204 — HOLD
+Hentzer `Kuruçeşme, Kuruçeşme Cd. No:9, 34345 Beşiktaş`, `+90 212 263 44 72`; resmi site ve İstanbul.net.tr exact adres/ana telefonu destekliyor. Resmi sitede fiyat listesi yok; RestaurantGuru menüsü sahibin 4 yıl önceki menüsü olarak işaretli. Son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6204 ; https://kurucesmebalik.com/ ; https://restaurantguru.com/Kurucesme-Balik-Istanbul/menu ; https://www.istanbul.net.tr/yeme-icme/restoran/kurucesme-balik/10906/3 ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d1895626-Reviews-Kurucesme_Balik-Istanbul.html
