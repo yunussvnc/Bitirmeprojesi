@@ -3997,3 +3997,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6239 ; https://www.migros.com.tr/
 ## MOICANO COFFEE ROASTERS ID 6238 — HOLD
 Hentzer `Türkali, Ihlamurdere Cd. No:34, 34357 Beşiktaş`, telefon alanı boş. Allzin aynı No:34 adresini doğrularken Yandex No:32A listeliyor; Instagram konumunda +90 552 634 04 86 görülüyor ancak Hentzer telefon boş olduğu için exact phone parity yok. Erişilebilir son bir yıl fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6238 ; https://allzinapp.com/Moicano/delivery_and_return ; https://yandex.com.tr/maps/org/moicano_coffee_roasters/233761794700/ ; https://www.instagram.com/explore/locations/382228682310618/moicano-coffee-roasters/
+
+## TADINDA TÜRK MUTFAĞI ID 6237 — HOLD
+Hentzer `DORA EVLERI ABLOK, Adnan Kahveci, Buse Sk. NO:5 A D:9 NOLU DÜKKAN, 34528 Beylikdüzü`, telefon alanı boş. Yemeksepeti ve RestaurantGuru adresi doğruluyor; Facebook snippet’inde 0544 761 25 06 görülse de Hentzer phone parity yok. Yemeksepeti’nde Şef Tabağı Popular carouselde tekrarlandığı için çıkarılınca yalnızca 19 benzersiz uygun ürün kalıyor; 20 ürün şartı sağlanmadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6237 ; https://www.yemeksepeti.com/en/restaurant/pgx9/tadinda-turk-mutfagi-pgx9 ; https://restaurantguru.com/Tadinda-Turk-Mutfagi-Buyukcekmece ; https://www.facebook.com/p/Tad%C4%B1nda-T%C3%BCrk-Mutfa%C4%9F%C4%B1-61584114371692/
