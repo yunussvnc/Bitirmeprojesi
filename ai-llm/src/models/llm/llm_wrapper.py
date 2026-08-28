@@ -114,8 +114,10 @@ class GroqWrapper(LLMWrapper):
         temperature: Optional[float] = None,
     ) -> str:
         import httpx
+        import time
 
         messages = self._build_messages(prompt, context, system_prompt)
+        start = time.monotonic()
         with httpx.Client(timeout=self.timeout) as client:
             resp = client.post(
                 "https://api.groq.com/openai/v1/chat/completions",
@@ -130,11 +132,18 @@ class GroqWrapper(LLMWrapper):
                     "temperature": temperature if temperature is not None else 0.7,
                 },
             )
+        latency_ms = (time.monotonic() - start) * 1000
         if resp.status_code != 200:
             raise RuntimeError(f"Groq API hatası: {resp.status_code} — {resp.text[:200]}")
 
-        content = resp.json()["choices"][0]["message"]["content"]
-        logger.info(f"[GroqWrapper] Yanıt üretildi ({len(content)} karakter)")
+        data = resp.json()
+        content = data["choices"][0]["message"]["content"]
+        usage = data.get("usage") or {}
+        logger.info(
+            f"[GroqWrapper] Yanıt üretildi ({len(content)} karakter, {latency_ms:.0f}ms, "
+            f"tokens={usage.get('total_tokens', '?')} "
+            f"(prompt={usage.get('prompt_tokens', '?')}, completion={usage.get('completion_tokens', '?')}))"
+        )
         return content
 
     # ---- async ----
@@ -147,8 +156,10 @@ class GroqWrapper(LLMWrapper):
         temperature: Optional[float] = None,
     ) -> str:
         import httpx
+        import time
 
         messages = self._build_messages(prompt, context, system_prompt)
+        start = time.monotonic()
         async with httpx.AsyncClient(timeout=self.timeout) as client:
             resp = await client.post(
                 "https://api.groq.com/openai/v1/chat/completions",
@@ -163,11 +174,18 @@ class GroqWrapper(LLMWrapper):
                     "temperature": temperature if temperature is not None else 0.7,
                 },
             )
+        latency_ms = (time.monotonic() - start) * 1000
         if resp.status_code != 200:
             raise RuntimeError(f"Groq API hatası: {resp.status_code} — {resp.text[:200]}")
 
-        content = resp.json()["choices"][0]["message"]["content"]
-        logger.info(f"[GroqWrapper] Async yanıt üretildi ({len(content)} karakter)")
+        data = resp.json()
+        content = data["choices"][0]["message"]["content"]
+        usage = data.get("usage") or {}
+        logger.info(
+            f"[GroqWrapper] Async yanıt üretildi ({len(content)} karakter, {latency_ms:.0f}ms, "
+            f"tokens={usage.get('total_tokens', '?')} "
+            f"(prompt={usage.get('prompt_tokens', '?')}, completion={usage.get('completion_tokens', '?')}))"
+        )
         return content
 
     # ---- audio (whisper) ----
