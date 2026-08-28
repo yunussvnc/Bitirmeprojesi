@@ -4337,3 +4337,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6153 ; https://restoranim.net/ist
 ## LİMONLUK CAFE ID 6152 — HOLD
 Hentzer `Vişnezade, Dolmabahçe Cd., 34357 Beşiktaş/İstanbul`, `+90 212 236 90 00`; Restoranim, Google/Yandex ve Instagram Dolmabahçe Resim Müzesi bahçesindeki exact işletmeyi doğruluyor. 28 Nisan 2026 tarihli açık Instagram paylaşımında yalnızca Cappuccino 230 TL, Türk kahvesi 160 TL ve Çilekli Milföy 350 TL doğrulanabildi; müze giriş ücreti gıda ürünü değil. 20+ benzersiz güncel fiyatlı gıda ürünü koşulu sağlanamadı. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6152 ; https://restoranim.net/istanbul/besiktas/kafe/limonluk-kafe-dolmabahce-sarayi-resim-muzesi ; https://www.instagram.com/p/DXlgOO4s1f8/ ; https://www.google.com/maps/search/Limonluk+Cafe+Be%C5%9Fikta%C5%9F
+
+## BEŞİKTAŞ İSKELESİ VAPUR KAFE ID 6151 — HOLD
+Hentzer `Sinanpaşa, İskele Cd. No:16, 34353 Beşiktaş/İstanbul`, telefon boş; Restoranim ve RestaurantGuru aynı iskele adresini doğruluyor ve telefon yayımlamıyor. 2025 yorumları ürün çeşitliliğinin az, yiyeceklerin atıştırmalık/tost ile sınırlı olduğunu gösteriyor; erişilebilir fiyat örnekleri eski. 20+ son bir yıl fiyatlı gıda ürünü ve bağımsız telefon doğrulanamadığından override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6151 ; https://restoranim.net/istanbul/besiktas/kafe/besiktas-iskelesi-vapur-kafe ; https://restaurantguru.com/Vapur-Kafe-Besiktas-Iskelesi-Istanbul
