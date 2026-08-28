@@ -43,6 +43,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from app_rate_limit import SearchRateLimiterMiddleware
+app.add_middleware(SearchRateLimiterMiddleware)
+
 @app.middleware("http")
 async def request_correlation_middleware(request: Request, call_next):
     """
