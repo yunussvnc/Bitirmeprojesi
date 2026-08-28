@@ -3953,3 +3953,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6250 ; https://www.migros.com.tr/
 ## PIZZA WOOD FIRE ID 6249 — HOLD
 Hentzer `Etiler, Nisbetiye Cd No:37/C, 34335 Beşiktaş`, `+90 538 470 31 01`; Restoranim ve Menu-TR exact adres/telefonu destekliyor. Ancak erişilebilir kaynaklarda son bir yıl içinde doğrulanmış fiyatlı 20+ ürün menüsü yok; Menu-TR sadece örnek ürün adları veriyor. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6249 ; https://restoranim.net/istanbul/besiktas/pizzaci/pizza-wood-fire ; https://www.menu-tr.com/istanbul/besiktas/pizza-restorani/pizza-wood-fire
+
+## MIDWAY RESTAURANT & CAFE ID 6248 — HOLD
+Hentzer `Kocatepe, Abdülhak Hamit Cd. No:11/A, 34437 Beyoğlu`, `+90 212 245 20 20`. RestaurantGuru exact adresi doğruluyor; Yandex aynı telefonu farklı formatta listeliyor. Resmi The Nest Hotel sayfasında fiyatlı menü yok; resmi Instagram `0505 626 49 56` telefonunu veriyor. 20+ güncel fiyatlı ürün ve tekil telefon paritesi sağlanamadığından **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6248 ; https://restaurantguru.com/Midway-Cafe-and-Brasserie-Istanbul ; https://thenesthotel.com.tr/midwayrestaurant.html ; https://www.instagram.com/midwayrestauranttaksim/
