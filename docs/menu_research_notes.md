@@ -4173,3 +4173,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6195 ; https://www.instagram.com/
 ## KARTAL YUVASI OCAKBAŞI ID 6194 — HOLD
 Hentzer `Dikilitaş, Çetin Emeç Parkı İçi, 34349 Beşiktaş`, `+90 212 236 60 84`; Waze exact adres ve telefonu doğruluyor. Wheree 2026 menü sayfası Adana/Urfa kebap ve meze konseptini anlatıyor ancak ürün-fiyat tablosu sunmuyor ve fiyatların değişebileceğini belirtiyor. 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6194 ; https://www.waze.com/live-map/directions?from=place.ChIJ85ZvyKi3yhQRS9I4fnBCSCc ; https://kartal-yuvas-ocakba.wheree.com/menu ; https://restaurantguru.com/Kartal-Yuvasi-Ocakbasi-Istanbul
+
+## FOUR SEASONS CAFE BISTRO ID 6193 — HOLD
+Hentzer `Vişnezade, Süleyman Seba Cd. No:65 A, 34357 Beşiktaş`, `+90 533 387 12 34`; Restoranim exact adres ve telefonu doğruluyor, RestaurantGuru aynı restoran/adresi destekliyor. Erişilebilir kaynaklarda güncel ürün-fiyat tablosu yok; yalnızca menü çeşitliliği, yorumlar ve kişi başı fiyat aralığı var. 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6193 ; https://restoranim.net/istanbul/besiktas/restoran/four-seasons-cafe-bistro ; https://restaurantguru.com/amp/FOUR-SEASONS-CAFE-BISTRO-Istanbul ; https://www.instagram.com/fourseasonscafebistro/
