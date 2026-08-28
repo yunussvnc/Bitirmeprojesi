@@ -4345,3 +4345,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6151 ; https://restoranim.net/ist
 ## ODENSE PETSHOP ID 6150 — HOLD
 Hentzer API kaydı `Muratpaşa, Cumhuriyet Cd. No:70/B, 34040 Bayrampaşa/İstanbul`, `+90 531 622 03 81`; işletme adı açıkça petshop ve kategori kaydı hatalı biçimde restoran görünse de gıda işletmesi değildir. Bu nedenle menü override’ı eklenmedi. **HOLD.**
 Kaynak: https://api.asemos.tr/api/v1/places/6150
+
+## FERIYE LOKANTASI ID 6149 — HOLD
+Hentzer `Yıldız, Çırağan Cd. No:44, 34347 Beşiktaş/İstanbul`, `+90 212 227 22 17`; Gurme Rehber, Waze ve Tripadvisor/Trip.com aynı Feriye Lokantası/Çırağan Palace kompleksi adresi ve telefonu doğruluyor. 2026 içerikleri ve restoran tanıtımları mevcut olsa da ürün bazlı güncel fiyatlı menü veya 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadı. Override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6149 ; https://www.gurmerehber.com/feriye-lokantasi-istanbul/ ; https://www.waze.com/az/live-map/directions/tr/i%CC%87stanbul/feriye-lokantasi?to=place.ChIJY586Bbi3yhQRi9dVTzb-g2M ; https://www.trip.com/restaurant/trkiye/istanbul/detail/feriye-lokantasi-17093787/
