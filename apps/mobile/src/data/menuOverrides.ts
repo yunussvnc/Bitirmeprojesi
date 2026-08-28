@@ -93922,5 +93922,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Karamelli Muzlu Cup", "price": "360 TL", "category": "Kavanoz Tatlılar" },
       { "name": "Supangle Cup", "price": "300 TL", "category": "Kavanoz Tatlılar" }
     ]
+  },
+  "6177": {
+    "name": "ADİLE SULTAN EV YEMEKLERİ - ADNAN KAHVECİ RESTORANI (EKSPRES)",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/vrg1/adile-sultan-ev-yemekleri-vrg1",
+    "sourceName": "Canlı Yemeksepeti Adile Sultan vendoru; resmi Beylikdüzü şube sayfası ve Restoranim exact adres/telefon paritesi",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Yemeksepeti Özel 200 TL Menü", "price": "200 TL", "category": "Menüler" },
+      { "name": "Düşük Kalorili Fit Menü", "price": "395 TL", "category": "Günlük Menüler" },
+      { "name": "Etli Yemek Menü", "price": "495 TL", "category": "Günlük Menüler" },
+      { "name": "Sebzeli Yemek Menü", "price": "395 TL", "category": "Günlük Menüler" },
+      { "name": "Tavuklu Etibol Yemek Menü", "price": "495 TL", "category": "Günlük Menüler" },
+      { "name": "Tavuklu Yemek Menü", "price": "395 TL", "category": "Günlük Menüler" },
+      { "name": "Vejetaryen Menü", "price": "395 TL", "category": "Günlük Menüler" },
+      { "name": "Mantı Menü", "price": "395 TL", "category": "Günlük Menüler" },
+      { "name": "Pilav Üstü Menü", "price": "295 TL", "category": "Günlük Menüler" },
+      { "name": "Makarna Menü", "price": "295 TL", "category": "Günlük Menüler" },
+      { "name": "Balıklı Yemek Menü", "price": "445 TL", "category": "Günlük Menüler" },
+      { "name": "Tarhana Çorbası (Ege Usulü)", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Köz Patlıcan Çorbası", "price": "165 TL", "category": "Çorbalar" },
+      { "name": "Fırınlanmış Mercimek Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Ezogelin Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Adile Sultan Usulü Sebze Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Adile Sultan Usulü Yoğurt Çorbası", "price": "155 TL", "category": "Çorbalar" },
+      { "name": "Kaşarlı Domates Çorbası", "price": "165 TL", "category": "Çorbalar" },
+      { "name": "Ayran Aşı Çorbası", "price": "195 TL", "category": "Çorbalar" },
+      { "name": "Beğendili Mangalda Köfte", "price": "495 TL", "category": "Etli Yemekler" }
+    ]
   }
 };
