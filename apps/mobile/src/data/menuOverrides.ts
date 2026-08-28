@@ -93662,5 +93662,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Bbq Chicken", "price": "410 TL", "category": "Tavuk Hamburger" },
       { "name": "Crispy Chicken", "price": "350 TL", "category": "Atıştırmalık" }
     ]
+  },
+  "6220": {
+    "name": "DELİ DÜRÜM BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/deli-durum-beylikduzu-adnan-kahveci-mah-st-3168a",
+    "sourceName": "Canlı Migros Yemek exact Adnan Kahveci vendoru; Restoranim ve 2026 sosyal kaynakları ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Klasik Falafel Dürüm", "price": "160 TL", "category": "Falafeller" },
+      { "name": "Soğanlı Falafel Dürüm", "price": "170 TL", "category": "Falafeller" },
+      { "name": "Kaşarlı Falafel Dürüm", "price": "200 TL", "category": "Falafeller" },
+      { "name": "Patatesli Falafel Dürüm", "price": "190 TL", "category": "Falafeller" },
+      { "name": "Classic Falafel Dürüm Menü", "price": "300 TL", "category": "Falafel Menüler" },
+      { "name": "Patatesli Falafel Dürüm Menü", "price": "330 TL", "category": "Falafel Menüler" },
+      { "name": "Kaşarlı Falafel Dürüm Menü", "price": "340 TL", "category": "Falafel Menüler" },
+      { "name": "Soğanlı Falafel Dürüm Menü", "price": "320 TL", "category": "Falafel Menüler" },
+      { "name": "Classic Döner", "price": "250 TL", "category": "Tavuk Dönerler" },
+      { "name": "İtalyan Tavuk Döner Dürüm", "price": "320 TL", "category": "Tavuk Dönerler" },
+      { "name": "Oriental Tavuk Döner Dürüm", "price": "320 TL", "category": "Tavuk Dönerler" },
+      { "name": "Meksika Döner", "price": "270 TL", "category": "Tavuk Dönerler" },
+      { "name": "Classic Döner Menü", "price": "400 TL", "category": "Döner Menüler" },
+      { "name": "Oriental Tavuk Döner Dürüm Menü", "price": "450 TL", "category": "Döner Menüler" },
+      { "name": "İtalyan Tavuk Döner Dürüm Menü", "price": "400 TL", "category": "Döner Menüler" },
+      { "name": "Meksika Tavuk Döner Dürüm Menü", "price": "420 TL", "category": "Döner Menüler" },
+      { "name": "Tavuklu Pizza Sandviç", "price": "380 TL", "category": "Sandviçler" },
+      { "name": "Zinger Sandviç", "price": "320 TL", "category": "Sandviçler" },
+      { "name": "Buffalo Sandviç", "price": "350 TL", "category": "Sandviçler" },
+      { "name": "Patso Sandviç", "price": "180 TL", "category": "Sandviçler" }
+    ]
   }
 };

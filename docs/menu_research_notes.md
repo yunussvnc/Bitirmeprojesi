@@ -4065,3 +4065,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6222 ; https://restoranim.net/ist
 ## BERF INN COFFEE SHOP ID 6221 — HOLD
 Hentzer `Sinanpaşa, Küçük Remzi Sk. No:1, 34353 Beşiktaş`, `+90 552 352 27 57`; Google Travel cep numarasını desteklese de Mekanlar/Tumisyeri/Cybo/Haritane exact şube için `0212 327 10 20` veriyor. Son bir yıl fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6221 ; https://www.google.com.tr/travel/hotels/entity/ChkIoOe48P398J8DGg0vZy8xMWd0enB4cnRwEAE ; https://mekanlar.com/mekan/berf-inn-coffee-shop ; https://www.tumisyeri.com/berf-inn-coffee-shop-0212-327-10-20 ; https://www.instagram.com/reel/B6seQs0F4vM/
+
+## DELİ DÜRÜM BEYLİKDÜZÜ ID 6220 — ACCEPTED
+Hentzer `Adnan Kahveci, Anadolu Cd. 13/1, 34520 Beylikdüzü`, `+90 554 014 59 71`; Restoranim ve 2026 tarihli Facebook/Instagram içerikleri exact adres ve telefonu doğruluyor. Migros Yemek exact Adnan Kahveci vendorunda 2026-08-28 tarihinde güncel fiyatlı 20 benzersiz gıda ürünü bulundu. Falafel dürümler/menüler, tavuk dönerler ve sandviçler seçildi; poşet ve tekrarlar eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6220 ; https://www.migros.com.tr/yemek/deli-durum-beylikduzu-adnan-kahveci-mah-st-3168a ; https://restoranim.net/istanbul/beylikduzu/restoran/deli-durum ; https://www.instagram.com/reel/DZYOZrDsOcc/
