@@ -93802,5 +93802,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Et Döner (750 gr.)", "price": "3.750 TL", "category": "Kiloluk Et Dönerler" },
       { "name": "Et Döner (1 kg.)", "price": "5.000 TL", "category": "Kiloluk Et Dönerler" }
     ]
+  },
+  "6199": {
+    "name": "ANTEPERA BAKLAVA",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/njd0/antepera-baklava",
+    "sourceName": "Canlı Yemeksepeti exact Antepera Baklava vendoru; resmi Instagram exact adres/telefonu doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Burma Kadayıf", "price": "1.200 TL", "category": "Baklavalar" },
+      { "name": "Havuç Dilim Baklava", "price": "620 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Baklava (500 gr.)", "price": "805 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Fıstıklı Baklava (1 kg.)", "price": "1.495 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Fıstık Sarma (500 gr.)", "price": "1.050 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Şöbiyet (500 gr.)", "price": "1.250 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Şöbiyet (1 kg.)", "price": "2.150 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Fıstıklı Soğuk Baklava (500 gr.)", "price": "805 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Fıstıklı Soğuk Baklava (1 kg.)", "price": "1.550 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Midye Baklava (500 gr.)", "price": "1.095 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Midye Baklava (1 kg.)", "price": "1.955 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Cevizli Baklava (500 gr.)", "price": "515 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Cevizli Baklava (1 kg.)", "price": "975 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Bol Fıstıklı Antep Özel Baklava (500 gr.)", "price": "920 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Bol Fıstıklı Antep Özel Baklava (1 kg.)", "price": "1.780 TL", "category": "Kiloluk Baklavalar" },
+      { "name": "Fıstıklı Soğuk Kadayıf (500 gr.)", "price": "750 TL", "category": "Kiloluk Tatlılar" },
+      { "name": "Fıstıklı Soğuk Kadayıf (1 kg.)", "price": "1.380 TL", "category": "Kiloluk Tatlılar" },
+      { "name": "Coca-Cola (33 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Fanta (33 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Sprite (33 cl.)", "price": "90 TL", "category": "İçecekler" }
+    ]
   }
 };

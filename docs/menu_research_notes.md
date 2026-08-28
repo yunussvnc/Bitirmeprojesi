@@ -4149,3 +4149,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6201 ; https://kaciyor.com/cigerc
 ## MILADA ID 6200 — HOLD
 Hentzer `Anadolu Hisarı, Körfez Cd. No:8, 34810 Beykoz`, `+90 532 484 85 10`; Restoranim exact adres/telefonu doğruluyor, MorRehber ve Instagram aynı işletmeyi destekliyor. Tripadvisor kahve/tatlı/kahvaltı menüsünü anlatıyor ancak güncel satış fiyatı sunmuyor; son bir yıl fiyatlı 20+ benzersiz ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6200 ; https://restoranim.net/istanbul/beykoz/kafe/milada ; https://morrehber.com/mekanlar/milada-coffee-anadolu-hisari-beykoz-istanbul/ ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d17815097-Reviews-Milada_Istanbul-Istanbul.html ; https://www.instagram.com/miladaistanbul/?hl=en
+
+## ANTEPERA BAKLAVA ID 6199 — ACCEPTED
+Hentzer `Büyükşehir, Cumhuriyet Cd. 21J, 34520 Beylikdüzü`, `+90 501 570 79 27`; resmi Instagram hesabı aynı işletme, `Cumhuriyet caddesi no 21` adresi ve telefonu yayımlıyor. Yemeksepeti `njd0` Antepera Baklava vendorunda 2026-08-28 tarihinde 20+ güncel fiyatlı baklava/tatlı/içecek ürünü yayınlanıyor; poşet ürünü dışarıda bırakılarak ilk 20 uygun ürün eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6199 ; https://www.instagram.com/antepera/ ; https://www.yemeksepeti.com/restaurant/njd0/antepera-baklava
