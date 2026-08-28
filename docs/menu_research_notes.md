@@ -4269,3 +4269,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6170 ; https://www.instagram.com/
 ## SOYLU BÜFE ID 6169 — HOLD
 Hentzer `Paşabahçe, Çağatay Sk. No:2, 34800 Beykoz/İstanbul`, `+90 216 322 70 10`; Restoranim, Bulurum ve diğer dizinler exact adres/telefonu doğruluyor. RestaurantGuru’da üç menü sürümü var ancak “menu added by users a year ago” ve “outdated menus” uyarısı bulunuyor; fiyatlı güncel 20+ ürün doğrulanamadı. Instagram menü erişimi giriş duvarında kaldı. **HOLD; eski veya doğrulanamayan fiyatlar aktarılmadı.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6169 ; https://restoranim.net/istanbul/beykoz/bufe/soylu-bufe ; https://restaurantguru.com/Soylu-bufe-Istanbul/menu ; https://www.instagram.com/soylubufe/reels/
+
+## ZEROO CAFE ID 6168 — HOLD
+Hentzer `Göztepe, Anadolu Hisarı, Göksu Cd. No:66/A, 34820 Beykoz/İstanbul`, `+90 546 953 42 53`; RestaurantGuru, Restoranim, Servis Kayıt ve Instagram exact adres/telefonu doğruluyor. Fırsat Bu Fırsat’ta 17 Kasım 2026 son kullanım tarihli tek bir 2 kişilik serpme kahvaltı fırsatı 1000 TL olarak mevcut; ancak 20+ benzersiz ürünün ayrı güncel fiyatları bulunamadı. Menü Haritası fiyat içeriği sunmuyor. **HOLD; tek paket fiyatından ürün bazlı fiyat türetilmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6168 ; https://restoranim.net/istanbul/beykoz/kafe/zeroo-cafe ; https://www.firsatbufirsat.com/firsat/zeroo-cafe-kahvalti ; https://restaurantguru.com/Goksu-Mahal-Cafe-Istanbul ; https://www.instagram.com/reel/DaYLu6MsjIk/
