@@ -3981,3 +3981,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6243 ; https://www.instagram.com/
 ## LE BARON ID 6242 — HOLD
 Hentzer `Levazım, Koru Sk. No:2, 34340 Beşiktaş`, `+90 212 353 66 61`; resmi Instagram Zorlu Center/Koru Sokak No:2 konumunu, Restoranim aynı adres/telefonu doğruluyor. Ancak erişilebilir kaynaklarda son bir yıl içinde exact şubeye ait fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6242 ; https://www.instagram.com/lebaronistanbul/ ; https://restoranim.net/istanbul/besiktas/restoran/le-baron ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d21059844-Reviews-Le_Baron-Istanbul.html
+
+## TAKSİM ANATOLIA SEAFOOD STEAK KEBAP HOUSE ID 6241 — HOLD
+Hentzer `Kocatepe, Lamartin Cd. 4 A, 34421 Beyoğlu`, `+90 537 463 54 40`; Servis Kayıt Listesi adres ve telefonu, RestaurantGuru adresi doğruluyor. Ancak erişilebilir kaynaklarda son bir yıl içinde exact şube için fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6241 ; https://serviskayitlistesi.com/istanbul/beyoglu/restoran/taksim-anatolia-seafood-steak-kebap-house-6oJYnc.html ; https://fr.restaurantguru.com/Anatolia-seafood-STEAK-kebap-house-Istanbul
