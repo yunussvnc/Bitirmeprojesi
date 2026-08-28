@@ -93550,5 +93550,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Coca-Cola (33 cl.)", "price": "96 TL", "category": "İçecekler" },
       { "name": "Ayran (30 cl.)", "price": "68 TL", "category": "İçecekler" }
     ]
+  },
+  "6239": {
+    "name": "YES KARDEŞLER FULYA DÜRÜMCÜSÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/yes-kardesler-fulya-durumcusu-sisli-tesvikiye-mah-st-18ec1",
+    "sourceName": "Canlı Migros Yemek exact Teşvikiye vendoru; Restoranim ve resmi Instagram ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Adana Dürüm", "price": "50 TL", "category": "Dürümler" },
+      { "name": "Ciğer Şiş Dürüm", "price": "60 TL", "category": "Dürümler" },
+      { "name": "Çöp Şiş Dürüm", "price": "60 TL", "category": "Dürümler" },
+      { "name": "Tavuk Dürüm", "price": "50 TL", "category": "Dürümler" },
+      { "name": "Urfa Dürüm", "price": "50 TL", "category": "Dürümler" },
+      { "name": "Adana Kebap", "price": "65 TL", "category": "Kebaplar" },
+      { "name": "Domatesli Kebap", "price": "80 TL", "category": "Kebaplar" },
+      { "name": "Karışık Izgara (Tek Kişilik)", "price": "160 TL", "category": "Kebaplar" },
+      { "name": "Patlıcanlı Kebap", "price": "80 TL", "category": "Kebaplar" },
+      { "name": "Urfa Kebap", "price": "65 TL", "category": "Kebaplar" },
+      { "name": "Ciğer Şiş", "price": "80 TL", "category": "Izgaralar" },
+      { "name": "Çöp Şiş", "price": "85 TL", "category": "Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "60 TL", "category": "Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "60 TL", "category": "Izgaralar" },
+      { "name": "Tavuk Kanat (1 kg.)", "price": "175 TL", "category": "Kiloluk Ürünler" },
+      { "name": "Coca-Cola (33 cl.)", "price": "15 TL", "category": "İçecekler" },
+      { "name": "Fanta (33 cl.)", "price": "15 TL", "category": "İçecekler" },
+      { "name": "Şalgam Suyu (30 cl.)", "price": "14 TL", "category": "İçecekler" },
+      { "name": "Ayran (33 cl.)", "price": "12 TL", "category": "İçecekler" },
+      { "name": "Limonlu Soda (20 cl.)", "price": "8 TL", "category": "İçecekler" }
+    ]
   }
 };

@@ -3989,3 +3989,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6241 ; https://serviskayitlistesi
 ## DÖNERCİ CENGİZ USTA ID 6240 — ACCEPTED (20 ürün)
 Hentzer `çarşı, Sinanpaşa, Şht. Asım Cd. NO6A, 34022 Beşiktaş`, `+90 212 258 88 82`; resmi sosyal paylaşımlar ve Harbiyiyorum yeni adresi `Sinanpaşa, Şht. Asım Cd. 6A` ile telefonu doğruluyor. Canlı Yemeksepeti exact vendorunda 20 benzersiz gıda ürünü ve güncel görünen fiyatlar mevcut; popüler carousel tekrarları ayrı ürün olarak alınmadı. Fiyatlar 2026-08-28 tarihinde doğrulandı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6240 ; https://www.yemeksepeti.com/restaurant/fp2w/donerci-cengiz-usta-fp2w ; https://harbiyiyorum.com/donerci-cengiz-usta-besiktasta-yeni-yerinde-acildi-karadeniz-donere-yeni-bir-rakip-geldi/ ; https://www.instagram.com/donerci.cengiz.usta/
+
+## YES KARDEŞLER FULYA DÜRÜMCÜSÜ ID 6239 — ACCEPTED (20 ürün)
+Hentzer `Teşvikiye Mahallesi Hakkı Yeten Caddesi, Kıvanç Sk. No:26, 34357 Beşiktaş`, `+90 212 240 79 32`; Restoranim aynı adres/telefonu, resmi Instagram aynı telefonu ve tek şube bilgisini doğruluyor. Canlı Migros Yemek exact Teşvikiye vendorunda 20 benzersiz gıda/içecek ürünü ve fiyat mevcut; poşet dahil edilmedi. Fiyatlar 2026-08-28 tarihinde doğrulandı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6239 ; https://www.migros.com.tr/yemek/yes-kardesler-fulya-durumcusu-sisli-tesvikiye-mah-st-18ec1 ; https://restoranim.net/istanbul/besiktas/restoran/yes-kardesler ; https://www.instagram.com/yeskardeslerrr/
