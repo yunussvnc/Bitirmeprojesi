@@ -4305,3 +4305,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6161 ; https://www.yemeksepeti.co
 ## EFRA PETHOUSE & PET KUAFÖR & PETSHOP ID 6160 — HOLD
 Hentzer kaydı `Yenidoğan, Ulubatlı Sk. 21/A, 34040 Bayrampaşa/İstanbul`, `+90 545 176 24 28` olarak geçiyor; işletme adı ve kategori petshop/pet kuaför faaliyetini açıkça belirtiyor. Gıda işletmesi olmadığı için menü override’ı eklenmedi. **HOLD.**
 Kaynak: https://api.asemos.tr/api/v1/places/6160
+
+## LAOS COFFEE KUĞULU PARK BEYLİKDÜZÜ ID 6159 — HOLD
+Hentzer `Kuğulu Park, Cumhuriyet, Cumhuriyet Cd. No:16/1, 34520 Beylikdüzü/İstanbul`, `+90 540 618 68 68`; Google Maps, RestaurantGuru ve resmi Instagram exact Kuğulu Park şubesini doğruluyor. Resmi Laos menü sayfası çok sayıda ürün kategorisi gösterse de ürün kartları/fiyatları erişilebilir değil; Instagram içerikleri fiyat listesi sunmuyor ve exact Yemeksepeti vendoru bulunamadı. 20+ son bir yıl fiyatlı ürün doğrulanamadı. **HOLD; doğrulanamayan fiyatlar aktarılmadı.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6159 ; https://www.laoscoffeeroastery.com/menu ; https://restaurantguru.com/Laos-Coffee-Beylikduzu-Kugulu-Park-Buyukcekmece ; https://www.google.com/maps/search/Laos+Coffee+Ku%C4%9Fulu+Park+Beylikd%C3%BCz%C3%BC ; https://www.instagram.com/laoskugulupark/
