@@ -4193,3 +4193,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6189 ; https://runge.com.tr/ ; ht
 ## ŞEKER DÜRÜM ID 6188 — HOLD
 Hentzer `Adnan Kahveci, Çalışlar Cd. D:No 23 A, 34528 Beylikdüzü/İstanbul`, `+90 537 208 06 26`; Restoranim aynı adres ve telefonu doğruluyor. Restoranim’de 2025 tarihli tekil fiyat yorumu (2 Adana dürüm 350 TL) mevcut ancak son bir yıl sınırının dışında; 2026 yorumlarında fiyat yok. 20+ güncel fiyatlı ürün menüsü doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6188 ; https://restoranim.net/istanbul/beylikduzu/durumcu/seker-durum ; https://www.reklamsayfaniz.com/seker-durum-beylikduzu-de-durum-siparisi/
+
+## BEYKOZ LAHMACUN TANTUNİ ID 6187 — ACCEPTED (28 ürün)
+Hentzer `Rüzgarlıbahçe, Cumhuriyet Cd. No:101, 34805 Beykoz/İstanbul`, `+90 216 322 30 61`; resmi Beykoz Lahmacun & Tantuni sitesi aynı konumu, telefonu ve WhatsApp hattını yayımlıyor. Resmi sitede 28 benzersiz gıda/alkolsüz içecek ürünü fiyatlarıyla listelenmiş: çorbalar, tavuk/biftek tantuniler, fırın ürünleri, tatlılar ve içecekler. Site footer’ı `© 2026` ve menü canlı olarak erişilebilir; fiyatlar 28.08.2026 tarihinde doğrulandı. Popüler etiketi taşıyan Lahmacun ve Biftek Tantuni Dürüm tekilleştirilerek birer kez alındı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6187 ; https://beykozlahmacuntantuni.com/ ; https://restoranim.net/istanbul/beykoz/fast-food/beykoz-lahmacun-tantuni

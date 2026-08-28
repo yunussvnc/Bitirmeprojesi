@@ -93858,5 +93858,41 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Latte", "price": "200 TL", "category": "İçecekler" },
       { "name": "Caramel Latte", "price": "208 TL", "category": "İçecekler" }
     ]
+  },
+  "6187": {
+    "name": "BEYKOZ LAHMACUN TANTUNİ",
+    "sourceUrl": "https://beykozlahmacuntantuni.com/",
+    "sourceName": "Resmi Beykoz Lahmacun & Tantuni sitesi; exact Rüzgarlıbahçe adresi ve telefon paritesi",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Ezogelin Çorbası", "price": "100 TL", "category": "Çorbalar" },
+      { "name": "Tavuk Tantuni Dürüm", "price": "170 TL", "category": "Tavuk Tantuniler" },
+      { "name": "Yoğurtlu Tavuk Tantuni", "price": "260 TL", "category": "Tavuk Tantuniler" },
+      { "name": "3/4 Ekmek Arası Tavuk Tantuni", "price": "260 TL", "category": "Tavuk Tantuniler" },
+      { "name": "Yarım Ekmek Arası Tavuk Tantuni", "price": "170 TL", "category": "Tavuk Tantuniler" },
+      { "name": "Ekmek Arası Biftek Tantuni", "price": "400 TL", "category": "Biftek Tantuniler" },
+      { "name": "Biftek Tantuni Dürüm", "price": "350 TL", "category": "Biftek Tantuniler" },
+      { "name": "3/4 Ekmek Arası Et Tantuni", "price": "500 TL", "category": "Biftek Tantuniler" },
+      { "name": "Yoğurtlu Et Tantuni", "price": "400 TL", "category": "Biftek Tantuniler" },
+      { "name": "Lahmacun", "price": "160 TL", "category": "Fırın Ürünleri" },
+      { "name": "Fındık Lahmacun", "price": "70 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Pide (Açık)", "price": "300 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sucuklu Kaşarlı Pide", "price": "350 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Pide", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Kaşarlı Pide", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kavurmalı Kaşarlı Pide", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Kaşarlı Pide", "price": "350 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Pide", "price": "300 TL", "category": "Fırın Ürünleri" },
+      { "name": "Antep Lahmacun", "price": "160 TL", "category": "Fırın Ürünleri" },
+      { "name": "Antep Katmeri", "price": "250 TL", "category": "Tatlılar" },
+      { "name": "Hasır Künefe", "price": "250 TL", "category": "Tatlılar" },
+      { "name": "Dolama Katmer", "price": "250 TL", "category": "Tatlılar" },
+      { "name": "Coca-Cola (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Fanta (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Sprite (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Ayran (30 cl.)", "price": "60 TL", "category": "İçecekler" },
+      { "name": "Limonlu Soda (20 cl.)", "price": "35 TL", "category": "İçecekler" },
+      { "name": "Soda (20 cl.)", "price": "25 TL", "category": "İçecekler" }
+    ]
   }
 };
