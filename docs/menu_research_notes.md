@@ -4025,3 +4025,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6232 ; https://www.menu-tr.com/is
 ## LORA ÇİKOLATA KAHVE BEYLİKDÜZÜ ID 6231 — HOLD
 Hentzer `Cumhuriyet Mahallesi Atatürk Bulvarı, Alya, Dolunay Sitesi No:27/1D, 34520 Beylikdüzü`, `+90 545 615 19 91`; Restoranim/Cybo exact şube ve telefonu destekliyor. Migros menü isimlerini listeliyor ancak sayfa CAPTCHA ile engellendiği için fiyatlar doğrulanamadı; resmi site yalnızca Denizli adresini gösteriyor. 20+ güncel fiyatlı ürün şartı sağlanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6231 ; https://restoranim.net/istanbul/beylikduzu/cikolata/lora-cikolata-kahve-beylikduzu ; https://www.migros.com.tr/yemek/lora-cikolata-kahve-beylikduzu-beylikduzu-cumhuriyet-mah-st-23a58 ; https://loracikolatakahve.com.tr/
+
+## SOĞAN EKMEK ID 6230 — HOLD
+Hentzer `Barış, Atatürk Blv, 34520 Beylikdüzü`, `+90 506 036 44 48`; Tumisyeri aynı genel adres/telefonu listeliyor. Yandex exact No:50J ve farklı `+90 532...` telefonu gösteriyor; RestaurantGuru yalnızca genel Atatürk Blv adresini veriyor. Güncel fiyatlı 20+ ürün menüsü de bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6230 ; https://yandex.com.tr/maps/org/sogan_ekmek/18441152847/ ; https://www.tumisyeri.com/so%C4%9Fan-ekmek_1w-0506-036-44-48 ; https://restaurantguru.com/Sogan-Ekmek-Buyukcekmece
