@@ -4093,3 +4093,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6215 ; https://www.topazistanbul.
 ## FERA COFFEE BEYLİKDÜZÜ ID 6214 — HOLD
 Hentzer `Barış Mahallesi, Beylikdüzü OSB, Kır Sk. No:14 D:2D, 34520 Beylikdüzü`, `+90 530 580 82 70`; Servis Listesi, Merkez Zirve Servis ve resmi Instagram exact adres/telefonu destekliyor. 2026-04-19 Instagram paylaşımında yalnızca kahve + tatlı 350 TL kampanyası var; 20 benzersiz güncel ürün/fiyat listesi yok. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6214 ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/kafe/fera-coffee-beylikduzu-hd8V0k.html ; https://merkezzirveservis.com.tr/firma/1/fera-coffee-beylikduzu-beylikduzu/ ; https://www.instagram.com/reel/DXUV51iiuJu/
+
+## MEKHAN LOUNGE ID 6213 — HOLD
+Hentzer `Yıldırım, Şehir Parkı Caddesi 2E, 34035 Bayrampaşa`, `+90 538 265 49 56`; Restoranim, Tumisyeri ve Comemixgo exact adres/telefonu doğruluyor. Dijital menü yalnızca Loading ekranında kaldı, MenuHaritasi fiyatlı ürün listesi vermedi; son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6213 ; https://restoranim.net/istanbul/bayrampasa/restoran/mekhan-lounge ; https://www.tumisyeri.com/mekhan-lounge-0538-265-49-56 ; https://comemixgo.com/firma/9520/mekhan%20lounge/ ; http://menu.mekhanlounge.com/ ; https://www.instagram.com/p/DVMOtsRiHji/
