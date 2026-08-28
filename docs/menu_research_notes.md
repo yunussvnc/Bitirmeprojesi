@@ -4109,3 +4109,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6211 ; https://www.yenilokanta.co
 ## SHINE İST RESTAURANT & CAFE ID 6210 — HOLD
 Hentzer `Gümüşsuyu, Kirazlı Yayla Cd., 34820 Beykoz`, `+90 533 637 72 30`; Restoranim ve resmi Instagram telefon/genel adresi destekliyor. Ancak resmi Instagram ve Yemeksepeti exact vendoru kapı numarasını `136/1` gösterirken Hentzer kaydı numarasız. Güncel menüde 20+ fiyatlı ürün olsa da zorunlu exact adres/şube paritesi sağlanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6210 ; https://www.yemeksepeti.com/en/restaurant/k9uh/shine-ist-restaurant ; https://restoranim.net/istanbul/beykoz/restoran/shine-ist-restaurant-cafe ; https://www.instagram.com/shineist_/ ; https://restaurantguru.com/Karlitepe-Kule-Restaurant-Istanbul/menu
+
+## PERLO’S BURGER&MORE BEYLİKDÜZÜ ID 6209 — HOLD
+Hentzer `Saklı Vadi Konakları, Adnan Kahveci, Esentepe Cd., 34528 Beylikdüzü`, `+90 850 259 3030`; resmi Perlo’s sitesi adres/telefonu doğruluyor. Yemeksepeti `wkl0` vendoru ise `Kalkan Sk. İnşaat D Blok No:13/7 İç Kapı No:24` adresini veriyor. Exact sokak/kapı eşleşmediğinden güncel vendor menüsü kullanılmadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6209 ; https://perlos.com.tr/hakkimizda/ ; https://perlos.com.tr/en/sube/perlos-beylikduzu/ ; https://www.yemeksepeti.com/restaurant/wkl0/perlos-burger-and-more
