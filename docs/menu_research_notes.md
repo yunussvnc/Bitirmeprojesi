@@ -4029,3 +4029,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6231 ; https://restoranim.net/ist
 ## SOĞAN EKMEK ID 6230 — HOLD
 Hentzer `Barış, Atatürk Blv, 34520 Beylikdüzü`, `+90 506 036 44 48`; Tumisyeri aynı genel adres/telefonu listeliyor. Yandex exact No:50J ve farklı `+90 532...` telefonu gösteriyor; RestaurantGuru yalnızca genel Atatürk Blv adresini veriyor. Güncel fiyatlı 20+ ürün menüsü de bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6230 ; https://yandex.com.tr/maps/org/sogan_ekmek/18441152847/ ; https://www.tumisyeri.com/so%C4%9Fan-ekmek_1w-0506-036-44-48 ; https://restaurantguru.com/Sogan-Ekmek-Buyukcekmece
+
+## SLADOLED DONDURMA ID 6229 — HOLD
+Hentzer `Muratpaşa, Kosova Cd. no:75/A, 34040 Bayrampaşa`, `+90 543 866 72 76`; Restoranim, Mekanlar ve resmi Instagram Bayrampaşa şubesini/adresi/telefonu destekliyor. 2025–2026 sosyal içerikleri güncel olsa da son bir yıl içinde fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6229 ; https://restoranim.net/istanbul/bayrampasa/dondurmaci/sladoled-dondurma ; https://mekanlar.com/mekan/sladoled-dondurma-muratpasa ; https://www.instagram.com/sladoleddondurma/
