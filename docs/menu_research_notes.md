@@ -4081,3 +4081,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6218 ; https://restoranim.net/ist
 ## PIZZA NELLA BEYLİKDÜZÜ ID 6217 — ACCEPTED
 Hentzer `Adnan Kahveci, Kuştepe Cd. 20/1, 34520 Beylikdüzü`, `+90 532 209 08 89`; Menu-TR, Restoranim ve Tumisyeri exact adres/telefonu doğruluyor. Migros Yemek exact Beylikdüzü/Adnan Kahveci vendorunda 2026-08-28 tarihinde 20 benzersiz güncel fiyatlı ürün bulundu. Başlangıç ve 27 cm orta/gurme pizza kalemleri seçildi; popüler carousel tekrarı, içecek ve yan ürün eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6217 ; https://www.migros.com.tr/yemek/pizza-nella-italiano-beylikduzu-adnan-kahveci-mah-st-2b543 ; https://www.menu-tr.com/istanbul/beylikduzu/restoran/pizza-nella-beylikduzu ; https://restoranim.net/istanbul/istanbul/restoran/pizza-nella-beylikduzu ; https://www.tumisyeri.com/pizza-nella-beylikd%C3%BCz%C3%BC-0532-209-08-89
+
+## EFENDY İSTANBUL ID 6216 — HOLD
+Hentzer `Levent, Nisbetiye Cd No:13, 34330 Beşiktaş`, `+90 530 289 80 39`; Efendy Group, Gault&Millau ve resmi/2026 kaynakları exact adres-telefonu doğruluyor. Resmi menu bağlantısı 404 ve erişilebilir kaynaklarda son bir yıl fiyatlı 20+ gıda ürünü doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6216 ; https://efendygroup.com/brands/ ; https://www.gault-millau.com.tr/en/efendy-istanbul/ ; https://efendyistanbul.com/menu/ ; https://restaurantguru.com/Efendy-Istanbul-Istanbul
