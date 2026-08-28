@@ -3945,3 +3945,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6252 ; https://www.migros.com.tr/
 ## ERDEM PASTANESİ ID 6251 — HOLD
 Hentzer `Çengeldere, Çengeldere Cd., 34820 Beykoz`, telefon `+90 531 290 90 44`; Menu-TR ve çeşitli dizinler adresi destekliyor, Yandex aynı telefonu ancak daha spesifik `Çengeldere Cad. 99/2` kapı numarasını gösteriyor. Hentzer adresinde kapı numarası olmadığından ve exact şubeye ait son bir yıl içinde doğrulanmış 20 fiyatlı ürün menüsü bulunamadığından **HOLD; override eklenmedi**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6251 ; https://www.menu-tr.com/istanbul/beykoz/pastane/erdem-pastanesi ; https://yandex.com.tr/maps/org/erdem_pastanesi/234638182826/ ; https://www.servisisletmebul.com/istanbul/beykoz/pastane-tatlici/erdem-pastanesi-bk8zeh.html
+
+## BABI İSTANBUL ID 6250 — HOLD
+Hentzer `Acarlar, 9. Cd. E Blok No:11 İç Kapı No:4, 34800 Beykoz`, `+90 540 789 91 00`. Villavens, Yakala ve resmi 2024 açılış paylaşımı destekliyor; resmi Instagram profilinde güncel telefon `0216 519 68 67` görünüyor. Migros/Yemeksepeti güncel fiyatlı menü sunuyor ancak 11/4 adresi ve Hentzer telefonu vendor ekranında doğrulanamıyor. 100% exact branch/phone paritesi sağlanamadığından **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6250 ; https://www.migros.com.tr/yemek/babi-istanbul-beykoz-acarlar-mah-st-2ece4 ; https://www.yemeksepeti.com/restaurant/mk4f/babi-istanbul-mk4f ; https://www.villavens.com/rehber/babi-istanbul-acarkent ; https://www.instagram.com/babi.istanbul/
