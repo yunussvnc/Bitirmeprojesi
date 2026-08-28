@@ -4341,3 +4341,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6152 ; https://restoranim.net/ist
 ## BEŞİKTAŞ İSKELESİ VAPUR KAFE ID 6151 — HOLD
 Hentzer `Sinanpaşa, İskele Cd. No:16, 34353 Beşiktaş/İstanbul`, telefon boş; Restoranim ve RestaurantGuru aynı iskele adresini doğruluyor ve telefon yayımlamıyor. 2025 yorumları ürün çeşitliliğinin az, yiyeceklerin atıştırmalık/tost ile sınırlı olduğunu gösteriyor; erişilebilir fiyat örnekleri eski. 20+ son bir yıl fiyatlı gıda ürünü ve bağımsız telefon doğrulanamadığından override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6151 ; https://restoranim.net/istanbul/besiktas/kafe/besiktas-iskelesi-vapur-kafe ; https://restaurantguru.com/Vapur-Kafe-Besiktas-Iskelesi-Istanbul
+
+## ODENSE PETSHOP ID 6150 — HOLD
+Hentzer API kaydı `Muratpaşa, Cumhuriyet Cd. No:70/B, 34040 Bayrampaşa/İstanbul`, `+90 531 622 03 81`; işletme adı açıkça petshop ve kategori kaydı hatalı biçimde restoran görünse de gıda işletmesi değildir. Bu nedenle menü override’ı eklenmedi. **HOLD.**
+Kaynak: https://api.asemos.tr/api/v1/places/6150
