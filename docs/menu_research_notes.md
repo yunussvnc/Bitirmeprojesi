@@ -4365,3 +4365,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6146 ; https://idylgelato.com/ ; 
 ## WHY COFFEE BEYLİKDÜZÜ WESTSIDE ID 6145 — HOLD
 Hentzer `Barış, E-5 Yanyolu Westside2 Çarşı No:28 No:68, 34520 Beylikdüzü/İstanbul`, telefon `+90 531 296 99 17`; Why Coffee resmi şube sayfası exact adresi doğruluyor ancak telefon `0850 723 02 23`, dolayısıyla Hentzer cep telefonu bağımsız exact parite sağlamıyor. Resmi sayfa ürün konsepti/görselleri sunuyor ama güncel fiyatlı menü listesi vermiyor; 20+ son bir yıl fiyatlı ürün doğrulanamadı. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6145 ; https://whycoffee.com.tr/subelerimiz/beylikduzu-westside/ ; https://www.menu-tr.com/istanbul/beylikduzu/kafe/why-coffee-beylikduzu-westside ; https://restaurantguru.com/amp/Why-Coffee-Beylikduzu-Westside-Buyukcekmece
+
+## BALTA BURGER BEŞİKTAŞ ID 6144 — HOLD
+Hentzer `Sinanpaşa, Ihlamurdere Cd. No:25A, 34022 Beşiktaş/İstanbul`, `+90 212 634 00 07`; Balta Burger resmi şube sayfası ve RestaurantGuru aynı exact adres/telefonu doğruluyor. Resmi şube sayfasında fiyatlı menü yok, RestaurantGuru yalnızca genel fiyat aralığı/yorumlar sunuyor ve Yaka.la menü sayfası extract edilemedi. 20+ son bir yıl fiyatlı ürün doğrulanamadığı için override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6144 ; https://baltaburger.com/006-istanbul-besiktas/ ; https://restaurantguru.com/Balta-Burger-Besiktas-Istanbul ; https://yaka.la/detail/istanbul/besiktas/balta-burger-besiktas?uuid
