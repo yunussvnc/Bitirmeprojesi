@@ -4313,3 +4313,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6159 ; https://www.laoscoffeeroas
 ## ÇAVUŞBAŞI BALIKÇISI / KILIÇ BALIK ÇAVUŞBAŞI ID 6158 — HOLD
 Hentzer `Çiftlik, Çavuşbaşı Cumhuriyet Cd. No:249 D:B, 34830 Beykoz/İstanbul`, `+90 544 857 51 91`; Menu-tr, RestaurantGuru, Yandex, Google ve resmi Instagram exact işletme/adres/telefon paritesini doğruluyor. Açık kaynaklarda fiyatlı menü bulunmuyor; günlük balık ve pişirme hizmeti açıklamaları/yorumları var ancak 20+ son bir yıl fiyatlı ürün doğrulanamadı. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6158 ; https://www.menu-tr.com/istanbul/beykoz/balik-restorani/cavusbasi-balikcisi ; https://restaurantguru.com/Kilic-Balik-Istanbul ; https://www.instagram.com/cavusbasi_balikcisi/
+
+## SAHİL REST CAFE ID 6157 — HOLD
+Hentzer `Yıldız, Yalı Sk. 62/65, 34349 Beşiktaş/İstanbul`, telefon boş; Restoranim exact adresi ve telefon bulunmadığını doğruluyor. TurkeyTurism’deki `+90 212 236 36 59` kaydı eski (2014 içerikleri) ve bağımsız güncel parite için yeterli değil. MenuBurada menü olmadığını belirtiyor; son bir yıl içinde fiyatlı 20+ ürün doğrulanamadı. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6157 ; https://restoranim.net/istanbul/besiktas/kafe/sahil-rest-cafe ; https://menuburada.com/sahil-rest-cafe-yildiz-istanbul/ ; https://food.turkeyturism.com/tr/sahil-rest-cafe-90-212-236-36-59.html
