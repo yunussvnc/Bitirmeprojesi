@@ -4073,3 +4073,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6220 ; https://www.migros.com.tr/
 ## PEYNİR EKMEK CAFE&KAHVALTI ID 6219 — HOLD
 Hentzer `Sinanpaşa, Çelebi Oğlu Sk. No:14, 34353 Beşiktaş`, `+90 212 259 58 59`; Restoranim, İstanbul Servis Listesi, Bulurum ve TazeYorum exact şube/telefonu doğruluyor. Resmi Instagram’ın 2026-04-18 paylaşımı işletmeyi destekliyor fakat görünür içerik fiyatlı menü listesi sunmuyor; eski 2020 menü güncel kabul edilmedi. Son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6219 ; https://restoranim.net/istanbul/besiktas/kahvaltici/peynir-ekmek-cafe-kahvalti ; https://istanbulservislistesi.com.tr/istanbul/besiktas/kafe/peynir-ekmek-cafe-kahvalti-9gKU70.html ; https://www.instagram.com/p/DXRFjNBgmpu/
+
+## ÇUBUKLU BUSİNES MAPS ID 6218 — HOLD
+Hentzer exact adres `Paşabahçe Mahallesi Barbaros Caddesi Burunbahçe Ağaçlık Mesire Yeri No:18 D:A+B`, telefon boş. Restoranim adresi doğruluyor ancak işletme içeriği Hayal Kahvesi/Luna adlarıyla karışıyor; Mekanlar da aynı konumu Çubuklu Hayal Kahvesi olarak veriyor. Telefon paritesi ve son bir yıl fiyatlı 20+ ürün menüsü yok. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6218 ; https://restoranim.net/istanbul/beykoz/restoran/cubuklu-busines-maps ; https://mekanlar.com/mekan/hayal-kahvesi-beykoz-pasabahce ; https://www.meyhankoli.com/restoran/istanbul-beykoz-cubuklu-hayal-kahvesi-2373
