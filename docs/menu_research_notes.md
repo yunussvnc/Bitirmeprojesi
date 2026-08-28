@@ -4241,3 +4241,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6177 ; https://adilesultanevyemek
 ## MIKEL COFFEE COMPANY ID 6176 — HOLD
 Hentzer `Büyükşehir, Atatürk Blv No:38A D:26, 34520 Beylikdüzü/İstanbul`, `+90 212 272 32 32`; Mikel resmi bayi sayfası, Kaçıyor ve RestaurantGuru White Corner kaydı exact şubeyi/adresi doğruluyor. Resmi site ürün kategorilerini gösteriyor fakat fiyat yayımlamıyor; Kaçıyor yalnızca kalori/ürün isimleri, RestaurantGuru ise fiyatlı menü sunmuyor. Exact şube için son bir yıl içinde 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; fiyatı olmayan ürün listesi aktarılmadı.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6176 ; https://mikelcoffee.com.tr/ ; https://kaciyor.com/mikel-coffee-company-beylikduzu ; https://fr.restaurantguru.com/Mikel-Coffee-White-Corner-AVM-Buyukcekmece/menu
+
+## PERAST COFFEE CO. ID 6175 — ACCEPTED (20 ürün)
+Hentzer `Yıldırım, Şht. Kamil Balkan Cd. No:76B, 34035 Bayrampaşa/İstanbul`, `+90 538 307 99 79`; resmi Instagram hesabı, Kaçıyor ve servis dizini exact Yıldırım şubesini, adresi ve telefonu doğruluyor. Canlı Yemeksepeti `spqw` vendorunda yemek, tatlı ve kahve kategorilerinden 20 benzersiz ürünün fiyatları erişilebilir; 28.08.2026’da doğrulandı. Popüler carousel kopyaları ana ürün listesine alınmadı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6175 ; https://www.yemeksepeti.com/restaurant/spqw/perast-coffee-co ; https://www.kaciyor.com/perast-coffee-co ; https://www.instagram.com/perastcoffeeco/?hl=en ; https://istanbulservislistesi.com.tr/istanbul/bayrampasa/kafe/perast-coffee-co-FgPeXQ.html

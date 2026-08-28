@@ -93950,5 +93950,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Ayran Aşı Çorbası", "price": "195 TL", "category": "Çorbalar" },
       { "name": "Beğendili Mangalda Köfte", "price": "495 TL", "category": "Etli Yemekler" }
     ]
+  },
+  "6175": {
+    "name": "PERAST COFFEE CO.",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/spqw/perast-coffee-co",
+    "sourceName": "Canlı Yemeksepeti Perast Coffee Co. vendoru; resmi Instagram ve Kaçıyor exact Yıldırım şube paritesi",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Honey & Butter Toast", "price": "500 TL", "category": "Yemekler" },
+      { "name": "Ajvarlı Tost", "price": "460 TL", "category": "Yemekler" },
+      { "name": "Kuru Etli Tost", "price": "480 TL", "category": "Yemekler" },
+      { "name": "Tatlı Kruvasan", "price": "500 TL", "category": "Yemekler" },
+      { "name": "Avakadolu Kruvasan", "price": "575 TL", "category": "Yemekler" },
+      { "name": "Roast Beef & Cheddar Kruvasan", "price": "590 TL", "category": "Yemekler" },
+      { "name": "Roast Beef Sando", "price": "540 TL", "category": "Yemekler" },
+      { "name": "Pesto & Mozzarella Focaccia", "price": "430 TL", "category": "Yemekler" },
+      { "name": "Bademli Kruvasan", "price": "320 TL", "category": "Yemekler" },
+      { "name": "Granola Bowl", "price": "420 TL", "category": "Yemekler" },
+      { "name": "Porridge Bowl", "price": "420 TL", "category": "Yemekler" },
+      { "name": "Acai Bowl", "price": "490 TL", "category": "Yemekler" },
+      { "name": "Antep Fıstıklı Raw", "price": "200 TL", "category": "Tatlılar" },
+      { "name": "Cream Puff", "price": "310 TL", "category": "Tatlılar" },
+      { "name": "İspanyol Cheesecake", "price": "310 TL", "category": "Tatlılar" },
+      { "name": "Tiramisu", "price": "290 TL", "category": "Tatlılar" },
+      { "name": "Çikolatalı Cookie", "price": "180 TL", "category": "Tatlılar" },
+      { "name": "Tarçınlı Kurabiye (Küçük)", "price": "100 TL", "category": "Tatlılar" },
+      { "name": "Beyaz Çikolatalı Brownie", "price": "300 TL", "category": "Tatlılar" },
+      { "name": "Frambuaz Cheesecake", "price": "290 TL", "category": "Tatlılar" }
+    ]
   }
 };
