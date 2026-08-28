@@ -4165,3 +4165,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6197 ; https://linktr.ee/pizzav ;
 ## BARBAROS OVEN ID 6196 — HOLD
 Hentzer `Orta Mahallesi Demirkapı Caddesi, Orta, Çığ Sk. No. 69/A, 34030 Bayrampaşa`, `+90 212 613 95 71`; TumIsyeri exact adres ve telefonu doğruluyor. RestaurantGuru listing mevcut ancak güncel 20+ fiyatlı ürün menüsü yok; Yemeksepeti/Migros/dijital menü exact vendoru doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6196 ; https://www.tumisyeri.com/barbaros-oven_20-0212-613-95-71 ; https://fr.restaurantguru.com/amp/Barbaros-Ekmek-Firini-Istanbul
+
+## TATLI SEPETİ ID 6195 — ACCEPTED
+Hentzer `Altıntepsi, Altıntepe Sok. No:15/A, 34035 Bayrampaşa`, `+90 533 527 76 38`; resmi Instagram hesabı Tatlı Sepeti markasını, tatlı/kahve/waffle konseptini ve Yemeksepeti-Migros-GetirYemek kanallarını doğruluyor. Instagram telefon ve konum bilgisi Hentzer ile eşleşiyor. Migros Yemek exact Altıntepsi vendorunda 2026-08-28 tarihinde 20+ güncel fiyatlı tatlı/içecek ürünü yayınlanıyor; poşet hariç ilk 20 uygun ürün eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6195 ; https://www.instagram.com/tatlisepeti.tr/ ; https://www.yemeksepeti.com/en/restaurant/yn2k/tatli-sepeti-yn2k ; https://www.migros.com.tr/yemek/tatli-sepeti-bayrampasa-altintepsi-mah-st-32693

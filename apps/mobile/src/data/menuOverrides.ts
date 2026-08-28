@@ -93830,5 +93830,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Fanta (33 cl.)", "price": "90 TL", "category": "İçecekler" },
       { "name": "Sprite (33 cl.)", "price": "90 TL", "category": "İçecekler" }
     ]
+  },
+  "6195": {
+    "name": "TATLI SEPETİ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/tatli-sepeti-bayrampasa-altintepsi-mah-st-32693",
+    "sourceName": "Canlı Migros Yemek exact Tatlı Sepeti vendoru; resmi Instagram ve Hentzer adres/telefon paritesi",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Vişneli Brownie", "price": "550 TL", "category": "Tatlılar" },
+      { "name": "Kazandibi", "price": "350 TL", "category": "Tatlılar" },
+      { "name": "Meşe Palamudu", "price": "450 TL", "category": "Tatlılar" },
+      { "name": "Pistachio (Antep Fıstık Rüyası)", "price": "550 TL", "category": "Tatlılar" },
+      { "name": "Lemon", "price": "480 TL", "category": "Tatlılar" },
+      { "name": "Polka", "price": "480 TL", "category": "Tatlılar" },
+      { "name": "Belina", "price": "550 TL", "category": "Tatlılar" },
+      { "name": "Yaban Mersinli Tart", "price": "550 TL", "category": "Tatlılar" },
+      { "name": "Van Stapele Cookie (90 Gr.)", "price": "300 TL", "category": "Tatlılar" },
+      { "name": "Siyah Beyaz Çikolata Cookie (75 Gr.)", "price": "250 TL", "category": "Tatlılar" },
+      { "name": "Kartanesi", "price": "550 TL", "category": "Tatlılar" },
+      { "name": "Kalp Pasta", "price": "700 TL", "category": "Tatlılar" },
+      { "name": "Kova Waffle", "price": "495 TL", "category": "Tatlılar" },
+      { "name": "Coca-Cola (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Soda (20 cl.)", "price": "32 TL", "category": "İçecekler" },
+      { "name": "Fuse Tea (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Limonlu Soda (20 cl.)", "price": "32 TL", "category": "İçecekler" },
+      { "name": "Sprite (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Latte", "price": "200 TL", "category": "İçecekler" },
+      { "name": "Caramel Latte", "price": "208 TL", "category": "İçecekler" }
+    ]
   }
 };
