@@ -93494,5 +93494,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Mısır Ekmeği", "price": "80 TL", "category": "Ekmek Çeşitleri" },
       { "name": "Susamlı Sandiviç Ekmeği", "price": "24 TL", "category": "Ekmek Çeşitleri" }
     ]
+  },
+  "6244": {
+    "name": "LOTUS WAFFLE",
+    "sourceUrl": "https://www.migros.com.tr/yemek/lotus-waffle-bayrampasa-kartaltepe-mah-st-33302",
+    "sourceName": "Canlı Migros Yemek exact Kartaltepe vendoru; Restoranim ve resmi Instagram ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Çikolata Rüyası Waffle (Büyük Boy)", "price": "320 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Lotus Waffle (Büyük Boy)", "price": "356 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Fıstık Bombası Waffle (Büyük Boy)", "price": "372 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Meyve Şöleni Waffle (Büyük Boy)", "price": "356 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Frambuazlı Waffle (Büyük Boy)", "price": "332 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Sütlü Çikolatalı Waffle (Büyük Boy)", "price": "320 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Antep Şöleni Waffle (Büyük Boy)", "price": "344 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Beyaz Çikolatalı Waffle (Büyük Boy)", "price": "320 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Çilek Aşkı Waffle (Büyük Boy)", "price": "320 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Karamelli Waffle (Büyük Boy)", "price": "320 TL", "category": "Waffle Büyük Boy" },
+      { "name": "Çikolata Rüyası Waffle Mega", "price": "360 TL", "category": "Kova Waffle" },
+      { "name": "Fıstıklı Waffle Bombası Mega", "price": "384 TL", "category": "Kova Waffle" },
+      { "name": "Mega Lotus Waffle", "price": "372 TL", "category": "Kova Waffle" },
+      { "name": "Çikolata Rüyası Waffle (Bardak)", "price": "232 TL", "category": "Bardak Waffle" },
+      { "name": "Lotus Waffle (Bardak)", "price": "244 TL", "category": "Bardak Waffle" },
+      { "name": "Fıstık Bombası Waffle (Bardak)", "price": "259,20 TL", "category": "Bardak Waffle" },
+      { "name": "Çikolatalı Tereyağlı Kruvasan Rüyası", "price": "392 TL", "category": "Kruvasanlar" },
+      { "name": "Fıstıklı Tereyağlı Kruvasan Bombası", "price": "448 TL", "category": "Kruvasanlar" },
+      { "name": "Lotus Tereyağlı Kruvasan", "price": "412 TL", "category": "Kruvasanlar" },
+      { "name": "Bitterim Waffle (Büyük Boy)", "price": "320 TL", "category": "Waffle Büyük Boy" }
+    ]
   }
 };

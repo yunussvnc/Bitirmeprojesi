@@ -3969,3 +3969,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6246 ; https://restoranim.net/ist
 ## THE HOUSE CAFE ORTAKÖY ID 6245 — HOLD
 Hentzer `Yıldız, Ortaköy Salhanesi Sk. No:1, 34349 Beşiktaş`, `+90 212 227 26 99`; resmi The House Cafe şube sayfası aynı adres ve telefonu doğruluyor. Ancak resmi sayfada ve erişilebilir kaynaklarda son bir yıl içinde doğrulanmış fiyatlı 20+ ürün menüsü yok. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6245 ; https://www.thehousecafe.com/en/sube/house-cafe-ortakoy/ ; https://www.istanbul.net.tr/yeme-icme/bar/the-house-cafe-ortakoy/5373/2 ; https://us.trip.com/restaurant/trkiye/istanbul/detail/the-house-cafe-17093812
+
+## LOTUS WAFFLE ID 6244 — ACCEPTED (20 ürün)
+Hentzer `Kartaltepe, Eski Edirne Asfaltı, Kartaltepe, Kardeş Sk. No:2, 34040 Bayrampaşa`, `+90 543 285 62 73`; Restoranim exact adres/telefonu, resmi Instagram exact adresi ve Migros vendoru `Bayrampaşa (Kartaltepe Mah.)` eşleşiyor. Canlı Migros menüsü 20 gıda ürünü ve fiyat sağlıyor; fiyatlar 2026-08-28 tarihinde doğrulandı. Poşet veya gıda dışı kalem alınmadı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6244 ; https://www.migros.com.tr/yemek/lotus-waffle-bayrampasa-kartaltepe-mah-st-33302 ; https://restoranim.net/istanbul/bayrampasa/kafe/lotus-waffle ; https://www.instagram.com/lotuswaffleco/
