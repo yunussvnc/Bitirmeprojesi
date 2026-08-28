@@ -4153,3 +4153,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6200 ; https://restoranim.net/ist
 ## ANTEPERA BAKLAVA ID 6199 — ACCEPTED
 Hentzer `Büyükşehir, Cumhuriyet Cd. 21J, 34520 Beylikdüzü`, `+90 501 570 79 27`; resmi Instagram hesabı aynı işletme, `Cumhuriyet caddesi no 21` adresi ve telefonu yayımlıyor. Yemeksepeti `njd0` Antepera Baklava vendorunda 2026-08-28 tarihinde 20+ güncel fiyatlı baklava/tatlı/içecek ürünü yayınlanıyor; poşet ürünü dışarıda bırakılarak ilk 20 uygun ürün eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6199 ; https://www.instagram.com/antepera/ ; https://www.yemeksepeti.com/restaurant/njd0/antepera-baklava
+
+## 4 / KITCHEN ORTAKÖY ID 6198 — HOLD
+Hentzer `Mecidiye, Eski Bahçe Sk. No:19, 34347 Beşiktaş`, `+90 532 727 74 44`; Winniey aynı adresi listeliyor ve resmi Instagram hesabı Four Kitchen Ortaköy’ü kahvaltı/pizza/makarna/salata/sandviç/kahve konseptiyle doğruluyor. Ancak erişilebilir resmi içeriklerde 20+ güncel fiyatlı ürün listesi ve bağımsız telefon doğrulaması yok. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6198 ; https://www.instagram.com/4.kitchen.ortakoy/ ; https://www.instagram.com/4.kitchen.ortakoy/p/Db7ulS9yCL7/ ; https://www.instagram.com/4.kitchen.ortakoy/p/DcTCYF_Mdry/ ; https://winniey.com/spots/istanbul-mecidiye?view
