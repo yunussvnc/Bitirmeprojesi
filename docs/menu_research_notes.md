@@ -4077,3 +4077,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6219 ; https://restoranim.net/ist
 ## ÇUBUKLU BUSİNES MAPS ID 6218 — HOLD
 Hentzer exact adres `Paşabahçe Mahallesi Barbaros Caddesi Burunbahçe Ağaçlık Mesire Yeri No:18 D:A+B`, telefon boş. Restoranim adresi doğruluyor ancak işletme içeriği Hayal Kahvesi/Luna adlarıyla karışıyor; Mekanlar da aynı konumu Çubuklu Hayal Kahvesi olarak veriyor. Telefon paritesi ve son bir yıl fiyatlı 20+ ürün menüsü yok. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6218 ; https://restoranim.net/istanbul/beykoz/restoran/cubuklu-busines-maps ; https://mekanlar.com/mekan/hayal-kahvesi-beykoz-pasabahce ; https://www.meyhankoli.com/restoran/istanbul-beykoz-cubuklu-hayal-kahvesi-2373
+
+## PIZZA NELLA BEYLİKDÜZÜ ID 6217 — ACCEPTED
+Hentzer `Adnan Kahveci, Kuştepe Cd. 20/1, 34520 Beylikdüzü`, `+90 532 209 08 89`; Menu-TR, Restoranim ve Tumisyeri exact adres/telefonu doğruluyor. Migros Yemek exact Beylikdüzü/Adnan Kahveci vendorunda 2026-08-28 tarihinde 20 benzersiz güncel fiyatlı ürün bulundu. Başlangıç ve 27 cm orta/gurme pizza kalemleri seçildi; popüler carousel tekrarı, içecek ve yan ürün eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6217 ; https://www.migros.com.tr/yemek/pizza-nella-italiano-beylikduzu-adnan-kahveci-mah-st-2b543 ; https://www.menu-tr.com/istanbul/beylikduzu/restoran/pizza-nella-beylikduzu ; https://restoranim.net/istanbul/istanbul/restoran/pizza-nella-beylikduzu ; https://www.tumisyeri.com/pizza-nella-beylikd%C3%BCz%C3%BC-0532-209-08-89

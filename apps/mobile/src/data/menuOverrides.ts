@@ -93690,5 +93690,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Buffalo Sandviç", "price": "350 TL", "category": "Sandviçler" },
       { "name": "Patso Sandviç", "price": "180 TL", "category": "Sandviçler" }
     ]
+  },
+  "6217": {
+    "name": "PIZZA NELLA BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pizza-nella-italiano-beylikduzu-adnan-kahveci-mah-st-2b543",
+    "sourceName": "Canlı Migros Yemek exact Beylikdüzü/Adnan Kahveci vendoru; Restoranim, Menu-TR ve Tumisyeri ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Al Caprese Bomonti", "price": "450 TL", "category": "Başlangıç" },
+      { "name": "Margherita Pizza (27 Cm)", "price": "460 TL", "category": "Pizza Orta Boy" },
+      { "name": "Ispanaklı Pizza (27 Cm)", "price": "535 TL", "category": "Pizza Orta Boy" },
+      { "name": "Akdeniz Pizza (27 Cm)", "price": "540 TL", "category": "Pizza Orta Boy" },
+      { "name": "Mantarlı Pizza (27 Cm)", "price": "480 TL", "category": "Pizza Orta Boy" },
+      { "name": "Vegan Pizza (27 Cm)", "price": "500 TL", "category": "Pizza Orta Boy" },
+      { "name": "Pizza Sebzesever (27 Cm)", "price": "535 TL", "category": "Pizza Orta Boy" },
+      { "name": "Pizza Verdura Mista (27 Cm)", "price": "535 TL", "category": "Pizza Orta Boy" },
+      { "name": "Picante Pizza (27 Cm)", "price": "599 TL", "category": "Pizza Orta Boy" },
+      { "name": "Mexicano Pizza (27 Cm)", "price": "599 TL", "category": "Pizza Orta Boy" },
+      { "name": "Pepperoni Pizza (27 Cm)", "price": "599 TL", "category": "Pizza Orta Boy" },
+      { "name": "Pizza Tonno (27 Cm)", "price": "599 TL", "category": "Pizza Orta Boy" },
+      { "name": "Pizza Siciliana (27 Cm)", "price": "575 TL", "category": "Pizza Orta Boy" },
+      { "name": "Salamlı Pizza (27 Cm)", "price": "599 TL", "category": "Pizza Orta Boy" },
+      { "name": "Sosisli Pizza (27 Cm)", "price": "599 TL", "category": "Pizza Orta Boy" },
+      { "name": "Pizza Danaman (27 Cm)", "price": "599 TL", "category": "Gurme Pizza Orta Boy" },
+      { "name": "Pizza Ala Turca (27 Cm)", "price": "599 TL", "category": "Gurme Pizza Orta Boy" },
+      { "name": "Pizza Ricotta (27 Cm)", "price": "550 TL", "category": "Gurme Pizza Orta Boy" },
+      { "name": "Kavurmalı Pizza (27 Cm)", "price": "750 TL", "category": "Gurme Pizza Orta Boy" },
+      { "name": "Pizza Pesto (27 Cm)", "price": "700 TL", "category": "Gurme Pizza Orta Boy" }
+    ]
   }
 };
