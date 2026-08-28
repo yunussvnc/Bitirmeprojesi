@@ -4225,3 +4225,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6181 ; https://www.yemeksepeti.co
 ## HAVAI FİŞEK MAĞAZASI VE MEŞALE SATIŞI ID 6180 — HOLD
 Hentzer kaydı `İsmet Paşa, Sinop Sk. No:8/A, 34035 Bayrampaşa/İstanbul`, `+90 545 906 03 05`; çoklu dizinler aynı adres/telefonu doğruluyor. İşletme kaynaklarda açıkça havai fişek/meşale mağazası olarak sınıflandırılıyor; gıda işletmesi değil ve menü ürünü bulunmuyor. **HOLD; gıda menüsü eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6180 ; https://havaifisekmagazasi.com/category/page-2/ ; https://www.facebook.com/havaifisekmagaza/?locale ; https://dukkanlar.net.tr/firma/havai-fisek-magazasi-ve-mesale-satisi/
+
+## ŞÖHRETLER BEŞİKTAŞ KÖFTECİSİ ID 6179 — HOLD
+Hentzer `Sinanpaşa, Şair Leyla Sk. 5 C, 34353 Beşiktaş/İstanbul`, `+90 212 260 25 60`; Bulurum, Restoranim, RestaurantGuru ve diğer rehberler exact adres/telefonu doğruluyor. RestaurantGuru’da kullanıcı menü sürümleri mevcut görünse de erişilebilir içerikte ürün/fiyat metni yok ve sayfa fiyatların son güncellemeden beri değişmiş olabileceği uyarısını veriyor. Sosyal fiyat paylaşımı 2021 tarihli; 20+ son bir yıl ürünü doğrulanamadı. **HOLD; eski/fiyatsız menü aktarılmadı.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6179 ; https://restaurantguru.com/Soehretler-Besiktas-Koftecisi-Istanbul/menu ; https://restoranim.net/istanbul/besiktas/kofteci/sohretler-besiktas-koftecisi ; https://www.bulurum.com/details/2e5b712f21bdbd0f1j037a0d545_5136
