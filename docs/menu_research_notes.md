@@ -4369,3 +4369,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6145 ; https://whycoffee.com.tr/s
 ## BALTA BURGER BEŞİKTAŞ ID 6144 — HOLD
 Hentzer `Sinanpaşa, Ihlamurdere Cd. No:25A, 34022 Beşiktaş/İstanbul`, `+90 212 634 00 07`; Balta Burger resmi şube sayfası ve RestaurantGuru aynı exact adres/telefonu doğruluyor. Resmi şube sayfasında fiyatlı menü yok, RestaurantGuru yalnızca genel fiyat aralığı/yorumlar sunuyor ve Yaka.la menü sayfası extract edilemedi. 20+ son bir yıl fiyatlı ürün doğrulanamadığı için override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6144 ; https://baltaburger.com/006-istanbul-besiktas/ ; https://restaurantguru.com/Balta-Burger-Besiktas-Istanbul ; https://yaka.la/detail/istanbul/besiktas/balta-burger-besiktas?uuid
+
+## TIESTO COFFEE ID 6143 — HOLD
+Hentzer `Cumhuriyet, Cumhuriyet Cd. No:16/2, 34520 Beylikdüzü/İstanbul`, `+90 537 860 37 21`; GameTable ve işletme arama kayıtları adresi destekliyor, Tiesto resmi sitesi telefonu kullanıyor ancak İstanbul şubesinin exact adresini yayımlamıyor. Resmi sitede kahve/ürün tanıtımı var fakat şube bazlı güncel fiyat menüsü yok. Yandex/Facebook sonuçlarında farklı `Barış Mah. Akdeniz Cd. No:8/1D` adresi de bulunduğundan strict exact adres paritesi güvenilir değil. 20+ son bir yıl fiyatlı ürün doğrulanamadı; override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6143 ; https://tiestocoffee.com/ ; https://www.gametable.com.tr/nerede ; https://www.facebook.com/p/Tiesto-Coffee-61589055625741/
