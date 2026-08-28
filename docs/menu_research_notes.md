@@ -4057,3 +4057,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6224 ; https://tesislerrezervasyo
 ## HAMBURGER7 BEYLİKDÜZÜ ID 6223 — ACCEPTED
 Hentzer `Adnan Kahveci Mahallesi Çamlıtepe Caddesi Dorapark 5, No:17/6 İç Kapı No:11, 34519 Beylikdüzü`, `+90 541 308 97 29`; Restoranim ve 2026 tarihli resmi sosyal paylaşımlar exact adres/telefonu doğruluyor. Migros Yemek exact Adnan Kahveci vendorunda 2026-08-28 tarihinde 20 benzersiz güncel fiyatlı gıda ürünü bulundu. Soslar, içecekler ve tekrarlar yerine burger, tavuk burger ve atıştırmalık kalemleri seçildi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6223 ; https://www.migros.com.tr/yemek/hamburger-7-beylikduzu-adnan-kahveci-mah-st-2f57a ; https://restoranim.net/istanbul/beylikduzu/burgerci/hamburger7 ; https://www.instagram.com/p/DZXhVUGo4T5/
+
+## LAMORE BALIK–ET MANGALBAŞI ID 6222 — HOLD
+Hentzer `Marmara, 34524 Beylikdüzü`, `+90 533 301 84 34`; işletme West İstanbul Marina’da görünse de Restoranim farklı `0532 100 27 28` telefon ve yalnızca genel adres veriyor. Yaka.la menü bulunmadığını bildiriyor; son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6222 ; https://restoranim.net/istanbul/beylikduzu/restoran/lamore-balik-et-mangalbasi-restaurant ; https://yaka.la/detail/istanbul/beylikduzu/lamore-balik-et-mangalbasi-restaurant?uuid=6843531a-fea8-4865-88d6-9afae4073831 ; https://fr.restaurantguru.com/Lamore-Istanbul
