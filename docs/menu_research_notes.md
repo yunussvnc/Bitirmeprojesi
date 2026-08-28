@@ -4101,3 +4101,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6213 ; https://restoranim.net/ist
 ## CURLY PIZZA ID 6212 — ACCEPTED
 Hentzer `Inci 7, Demir Romance Sitesi, Cumhuriyet, Fedakar Sk., 34520 Beylikdüzü`, `+90 212 803 42 99`; Restoranim, Mekanlar ve Tumisyeri exact adres/telefonu doğruluyor. Yemeksepeti `piej` exact vendorunda 2026-08-28 tarihinde çok sayıda güncel fiyatlı pizza bulundu; ilk 20 benzersiz büyük boy pizza kalemi eklendi. Popular carousel tekrarları ve gıda dışı ürünler dışarıda bırakıldı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6212 ; https://www.yemeksepeti.com/restaurant/piej/curly-pizza ; https://restoranim.net/istanbul/beylikduzu/pizzaci/curly-pizza ; https://mekanlar.com/mekan/curly-pizza-cumhuriyet-mh ; https://www.tumisyeri.com/curly-pizza-0212-803-42-99
+
+## YENİ LOKANTA ID 6211 — HOLD
+Hentzer `Tomtom, Kumbaracı Yokuşu Sok. No:66/B, 34433 Beyoğlu`, `+90 212 292 25 50`; resmi site, Michelin, Yelp ve Indagare exact işletme/adres/telefonu destekliyor. Resmi sitede menü ürün-fiyat listesi yok; son bir yıl fiyatlı 20+ benzersiz ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6211 ; https://www.yenilokanta.com/ ; https://guide.michelin.com/tr/tr/istanbul-province/istanbul/restaurant/yeni-lokanta ; https://www.yelp.com/biz/yeni-lokanta-istanbul-2 ; https://indagare.com/restaurant/yeni-lokanta
