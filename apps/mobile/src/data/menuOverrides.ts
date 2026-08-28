@@ -93606,5 +93606,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Ekmek Arası Kalamar", "price": "1500 TL", "category": "Kalamar & Karides Menüleri" },
       { "name": "Midye Tava", "price": "1650 TL", "category": "Kalamar & Karides Menüleri" }
     ]
+  },
+  "6225": {
+    "name": "SAMPI PİDE BEŞİKTAŞ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/sampi-pide-besiktas-cihannuma-mah-st-1f0c1",
+    "sourceName": "Canlı Migros Yemek exact Beşiktaş/Cihannüma vendoru; Mekanlar ve Bulurum ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Acısız Lahmacun", "price": "218 TL", "category": "Lahmacunlar" },
+      { "name": "Acılı Lahmacun", "price": "218 TL", "category": "Lahmacunlar" },
+      { "name": "Kaşar Peynirli Pide", "price": "380 TL", "category": "Ekonomik Pide" },
+      { "name": "Kuşbaşılı Kaşarlı Pide (Açık)", "price": "529 TL", "category": "Ekonomik Pide" },
+      { "name": "Samsun Pidesi (Kapalı Kıymalı)", "price": "448 TL", "category": "Ekonomik Pide" },
+      { "name": "Patatesli Pide (Kapalı)", "price": "299 TL", "category": "Ekonomik Pide" },
+      { "name": "Tavuklu Pide (Açık)", "price": "335 TL", "category": "Ekonomik Pide" },
+      { "name": "Beyaz Peynirli Pide", "price": "328 TL", "category": "Ekonomik Pide" },
+      { "name": "Ispanaklı Pide", "price": "325 TL", "category": "Ekonomik Pide" },
+      { "name": "Ispanaklı Beyaz Peynirli Pide", "price": "325 TL", "category": "Ekonomik Pide" },
+      { "name": "Mantarlı Domatesli Biberli Kaşarlı Pide", "price": "368 TL", "category": "Ekonomik Pide" },
+      { "name": "Kıymalı Patatesli Kaşarlı Pide", "price": "385 TL", "category": "Özel Pide" },
+      { "name": "Kuşbaşılı Pide (Açık)", "price": "472 TL", "category": "Özel Pide" },
+      { "name": "Kıymalı Kaşarlı Pide", "price": "506 TL", "category": "Özel Pide" },
+      { "name": "Yoğurtlu Pide (Kapalı)", "price": "483 TL", "category": "Özel Pide" },
+      { "name": "Dört Mevsim Pide (Açık)", "price": "495 TL", "category": "Özel Pide" },
+      { "name": "Karışık Pide Sucuklu", "price": "522 TL", "category": "Özel Pide" },
+      { "name": "Karışık Pide Pastırmalı", "price": "610 TL", "category": "Özel Pide" },
+      { "name": "Et Dönerli Kaşarlı Pide (Kapalı)", "price": "550 TL", "category": "Özel Pide" },
+      { "name": "Et Dönerli Kaşarlı, Cheddarlı Pide (Kapalı)", "price": "555 TL", "category": "Özel Pide" }
+    ]
   }
 };

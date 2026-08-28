@@ -4045,3 +4045,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6227 ; https://restoranim.net/ist
 ## BUNKER COFFEE ID 6226 — HOLD
 Hentzer `İsmet Paşa, Eti Sokağı No:8/B, 34040 Bayrampaşa`, phone boş; Servis Kayıt exact adresi fakat 0850 309 8996 telefonunu veriyor. Yemeksepeti’nde 15 benzersiz uygun fiyatlı ürün bulundu, 20 ürün şartı sağlanmadı; poşet hariç tutuldu. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6226 ; https://serviskayitlistesi.com/istanbul/bayrampasa/kafe/bunker-coffee-3yPKK4.html ; https://www.yemeksepeti.com/restaurant/qde7/bunker-coffee ; https://www.instagram.com/bunkercoffee1/
+
+## SAMPI PİDE BEŞİKTAŞ ID 6225 — ACCEPTED
+Hentzer `Cihannüma, Sinanpaşa, Barbaros Blv. No:3-A, 34353 Beşiktaş`, `+90 212 236 35 35`; Mekanlar ve Bulurum exact adres/telefonu doğruluyor. Migros Yemek exact Beşiktaş/Cihannüma vendoru 2026-08-28 tarihinde canlı fiyatlı 20 benzersiz gıda ürünü sundu. Eklenen kalemler arasında Acısız/Acılı Lahmacun, farklı pide çeşitleri ve Et Dönerli Kaşarlı pideler bulunuyor; poşet veya tekrarlar eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6225 ; https://www.migros.com.tr/yemek/sampi-pide-besiktas-cihannuma-mah-st-1f0c1 ; https://mekanlar.com/mekan/sampi-pide-cihannuma-besiktas-istanbul ; https://www.bulurum.com/details/2a7b1_733125ajc577_acg7h2a6e0k2g
