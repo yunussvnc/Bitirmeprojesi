@@ -3977,3 +3977,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6244 ; https://www.migros.com.tr/
 ## PERA TERAS MEYHANESİ ID 6243 — HOLD
 Hentzer `Dereağzı, Denizyolu Cd. No:19, 34528 Beylikdüzü`, `+90 530 626 17 96`. Resmi Instagram aynı telefon/No:19 adresini yayımlıyor; Yandex aynı telefonu No:21 olarak listeliyor. 2025-2026 sosyal paylaşımlarda fix menü fiyatları bulunsa da exact şube için 20 benzersiz güncel fiyatlı ürün menüsü yok ve adres çelişkisi mevcut. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6243 ; https://www.instagram.com/pera_teras/ ; https://yandex.com.tr/maps/org/pera_teras_restoran/196734419578/ ; https://www.instagram.com/p/DWTaeAhDD-V/
+
+## LE BARON ID 6242 — HOLD
+Hentzer `Levazım, Koru Sk. No:2, 34340 Beşiktaş`, `+90 212 353 66 61`; resmi Instagram Zorlu Center/Koru Sokak No:2 konumunu, Restoranim aynı adres/telefonu doğruluyor. Ancak erişilebilir kaynaklarda son bir yıl içinde exact şubeye ait fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6242 ; https://www.instagram.com/lebaronistanbul/ ; https://restoranim.net/istanbul/besiktas/restoran/le-baron ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d21059844-Reviews-Le_Baron-Istanbul.html
