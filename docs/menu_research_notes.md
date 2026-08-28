@@ -3985,3 +3985,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6242 ; https://www.instagram.com/
 ## TAKSİM ANATOLIA SEAFOOD STEAK KEBAP HOUSE ID 6241 — HOLD
 Hentzer `Kocatepe, Lamartin Cd. 4 A, 34421 Beyoğlu`, `+90 537 463 54 40`; Servis Kayıt Listesi adres ve telefonu, RestaurantGuru adresi doğruluyor. Ancak erişilebilir kaynaklarda son bir yıl içinde exact şube için fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6241 ; https://serviskayitlistesi.com/istanbul/beyoglu/restoran/taksim-anatolia-seafood-steak-kebap-house-6oJYnc.html ; https://fr.restaurantguru.com/Anatolia-seafood-STEAK-kebap-house-Istanbul
+
+## DÖNERCİ CENGİZ USTA ID 6240 — ACCEPTED (20 ürün)
+Hentzer `çarşı, Sinanpaşa, Şht. Asım Cd. NO6A, 34022 Beşiktaş`, `+90 212 258 88 82`; resmi sosyal paylaşımlar ve Harbiyiyorum yeni adresi `Sinanpaşa, Şht. Asım Cd. 6A` ile telefonu doğruluyor. Canlı Yemeksepeti exact vendorunda 20 benzersiz gıda ürünü ve güncel görünen fiyatlar mevcut; popüler carousel tekrarları ayrı ürün olarak alınmadı. Fiyatlar 2026-08-28 tarihinde doğrulandı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6240 ; https://www.yemeksepeti.com/restaurant/fp2w/donerci-cengiz-usta-fp2w ; https://harbiyiyorum.com/donerci-cengiz-usta-besiktasta-yeni-yerinde-acildi-karadeniz-donere-yeni-bir-rakip-geldi/ ; https://www.instagram.com/donerci.cengiz.usta/

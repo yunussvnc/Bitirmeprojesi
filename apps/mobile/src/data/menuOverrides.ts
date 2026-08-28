@@ -93522,5 +93522,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Tereyağlı Kruvasan", "price": "412 TL", "category": "Kruvasanlar" },
       { "name": "Bitterim Waffle (Büyük Boy)", "price": "320 TL", "category": "Waffle Büyük Boy" }
     ]
+  },
+  "6240": {
+    "name": "DÖNERCİ CENGİZ USTA",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/fp2w/donerci-cengiz-usta-fp2w",
+    "sourceName": "Canlı Yemeksepeti exact Dönerci Cengiz Usta menüsü; resmi sosyal ve Harbiyiyorum ile exact Şht. Asım Cd. 6A adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Ezogelin Çorbası", "price": "144 TL", "category": "Çorbalar" },
+      { "name": "Et Döner", "price": "500 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner (150 gr.)", "price": "736 TL", "category": "Et Dönerler" },
+      { "name": "Pilav Üstü Et Döner (100 gr.)", "price": "584 TL", "category": "Et Dönerler" },
+      { "name": "Pilav Üstü Et Döner (150 gr.)", "price": "816 TL", "category": "Et Dönerler" },
+      { "name": "İskender (Et Dönerden)", "price": "640 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm (100 gr.)", "price": "500 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm (150 gr.)", "price": "736 TL", "category": "Et Dönerler" },
+      { "name": "Çeyrek Ekmek Arası Et Döner (75 gr.)", "price": "400 TL", "category": "Et Dönerler" },
+      { "name": "Yarım Ekmek Arası Et Döner (75 gr.)", "price": "400 TL", "category": "Et Dönerler" },
+      { "name": "3/4 Ekmek Arası Et Döner", "price": "500 TL", "category": "Et Dönerler" },
+      { "name": "Pide Ekmek Arası Et Döner", "price": "400 TL", "category": "Et Dönerler" },
+      { "name": "Pilav Üstü Et Döner (120 gr.)", "price": "672 TL", "category": "Et Dönerler" },
+      { "name": "Kiloluk Et Döner", "price": "1200 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm (120 gr.)", "price": "612 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner (120 gr.)", "price": "612 TL", "category": "Et Dönerler" },
+      { "name": "Pirinç Pilavı", "price": "120 TL", "category": "Yan Ürünler" },
+      { "name": "Patates Kızartması", "price": "176 TL", "category": "Yan Ürünler" },
+      { "name": "Coca-Cola (33 cl.)", "price": "96 TL", "category": "İçecekler" },
+      { "name": "Ayran (30 cl.)", "price": "68 TL", "category": "İçecekler" }
+    ]
   }
 };
