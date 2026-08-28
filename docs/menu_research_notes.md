@@ -4049,3 +4049,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6226 ; https://serviskayitlistesi
 ## SAMPI PİDE BEŞİKTAŞ ID 6225 — ACCEPTED
 Hentzer `Cihannüma, Sinanpaşa, Barbaros Blv. No:3-A, 34353 Beşiktaş`, `+90 212 236 35 35`; Mekanlar ve Bulurum exact adres/telefonu doğruluyor. Migros Yemek exact Beşiktaş/Cihannüma vendoru 2026-08-28 tarihinde canlı fiyatlı 20 benzersiz gıda ürünü sundu. Eklenen kalemler arasında Acısız/Acılı Lahmacun, farklı pide çeşitleri ve Et Dönerli Kaşarlı pideler bulunuyor; poşet veya tekrarlar eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6225 ; https://www.migros.com.tr/yemek/sampi-pide-besiktas-cihannuma-mah-st-1f0c1 ; https://mekanlar.com/mekan/sampi-pide-cihannuma-besiktas-istanbul ; https://www.bulurum.com/details/2a7b1_733125ajc577_acg7h2a6e0k2g
+
+## BEYKOZ KORU SOSYAL TESİSİ ID 6224 — HOLD
+Hentzer `Merkez, Kelle İbrahim Cd. 17/A, 34820 Beykoz`, phone boş; resmi İBB rezervasyon sayfası exact No:17/A adresini doğruluyor. 2025–2026 genel içerikler mevcut ancak exact şubeye ait son bir yıl fiyatlı 20+ ürün menüsü bulunamadı; RestaurantGuru fiyatlı menü sunmadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6224 ; https://tesislerrezervasyon.ibb.istanbul/ ; https://fr.restaurantguru.com/Beykoz-Koru-Social-Facilities-Istanbul/menu?param ; https://www.instagram.com/p/DUyeVK7CJs_/
