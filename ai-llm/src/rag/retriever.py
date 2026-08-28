@@ -153,8 +153,46 @@ class RAGRetriever:
         candidates = self._apply_district_filter(candidates, parsed_query, top_k)
 
         if personalization_active:
-            return self.personalization_scorer.rerank(candidates, user_id=user_id, top_k=top_k)
-        return candidates[:top_k]
+            # top_k*2 alıp diversify'a havuz bırakıyoruz, nihai kırpma _diversify'da.
+            candidates = self.personalization_scorer.rerank(candidates, user_id=user_id, top_k=top_k * 2)
+        return self._diversify(candidates, top_k)
+
+    def _diversify(
+        self,
+        candidates: List[Dict[str, Any]],
+        top_k: int,
+        max_per_category: int = 2,
+    ) -> List[Dict[str, Any]]:
+        """
+        Skora göre sıralı adaylardan top_k seçerken aynı kategoriden mekanların
+        üst sıralarda kümelenmesini azaltır (örn. aynı sokaktaki 5 benzer kafe
+        yerine karışık bir liste). Gerçek embedding-tabanlı MMR değil — ucuz,
+        payload'daki 'kategori' alanına dayanan bir cap/deferred yaklaşımı.
+        Kategori bilgisi olmayan adaylara cap uygulanmaz (bilinmeyen kategoriyi
+        cezalandırmamak için).
+        """
+        if len(candidates) <= top_k:
+            return candidates[:top_k]
+
+        selected: List[Dict[str, Any]] = []
+        category_counts: Dict[str, int] = {}
+        deferred: List[Dict[str, Any]] = []
+
+        for c in candidates:
+            category = (c.get("payload") or {}).get("kategori", "")
+            count = category_counts.get(category, 0)
+            if not category or count < max_per_category:
+                selected.append(c)
+                category_counts[category] = count + 1
+            else:
+                deferred.append(c)
+            if len(selected) >= top_k:
+                break
+
+        if len(selected) < top_k:
+            selected.extend(deferred[: top_k - len(selected)])
+
+        return selected[:top_k]
 
     def _apply_district_filter(
         self,
