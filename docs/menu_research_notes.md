@@ -4289,3 +4289,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6165 ; https://www.bestdonerinist
 ## ADİLE SULTAN EV YEMEKLERİ BAYRAMPAŞA ID 6164 — ACCEPTED (20 ürün)
 Hentzer `Kocatepe, Şehir Parkı Caddesi No:151A, 34000 Bayrampaşa/İstanbul`, `+90 212 912 92 09`; resmi Bayrampaşa şube sayfası telefon/adres bilgisini, Yemeksepeti `og6z` vendoru aynı adresi doğruluyor. Canlı Yemeksepeti menüsünde günlük menüler ve çorbalar kategorilerinden 20 benzersiz güncel fiyatlı gıda ürünü doğrulandı; 28.08.2026’da kontrol edildi. Popüler carousel tekrarları ayrıca alınmadı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6164 ; https://adilesultanevyemekleri.com/sube/bayrampasa/ ; https://www.yemeksepeti.com/en/restaurant/og6z/adile-sultan-ev-yemekleri-og6z ; https://www.sikayetvar.com/adile-sultan-ev-yemekleri
+
+## SUNSET GRILL & BAR ID 6163 — ACCEPTED (20 ürün; mevcut kayıt güncellendi)
+Hentzer `Kuruçeşme Mahallesi Ulus Park, Kuruçeşme, Yol Sokağı No:2, 34345 Beşiktaş/İstanbul`, `+90 212 287 03 57`; resmi iletişim sayfası aynı adresi ve telefonu doğruluyor. Resmi `yemek.pdf` menüsü footer’ında fiyatların 14 Mayıs 2026’dan itibaren geçerli olduğu belirtiliyor. Mevcut Sunset override kaydı resmi PDF’den 20 benzersiz gıda ürünüyle tamamlandı; Popüler carousel veya fiyatı görünmeyen ürünler eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6163 ; https://www.sunsetgrillbar.com/tr-TR/iletisim ; https://www.sunsetgrillbar.com/tr-TR/menu ; https://www.sunsetgrillbar.com/assets/yemek.pdf

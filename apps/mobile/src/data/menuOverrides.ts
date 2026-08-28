@@ -7225,6 +7225,61 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "name": "Steak Tartar, Tütsülenmiş Yoğurt, Dolmalık Biber ve Kızarmış Ekmek ile",
         "price": "1.970",
         "category": "Başlangıçlar"
+      },
+      {
+        "name": "Yıllandırılmış Kontrfile Carpaccio, Trüf, Yuzu Aioli ve Ev Yapımı Ekmek ile",
+        "price": "2.400",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Sarı Yüzgeçli Ton Balığı Taco, Avokado, Marul ve Yuzu Mayonez ile",
+        "price": "1.370",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Karışık Zeytinyağlı Tabağı",
+        "price": "1.450",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Mantarlı Mantı, Fermente Yoğurt ile",
+        "price": "2.200",
+        "category": "Sıcak Başlangıçlar"
+      },
+      {
+        "name": "Ahtapot, Patates Püresi, Sucuk, Zeytin ve Limon Kabuğu ile",
+        "price": "2.650",
+        "category": "Sıcak Başlangıçlar"
+      },
+      {
+        "name": "Gyoza, Tütsülenmiş Bonfile ve Soya Zencefil Sosu ile",
+        "price": "1.650",
+        "category": "Sıcak Başlangıçlar"
+      },
+      {
+        "name": "Ördek Ciğeri, Elma ve Çilekli Chutney Sos ile",
+        "price": "2.200",
+        "category": "Sıcak Başlangıçlar"
+      },
+      {
+        "name": "Kabak Çiçeği Dolması, Kuru Kayısılı Pilav ile",
+        "price": "1.080",
+        "category": "Sıcak Başlangıçlar"
+      },
+      {
+        "name": "Sunset Karides Tempura",
+        "price": "1.960",
+        "category": "Sıcak Başlangıçlar"
+      },
+      {
+        "name": "Kale Salatası, Kinoa, Parmesan Peyniri ve Karamelize Fındık ile",
+        "price": "1.650",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Sezar Salata, Izgara Tavuk Göğsü ve Parmesan Peyniri ile",
+        "price": "1.680",
+        "category": "Salatalar"
       }
     ]
   },
@@ -94034,5 +94089,5 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Soğuk Yoğurtlu Naneli Çorba", "price": "195 TL", "category": "Çorbalar" },
       { "name": "Patlıcan Beğendili Izgara Köfte", "price": "495 TL", "category": "Etli Yemekler" }
     ]
-  }
+  },
 };
