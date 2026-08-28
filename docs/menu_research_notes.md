@@ -4033,3 +4033,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6230 ; https://yandex.com.tr/maps
 ## SLADOLED DONDURMA ID 6229 — HOLD
 Hentzer `Muratpaşa, Kosova Cd. no:75/A, 34040 Bayrampaşa`, `+90 543 866 72 76`; Restoranim, Mekanlar ve resmi Instagram Bayrampaşa şubesini/adresi/telefonu destekliyor. 2025–2026 sosyal içerikleri güncel olsa da son bir yıl içinde fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6229 ; https://restoranim.net/istanbul/bayrampasa/dondurmaci/sladoled-dondurma ; https://mekanlar.com/mekan/sladoled-dondurma-muratpasa ; https://www.instagram.com/sladoleddondurma/
+
+## İSTAKOZİ SEA FAST FOOD ORTAKÖY ŞUBESİ ID 6228 — HOLD
+Hentzer `Mecidiye, Osmanzade Sk. no:6, 34347 Beşiktaş`, `+90 533 471 38 27`; resmi site exact adresi doğruluyor, Restoranim Hentzer telefonunu listeliyor. Fakat resmi iletişim sayfasındaki rezervasyon telefonu `+90 212 227 37 27` olduğundan exact phone parity yok. Resmi menü 20+ ürün/menü adı içeriyor ancak fiyat içermiyor; son bir yıl fiyatlı menü doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6228 ; https://istakozi.com/menu/ ; https://istakozi.com/iletisim/ ; https://restoranim.net/istanbul/besiktas/balikci/istakozi-sea-fast-food
