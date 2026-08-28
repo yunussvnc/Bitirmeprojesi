@@ -4013,3 +4013,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6235 ; https://www.migros.com.tr/
 ## GÜNBATIMI CAFE RESTAURANT ID 6234 — HOLD
 Hentzer Gürpınar/Beylikdüzü ve `+90 540 123 45 44`; Yandex Dalyan Cad. 1/1 ve aynı telefonu, resmi Instagram 2026 paylaşımlarında Dalyan Cad. Cafe 1/2 ve telefonu gösteriyor. Kapı/işletme birimi 1/1–1/2 çelişkisi ve son bir yıl içinde fiyatlı 20+ ürün menüsü bulunmaması nedeniyle **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6234 ; https://yandex.com.tr/maps/org/gunbatimi_cafe_restaurant/105378466996/ ; https://www.instagram.com/gunbatimicafe_restaurant/ ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d12536461-Reviews-GunbatImI_Cafe_Restaurant-Istanbul.html
+
+## PİKAP ID 6233 — HOLD
+Hentzer `Sinanpaşa, Ortabahçe Cd. No:21 D:C, 34535 Beşiktaş`, `+90 212 227 19 29`; RestaurantGuru ve Nerdeler exact adres/telefonu doğruluyor. Ancak son bir yıl içinde exact şubeye ait erişilebilir fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6233 ; https://restaurantguru.com/Pikap-Pub-Istanbul ; https://nerdeler.com.tr/pikap ; https://www.meyhankoli.com/restoran/istanbul-besiktas-pikap-1343
