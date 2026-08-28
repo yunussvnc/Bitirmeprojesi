@@ -3965,3 +3965,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6247 ; https://www.yemeksepeti.co
 ## BOI KAVACIK ID 6246 — HOLD
 Hentzer `Kavacık, Yayabeyi Sk. No:1, 34810 Beykoz`, `+90 533 353 19 08`; Restoranim exact adres/telefonu, Menu-TR ve Snapchat exact adresi destekliyor. Ancak erişilebilir kaynaklarda son bir yıl içinde doğrulanmış fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6246 ; https://restoranim.net/istanbul/istanbul/kafe/boi-kavacik ; https://www.menu-tr.com/istanbul/beykoz/kafe/boi-kavacik ; https://www.snapchat.com/place/boikavack/3bfd01b9-1095-4ec7-8389-0d8c7b3d00de
+
+## THE HOUSE CAFE ORTAKÖY ID 6245 — HOLD
+Hentzer `Yıldız, Ortaköy Salhanesi Sk. No:1, 34349 Beşiktaş`, `+90 212 227 26 99`; resmi The House Cafe şube sayfası aynı adres ve telefonu doğruluyor. Ancak resmi sayfada ve erişilebilir kaynaklarda son bir yıl içinde doğrulanmış fiyatlı 20+ ürün menüsü yok. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6245 ; https://www.thehousecafe.com/en/sube/house-cafe-ortakoy/ ; https://www.istanbul.net.tr/yeme-icme/bar/the-house-cafe-ortakoy/5373/2 ; https://us.trip.com/restaurant/trkiye/istanbul/detail/the-house-cafe-17093812
