@@ -4037,3 +4037,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6229 ; https://restoranim.net/ist
 ## İSTAKOZİ SEA FAST FOOD ORTAKÖY ŞUBESİ ID 6228 — HOLD
 Hentzer `Mecidiye, Osmanzade Sk. no:6, 34347 Beşiktaş`, `+90 533 471 38 27`; resmi site exact adresi doğruluyor, Restoranim Hentzer telefonunu listeliyor. Fakat resmi iletişim sayfasındaki rezervasyon telefonu `+90 212 227 37 27` olduğundan exact phone parity yok. Resmi menü 20+ ürün/menü adı içeriyor ancak fiyat içermiyor; son bir yıl fiyatlı menü doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6228 ; https://istakozi.com/menu/ ; https://istakozi.com/iletisim/ ; https://restoranim.net/istanbul/besiktas/balikci/istakozi-sea-fast-food
+
+## SURUÇ KEBAP LAHMACUN SALONU BEYLİKDÜZÜ ID 6227 — HOLD
+Hentzer `Büyükşehir, Ceylan Sk. BEYAZ PARK EVLERİ NO:1 DÜKKAN62, 34519 Beylikdüzü`, `+90 532 362 00 82`; Restoranim ve Kaçıyor exact adres/telefonu doğruluyor, RestaurantGuru adresi destekliyor. Ancak erişilebilir kaynaklarda son bir yıl içinde fiyatlı 20+ ürün menüsü yok; Kaçıyor yalnızca kalori/ürün adları veriyor. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6227 ; https://restoranim.net/istanbul/beylikduzu/kebapci/suruc-kebap-lahmacun-salonu-beylikduzu ; https://www.kaciyor.com/suruc-kebap-lahmacun-salonu-beylikduzu ; https://de.restaurantguru.com/amp/Meshur-surfa-suruc-ocakbasi-Buyukcekmece
