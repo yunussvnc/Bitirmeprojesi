@@ -4009,3 +4009,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6236 ; https://sg.trip.com/restau
 ## İNAN BALIK RESTAURANT ID 6235 — ACCEPTED (20 ürün)
 Hentzer `BEYLIKDÜZÜOSB MAH, Ali Çebi Cd. NO:3/7, 34524 Beylikdüzü`, `+90 212 673 43 45`; Servis Kayıt ve Restoranim aynı adres/telefonu, resmi Instagram Keleşoğlu Plaza No:3/7 ve telefonu doğruluyor. Canlı Migros Yemek exact Beylikdüzü OSB vendorunda DOM üzerinden 20 benzersiz deniz ürünü menü kalemi ve fiyatı doğrulandı; fiyatlar 2026-08-28 tarihinde kontrol edildi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6235 ; https://www.migros.com.tr/yemek/inan-balik-beylikduzu-beylikduzu-osb-mah-st-31f81 ; https://restoranim.net/istanbul/beylikduzu/balikci/inan-balik-restoran ; https://www.serviskayitlistesi.com/istanbul/beylikduzu/restoran/inan-balik-restoran-fNOc48.html ; https://www.instagram.com/reel/DVgbiACAtlg/
+
+## GÜNBATIMI CAFE RESTAURANT ID 6234 — HOLD
+Hentzer Gürpınar/Beylikdüzü ve `+90 540 123 45 44`; Yandex Dalyan Cad. 1/1 ve aynı telefonu, resmi Instagram 2026 paylaşımlarında Dalyan Cad. Cafe 1/2 ve telefonu gösteriyor. Kapı/işletme birimi 1/1–1/2 çelişkisi ve son bir yıl içinde fiyatlı 20+ ürün menüsü bulunmaması nedeniyle **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6234 ; https://yandex.com.tr/maps/org/gunbatimi_cafe_restaurant/105378466996/ ; https://www.instagram.com/gunbatimicafe_restaurant/ ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d12536461-Reviews-GunbatImI_Cafe_Restaurant-Istanbul.html
