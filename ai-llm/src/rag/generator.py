@@ -143,6 +143,8 @@ Yanıtı samimi ve kullanıcı dostu bir dille ver. Respond only in {SUPPORTED_L
         recommendations = []
         for mekan in mekanlar:
             payload = mekan.get("payload", {})
+            kategori = (payload.get("kategori") or "").strip()
+            gerekce = f"Aradığın özelliklere uyan bir {kategori.lower()}." if kategori else "Aradığın özelliklere uyan bir mekan."
             recommendations.append({
                 "mekan_id": payload.get("id"),
                 "ad": payload.get("ad"),
@@ -152,7 +154,7 @@ Yanıtı samimi ve kullanıcı dostu bir dille ver. Respond only in {SUPPORTED_L
                 "boylam": payload.get("boylam"),
                 "adres": payload.get("adres", ""),
                 "benzerlik_skoru": mekan.get("score", 0),
-                "gerekce": f"Benzerlik skoru: {mekan.get('score', 0):.2f}"
+                "gerekce": gerekce
             })
         return recommendations
 
