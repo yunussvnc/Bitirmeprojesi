@@ -3961,3 +3961,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6248 ; https://restaurantguru.com
 ## VOIMOSS COFFEE ID 6247 — HOLD
 Hentzer `Altıntepsi, Yahya Kemal Cd. No:35A, 34035 Bayrampaşa`, `+90 552 842 22 22`; Restoranim exact adres ve telefonu, İstanbul Servis Listesi exact adresi destekliyor. Canlı Yemeksepeti menüsünde 19 uygun gıda/içecek ürünü ve güncel görünen fiyatlar var; 20. uygun ürün bulunmadığından poşet gibi gıda dışı kalem eklenmedi. Minimum 20 ürün şartı sağlanamadığı için **HOLD; override eklenmedi**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6247 ; https://www.yemeksepeti.com/en/restaurant/gpzs/voimoss-coffee ; https://restoranim.net/istanbul/istanbul/kafe/voimoss-coffee ; https://istanbulservislistesi.com.tr/istanbul/bayrampasa/kafe/voimoss-coffee-a3lkNc.html
+
+## BOI KAVACIK ID 6246 — HOLD
+Hentzer `Kavacık, Yayabeyi Sk. No:1, 34810 Beykoz`, `+90 533 353 19 08`; Restoranim exact adres/telefonu, Menu-TR ve Snapchat exact adresi destekliyor. Ancak erişilebilir kaynaklarda son bir yıl içinde doğrulanmış fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6246 ; https://restoranim.net/istanbul/istanbul/kafe/boi-kavacik ; https://www.menu-tr.com/istanbul/beykoz/kafe/boi-kavacik ; https://www.snapchat.com/place/boikavack/3bfd01b9-1095-4ec7-8389-0d8c7b3d00de
