@@ -4169,3 +4169,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6196 ; https://www.tumisyeri.com/
 ## TATLI SEPETİ ID 6195 — ACCEPTED
 Hentzer `Altıntepsi, Altıntepe Sok. No:15/A, 34035 Bayrampaşa`, `+90 533 527 76 38`; resmi Instagram hesabı Tatlı Sepeti markasını, tatlı/kahve/waffle konseptini ve Yemeksepeti-Migros-GetirYemek kanallarını doğruluyor. Instagram telefon ve konum bilgisi Hentzer ile eşleşiyor. Migros Yemek exact Altıntepsi vendorunda 2026-08-28 tarihinde 20+ güncel fiyatlı tatlı/içecek ürünü yayınlanıyor; poşet hariç ilk 20 uygun ürün eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6195 ; https://www.instagram.com/tatlisepeti.tr/ ; https://www.yemeksepeti.com/en/restaurant/yn2k/tatli-sepeti-yn2k ; https://www.migros.com.tr/yemek/tatli-sepeti-bayrampasa-altintepsi-mah-st-32693
+
+## KARTAL YUVASI OCAKBAŞI ID 6194 — HOLD
+Hentzer `Dikilitaş, Çetin Emeç Parkı İçi, 34349 Beşiktaş`, `+90 212 236 60 84`; Waze exact adres ve telefonu doğruluyor. Wheree 2026 menü sayfası Adana/Urfa kebap ve meze konseptini anlatıyor ancak ürün-fiyat tablosu sunmuyor ve fiyatların değişebileceğini belirtiyor. 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6194 ; https://www.waze.com/live-map/directions?from=place.ChIJ85ZvyKi3yhQRS9I4fnBCSCc ; https://kartal-yuvas-ocakba.wheree.com/menu ; https://restaurantguru.com/Kartal-Yuvasi-Ocakbasi-Istanbul
