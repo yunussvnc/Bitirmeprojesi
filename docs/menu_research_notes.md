@@ -4201,3 +4201,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6187 ; https://beykozlahmacuntant
 ## ANTAKYA KEBAP ASMALI ID 6186 — HOLD
 Hentzer `Asmalı Mescit, Asmalı Mescit Cd. No:17/C, 34430 Beyoğlu/İstanbul`, `+90 212 292 18 43`; resmi Instagram, Restoranim ve diğer dizinler exact adres/telefonu doğruluyor. Wheree menü sayfası aynı işletmeyi gösterse de yalnızca işletme/menü fotoğrafları ve fiyatların değişebileceği uyarısı var; ürün-fiyat tablosu yok. Restoranim’deki fiyatlı yorumlar 2025–2022 döneminden ve 20+ güncel ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6186 ; https://antakya-kebap-asmali.wheree.com/menu ; https://restoranim.net/istanbul/beyoglu/kebapci/antakya-kebap-asmali ; https://www.instagram.com/antakyakebab/
+
+## MARMARA'DA BALIK BEYLİKDÜZÜ ID 6185 — HOLD
+Hentzer `Gürpınar, Dalyan Cd. No:53, 34528 Beylikdüzü/İstanbul`, `+90 542 328 63 24`; Instagram ve servis dizini exact adres/telefonu doğruluyor. Yaka.la aynı işletme/şube için çok sayıda menü fotoğrafı sunuyor ancak ürün-fiyat metni/OCR doğrulaması yok; Instagram’da güncel işletme ve tekil kampanya paylaşımları var fakat 20+ benzersiz ürünün fiyatı okunabilir biçimde doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6185 ; https://yaka.la/detail/istanbul/beylikduzu/marmarada-balik-beylikduzu-balik-restaurant?uuid=1feb88fd-9aa1-41a4-95aa-3a5b2eab1f50 ; https://www.instagram.com/marmarada.balik/?hl=en ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/restoran/marmarada-balik-pjQDwU.html
