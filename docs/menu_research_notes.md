@@ -4061,3 +4061,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6223 ; https://www.migros.com.tr/
 ## LAMORE BALIK–ET MANGALBAŞI ID 6222 — HOLD
 Hentzer `Marmara, 34524 Beylikdüzü`, `+90 533 301 84 34`; işletme West İstanbul Marina’da görünse de Restoranim farklı `0532 100 27 28` telefon ve yalnızca genel adres veriyor. Yaka.la menü bulunmadığını bildiriyor; son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6222 ; https://restoranim.net/istanbul/beylikduzu/restoran/lamore-balik-et-mangalbasi-restaurant ; https://yaka.la/detail/istanbul/beylikduzu/lamore-balik-et-mangalbasi-restaurant?uuid=6843531a-fea8-4865-88d6-9afae4073831 ; https://fr.restaurantguru.com/Lamore-Istanbul
+
+## BERF INN COFFEE SHOP ID 6221 — HOLD
+Hentzer `Sinanpaşa, Küçük Remzi Sk. No:1, 34353 Beşiktaş`, `+90 552 352 27 57`; Google Travel cep numarasını desteklese de Mekanlar/Tumisyeri/Cybo/Haritane exact şube için `0212 327 10 20` veriyor. Son bir yıl fiyatlı 20+ ürün menüsü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6221 ; https://www.google.com.tr/travel/hotels/entity/ChkIoOe48P398J8DGg0vZy8xMWd0enB4cnRwEAE ; https://mekanlar.com/mekan/berf-inn-coffee-shop ; https://www.tumisyeri.com/berf-inn-coffee-shop-0212-327-10-20 ; https://www.instagram.com/reel/B6seQs0F4vM/
