@@ -4141,3 +4141,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6203 ; https://www.meyhankoli.com
 ## BAYRAMOĞLU DÖNER ID 6202 — ACCEPTED
 Hentzer `Rüzgarlıbahçe, Cumhuriyet Cd. No:2, 34805 Beykoz`, `+90 216 413 00 45`; resmi Bayramoğlu sitesi exact adresi ve ana telefonu doğruluyor, Mekanlar/World of Mouth aynı işletmeyi destekliyor. Yemeksepeti `ts0x` exact Bayramoğlu vendorunda 2026-08-28 tarihinde 20+ güncel fiyatlı döner/yan ürün yayınlanıyor; ilk 20 benzersiz gıda ürünü eklendi, poşet dışarıda bırakıldı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6202 ; https://bayramogludoner.com.tr/ ; https://www.yemeksepeti.com/restaurant/ts0x/bayramoglu-doner ; https://mekanlar.com/mekan/bayramoglu-doner-kavacik ; https://www.worldofmouth.app/restaurants/bayramolu-doner
+
+## CİĞERCİ YILMAZ ID 6201 — HOLD
+Hentzer `Park Teras, Büyükşehir, Anadolu Cd. No:30, 34520 Beylikdüzü`, `+90 531 648 03 93`; Maptons/Kaçıyor/Jefedes No:30’u destekliyor, ancak sosyal kaynaklarda Atatürk Bulvarı No:29 ve ek telefonlar bulunuyor. Kaçıyor’da fiyat yerine kalori/besin bilgisi var; 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6201 ; https://kaciyor.com/cigerci-yilmaz ; https://sj.maptons.com/p/13185605014 ; https://www.jefedes.com/rezervasyon/isletme/istanbul/buyukcekmece/2a25ed60-b8cf-4177-b401-4ea866068340 ; https://www.instagram.com/reel/DZaNT99Khql/
