@@ -4333,3 +4333,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6154 ; https://restoranim.net/ist
 ## PERA PORT LOUNGE ID 6153 — HOLD
 Hentzer `Kemankeş Karamustafa Paşa, Ali Paşa Değirmeni Sk. No:22, 34425 Beyoğlu/İstanbul`, `+90 543 446 40 65`; Tümİşyeri, Restoranim’deki Pera Port Kebab & Yemek ve Tripadvisor exact adres/telefonu doğruluyor. Mart 2026 tarihli restoran yorumları mevcut olsa da ürün bazlı güncel fiyat listesi erişilebilir değil. 20+ son bir yıl fiyatlı ürün doğrulanamadığı için override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6153 ; https://restoranim.net/istanbul/beyoglu/restoran/pera-port-kebab-yemek ; https://www.tumisyeri.com/pera-port-lounge-0543-446-40-65 ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d26659783-Reviews-Pera_Port_Lounge-Istanbul.html
+
+## LİMONLUK CAFE ID 6152 — HOLD
+Hentzer `Vişnezade, Dolmabahçe Cd., 34357 Beşiktaş/İstanbul`, `+90 212 236 90 00`; Restoranim, Google/Yandex ve Instagram Dolmabahçe Resim Müzesi bahçesindeki exact işletmeyi doğruluyor. 28 Nisan 2026 tarihli açık Instagram paylaşımında yalnızca Cappuccino 230 TL, Türk kahvesi 160 TL ve Çilekli Milföy 350 TL doğrulanabildi; müze giriş ücreti gıda ürünü değil. 20+ benzersiz güncel fiyatlı gıda ürünü koşulu sağlanamadı. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6152 ; https://restoranim.net/istanbul/besiktas/kafe/limonluk-kafe-dolmabahce-sarayi-resim-muzesi ; https://www.instagram.com/p/DXlgOO4s1f8/ ; https://www.google.com/maps/search/Limonluk+Cafe+Be%C5%9Fikta%C5%9F
