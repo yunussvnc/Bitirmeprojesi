@@ -4085,3 +4085,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6217 ; https://www.migros.com.tr/
 ## EFENDY İSTANBUL ID 6216 — HOLD
 Hentzer `Levent, Nisbetiye Cd No:13, 34330 Beşiktaş`, `+90 530 289 80 39`; Efendy Group, Gault&Millau ve resmi/2026 kaynakları exact adres-telefonu doğruluyor. Resmi menu bağlantısı 404 ve erişilebilir kaynaklarda son bir yıl fiyatlı 20+ gıda ürünü doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6216 ; https://efendygroup.com/brands/ ; https://www.gault-millau.com.tr/en/efendy-istanbul/ ; https://efendyistanbul.com/menu/ ; https://restaurantguru.com/Efendy-Istanbul-Istanbul
+
+## TOPAZ İSTANBUL ID 6215 — HOLD
+Hentzer `Ömer Avni, İnönü Cd. No:42, 34437 Beyoğlu`, `+90 531 329 41 11`; resmi/RestaurantGuru/Indagare/Gault&Millau kaynakları exact adres ve telefonu doğruluyor. RestaurantGuru güncel menü sürümleri listelese de ürün-fiyat metni erişilebilir değil; resmi sitede de fiyatlı menü listesi yok. Son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6215 ; https://www.topazistanbul.com/index-en.html ; https://restaurantguru.com/Topaz-Istanbul-2/menu ; https://indagare.com/restaurant/topaz-istanbul ; https://www.gault-millau.com.tr/en/efendy-istanbul/
