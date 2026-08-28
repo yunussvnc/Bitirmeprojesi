@@ -4213,3 +4213,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6184 ; https://kaciyor.com/savoy-
 ## SUK19 KEBAP ID 6183 — HOLD
 Hentzer `Sinanpaşa, Şht. Asım Cd. No:37, 34353 Beşiktaş/İstanbul`, `+90 546 775 09 19`; Restoranim ve servis dizinleri exact adres/telefonu doğruluyor. Migros Yemek’te 20+ ürünlü canlı menü mevcut ve ürün fiyatları erişilebilir, ancak vendor başlığı `Suk19 Kebap, Beşiktaş (Türkali Mah.)`; Hentzer şubesi Sinanpaşa No:37 olduğundan 100% exact branch parity kurulamadı. Pardon menüsünde kategori isimleri var fakat fiyat/ürün ayrıntıları yok. **HOLD; farklı şubenin menüsü aktarılmadı.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6183 ; https://restoranim.net/istanbul/besiktas/restoran/suk19-kebap ; https://www.migros.com.tr/yemek/suk19-kebap-besiktas-turkali-mah-st-316ab ; https://webmenu.pardonapp.co/suk19-kebap/menu/portions
+
+## AKYILDIZ PİDE KEBAP ID 6182 — HOLD
+Hentzer `Paşabahçe, Tombala Sk. No:2, 34800 Beykoz/İstanbul`, `+90 531 326 38 75`; Restoranim ve Tumİşyeri aynı adres/telefonu doğruluyor. Migros Yemek exact `Beykoz (Paşabahçe Mah.)` vendoru çok sayıda ürün adı ve kategori gösteriyor ancak erişilebilir metinde ürün fiyatları yok. 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; fiyatı olmayan menü aktarılmadı.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6182 ; https://www.migros.com.tr/yemek/akyildiz-pide-kebap-beykoz-pasabahce-mah-st-322a3 ; https://restoranim.net/istanbul/istanbul/restoran/akyildiz-pide-kebap ; https://www.tumisyeri.com/aky%C4%B1ld%C4%B1z-pide-kebap_1X-0531-326-38-75
