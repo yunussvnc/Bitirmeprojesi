@@ -3949,3 +3949,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6251 ; https://www.menu-tr.com/is
 ## BABI İSTANBUL ID 6250 — HOLD
 Hentzer `Acarlar, 9. Cd. E Blok No:11 İç Kapı No:4, 34800 Beykoz`, `+90 540 789 91 00`. Villavens, Yakala ve resmi 2024 açılış paylaşımı destekliyor; resmi Instagram profilinde güncel telefon `0216 519 68 67` görünüyor. Migros/Yemeksepeti güncel fiyatlı menü sunuyor ancak 11/4 adresi ve Hentzer telefonu vendor ekranında doğrulanamıyor. 100% exact branch/phone paritesi sağlanamadığından **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6250 ; https://www.migros.com.tr/yemek/babi-istanbul-beykoz-acarlar-mah-st-2ece4 ; https://www.yemeksepeti.com/restaurant/mk4f/babi-istanbul-mk4f ; https://www.villavens.com/rehber/babi-istanbul-acarkent ; https://www.instagram.com/babi.istanbul/
+
+## PIZZA WOOD FIRE ID 6249 — HOLD
+Hentzer `Etiler, Nisbetiye Cd No:37/C, 34335 Beşiktaş`, `+90 538 470 31 01`; Restoranim ve Menu-TR exact adres/telefonu destekliyor. Ancak erişilebilir kaynaklarda son bir yıl içinde doğrulanmış fiyatlı 20+ ürün menüsü yok; Menu-TR sadece örnek ürün adları veriyor. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6249 ; https://restoranim.net/istanbul/besiktas/pizzaci/pizza-wood-fire ; https://www.menu-tr.com/istanbul/besiktas/pizza-restorani/pizza-wood-fire
