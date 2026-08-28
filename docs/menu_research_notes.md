@@ -4301,3 +4301,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6162 ; https://www.shangpalacebos
 ## ÇİFTLİK DÖNER / MEYDAN ÇİFTLİK DÖNER ID 6161 — HOLD
 Hentzer `Abbasağa, Şht. Asım Cd. No:18, 34353 Beşiktaş/İstanbul`, `+90 212 327 05 35`; Restoranim ve Yemeksepeti exact Beşiktaş vendoru aynı şube/adres/telefonu doğruluyor. Canlı Yemeksepeti menüsünde fiyatlar güncel yorumlarla birlikte görüldü; ancak Popüler tekrarları çıkarılınca yalnızca 13 benzersiz gıda ürünü mevcut: 5 et döner ürünü, 1 İskender, 1 tatlı, 2 yan ürün ve 1 çorba ile 3 benzersiz içecek dışı? (İçecekler menüye alınmadı). 20+ benzersiz gıda ürünü koşulu sağlanamadığı için override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6161 ; https://www.yemeksepeti.com/restaurant/u56t/meydan-ciftlik-doner ; https://restoranim.net/istanbul/besiktas/donerci/meydan-ciftlik-doner
+
+## EFRA PETHOUSE & PET KUAFÖR & PETSHOP ID 6160 — HOLD
+Hentzer kaydı `Yenidoğan, Ulubatlı Sk. 21/A, 34040 Bayrampaşa/İstanbul`, `+90 545 176 24 28` olarak geçiyor; işletme adı ve kategori petshop/pet kuaför faaliyetini açıkça belirtiyor. Gıda işletmesi olmadığı için menü override’ı eklenmedi. **HOLD.**
+Kaynak: https://api.asemos.tr/api/v1/places/6160
