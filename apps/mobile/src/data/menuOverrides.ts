@@ -93978,5 +93978,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Beyaz Çikolatalı Brownie", "price": "300 TL", "category": "Tatlılar" },
       { "name": "Frambuaz Cheesecake", "price": "290 TL", "category": "Tatlılar" }
     ]
+  },
+  "6166": {
+    "name": "ATALAY KEBAP",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/d6l6/atalay-kebap",
+    "sourceName": "Canlı Yemeksepeti Atalay Kebap vendoru; Restoranim ve RestaurantGuru exact Türkali şube paritesi",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Adana Dürüm Menü", "price": "550 TL", "category": "Menüler" },
+      { "name": "Adana Kebap Menü", "price": "700 TL", "category": "Menüler" },
+      { "name": "Dana Çöp Şiş Dürüm Menü", "price": "600 TL", "category": "Menüler" },
+      { "name": "Izgara Köfte Dürüm Menü", "price": "550 TL", "category": "Menüler" },
+      { "name": "Izgara Köfte Menü", "price": "700 TL", "category": "Menüler" },
+      { "name": "Tavuk Kanat Menü", "price": "650 TL", "category": "Menüler" },
+      { "name": "Tavuk Şiş Dürüm Menü", "price": "550 TL", "category": "Menüler" },
+      { "name": "Tavuk Şiş Menü", "price": "650 TL", "category": "Menüler" },
+      { "name": "Urfa Dürüm Menü", "price": "550 TL", "category": "Menüler" },
+      { "name": "Urfa Kebap Menü", "price": "700 TL", "category": "Menüler" },
+      { "name": "Dana Çöp Şiş Menü", "price": "700 TL", "category": "Menüler" },
+      { "name": "Ezogelin Çorbası", "price": "150 TL", "category": "Çorbalar" },
+      { "name": "Adana Kebap", "price": "500 TL", "category": "Kebaplar" },
+      { "name": "Urfa Kebap", "price": "500 TL", "category": "Kebaplar" },
+      { "name": "Domatesli Kebap", "price": "550 TL", "category": "Kebaplar" },
+      { "name": "Sarma Beyti Kebap", "price": "600 TL", "category": "Kebaplar" },
+      { "name": "Fıstıklı Kebap", "price": "650 TL", "category": "Kebaplar" },
+      { "name": "Yoğurtlu Kebap", "price": "550 TL", "category": "Kebaplar" },
+      { "name": "Karışık Kebap (1 Kişilik)", "price": "1.275 TL", "category": "Kebaplar" },
+      { "name": "Karışık Kebap (2 Kişilik)", "price": "2.900 TL", "category": "Kebaplar" }
+    ]
   }
 };

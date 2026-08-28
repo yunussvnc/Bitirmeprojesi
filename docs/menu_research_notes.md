@@ -4277,3 +4277,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6168 ; https://restoranim.net/ist
 ## MUGGA MUG BEYLİKDÜZÜ ID 6167 — HOLD
 Hentzer `Barış, Mehmetçik Cd. No 5 3-4 Wesside1 D:9 E blok Dükkan, 34520 Beylikdüzü/İstanbul`, `+90 539 951 64 58`; Restoranim, RestaurantGuru, Kaçıyor ve Instagram exact adres/telefonu doğruluyor. Kaçıyor yalnızca ürün isimleri ve kalori bilgileri sunuyor; RestaurantGuru fiyatlı menü yayımlamıyor. Son bir yıl içinde exact şubeye ait 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; fiyatı olmayan ürün isimleri aktarılmadı.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6167 ; https://restoranim.net/istanbul/beylikduzu/kafe/mugga-mug-beylikduzu ; https://restaurantguru.com/Hugga-Mug-Istanbul-2 ; https://kaciyor.com/mugga-mug-beylikduzu ; https://www.instagram.com/reel/DEryhZwq4ZV/
+
+## ATALAY KEBAP ID 6166 — ACCEPTED (20 ürün)
+Hentzer `Türkali, Mecit Ali Sk. 19/B, 34357 Beşiktaş/İstanbul`, `+90 212 258 61 95`; Restoranim, RestaurantGuru ve arama kaynakları exact şube adresi/telefonu doğruluyor. Canlı Yemeksepeti `d6l6` vendorunda menüler, çorbalar, kebaplar ve ızgaralar kategorilerinden 20 benzersiz güncel fiyatlı ürün erişilebilir; 28.08.2026’da doğrulandı. Popüler carousel kopyaları ana ürün listesine ayrıca alınmadı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6166 ; https://www.yemeksepeti.com/restaurant/d6l6/atalay-kebap ; https://restoranim.net/istanbul/besiktas/restoran/atalay-kebap ; https://restaurantguru.com/Atalay-Kebap-Istanbul
