@@ -4361,3 +4361,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6147 ; https://www.bulurum.com/de
 ## IDYL GELATO ID 6146 — HOLD
 Hentzer `Yıldız, Çırağan Cd. No:5A, 34342 Beşiktaş/İstanbul`, `+90 549 375 50 50`; Idyl resmi sitesi Beşiktaş/Nişantaşı şubelerini doğruluyor. Canlı Yemeksepeti `f2xx` menüsünde 13 benzersiz güncel fiyatlı dondurma-sorbe ürünü ve gıda olmayan 1 TL poşet satırı bulundu. 20+ benzersiz gıda ürünü koşulu sağlanamadığı için override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6146 ; https://idylgelato.com/ ; https://www.yemeksepeti.com/restaurant/f2xx/idyl-gelato
+
+## WHY COFFEE BEYLİKDÜZÜ WESTSIDE ID 6145 — HOLD
+Hentzer `Barış, E-5 Yanyolu Westside2 Çarşı No:28 No:68, 34520 Beylikdüzü/İstanbul`, telefon `+90 531 296 99 17`; Why Coffee resmi şube sayfası exact adresi doğruluyor ancak telefon `0850 723 02 23`, dolayısıyla Hentzer cep telefonu bağımsız exact parite sağlamıyor. Resmi sayfa ürün konsepti/görselleri sunuyor ama güncel fiyatlı menü listesi vermiyor; 20+ son bir yıl fiyatlı ürün doğrulanamadı. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6145 ; https://whycoffee.com.tr/subelerimiz/beylikduzu-westside/ ; https://www.menu-tr.com/istanbul/beylikduzu/kafe/why-coffee-beylikduzu-westside ; https://restaurantguru.com/amp/Why-Coffee-Beylikduzu-Westside-Buyukcekmece
