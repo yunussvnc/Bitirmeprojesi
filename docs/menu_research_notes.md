@@ -4137,3 +4137,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6204 ; https://kurucesmebalik.com
 ## AKDENİZ CAFE/BAR ID 6203 — HOLD
 Hentzer `Hüseyinağa, Nevizade Sk. 25/A, 34435 Beyoğlu`, `+90 212 245 61 70`; Meyhankoli, Haritane ve Bulurum işletme/adres/telefonu destekliyor. Güncel ürün-fiyat listesi erişilebilir değil; son bir yıl fiyatlı 20+ benzersiz ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6203 ; https://www.meyhankoli.com/restoran/akdeniz-cafe-1455 ; https://haritane.com/akdeniz-cafe-bar-detay1236505/ ; https://www.bulurum.com/en/details/_c7426ai7353ci4f4eda020j16404h1b?nomobile=true
+
+## BAYRAMOĞLU DÖNER ID 6202 — ACCEPTED
+Hentzer `Rüzgarlıbahçe, Cumhuriyet Cd. No:2, 34805 Beykoz`, `+90 216 413 00 45`; resmi Bayramoğlu sitesi exact adresi ve ana telefonu doğruluyor, Mekanlar/World of Mouth aynı işletmeyi destekliyor. Yemeksepeti `ts0x` exact Bayramoğlu vendorunda 2026-08-28 tarihinde 20+ güncel fiyatlı döner/yan ürün yayınlanıyor; ilk 20 benzersiz gıda ürünü eklendi, poşet dışarıda bırakıldı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6202 ; https://bayramogludoner.com.tr/ ; https://www.yemeksepeti.com/restaurant/ts0x/bayramoglu-doner ; https://mekanlar.com/mekan/bayramoglu-doner-kavacik ; https://www.worldofmouth.app/restaurants/bayramolu-doner

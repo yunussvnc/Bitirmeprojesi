@@ -93774,5 +93774,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "White Mocha", "price": "250 TL", "category": "Sıcak Kahveler" },
       { "name": "Türk Kahvesi Double", "price": "150 TL", "category": "Sıcak Kahveler" }
     ]
+  },
+  "6202": {
+    "name": "BAYRAMOĞLU DÖNER",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/ts0x/bayramoglu-doner",
+    "sourceName": "Canlı Yemeksepeti exact Bayramoğlu Döner vendoru; resmi site, Mekanlar ve World of Mouth ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Et Döner", "price": "550 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner (Double)", "price": "1.100 TL", "category": "Et Dönerler" },
+      { "name": "Pilav Üstü Et Döner", "price": "600 TL", "category": "Et Dönerler" },
+      { "name": "Pilav Üstü Et Döner (Double)", "price": "1.130 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm (100 gr.)", "price": "500 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm (150 gr.)", "price": "740 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm (200 gr.)", "price": "1.000 TL", "category": "Et Dönerler" },
+      { "name": "Yarım Ekmek Arası Et Döner (100 gr.)", "price": "500 TL", "category": "Et Dönerler" },
+      { "name": "Yarım Ekmek Arası Et Döner (150 gr.)", "price": "740 TL", "category": "Et Dönerler" },
+      { "name": "Yarım Ekmek Arası Et Döner (200 gr.)", "price": "1.000 TL", "category": "Et Dönerler" },
+      { "name": "Tam Ekmek Arası Et Döner (150 gr.)", "price": "740 TL", "category": "Et Dönerler" },
+      { "name": "Tam Ekmek Arası Et Döner (200 gr.)", "price": "1.000 TL", "category": "Et Dönerler" },
+      { "name": "3/4 Ekmek Arası Et Döner (150 gr.)", "price": "740 TL", "category": "Et Dönerler" },
+      { "name": "3/4 Ekmek Arası Et Döner (200 gr.)", "price": "1.000 TL", "category": "Et Dönerler" },
+      { "name": "Patates Kızartması", "price": "75 TL", "category": "Yan Ürünler" },
+      { "name": "Acı Biber Turşusu", "price": "20 TL", "category": "Yan Ürünler" },
+      { "name": "Et Döner (250 gr.)", "price": "1.250 TL", "category": "Kiloluk Et Dönerler" },
+      { "name": "Et Döner (500 gr.)", "price": "2.500 TL", "category": "Kiloluk Et Dönerler" },
+      { "name": "Et Döner (750 gr.)", "price": "3.750 TL", "category": "Kiloluk Et Dönerler" },
+      { "name": "Et Döner (1 kg.)", "price": "5.000 TL", "category": "Kiloluk Et Dönerler" }
+    ]
   }
 };
