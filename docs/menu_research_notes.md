@@ -4349,3 +4349,7 @@ Kaynak: https://api.asemos.tr/api/v1/places/6150
 ## FERIYE LOKANTASI ID 6149 — HOLD
 Hentzer `Yıldız, Çırağan Cd. No:44, 34347 Beşiktaş/İstanbul`, `+90 212 227 22 17`; Gurme Rehber, Waze ve Tripadvisor/Trip.com aynı Feriye Lokantası/Çırağan Palace kompleksi adresi ve telefonu doğruluyor. 2026 içerikleri ve restoran tanıtımları mevcut olsa da ürün bazlı güncel fiyatlı menü veya 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadı. Override eklenmedi. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6149 ; https://www.gurmerehber.com/feriye-lokantasi-istanbul/ ; https://www.waze.com/az/live-map/directions/tr/i%CC%87stanbul/feriye-lokantasi?to=place.ChIJY586Bbi3yhQRi9dVTzb-g2M ; https://www.trip.com/restaurant/trkiye/istanbul/detail/feriye-lokantasi-17093787/
+
+## BEŞİKTAŞ KAZAN ID 6148 — HOLD
+Hentzer `Sinanpaşa, Beşiktaş Cd. No:35, 34353 Beşiktaş/İstanbul`, telefon `+90 212 000 00 00`; Tripadvisor ve Waze/harita aynı adresi doğruluyor ancak Facebook kaydında telefon `+90 212 258 38 90` olduğundan Hentzer telefonu bağımsız eşleşmiyor. Tripadvisor işletmeyi bar/bira restoranı olarak sınıflandırıyor ve fiyatlı menü sunmuyor. Exact telefon ve 20+ son bir yıl fiyatlı gıda ürünü koşulları sağlanmadığı için override eklenmedi. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6148 ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d19310481-Reviews-Besiktas_Kazan-Istanbul.html ; https://www.facebook.com/KazanBesiktas/about/ ; https://www.waze.com/live-map/directions/tr/i%CC%87stanbul/besiktas-kazan?to
