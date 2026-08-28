@@ -4157,3 +4157,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6199 ; https://www.instagram.com/
 ## 4 / KITCHEN ORTAKÖY ID 6198 — HOLD
 Hentzer `Mecidiye, Eski Bahçe Sk. No:19, 34347 Beşiktaş`, `+90 532 727 74 44`; Winniey aynı adresi listeliyor ve resmi Instagram hesabı Four Kitchen Ortaköy’ü kahvaltı/pizza/makarna/salata/sandviç/kahve konseptiyle doğruluyor. Ancak erişilebilir resmi içeriklerde 20+ güncel fiyatlı ürün listesi ve bağımsız telefon doğrulaması yok. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6198 ; https://www.instagram.com/4.kitchen.ortakoy/ ; https://www.instagram.com/4.kitchen.ortakoy/p/Db7ulS9yCL7/ ; https://www.instagram.com/4.kitchen.ortakoy/p/DcTCYF_Mdry/ ; https://winniey.com/spots/istanbul-mecidiye?view
+
+## PIZZA V KAVACIK ID 6197 — HOLD
+Hentzer `Fatih, Çavuşbaşı Cumhuriyet Cd. No:389/1 İç Kapı No:1, 34830 Beykoz`, `+90 216 331 33 53`; resmi Pizza V Linktree, Facebook, Instagram, Cybo, Restoranim ve X aynı exact adres/telefonu destekliyor. Resmi online sipariş bağlantısı QR okuyucu/yükleme ekranında kaldı; 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6197 ; https://linktr.ee/pizzav ; https://www.facebook.com/p/Pizza-V-Kavac%C4%B1k-61570242891159/ ; https://restoranim.net/istanbul/beykoz/pizzaci/pizza-v-kavacik ; https://siparis.v.pizza/
