@@ -4097,3 +4097,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6214 ; https://istanbulservislist
 ## MEKHAN LOUNGE ID 6213 — HOLD
 Hentzer `Yıldırım, Şehir Parkı Caddesi 2E, 34035 Bayrampaşa`, `+90 538 265 49 56`; Restoranim, Tumisyeri ve Comemixgo exact adres/telefonu doğruluyor. Dijital menü yalnızca Loading ekranında kaldı, MenuHaritasi fiyatlı ürün listesi vermedi; son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6213 ; https://restoranim.net/istanbul/bayrampasa/restoran/mekhan-lounge ; https://www.tumisyeri.com/mekhan-lounge-0538-265-49-56 ; https://comemixgo.com/firma/9520/mekhan%20lounge/ ; http://menu.mekhanlounge.com/ ; https://www.instagram.com/p/DVMOtsRiHji/
+
+## CURLY PIZZA ID 6212 — ACCEPTED
+Hentzer `Inci 7, Demir Romance Sitesi, Cumhuriyet, Fedakar Sk., 34520 Beylikdüzü`, `+90 212 803 42 99`; Restoranim, Mekanlar ve Tumisyeri exact adres/telefonu doğruluyor. Yemeksepeti `piej` exact vendorunda 2026-08-28 tarihinde çok sayıda güncel fiyatlı pizza bulundu; ilk 20 benzersiz büyük boy pizza kalemi eklendi. Popular carousel tekrarları ve gıda dışı ürünler dışarıda bırakıldı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6212 ; https://www.yemeksepeti.com/restaurant/piej/curly-pizza ; https://restoranim.net/istanbul/beylikduzu/pizzaci/curly-pizza ; https://mekanlar.com/mekan/curly-pizza-cumhuriyet-mh ; https://www.tumisyeri.com/curly-pizza-0212-803-42-99

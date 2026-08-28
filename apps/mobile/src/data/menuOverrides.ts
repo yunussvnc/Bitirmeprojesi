@@ -93718,5 +93718,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Kavurmalı Pizza (27 Cm)", "price": "750 TL", "category": "Gurme Pizza Orta Boy" },
       { "name": "Pizza Pesto (27 Cm)", "price": "700 TL", "category": "Gurme Pizza Orta Boy" }
     ]
+  },
+  "6212": {
+    "name": "CURLY PIZZA",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/piej/curly-pizza",
+    "sourceName": "Canlı Yemeksepeti exact Curly Pizza vendoru; Restoranim, Mekanlar ve Tumisyeri ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Acılı Kajun Pizza (Büyük Boy)", "price": "819,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Anatolia Pizza (Büyük Boy)", "price": "849,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "BBQ Aşkı Pizza (Büyük Boy)", "price": "819 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Chickfit Pizza (Büyük Boy)", "price": "819,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Dallas Pizza (Büyük Boy)", "price": "769,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Et Aşkı Pizza (Büyük Boy)", "price": "869,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Et Makinası Pizza (Büyük Boy)", "price": "869,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Karışık Pizza (Büyük Boy)", "price": "769 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Farmer Pizza (Büyük Boy)", "price": "869,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Hawaii Pizza (Büyük Boy)", "price": "819,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Mangalcı Pizza (Büyük Boy)", "price": "819,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Margherita Pizza (Büyük Boy)", "price": "714,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Meat & More Pizza (Büyük Boy)", "price": "869,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Meat Lovers Pizza (Büyük Boy)", "price": "869,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Mediterranean Pizza (Büyük Boy)", "price": "769,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Meksika Dalgası Pizza (Büyük Boy)", "price": "819,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Ocean Feast Pizza (Büyük Boy)", "price": "769,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Mevsim Pizza (Büyük Boy)", "price": "769,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Peynir Kaynağı Pizza (Büyük)", "price": "714,99 TL", "category": "Büyük Boy Pizzalar" },
+      { "name": "Powerbank Pizza (Büyük)", "price": "769,99 TL", "category": "Büyük Boy Pizzalar" }
+    ]
   }
 };
