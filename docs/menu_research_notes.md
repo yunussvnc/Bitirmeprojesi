@@ -4021,3 +4021,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6233 ; https://restaurantguru.com
 ## SMASH DÉ BURGER ID 6232 — HOLD
 Hentzer `Barış Mah. Samsun Cad. Dışkapı, Makyol Yaşam Sitesi, No:14/6 Daire:0078, 34520 Beylikdüzü`, `+90 555 640 78 64`. Menu-TR/Yandex genel Makyol konumunu destekliyor; fakat resmi Instagram 2026 içeriklerinde No:14/1 geçiyor. Exact kapı birimi 14/6/D:0078 ile eşleşmedi; ayrıca 20+ benzersiz güncel fiyatlı ürün listesi ve Hentzer telefon paritesi doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6232 ; https://www.menu-tr.com/istanbul/beylikduzu/hamburger-restorani/smash-de-burger ; https://www.instagram.com/p/DYpp_KhDa0I/ ; https://www.instagram.com/p/DbS5wIjDYhK/
+
+## LORA ÇİKOLATA KAHVE BEYLİKDÜZÜ ID 6231 — HOLD
+Hentzer `Cumhuriyet Mahallesi Atatürk Bulvarı, Alya, Dolunay Sitesi No:27/1D, 34520 Beylikdüzü`, `+90 545 615 19 91`; Restoranim/Cybo exact şube ve telefonu destekliyor. Migros menü isimlerini listeliyor ancak sayfa CAPTCHA ile engellendiği için fiyatlar doğrulanamadı; resmi site yalnızca Denizli adresini gösteriyor. 20+ güncel fiyatlı ürün şartı sağlanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6231 ; https://restoranim.net/istanbul/beylikduzu/cikolata/lora-cikolata-kahve-beylikduzu ; https://www.migros.com.tr/yemek/lora-cikolata-kahve-beylikduzu-beylikduzu-cumhuriyet-mah-st-23a58 ; https://loracikolatakahve.com.tr/
