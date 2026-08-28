@@ -4281,3 +4281,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6167 ; https://restoranim.net/ist
 ## ATALAY KEBAP ID 6166 — ACCEPTED (20 ürün)
 Hentzer `Türkali, Mecit Ali Sk. 19/B, 34357 Beşiktaş/İstanbul`, `+90 212 258 61 95`; Restoranim, RestaurantGuru ve arama kaynakları exact şube adresi/telefonu doğruluyor. Canlı Yemeksepeti `d6l6` vendorunda menüler, çorbalar, kebaplar ve ızgaralar kategorilerinden 20 benzersiz güncel fiyatlı ürün erişilebilir; 28.08.2026’da doğrulandı. Popüler carousel kopyaları ana ürün listesine ayrıca alınmadı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6166 ; https://www.yemeksepeti.com/restaurant/d6l6/atalay-kebap ; https://restoranim.net/istanbul/besiktas/restoran/atalay-kebap ; https://restaurantguru.com/Atalay-Kebap-Istanbul
+
+## KARADENİZ DÖNER ASIM USTA ID 6165 — HOLD
+Hentzer `Sinanpaşa, Köyiçi Cd No:6, 34353 Beşiktaş/İstanbul`, `+90 212 261 76 93`; Best Döner in Istanbul, Hangi Mekan, Gurmerehber ve güncel sosyal içerikler exact adres/telefonu doğruluyor. Gurmerehber’deki fiyatlı menü yalnızca Porsiyon Döner, Büyük Tombik Döner, Açık Ayran ve Kapalı Ayran olmak üzere 4 ürün içeriyor ve açıkça Mayıs 2025 fiyatı olarak belirtilmiş; son bir yıl koşulunu karşılamıyor. **HOLD; 20+ güncel fiyatlı menü yok.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6165 ; https://www.bestdonerinistanbul.com/en/place/karadeniz-doner-asim-usta ; https://www.gurmerehber.com/tarihi-karadeniz-doner-besiktas/ ; https://www.hangimekan.com.tr/yeme-icme/istanbul/besiktas/karadeniz-doner-asim-usta/
