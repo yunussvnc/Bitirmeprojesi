@@ -4133,3 +4133,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6205 ; https://mekanlar.com/mekan
 ## KURUÇEŞME BALIK ID 6204 — HOLD
 Hentzer `Kuruçeşme, Kuruçeşme Cd. No:9, 34345 Beşiktaş`, `+90 212 263 44 72`; resmi site ve İstanbul.net.tr exact adres/ana telefonu destekliyor. Resmi sitede fiyat listesi yok; RestaurantGuru menüsü sahibin 4 yıl önceki menüsü olarak işaretli. Son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6204 ; https://kurucesmebalik.com/ ; https://restaurantguru.com/Kurucesme-Balik-Istanbul/menu ; https://www.istanbul.net.tr/yeme-icme/restoran/kurucesme-balik/10906/3 ; https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d1895626-Reviews-Kurucesme_Balik-Istanbul.html
+
+## AKDENİZ CAFE/BAR ID 6203 — HOLD
+Hentzer `Hüseyinağa, Nevizade Sk. 25/A, 34435 Beyoğlu`, `+90 212 245 61 70`; Meyhankoli, Haritane ve Bulurum işletme/adres/telefonu destekliyor. Güncel ürün-fiyat listesi erişilebilir değil; son bir yıl fiyatlı 20+ benzersiz ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6203 ; https://www.meyhankoli.com/restoran/akdeniz-cafe-1455 ; https://haritane.com/akdeniz-cafe-bar-detay1236505/ ; https://www.bulurum.com/en/details/_c7426ai7353ci4f4eda020j16404h1b?nomobile=true
