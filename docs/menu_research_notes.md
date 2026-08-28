@@ -4117,3 +4117,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6209 ; https://perlos.com.tr/hakk
 ## OTLANGAÇ KAHVALTI ID 6208 — HOLD
 Hentzer `Sinanpaşa, Şair Veysi Sk. No:20 D:B, 34353 Beşiktaş`, `+90 212 327 05 00`; dijital menü ve Yemeksepeti `No:20/B` adres/telefon paritesini destekliyor. Ancak erişilebilir dijital menüde yaklaşık 11 fiyatlı ürün var; 20 benzersiz güncel gıda ürününün fiyatı eksiksiz doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6208 ; https://otlangaccafe.dijital.menu/22497 ; https://www.yemeksepeti.com/restaurant/fw7z/otlangac-kahvalti-and-cafe ; https://restaurantguru.com/Otlangac-Kahvalti-Istanbul ; https://www.instagram.com/reel/DBeBli6A1rB/
+
+## OPHELIA PATISSERIE BEŞİKTAŞ ID 6207 — HOLD
+Hentzer `Türkali, Ihlamurdere Cd., 34357 Beşiktaş`, `+90 538 435 34 55`; Restoranim telefonu doğruluyor. Yemeksepeti exact vendoru `Ihlamurdere Cd. 123F` ve yalnızca 7 fiyatlı tatlı/profiterol ürünü gösteriyor. 20 benzersiz ürün ve exact kapı paritesi sağlanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6207 ; https://www.yemeksepeti.com/restaurant/j3iu/ophelia-patisserie-j3iu ; https://restoranim.net/istanbul/istanbul/tatlici/ophelia-patisserie-besiktas ; https://fr.restaurantguru.com/Ophelia-Patisserie-Besiktas-Istanbul
