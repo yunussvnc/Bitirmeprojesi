@@ -93578,5 +93578,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Ayran (33 cl.)", "price": "12 TL", "category": "İçecekler" },
       { "name": "Limonlu Soda (20 cl.)", "price": "8 TL", "category": "İçecekler" }
     ]
+  },
+  "6235": {
+    "name": "İNAN BALIK RESTAURANT",
+    "sourceUrl": "https://www.migros.com.tr/yemek/inan-balik-beylikduzu-beylikduzu-osb-mah-st-31f81",
+    "sourceName": "Canlı Migros Yemek exact Beylikdüzü OSB vendoru; Servis Kayıt, Restoranim ve resmi Instagram ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Hamsi Tava Menü", "price": "400 TL", "category": "Tek Kişilik Tava Menüler" },
+      { "name": "Hamsi Kuşu Menü (Kılçıksız)", "price": "450 TL", "category": "Tek Kişilik Tava Menüler" },
+      { "name": "İstavrit Tava Menü", "price": "450 TL", "category": "Tek Kişilik Tava Menüler" },
+      { "name": "Levrek Tava Menü (Kılçıksız)", "price": "650 TL", "category": "Tek Kişilik Tava Menüler" },
+      { "name": "Çipura Tava Menü (Kılçıksız)", "price": "650 TL", "category": "Tek Kişilik Tava Menüler" },
+      { "name": "Fish And Chips", "price": "550 TL", "category": "Tek Kişilik Tava Menüler" },
+      { "name": "Levrek Izgara Menü", "price": "650 TL", "category": "Tek Kişilik Izgara Menüler" },
+      { "name": "Çipura Izgara Menü", "price": "650 TL", "category": "Tek Kişilik Izgara Menüler" },
+      { "name": "Somon Izgara Menü", "price": "695 TL", "category": "Tek Kişilik Izgara Menüler" },
+      { "name": "Palamut Izgara Menü", "price": "550 TL", "category": "Tek Kişilik Izgara Menüler" },
+      { "name": "Levrek Izgara Menü (3 Kişilik)", "price": "1950 TL", "category": "Üç Kişilik Izgara Menüler" },
+      { "name": "Çipura Izgara Menü (Kılçıksız) (3 Kişilik)", "price": "1950 TL", "category": "Üç Kişilik Izgara Menüler" },
+      { "name": "Hamsi Tava 3 Kişilik Menü", "price": "1200 TL", "category": "Üç Kişilik Tava Menüler" },
+      { "name": "Levrek Tava 3 Kişilik Menü (Kılçıksız)", "price": "1950 TL", "category": "Üç Kişilik Tava Menüler" },
+      { "name": "Çipura Tava Menü (3 Kişilik) (Kılçıksız)", "price": "1950 TL", "category": "Üç Kişilik Tava Menüler" },
+      { "name": "Kalamar Tava", "price": "1350 TL", "category": "Kalamar & Karides Menüleri" },
+      { "name": "Karides Güveç", "price": "1350 TL", "category": "Kalamar & Karides Menüleri" },
+      { "name": "Tereyağlı Karides Güveç", "price": "1650 TL", "category": "Kalamar & Karides Menüleri" },
+      { "name": "Ekmek Arası Kalamar", "price": "1500 TL", "category": "Kalamar & Karides Menüleri" },
+      { "name": "Midye Tava", "price": "1650 TL", "category": "Kalamar & Karides Menüleri" }
+    ]
   }
 };

@@ -4005,3 +4005,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6237 ; https://www.yemeksepeti.co
 ## KAFEKA NARGİLE CAFE RESTAURANT ID 6236 — HOLD
 Hentzer `Katip Mustafa Çelebi, Küçük Parmakkapı Sk. No:2/B, 34430 Beyoğlu`, `+90 212 249 12 82`; Trip.com, RestaurantGuru, Cybo ve Menu-TR çoğunlukla eşleşiyor, ancak Bulurum aynı telefonu No:6 olarak veriyor. Erişilebilir menü kaynaklarında son bir yıl içinde fiyatlı 20+ ürün listesi yok. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6236 ; https://sg.trip.com/restaurant/trkiye/istanbul/detail/kafeka-nargile-cafe-restaurant-17094931/ ; https://restaurantguru.com/Kafika-Kacirdiginiz-Filmler-Kahvesi-Istanbul/menu ; https://www.menu-tr.com/istanbul/beyoglu/nargile-salonu/kafeka-cafe-restaurant-beyoglu-2
+
+## İNAN BALIK RESTAURANT ID 6235 — ACCEPTED (20 ürün)
+Hentzer `BEYLIKDÜZÜOSB MAH, Ali Çebi Cd. NO:3/7, 34524 Beylikdüzü`, `+90 212 673 43 45`; Servis Kayıt ve Restoranim aynı adres/telefonu, resmi Instagram Keleşoğlu Plaza No:3/7 ve telefonu doğruluyor. Canlı Migros Yemek exact Beylikdüzü OSB vendorunda DOM üzerinden 20 benzersiz deniz ürünü menü kalemi ve fiyatı doğrulandı; fiyatlar 2026-08-28 tarihinde kontrol edildi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6235 ; https://www.migros.com.tr/yemek/inan-balik-beylikduzu-beylikduzu-osb-mah-st-31f81 ; https://restoranim.net/istanbul/beylikduzu/balikci/inan-balik-restoran ; https://www.serviskayitlistesi.com/istanbul/beylikduzu/restoran/inan-balik-restoran-fNOc48.html ; https://www.instagram.com/reel/DVgbiACAtlg/
