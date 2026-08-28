@@ -4041,3 +4041,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6228 ; https://istakozi.com/menu/
 ## SURUÇ KEBAP LAHMACUN SALONU BEYLİKDÜZÜ ID 6227 — HOLD
 Hentzer `Büyükşehir, Ceylan Sk. BEYAZ PARK EVLERİ NO:1 DÜKKAN62, 34519 Beylikdüzü`, `+90 532 362 00 82`; Restoranim ve Kaçıyor exact adres/telefonu doğruluyor, RestaurantGuru adresi destekliyor. Ancak erişilebilir kaynaklarda son bir yıl içinde fiyatlı 20+ ürün menüsü yok; Kaçıyor yalnızca kalori/ürün adları veriyor. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6227 ; https://restoranim.net/istanbul/beylikduzu/kebapci/suruc-kebap-lahmacun-salonu-beylikduzu ; https://www.kaciyor.com/suruc-kebap-lahmacun-salonu-beylikduzu ; https://de.restaurantguru.com/amp/Meshur-surfa-suruc-ocakbasi-Buyukcekmece
+
+## BUNKER COFFEE ID 6226 — HOLD
+Hentzer `İsmet Paşa, Eti Sokağı No:8/B, 34040 Bayrampaşa`, phone boş; Servis Kayıt exact adresi fakat 0850 309 8996 telefonunu veriyor. Yemeksepeti’nde 15 benzersiz uygun fiyatlı ürün bulundu, 20 ürün şartı sağlanmadı; poşet hariç tutuldu. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6226 ; https://serviskayitlistesi.com/istanbul/bayrampasa/kafe/bunker-coffee-3yPKK4.html ; https://www.yemeksepeti.com/restaurant/qde7/bunker-coffee ; https://www.instagram.com/bunkercoffee1/
