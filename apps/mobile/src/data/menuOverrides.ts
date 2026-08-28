@@ -93894,5 +93894,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Limonlu Soda (20 cl.)", "price": "35 TL", "category": "İçecekler" },
       { "name": "Soda (20 cl.)", "price": "25 TL", "category": "İçecekler" }
     ]
+  },
+  "6181": {
+    "name": "MOR KAVANOZ (BEYLİKDÜZÜ)",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/d9cu/mor-kavanoz",
+    "sourceName": "Canlı Yemeksepeti exact Cumhuriyet Cd. vendoru; resmi sosyal hesap ve dizinlerle adres-telefon paritesi",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Trileçe (4 Dilim)", "price": "1008 TL", "category": "Menüler" },
+      { "name": "4'lü Çömlekte Sütlaç Menü", "price": "976 TL", "category": "Menüler" },
+      { "name": "4'lü Çömlekte Fındıklı Sütlaç Menü", "price": "1104 TL", "category": "Menüler" },
+      { "name": "4'lü Kazandibi Menü", "price": "976 TL", "category": "Menüler" },
+      { "name": "4'lü Spoonful Cup Menü", "price": "1248 TL", "category": "Menüler" },
+      { "name": "Çilekli Mag", "price": "340 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Muzlu Mag", "price": "320 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Oreolu Mag", "price": "320 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Yaban Mersinli Mag", "price": "320 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Oreolu Çilekli Mag", "price": "340 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Nutili Çilekli Mag", "price": "360 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Nutili Çilekli Muzlu Mag", "price": "360 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Frambuazlı Red Cup", "price": "300 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Fıstıklı Çikolatalı Cup", "price": "360 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Böğürtlenli Çikolatalı Cup", "price": "360 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "KitKat Parçacıklı Çilekli Cup", "price": "360 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Lotuslu Çilekli Magbella", "price": "360 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Krokanlı Çikolatalı Cup", "price": "360 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Karamelli Muzlu Cup", "price": "360 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Supangle Cup", "price": "300 TL", "category": "Kavanoz Tatlılar" }
+    ]
   }
 };
