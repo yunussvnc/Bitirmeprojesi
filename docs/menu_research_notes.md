@@ -4069,3 +4069,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6221 ; https://www.google.com.tr/
 ## DELİ DÜRÜM BEYLİKDÜZÜ ID 6220 — ACCEPTED
 Hentzer `Adnan Kahveci, Anadolu Cd. 13/1, 34520 Beylikdüzü`, `+90 554 014 59 71`; Restoranim ve 2026 tarihli Facebook/Instagram içerikleri exact adres ve telefonu doğruluyor. Migros Yemek exact Adnan Kahveci vendorunda 2026-08-28 tarihinde güncel fiyatlı 20 benzersiz gıda ürünü bulundu. Falafel dürümler/menüler, tavuk dönerler ve sandviçler seçildi; poşet ve tekrarlar eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6220 ; https://www.migros.com.tr/yemek/deli-durum-beylikduzu-adnan-kahveci-mah-st-3168a ; https://restoranim.net/istanbul/beylikduzu/restoran/deli-durum ; https://www.instagram.com/reel/DZYOZrDsOcc/
+
+## PEYNİR EKMEK CAFE&KAHVALTI ID 6219 — HOLD
+Hentzer `Sinanpaşa, Çelebi Oğlu Sk. No:14, 34353 Beşiktaş`, `+90 212 259 58 59`; Restoranim, İstanbul Servis Listesi, Bulurum ve TazeYorum exact şube/telefonu doğruluyor. Resmi Instagram’ın 2026-04-18 paylaşımı işletmeyi destekliyor fakat görünür içerik fiyatlı menü listesi sunmuyor; eski 2020 menü güncel kabul edilmedi. Son bir yıl fiyatlı 20+ ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6219 ; https://restoranim.net/istanbul/besiktas/kahvaltici/peynir-ekmek-cafe-kahvalti ; https://istanbulservislistesi.com.tr/istanbul/besiktas/kafe/peynir-ekmek-cafe-kahvalti-9gKU70.html ; https://www.instagram.com/p/DXRFjNBgmpu/
