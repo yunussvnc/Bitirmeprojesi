@@ -4161,3 +4161,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6198 ; https://www.instagram.com/
 ## PIZZA V KAVACIK ID 6197 — HOLD
 Hentzer `Fatih, Çavuşbaşı Cumhuriyet Cd. No:389/1 İç Kapı No:1, 34830 Beykoz`, `+90 216 331 33 53`; resmi Pizza V Linktree, Facebook, Instagram, Cybo, Restoranim ve X aynı exact adres/telefonu destekliyor. Resmi online sipariş bağlantısı QR okuyucu/yükleme ekranında kaldı; 20+ güncel fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6197 ; https://linktr.ee/pizzav ; https://www.facebook.com/p/Pizza-V-Kavac%C4%B1k-61570242891159/ ; https://restoranim.net/istanbul/beykoz/pizzaci/pizza-v-kavacik ; https://siparis.v.pizza/
+
+## BARBAROS OVEN ID 6196 — HOLD
+Hentzer `Orta Mahallesi Demirkapı Caddesi, Orta, Çığ Sk. No. 69/A, 34030 Bayrampaşa`, `+90 212 613 95 71`; TumIsyeri exact adres ve telefonu doğruluyor. RestaurantGuru listing mevcut ancak güncel 20+ fiyatlı ürün menüsü yok; Yemeksepeti/Migros/dijital menü exact vendoru doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6196 ; https://www.tumisyeri.com/barbaros-oven_20-0212-613-95-71 ; https://fr.restaurantguru.com/amp/Barbaros-Ekmek-Firini-Istanbul
