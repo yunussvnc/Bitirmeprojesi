@@ -4221,3 +4221,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6182 ; https://www.migros.com.tr/
 ## MOR KAVANOZ (BEYLİKDÜZÜ) ID 6181 — ACCEPTED (20 ürün)
 Hentzer `Cumhuriyet Mahallesi Cumhuriyet Cd. İmamoğlu1 Sitesi No:20L, 34520 Beylikdüzü/İstanbul`, `+90 212 872 72 77`; Corner, Menu-TR, Restoranim ve resmi sosyal hesap aynı Beylikdüzü işletmesini/adresini ve telefonu doğruluyor. Canlı Yemeksepeti `d9cu` vendoru Cumhuriyet Cd. şubesi için çok sayıda benzersiz ürün ve güncel indirimli fiyat gösteriyor; 20 ürün seçilerek 28.08.2026’da doğrulandı. Popüler carousel kopyaları ana ürün listesinden ayrı tutulmadı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6181 ; https://www.yemeksepeti.com/restaurant/d9cu/mor-kavanoz ; https://www.migros.com.tr/yemek/mor-kavanoz-sutlu-tatli-ekler-beylikduzu-cumhuriyet-mah-st-201c2 ; https://www.instagram.com/mor-kavanoz-beylikduzu/ ; https://www.menu-tr.com/istanbul/beylikduzu/tatlici/mor-kavanoz-beylikduzu
+
+## HAVAI FİŞEK MAĞAZASI VE MEŞALE SATIŞI ID 6180 — HOLD
+Hentzer kaydı `İsmet Paşa, Sinop Sk. No:8/A, 34035 Bayrampaşa/İstanbul`, `+90 545 906 03 05`; çoklu dizinler aynı adres/telefonu doğruluyor. İşletme kaynaklarda açıkça havai fişek/meşale mağazası olarak sınıflandırılıyor; gıda işletmesi değil ve menü ürünü bulunmuyor. **HOLD; gıda menüsü eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6180 ; https://havaifisekmagazasi.com/category/page-2/ ; https://www.facebook.com/havaifisekmagaza/?locale ; https://dukkanlar.net.tr/firma/havai-fisek-magazasi-ve-mesale-satisi/
