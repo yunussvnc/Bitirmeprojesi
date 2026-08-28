@@ -93746,5 +93746,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Peynir Kaynağı Pizza (Büyük)", "price": "714,99 TL", "category": "Büyük Boy Pizzalar" },
       { "name": "Powerbank Pizza (Büyük)", "price": "769,99 TL", "category": "Büyük Boy Pizzalar" }
     ]
+  },
+  "6206": {
+    "name": "ICC COFFEE ROASTERY l ISTANBUL COFFEE COMPANY",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/byz9/istanbul-coffee-company",
+    "sourceName": "Canlı Yemeksepeti exact İstanbul Coffee Company vendoru; resmi iletişim sayfası, Menu-TR ve Nelerimeshur ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-28",
+    "items": [
+      { "name": "Caramel Frappe", "price": "240 TL", "category": "Frappes" },
+      { "name": "Vanilla Frappe", "price": "240 TL", "category": "Frappes" },
+      { "name": "Hazelnut Frappe", "price": "240 TL", "category": "Frappes" },
+      { "name": "Espresso Shake", "price": "240 TL", "category": "Frappes" },
+      { "name": "Filtre Kahve", "price": "200 TL", "category": "Sıcak Kahveler" },
+      { "name": "V60", "price": "200 TL", "category": "Sıcak Kahveler" },
+      { "name": "Chemex", "price": "200 TL", "category": "Sıcak Kahveler" },
+      { "name": "Türk Kahvesi", "price": "140 TL", "category": "Sıcak Kahveler" },
+      { "name": "Espresso", "price": "140 TL", "category": "Sıcak Kahveler" },
+      { "name": "Americano", "price": "120 TL", "category": "Sıcak Kahveler" },
+      { "name": "Latte", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Cappuccino", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Flat White", "price": "230 TL", "category": "Sıcak Kahveler" },
+      { "name": "Espresso Macchiato", "price": "210 TL", "category": "Sıcak Kahveler" },
+      { "name": "Mocha", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Caramel Latte", "price": "240 TL", "category": "Sıcak Kahveler" },
+      { "name": "Hazelnut Latte", "price": "240 TL", "category": "Sıcak Kahveler" },
+      { "name": "Vanilla Latte", "price": "240 TL", "category": "Sıcak Kahveler" },
+      { "name": "White Mocha", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Türk Kahvesi Double", "price": "150 TL", "category": "Sıcak Kahveler" }
+    ]
   }
 };

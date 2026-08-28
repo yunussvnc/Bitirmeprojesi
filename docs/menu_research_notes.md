@@ -4121,3 +4121,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6208 ; https://otlangaccafe.dijit
 ## OPHELIA PATISSERIE BEŞİKTAŞ ID 6207 — HOLD
 Hentzer `Türkali, Ihlamurdere Cd., 34357 Beşiktaş`, `+90 538 435 34 55`; Restoranim telefonu doğruluyor. Yemeksepeti exact vendoru `Ihlamurdere Cd. 123F` ve yalnızca 7 fiyatlı tatlı/profiterol ürünü gösteriyor. 20 benzersiz ürün ve exact kapı paritesi sağlanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6207 ; https://www.yemeksepeti.com/restaurant/j3iu/ophelia-patisserie-j3iu ; https://restoranim.net/istanbul/istanbul/tatlici/ophelia-patisserie-besiktas ; https://fr.restaurantguru.com/Ophelia-Patisserie-Besiktas-Istanbul
+
+## ICC COFFEE ROASTERY l ISTANBUL COFFEE COMPANY ID 6206 — ACCEPTED
+Hentzer `Kavaklı, Kocatepe Cd. No:319 6/D, 34524 Beylikdüzü`, `+90 542 784 54 95`; resmi İstanbul Coffee Company iletişim sayfası, Menu-TR, Nelerimeshur ve BrewAtlas exact adres/telefonu doğruluyor. Yemeksepeti `byz9` exact vendoru aynı Kocatepe Cd. No:319 6/D adresinde 2026-08-28 tarihinde 20+ güncel fiyatlı kahve/soğuk içecek ürünü yayınlıyor; ilk 20 benzersiz gıda/içecek kalemi eklendi, poşet dışarıda bırakıldı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6206 ; https://www.yemeksepeti.com/restaurant/byz9/istanbul-coffee-company ; https://istanbulcoffeecompany.com/pages/iletisim ; https://www.menu-tr.com/istanbul/beylikduzu/kafe/icc-coffee-roastery-l-istanbul-coffee-company ; https://nelerimeshur.com/en/istanbul/cafes-and-desserts/icc-coffee-roastery-l-istanbul-coffee-company
