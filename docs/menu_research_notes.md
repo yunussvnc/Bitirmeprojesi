@@ -4265,3 +4265,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6171 ; https://restaurantguru.com
 ## MARCHE PATISSERIE & BAKERY ID 6170 — HOLD
 Hentzer `Kanlıca, Hacı Muhittin Sk. No:1/A, 34810 Beykoz/İstanbul`, `+90 532 360 88 12`; Instagram, Servis İşletme Bul, Türkiye Servis Kayıt ve diğer kayıtlar exact adres/telefonu doğruluyor. Instagram’da 2026 tarihli ürün ve menü gönderileri bulunmasına rağmen fiyatlar metin olarak erişilebilir değil; Menu-tr yalnızca tanıtım/yorum, fiyatlı 20+ ürün listesi sunmuyor. **HOLD; görselden fiyat çıkarımı ve doğrulanmamış ürünler aktarılmadı.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6170 ; https://www.instagram.com/marchepatisserie/?hl=en ; https://www.servisisletmebul.com/istanbul/beykoz/pastane-tatlici/marche-patisserie-bakery-eezlol.html ; https://www.menu-tr.com/istanbul/beykoz/kafe/marche-patisserie-bakery
+
+## SOYLU BÜFE ID 6169 — HOLD
+Hentzer `Paşabahçe, Çağatay Sk. No:2, 34800 Beykoz/İstanbul`, `+90 216 322 70 10`; Restoranim, Bulurum ve diğer dizinler exact adres/telefonu doğruluyor. RestaurantGuru’da üç menü sürümü var ancak “menu added by users a year ago” ve “outdated menus” uyarısı bulunuyor; fiyatlı güncel 20+ ürün doğrulanamadı. Instagram menü erişimi giriş duvarında kaldı. **HOLD; eski veya doğrulanamayan fiyatlar aktarılmadı.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6169 ; https://restoranim.net/istanbul/beykoz/bufe/soylu-bufe ; https://restaurantguru.com/Soylu-bufe-Istanbul/menu ; https://www.instagram.com/soylubufe/reels/
