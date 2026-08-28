@@ -12,10 +12,24 @@ from src.config import settings
 
 try:
     import psycopg2
+    from psycopg2 import pool as psycopg2_pool
 except ImportError:  # pragma: no cover - sqlite-only ortamlarda opsiyonel
     psycopg2 = None
+    psycopg2_pool = None
 
 logger = logging.getLogger(__name__)
+
+_pg_pool = None
+
+
+def _get_pg_pool():
+    """Modül seviyesinde tekil connection pool — her istekte yeni bağlantı
+    açıp kapatmak yerine (yüksek trafikte overhead + Postgres bağlantı limiti
+    riski) havuzdan ödünç alıp geri verir."""
+    global _pg_pool
+    if _pg_pool is None and psycopg2_pool is not None:
+        _pg_pool = psycopg2_pool.SimpleConnectionPool(1, 10, settings.database_url_normalized)
+    return _pg_pool
 
 
 class PersonalizationScorer:
@@ -67,16 +81,17 @@ class PersonalizationScorer:
             conn.close()
 
     def _query_postgres(self, query: str, params: tuple) -> List[tuple]:
-        if psycopg2 is None:
+        pool = _get_pg_pool()
+        if pool is None:
             logger.warning("PersonalizationScorer: psycopg2-binary yüklü değil.")
             return []
-        conn = psycopg2.connect(settings.database_url_normalized)
+        conn = pool.getconn()
         try:
             cursor = conn.cursor()
             cursor.execute(query, params)
             return cursor.fetchall()
         finally:
-            conn.close()
+            pool.putconn(conn)
 
     def rerank(
         self,
