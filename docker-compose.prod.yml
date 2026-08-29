@@ -384,7 +384,7 @@ services:
       # image'ine build-time'da gömülüyor) — depends_on'da hiç yer almıyor.
     # nginx:alpine base image busybox wget içerir, ekstra paket kurmaya gerek yok.
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://localhost:80/ || exit 1"]
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:80/nginx-health || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -400,7 +400,7 @@ services:
   # bir "renew" dener (süresi dolmayanlarda no-op, zararsız).
   # ===========================================================================
   certbot:
-    image: certbot/certbot:latest
+    image: certbot/dns-cloudflare:latest
     container_name: asemos_certbot
     restart: unless-stopped
     init: true
@@ -409,6 +409,7 @@ services:
     read_only: true
     tmpfs:
       - /tmp
+      - /var/log/letsencrypt
     volumes:
       - certbot_data:/etc/letsencrypt
       - certbot_www:/var/www/certbot
