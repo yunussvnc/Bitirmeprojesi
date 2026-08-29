@@ -94174,4 +94174,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Oklahoma Onion Burger", "price": "588,90 TL", "category": "Smash Burgerler" }
     ]
   },
+  "6123": {
+    "name": "DIVAN BRASSERIE BEYOĞLU",
+    "sourceUrl": "https://webmenu.pardonapp.co/en/divan-brasserie-beyoglu",
+    "sourceName": "Divan Brasserie Beyoğlu resmi Pardon dijital menüsü; resmi Divan şube sayfası ve Trip.com ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-29",
+    "items": [
+      { "name": "Beef Tenderloin (170g)", "price": "1950 TL", "category": "Ana Yemekler" },
+      { "name": "Slow Cooked Beef Shoulder (170g)", "price": "1950 TL", "category": "Ana Yemekler" },
+      { "name": "Meatballs (180g)", "price": "1450 TL", "category": "Ana Yemekler" },
+      { "name": "Yogurt Kebab (180g)", "price": "1950 TL", "category": "Ana Yemekler" },
+      { "name": "Grilled Chicken with Thyme (180 g)", "price": "1350 TL", "category": "Ana Yemekler" },
+      { "name": "Salmon Fillet (170g)", "price": "1750 TL", "category": "Ana Yemekler" },
+      { "name": "Robespierre (170 gr)", "price": "1750 TL", "category": "Ana Yemekler" },
+      { "name": "Pizza Margherita", "price": "940 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Pizza Bresaola (70 gr)", "price": "1400 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Pizza Funghi", "price": "1100 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Pizza Anatolia (70 gr)", "price": "1350 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Club Sandwich (120g)", "price": "1150 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Beef Burger (180 gr)", "price": "1300 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Pizzetta", "price": "1100 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Pizza Dolce Picante", "price": "1700 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Pizza Vegetarian", "price": "1050 TL", "category": "Pizza ve Sandviçler" },
+      { "name": "Divan Salad", "price": "890 TL", "category": "Salatalar" },
+      { "name": "Power Salad", "price": "1150 TL", "category": "Salatalar" },
+      { "name": "Baked Salmon & Kale Salad", "price": "1350 TL", "category": "Salatalar" },
+      { "name": "Arugula & Artichoke Hearts", "price": "1190 TL", "category": "Salatalar" }
+    ]
+  },
 };
