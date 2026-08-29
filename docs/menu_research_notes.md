@@ -4425,3 +4425,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6131 ; https://www.yemeksepeti.co
 ## VØLER COFFEE & BREAKFAST ID 6130 — HOLD
 Hentzer `Ataköy 7, 8. Kısım Mh, Palmiye Sk. Mimar Sinan Sitesi No: 2S L3 Blok Dükkan No:32, 34156 Bakırköy/İstanbul`, `+90 544 288 65 37`; European Coffee Trip, Asian Coffee Map, RestaurantGuru, Menu-tr ve resmi Facebook aynı exact şubeyi destekliyor. Resmi `volercoffee.com/menu` sayfası ürün adları/açıklamaları veriyor ancak fiyat göstermiyor; resmi fiyatlı ürün sayfası arama sonuçlarında 2020 tarihli. Son bir yılda 20+ fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6130 ; https://www.volercoffee.com/menu/ ; https://europeancoffeetrip.com/cafe/voler-istanbul/ ; https://restaurantguru.com/Voler-Coffee-Istanbul ; https://www.facebook.com/volercoffee/
+
+## DENİZ KIZI SOKAK MEYHANESİ ID 6129 — HOLD
+Hentzer `İstanbul Yakuplu Marmara Mahallesi Ulusum Caddesi 22/3 West Marina, 34520 Beylikdüzü/İstanbul`, `+90 552 302 90 40`; Restoranim ve RestaurantGuru aynı exact adres/telefonu destekliyor, 2026 tarihli güncel yorumlar mevcut. Ancak açık menü/fiyat listesi bulunamadı; 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6129 ; https://restoranim.net/istanbul/istanbul/bar/deniz-kizi-sokak-meyhanesi ; https://restaurantguru.com/Deniz-kizi-sokak-meyhanesi-Buyukcekmece ; https://www.instagram.com/denizkizi.kumsalistanbul/
