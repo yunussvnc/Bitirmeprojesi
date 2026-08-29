@@ -4429,3 +4429,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6130 ; https://www.volercoffee.co
 ## DENİZ KIZI SOKAK MEYHANESİ ID 6129 — HOLD
 Hentzer `İstanbul Yakuplu Marmara Mahallesi Ulusum Caddesi 22/3 West Marina, 34520 Beylikdüzü/İstanbul`, `+90 552 302 90 40`; Restoranim ve RestaurantGuru aynı exact adres/telefonu destekliyor, 2026 tarihli güncel yorumlar mevcut. Ancak açık menü/fiyat listesi bulunamadı; 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6129 ; https://restoranim.net/istanbul/istanbul/bar/deniz-kizi-sokak-meyhanesi ; https://restaurantguru.com/Deniz-kizi-sokak-meyhanesi-Buyukcekmece ; https://www.instagram.com/denizkizi.kumsalistanbul/
+
+## ZLATNO COFFEE ID 6128 — HOLD
+Hentzer `Yıldırım, Şht. Kamil Balkan Cd. No:19, 34254 Bayrampaşa/İstanbul`, `+90 534 778 43 34`. Zlatno resmi sitesi canlı fiyatlı çok sayıda ürün sunuyor ve Yandex telefonu exact eşleştiriyor; ancak Yandex exact adresi `Şht. Kamil Balkan Cd. No:19A` olarak veriyor. No:19 ile No:19A farkı strict adres paritesini bozduğu için, menü güncel olsa da override yazılmadı. **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6128 ; https://zlatno.co/ ; https://yandex.com.tr/maps/org/zlatno_coffee/227064463961/ ; https://restaurantguru.com/Zlatno-Coffee-Istanbul ; https://www.instagram.com/zlatnocoffee/
