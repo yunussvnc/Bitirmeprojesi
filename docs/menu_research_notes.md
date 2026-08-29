@@ -4397,3 +4397,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6138 ; https://www.itsumijp.com/i
 ## ASMAALTI KEBAP RESTAURANT ID 6137 — HOLD
 Hentzer `Teras Park AVM, Adnan Kahveci, Anadolu Cd. No30 D:2, 34520 Beylikdüzü/İstanbul`, `+90 538 775 42 21`. Resmi Asma Altı sitesi telefonu eşleştiriyor ancak adresi `Teras Park AVM, Adnan Kahveci Mah., Anadolu Cad. No:32 D:2` olarak veriyor; No:32 D:2, Hentzer No:30 D:2 ile 100% exact adres eşleşmesi değildir. Yemeksepeti `zute` arama kaydı 20+ güncel fiyatlı ürün gösterse de strict şube paritesi kurulamadı. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6137 ; https://asmaaltikebapcisi.com.tr/ ; https://restoranim.net/istanbul/beylikduzu/restoran/asmaalti-kebap-restaurant ; https://www.yemeksepeti.com/restaurant/zute/asmaalti-kebapcisi
+
+## BEŞİKTAŞ BARBAROS BALIKÇISI ID 6136 — HOLD
+Hentzer `Cihannüma, Salihefendi Sk. 6C D:1, 34353 Beşiktaş/İstanbul`, `+90 212 258 18 80`; Nasilbiryer, Meyhankoli, Yaka.la ve servis dizinleri aynı adres/telefonu destekliyor. RestaurantGuru menüsü 4 yıl önce eklenmiş/eski olarak işaretli; Yaka.la menü bilgisi yok. 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6136 ; https://restaurantguru.com/Besiktas-Barbaros-Balikcisi-Istanbul-4/menu ; https://www.meyhankoli.com/restoran/besiktas-barbaros-balikcisi-443 ; https://yaka.la/detail/istanbul/besiktas/besiktas-barbaros-balikcisi?uuid=a31a5392-9004-4137-a5ee-aa30dbff3e34
