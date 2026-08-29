@@ -4393,3 +4393,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6139 ; https://restoranim.net/ist
 ## ITSUMI ID 6138 — HOLD
 Hentzer `Levent, İş Kuleleri Kule 2 D:43, 34330 Beşiktaş/İstanbul`, `+90 212 264 64 48`. Resmi Itsumi Levent sayfası aynı İş Kuleleri Kule 2 Giriş kat No:43 adresini veriyor ancak güncel restoran telefonunu `0534 946 48 48` olarak yayımlıyor; resmi Instagram’da `0212 264 64 48` genel/paket servis telefonu geçiyor. Yemeksepeti `p30r` vendoru aynı İş Kuleleri No:43 şubesine ait ve 20+ güncel fiyatlı ürün gösteriyor. Adres güçlü eşleşse de telefon çelişkisi nedeniyle 100% exact telefon paritesi kurulamadı. **HOLD.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6138 ; https://www.itsumijp.com/itsumi-levent/ ; https://www.yemeksepeti.com/restaurant/p30r/itsumi ; https://www.instagram.com/itsumijapon/
+
+## ASMAALTI KEBAP RESTAURANT ID 6137 — HOLD
+Hentzer `Teras Park AVM, Adnan Kahveci, Anadolu Cd. No30 D:2, 34520 Beylikdüzü/İstanbul`, `+90 538 775 42 21`. Resmi Asma Altı sitesi telefonu eşleştiriyor ancak adresi `Teras Park AVM, Adnan Kahveci Mah., Anadolu Cad. No:32 D:2` olarak veriyor; No:32 D:2, Hentzer No:30 D:2 ile 100% exact adres eşleşmesi değildir. Yemeksepeti `zute` arama kaydı 20+ güncel fiyatlı ürün gösterse de strict şube paritesi kurulamadı. **HOLD.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6137 ; https://asmaaltikebapcisi.com.tr/ ; https://restoranim.net/istanbul/beylikduzu/restoran/asmaalti-kebap-restaurant ; https://www.yemeksepeti.com/restaurant/zute/asmaalti-kebapcisi
