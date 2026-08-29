@@ -4437,3 +4437,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6128 ; https://zlatno.co/ ; https
 ## GOLDENFINGERS BEYLİKDÜZÜ (KAVAKLI) ID 6127 — ACCEPTED (20 ürün)
 Hentzer `Kavaklı, Yeşilyurt Cd. H Blok No:17/2L, 34520 Beylikdüzü/İstanbul`, `+90 531 088 05 12`; resmi Kavaklı dijital menü exact adres ve telefonu yayımlıyor. Canlı Migros Yemek exact Kavaklı vendoru da aynı şubeyi gösteriyor ve güncel indirimli fiyatlı geniş menü sunuyor; Yemeksepeti `rm6g` adresi `Kavaklı Mahallesi Yeşilyurt Cad H Blok 17/2L Zemin Kat / Demir Country yanı` olarak doğruluyor ve 2026 tarihli yorumlar içeriyor. 20 benzersiz smash burger ürünü eklendi; fiyatlar 2026-08-29 tarihinde doğrulandı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6127 ; https://goldenfingerskavakli.dijital.menu/50303 ; https://www.migros.com.tr/yemek/goldenfingers-burger-cheesesteak-beylikduzu-kavakli-mah-st-336ee ; https://www.yemeksepeti.com/restaurant/rm6g/goldenfingers-burger-and-cheesesteak-rm6g
+
+## DİLMAN KEBAP & LAHMACUN ID 6126 — HOLD
+Hentzer `Katip Mustafa Çelebi Mahallesi, Çukurlu Çeşme Sk. No:8, 34433 Beyoğlu/İstanbul`, `+90 212 244 55 30`; Restoranim ve RestaurantGuru aynı exact adres/telefonu destekliyor, 2026 tarihli güncel yorumlar mevcut. Ancak açık menüde ürün bazlı fiyat listesi bulunamadı; son bir yılda 20+ fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6126 ; https://restoranim.net/istanbul/beyoglu/restoran/dilman-kebap-lahmacun ; https://ru.restaurantguru.com/Kolcuoglu-Kebap-Beyoglu-Istanbul
