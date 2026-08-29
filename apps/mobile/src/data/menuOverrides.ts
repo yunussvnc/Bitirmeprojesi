@@ -94118,4 +94118,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Patlıcan Beğendili Izgara Köfte", "price": "495 TL", "category": "Etli Yemekler" }
     ]
   },
+  "6131": {
+    "name": "VATRA CAFE RESTAURANT",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/xf9d/vatra-cafe-and-restaurant",
+    "sourceName": "Canlı Yemeksepeti exact Başakşehir A26-A27 şubesi; Nasilbiryer/RestaurantGuru ve resmi sosyal paylaşımlarla adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-29",
+    "items": [
+      { "name": "Izgara Köfte", "price": "350 TL", "category": "Izgaralar" },
+      { "name": "Karışık Izgara Köfte", "price": "400 TL", "category": "Izgaralar" },
+      { "name": "Kaşarlı Köfte (120-140 gr.)", "price": "350 TL", "category": "Izgaralar" },
+      { "name": "Karışık Izgara Tabağı", "price": "550 TL", "category": "Izgaralar" },
+      { "name": "4 Peynirli Pizza", "price": "320 TL", "category": "Pizzalar" },
+      { "name": "Margarita Pizza", "price": "275 TL", "category": "Pizzalar" },
+      { "name": "İtalyan İşi Pizza", "price": "330 TL", "category": "Pizzalar" },
+      { "name": "Türk Usulü Pizza", "price": "330 TL", "category": "Pizzalar" },
+      { "name": "Tonno Pizza", "price": "310 TL", "category": "Pizzalar" },
+      { "name": "Vatra Special Pizza", "price": "350 TL", "category": "Pizzalar" },
+      { "name": "Vatra Köfte Pizza", "price": "330 TL", "category": "Pizzalar" },
+      { "name": "Meksika Dalgası Pizza", "price": "320 TL", "category": "Pizzalar" },
+      { "name": "Akdeniz Esintisi Pizza", "price": "290 TL", "category": "Pizzalar" },
+      { "name": "Barbekü Tavuklu Pizza", "price": "320 TL", "category": "Pizzalar" },
+      { "name": "Çift Katlı Özel İtalyan Pizza", "price": "390 TL", "category": "Pizzalar" },
+      { "name": "Köri Soslu Tavuk", "price": "350 TL", "category": "Tavuklar" },
+      { "name": "Soya Soslu Tavuk", "price": "350 TL", "category": "Tavuklar" },
+      { "name": "Barbekü Soslu Tavuk", "price": "350 TL", "category": "Tavuklar" },
+      { "name": "Meksika Usulü Tavuk", "price": "350 TL", "category": "Tavuklar" },
+      { "name": "Schnitzel", "price": "320 TL", "category": "Tavuklar" }
+    ]
+  },
 };
