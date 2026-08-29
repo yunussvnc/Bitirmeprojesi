@@ -4409,3 +4409,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6135 ; https://fr.restaurantguru.
 ## ALİÇO MEYHANE ID 6134 — HOLD
 Hentzer `Cihannüma, Salihefendi Sk. 8A, 34353 Beşiktaş/İstanbul`, `+90 552 632 25 29`; resmi alicomeyhane.com arama/iletişim kayıtları aynı adres ve WhatsApp telefonunu doğruluyor. Resmi site şu anda Plesk kullanıcı/şifre ekranı döndürüyor; menü sayfasından erişilebilir fiyat listesi alınamadı. Meyhankoli’de yalnızca yorumlar bulunuyor. 20+ son bir yıl fiyatlı ürün doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6134 ; http://www.alicomeyhane.com/ ; http://www.alicomeyhane.com/iletisim ; https://www.meyhankoli.com/restoran/alico-meyhane-7363
+
+## HEYBE PASTANELERİ ID 6133 — HOLD
+Hentzer `Muratpaşa, Kamil Cd. No:157, 34040 Bayrampaşa/İstanbul`, `+90 212 418 45 06`; Yandex ve Facebook kaydı bu exact adres/telefonu destekliyor. Heybe’nin canlı dijital menüsü 20+ fiyatlı ürün içeriyor, ancak resmi `heybepastacafe.com` ana sayfası/arama kaydı menüyü `Kocatepe, Kocatepe Cd. No:39, 34045 Bayrampaşa` ve `0212 640 50 37` olarak tanımlıyor; Instagram da “başka şubemiz yoktur” diyor. Menü Hentzer’deki Muratpaşa şubesine exact olarak bağlanamadığı için branch parity ihlali riski nedeniyle **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6133 ; https://yandex.com.tr/maps/org/heybe_pastaneleri/194554513406/ ; https://www.facebook.com/100063441176502/ ; https://www.heybepastacafe.com/ ; http://www.heybepastacafe.com/menu ; https://www.instagram.com/heybepastacafe/
