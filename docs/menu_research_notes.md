@@ -4401,3 +4401,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6137 ; https://asmaaltikebapcisi.
 ## BEŞİKTAŞ BARBAROS BALIKÇISI ID 6136 — HOLD
 Hentzer `Cihannüma, Salihefendi Sk. 6C D:1, 34353 Beşiktaş/İstanbul`, `+90 212 258 18 80`; Nasilbiryer, Meyhankoli, Yaka.la ve servis dizinleri aynı adres/telefonu destekliyor. RestaurantGuru menüsü 4 yıl önce eklenmiş/eski olarak işaretli; Yaka.la menü bilgisi yok. 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6136 ; https://restaurantguru.com/Besiktas-Barbaros-Balikcisi-Istanbul-4/menu ; https://www.meyhankoli.com/restoran/besiktas-barbaros-balikcisi-443 ; https://yaka.la/detail/istanbul/besiktas/besiktas-barbaros-balikcisi?uuid=a31a5392-9004-4137-a5ee-aa30dbff3e34
+
+## TATLI KRİZİ WAFFLE ID 6135 — HOLD
+Hentzer `Yıldırım, Millet Cd. No 77/A, 34045 Bayrampaşa/İstanbul`, `+90 212 479 74 71`; RestaurantGuru/Yandex exact işletme kaydını adres ve telefonla destekliyor. Yemeksepeti `Waffle Tatlı Krizi` kaydında güncel görünen yalnızca 6 waffle ve 2 içecek var; exact şube adres/telefonu sayfada doğrulanamadı ve toplam 20+ ürün bulunmuyor. Benzer isimli diğer şubeler/işletmeler branch parity nedeniyle kullanılmadı. **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6135 ; https://fr.restaurantguru.com/Tatli-Krizi-Waffle-Istanbul ; https://yandex.com.tr/maps/org/tatli_krizi_waffle/182274383140/ ; https://www.yemeksepeti.com/restaurant/s1uh/waffle-tatli-krizi
