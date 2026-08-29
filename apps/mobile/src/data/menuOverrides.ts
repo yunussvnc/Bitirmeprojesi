@@ -94062,6 +94062,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Karışık Kebap (2 Kişilik)", "price": "2.900 TL", "category": "Kebaplar" }
     ]
   },
+  "6139": {
+    "name": "GOLDEN BURGER",
+    "sourceUrl": "https://www.migros.com.tr/yemek/golden-burger-beylikduzu-adnan-kahveci-mah-st-3305f",
+    "sourceName": "Canlı Migros Yemek Golden Burger Adnan Kahveci vendoru; Restoranim exact Anadolu Cd., Buse Sk. şube ve telefon paritesi",
+    "verifiedAt": "2026-08-29",
+    "items": [
+      { "name": "Golden Burger Menü", "price": "895 TL", "category": "Menüler" },
+      { "name": "Golden Burger Chicken Menü", "price": "795 TL", "category": "Menüler" },
+      { "name": "Nugget Burger", "price": "275 TL", "category": "Burgerler" },
+      { "name": "Et Hamburger (150 G)", "price": "465 TL", "category": "Burgerler" },
+      { "name": "Hamburger Chicken (150 G)", "price": "550 TL", "category": "Burgerler" },
+      { "name": "Joppies Et Burger (150 G)", "price": "525 TL", "category": "Burgerler" },
+      { "name": "Joppies Chicken Burger (150 G)", "price": "625 TL", "category": "Burgerler" },
+      { "name": "Cheeseburger Et (150 G)", "price": "525 TL", "category": "Burgerler" },
+      { "name": "Cheese Chicken Burger (150 G)", "price": "555 TL", "category": "Burgerler" },
+      { "name": "Chili Cheeseburger Et (150 G)", "price": "725 TL", "category": "Burgerler" },
+      { "name": "Chili Cheese Chicken Burger (150 G)", "price": "530 TL", "category": "Burgerler" },
+      { "name": "Italian Et Burger (150 G)", "price": "575 TL", "category": "Burgerler" },
+      { "name": "Italian Chicken Burger (150 G)", "price": "550 TL", "category": "Burgerler" },
+      { "name": "El Turco Et Burger (150 G)", "price": "555 TL", "category": "Burgerler" },
+      { "name": "El Turco Chicken Burger (150 G)", "price": "550 TL", "category": "Burgerler" },
+      { "name": "Avocado Et Burger (150 G)", "price": "595 TL", "category": "Burgerler" },
+      { "name": "Hollandaise Et Burger (150 G)", "price": "595 TL", "category": "Burgerler" },
+      { "name": "Hollandaise Chicken Burger (150 G)", "price": "550 TL", "category": "Burgerler" },
+      { "name": "Mexican Et Burger (150 G)", "price": "595 TL", "category": "Burgerler" },
+      { "name": "Mexican Chicken Burger (150 G)", "price": "550 TL", "category": "Burgerler" }
+    ]
+  },
   "6164": {
     "name": "ADİLE SULTAN EV YEMEKLERİ - BAYRAMPAŞA",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/og6z/adile-sultan-ev-yemekleri-og6z",
