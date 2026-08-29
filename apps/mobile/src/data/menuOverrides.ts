@@ -94202,4 +94202,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Arugula & Artichoke Hearts", "price": "1190 TL", "category": "Salatalar" }
     ]
   },
+  "6122": {
+    "name": "TUĞRA RESTAURANT",
+    "sourceUrl": "https://menufiyatlar.com/2211-tugra-restaurant-menu-fiyatlari",
+    "sourceName": "2026 Tuğra fiyat listesi; resmi Kempinski/Tuğra sayfaları ile exact Çırağan Palace şubesi ve telefon doğrulaması",
+    "verifiedAt": "2026-08-29",
+    "items": [
+      { "name": "Çeşm-i Nigâr Çorbası", "price": "970 TL", "category": "Başlangıçlar" },
+      { "name": "Kelle Söğüş", "price": "2300 TL", "category": "Başlangıçlar" },
+      { "name": "Tuğra Meze Tabağı", "price": "2800 TL", "category": "Başlangıçlar" },
+      { "name": "Lakerda", "price": "1450 TL", "category": "Başlangıçlar" },
+      { "name": "Anadolu Peynir Aynası", "price": "1750 TL", "category": "Başlangıçlar" },
+      { "name": "Bostana Salatası", "price": "1350 TL", "category": "Başlangıçlar" },
+      { "name": "Yazok Etli Börek", "price": "1600 TL", "category": "Başlangıçlar" },
+      { "name": "Yaprak Dana Ciğer (100 gr)", "price": "1650 TL", "category": "Başlangıçlar" },
+      { "name": "Kesme Mantı", "price": "1900 TL", "category": "Başlangıçlar" },
+      { "name": "Zemher-i Lahana", "price": "1200 TL", "category": "Başlangıçlar" },
+      { "name": "Hünkâr Beğendi 2.0 (220 gr)", "price": "3950 TL", "category": "Ana Yemekler" },
+      { "name": "Yorumumuzla Piliç Topkapı", "price": "3200 TL", "category": "Ana Yemekler" },
+      { "name": "Kuzu İncik (400 gr)", "price": "4200 TL", "category": "Ana Yemekler" },
+      { "name": "Düve Bonfile (160 gr)", "price": "4600 TL", "category": "Ana Yemekler" },
+      { "name": "Testi Kebabı (140 gr)", "price": "4250 TL", "category": "Ana Yemekler" },
+      { "name": "Karadeniz Kalkan (400 gr)", "price": "4500 TL", "category": "Ana Yemekler" },
+      { "name": "T’ürlü", "price": "2600 TL", "category": "Ana Yemekler" },
+      { "name": "Kuzu Külbastı", "price": "3600 TL", "category": "Ana Yemekler" },
+      { "name": "Ördek Tandır", "price": "3800 TL", "category": "Ana Yemekler" },
+      { "name": "Dana İncik", "price": "3400 TL", "category": "Ana Yemekler" }
+    ]
+  },
 };
