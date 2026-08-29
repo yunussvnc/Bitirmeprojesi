@@ -94146,4 +94146,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Schnitzel", "price": "320 TL", "category": "Tavuklar" }
     ]
   },
+  "6127": {
+    "name": "GOLDENFINGERS BEYLİKDÜZÜ (KAVAKLI)",
+    "sourceUrl": "https://goldenfingerskavakli.dijital.menu/50303",
+    "sourceName": "Resmi Goldenfingers Kavaklı dijital menüsü; Migros Yemek exact Kavaklı vendoru ile adres ve fiyat doğrulaması",
+    "verifiedAt": "2026-08-29",
+    "items": [
+      { "name": "Chicken Burger", "price": "458,93 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. Chicken Burger", "price": "384,90 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. Louisiana Chicken Burger", "price": "388,88 TL", "category": "Smash Burgerler" },
+      { "name": "Louisiana Chicken Burger", "price": "548,93 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. Trüflü Chicken Burger", "price": "404,93 TL", "category": "Smash Burgerler" },
+      { "name": "Trüffle Chicken Burger", "price": "464,93 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. Rockn Fight Chicken Burger", "price": "408,90 TL", "category": "Smash Burgerler" },
+      { "name": "Rock'n Fight Chicken Burger", "price": "468,90 TL", "category": "Smash Burgerler" },
+      { "name": "Cheeseburger", "price": "554,93 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. Cheeseburger", "price": "444,90 TL", "category": "Smash Burgerler" },
+      { "name": "Truffled Cheeseburger", "price": "566,37 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. Bbq Cheeseburger", "price": "448,88 TL", "category": "Smash Burgerler" },
+      { "name": "Bbq Cheeseburger", "price": "548,93 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. American Classic Burger", "price": "454,88 TL", "category": "Smash Burgerler" },
+      { "name": "American Classic Burger", "price": "558,90 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. American Classic Bbq Burger", "price": "458,93 TL", "category": "Smash Burgerler" },
+      { "name": "American Classic Bbq Burger", "price": "658,88 TL", "category": "Smash Burgerler" },
+      { "name": "Jr. Badass Cheeseburger", "price": "464,93 TL", "category": "Smash Burgerler" },
+      { "name": "Badass Cheeseburger", "price": "664,88 TL", "category": "Smash Burgerler" },
+      { "name": "Oklahoma Onion Burger", "price": "588,90 TL", "category": "Smash Burgerler" }
+    ]
+  },
 };
