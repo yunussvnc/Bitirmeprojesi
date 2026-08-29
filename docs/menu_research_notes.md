@@ -4445,3 +4445,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6126 ; https://restoranim.net/ist
 ## CAFE BEYBÛN ID 6125 — HOLD
 Hentzer `Şehit Muhtar, Nane Sk. No:5, 34435 Beyoğlu/İstanbul`, `+90 212 243 27 10`; RestaurantGuru, Facebook ve Cybo aynı exact adres/telefonu destekliyor. RestaurantGuru menü sürümleri kullanıcı yüklemesi olarak 2 yıl önce ve işletme yüklemesi olarak 4 yıl önce; güncel fiyatlı ürün listesi bulunamadı. Son bir yılda 20+ fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6125 ; https://restaurantguru.com/Cafe-Beybun-Istanbul ; https://fr.restaurantguru.com/amp/Cafe-Beybun-Istanbul/menu ; https://www.facebook.com/100047287016659/
+
+## MELEKLER OCAKBAŞI ID 6124 — HOLD
+Hentzer `Katip Mustafa Çelebi, İpek Sk. No:13/A, 34433 Beyoğlu/İstanbul`, `+90 212 243 05 85`; Wanderboat, RestaurantGuru ve Bulurum adres/telefonu destekliyor. RestaurantGuru menüsü exact şubeyi listelese de fiyatlar 1–22 seviyesinde ve menü güncelleme tarihi belirtilmiyor; bu nedenle güncel oldukları doğrulanamadı. Son bir yılda 20+ fiyatlı ürün bulunamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6124 ; https://restaurantguru.com/Melekler-Ocakbasi-Istanbul/menu ; https://wanderboat.ai/restaurants/turkey/beyo%C4%9Flu/melekler-ocakbasi/a73RHdi0TOuO0EGjMciakA ; https://www.bulurum.com/details/3hce4f6i2b_g0h444bcj01_2133f4g_e
