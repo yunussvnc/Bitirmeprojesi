@@ -4405,3 +4405,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6136 ; https://restaurantguru.com
 ## TATLI KRİZİ WAFFLE ID 6135 — HOLD
 Hentzer `Yıldırım, Millet Cd. No 77/A, 34045 Bayrampaşa/İstanbul`, `+90 212 479 74 71`; RestaurantGuru/Yandex exact işletme kaydını adres ve telefonla destekliyor. Yemeksepeti `Waffle Tatlı Krizi` kaydında güncel görünen yalnızca 6 waffle ve 2 içecek var; exact şube adres/telefonu sayfada doğrulanamadı ve toplam 20+ ürün bulunmuyor. Benzer isimli diğer şubeler/işletmeler branch parity nedeniyle kullanılmadı. **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6135 ; https://fr.restaurantguru.com/Tatli-Krizi-Waffle-Istanbul ; https://yandex.com.tr/maps/org/tatli_krizi_waffle/182274383140/ ; https://www.yemeksepeti.com/restaurant/s1uh/waffle-tatli-krizi
+
+## ALİÇO MEYHANE ID 6134 — HOLD
+Hentzer `Cihannüma, Salihefendi Sk. 8A, 34353 Beşiktaş/İstanbul`, `+90 552 632 25 29`; resmi alicomeyhane.com arama/iletişim kayıtları aynı adres ve WhatsApp telefonunu doğruluyor. Resmi site şu anda Plesk kullanıcı/şifre ekranı döndürüyor; menü sayfasından erişilebilir fiyat listesi alınamadı. Meyhankoli’de yalnızca yorumlar bulunuyor. 20+ son bir yıl fiyatlı ürün doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6134 ; http://www.alicomeyhane.com/ ; http://www.alicomeyhane.com/iletisim ; https://www.meyhankoli.com/restoran/alico-meyhane-7363
