@@ -4441,3 +4441,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6127 ; https://goldenfingerskavak
 ## DİLMAN KEBAP & LAHMACUN ID 6126 — HOLD
 Hentzer `Katip Mustafa Çelebi Mahallesi, Çukurlu Çeşme Sk. No:8, 34433 Beyoğlu/İstanbul`, `+90 212 244 55 30`; Restoranim ve RestaurantGuru aynı exact adres/telefonu destekliyor, 2026 tarihli güncel yorumlar mevcut. Ancak açık menüde ürün bazlı fiyat listesi bulunamadı; son bir yılda 20+ fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6126 ; https://restoranim.net/istanbul/beyoglu/restoran/dilman-kebap-lahmacun ; https://ru.restaurantguru.com/Kolcuoglu-Kebap-Beyoglu-Istanbul
+
+## CAFE BEYBÛN ID 6125 — HOLD
+Hentzer `Şehit Muhtar, Nane Sk. No:5, 34435 Beyoğlu/İstanbul`, `+90 212 243 27 10`; RestaurantGuru, Facebook ve Cybo aynı exact adres/telefonu destekliyor. RestaurantGuru menü sürümleri kullanıcı yüklemesi olarak 2 yıl önce ve işletme yüklemesi olarak 4 yıl önce; güncel fiyatlı ürün listesi bulunamadı. Son bir yılda 20+ fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6125 ; https://restaurantguru.com/Cafe-Beybun-Istanbul ; https://fr.restaurantguru.com/amp/Cafe-Beybun-Istanbul/menu ; https://www.facebook.com/100047287016659/
