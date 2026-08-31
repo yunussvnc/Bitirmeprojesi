@@ -4473,3 +4473,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6119 ; https://restoranim.net/ist
 ## AKALI MAÇKA ID 6118 — ACCEPTED (20 ürün)
 Hentzer `Vişnezade, Dibekçi Sk. No:11, 34357 Beşiktaş/İstanbul`, `+90 212 227 42 42`; Akali resmi şubeler sayfası Maçka adresini exact yayımlıyor, resmi Akali menü sayfası da +90 212 227 4242 iletişim bilgisini veriyor. Resmi menüde fiyatların 12/01/2026 itibarıyla geçerli ve KDV dahil olduğu belirtiliyor. 6 burger ve 14 sos olmak üzere 20 benzersiz fiyatlı gıda ürünü eklendi; içecekler kapsam dışında bırakıldı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6118 ; https://akalipub.squarespace.com/subeler ; https://www.akali.co/en/menu ; https://menuharitasi.com/menu/akali-burger-besiktas
+
+## ARCA BURGER ID 6117 — HOLD
+Hentzer `Sinanpaşa, Köşeli Sk. No:3, 34353 Beşiktaş/İstanbul`, `+90 530 675 95 13`; İşletmeleribul ve Servis Adres Bul exact adres/telefonu destekliyor. Yemeksepeti exact Köşeli Sk. 3 vendorunda 5 burger, 4 yan ürün ve 6 içecek fiyatlı; poşet gıda dışı olduğu için kapsam dışı. Toplam 15 kullanılabilir ürünle minimum 20 şartı sağlanamadı. Son bir yılda 20+ fiyatlı ürün doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6117 ; https://www.yemeksepeti.com/restaurant/sr64/arca-burger-sr64 ; https://isletmeleribul.com.tr/istanbul/besiktas/fast-food/arca-burger-6zeibh.html ; https://servisadresbul.com/firma/1/arca-burger-besiktas/index.html
