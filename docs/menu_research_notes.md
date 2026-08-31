@@ -4469,3 +4469,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6120 ; https://webmenu.pardonapp.
 ## KAFUL ÇAY KAHVE ID 6119 — HOLD
 Hentzer `Sinanpaşa, Aşık Garip Sk., 34022 Beşiktaş/İstanbul`, `+90 555 879 61 61`; Restoranim, İstanbul Mekan Rehberi ve RestaurantGuru aynı işletme/telefonu destekliyor. Güncel 2026 yorumlarında pizza, tatlı ve içeceklerden söz edilse de açık kaynaklarda ürün bazlı fiyat menüsü yok; son bir yılda 20+ fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6119 ; https://restoranim.net/istanbul/besiktas/kafe/kaful-cay-kahve ; https://istanbulmekanrehberi.com/m/cafe/kaful-cay-kahve ; https://restaurantguru.com/Kaful-CayandKahve-Istanbul
+
+## AKALI MAÇKA ID 6118 — ACCEPTED (20 ürün)
+Hentzer `Vişnezade, Dibekçi Sk. No:11, 34357 Beşiktaş/İstanbul`, `+90 212 227 42 42`; Akali resmi şubeler sayfası Maçka adresini exact yayımlıyor, resmi Akali menü sayfası da +90 212 227 4242 iletişim bilgisini veriyor. Resmi menüde fiyatların 12/01/2026 itibarıyla geçerli ve KDV dahil olduğu belirtiliyor. 6 burger ve 14 sos olmak üzere 20 benzersiz fiyatlı gıda ürünü eklendi; içecekler kapsam dışında bırakıldı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6118 ; https://akalipub.squarespace.com/subeler ; https://www.akali.co/en/menu ; https://menuharitasi.com/menu/akali-burger-besiktas

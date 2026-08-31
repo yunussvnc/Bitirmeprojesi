@@ -94230,4 +94230,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Dana İncik", "price": "3400 TL", "category": "Ana Yemekler" }
     ]
   },
+  "6118": {
+    "name": "AKALI MAÇKA",
+    "sourceUrl": "https://www.akali.co/en/menu",
+    "sourceName": "Akali resmi güncel menüsü; resmi şubeler sayfası ile Maçka adresi ve resmi menü iletişim bilgisi ile telefon doğrulaması",
+    "verifiedAt": "2026-08-31",
+    "items": [
+      { "name": "Akali 80", "price": "509 TL", "category": "Burger" },
+      { "name": "Akali 160", "price": "699 TL", "category": "Burger" },
+      { "name": "Akali 240", "price": "979 TL", "category": "Burger" },
+      { "name": "Veggie 80", "price": "509 TL", "category": "Burger" },
+      { "name": "Veggie 160", "price": "699 TL", "category": "Burger" },
+      { "name": "Veggie 240", "price": "979 TL", "category": "Burger" },
+      { "name": "Avocado Cream", "price": "159 TL", "category": "Soslar" },
+      { "name": "Pineapple Holika", "price": "139 TL", "category": "Soslar" },
+      { "name": "Jalapeno Mash", "price": "159 TL", "category": "Soslar" },
+      { "name": "Eggplant Remoulade", "price": "119 TL", "category": "Soslar" },
+      { "name": "Benji", "price": "119 TL", "category": "Soslar" },
+      { "name": "Garlic Blue Cheese", "price": "179 TL", "category": "Soslar" },
+      { "name": "Caramelized Onion", "price": "139 TL", "category": "Soslar" },
+      { "name": "Jack BBQ", "price": "159 TL", "category": "Soslar" },
+      { "name": "Truf Salsa", "price": "139 TL", "category": "Soslar" },
+      { "name": "Truffalgar", "price": "179 TL", "category": "Soslar" },
+      { "name": "#babaneyiycez Hot Cream", "price": "139 TL", "category": "Soslar" },
+      { "name": "Mushroom Padano", "price": "119 TL", "category": "Soslar" },
+      { "name": "Peanut Creole", "price": "160 TL", "category": "Soslar" },
+      { "name": "Sauce Tasting", "price": "249 TL", "category": "Soslar" }
+    ]
+  },
 };
