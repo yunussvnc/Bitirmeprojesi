@@ -4465,3 +4465,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6121 ; https://mekanlar.com/mekan
 ## PEPO'S GALATA ID 6120 — HOLD
 Hentzer `Bereketzade, Camekan Sk. No:1/D, 34421 Beyoğlu/İstanbul`, `+90 212 245 16 96`; Tripadvisor, Mindtrip, Facebook ve Pardon exact şubeyi/telefonu destekliyor. Pardon dijital menüsü Copyright 2026 ve 20’den fazla ana yemek ürünü gösteriyor; ancak ürün kartlarında fiyatlar görünmüyor. Wheree/RestaurantGuru kaynakları da fiyat listesini güncel ve ürün bazında doğrulamıyor. Son bir yılda 20+ fiyatlı ürün doğrulanamadığı için override yazılmadı, **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6120 ; https://webmenu.pardonapp.co/pepos-galata ; https://webmenu.pardonapp.co/pepos-galata/menu/ana-yemekler ; https://www.tripadvisor.com/Restaurant_Review-g293974-d23694493-Reviews-Pepo_s_Galata-Istanbul.html ; https://www.facebook.com/peposgalata/
+
+## KAFUL ÇAY KAHVE ID 6119 — HOLD
+Hentzer `Sinanpaşa, Aşık Garip Sk., 34022 Beşiktaş/İstanbul`, `+90 555 879 61 61`; Restoranim, İstanbul Mekan Rehberi ve RestaurantGuru aynı işletme/telefonu destekliyor. Güncel 2026 yorumlarında pizza, tatlı ve içeceklerden söz edilse de açık kaynaklarda ürün bazlı fiyat menüsü yok; son bir yılda 20+ fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6119 ; https://restoranim.net/istanbul/besiktas/kafe/kaful-cay-kahve ; https://istanbulmekanrehberi.com/m/cafe/kaful-cay-kahve ; https://restaurantguru.com/Kaful-CayandKahve-Istanbul
