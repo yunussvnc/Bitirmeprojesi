@@ -94258,4 +94258,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sauce Tasting", "price": "249 TL", "category": "Soslar" }
     ]
   },
+  "6116": {
+    "name": "BEYKENT SARAY | SAC TAVA & KEBAP",
+    "sourceUrl": "https://beykentsaraysactava.com/wp-content/uploads/2026/05/MENU-MAYIS-2026.pdf",
+    "sourceName": "Beykent Saray resmi Mayıs 2026 menüsü; resmi iletişim sayfası ve Yemeksepeti ile exact şube adresi-telefon doğrulaması",
+    "verifiedAt": "2026-08-31",
+    "items": [
+      { "name": "Saray Sac Tava", "price": "850 TL", "category": "Özel Ana Yemekler" },
+      { "name": "Dana Sac Tava", "price": "850 TL", "category": "Özel Ana Yemekler" },
+      { "name": "Kaşarlı Sac Tava", "price": "900 TL", "category": "Özel Ana Yemekler" },
+      { "name": "Izgara Köfte", "price": "620 TL", "category": "Köfteler" },
+      { "name": "Kaşarlı Köfte", "price": "680 TL", "category": "Köfteler" },
+      { "name": "Yarım Ekmek Köfte", "price": "450 TL", "category": "Köfteler" },
+      { "name": "Adana Kebap", "price": "680 TL", "category": "Kebaplar" },
+      { "name": "Urfa Kebap", "price": "680 TL", "category": "Kebaplar" },
+      { "name": "Kuzu Şiş", "price": "850 TL", "category": "Kebaplar" },
+      { "name": "Çöp Şiş", "price": "850 TL", "category": "Kebaplar" },
+      { "name": "Kuzu Ciğer Şiş", "price": "700 TL", "category": "Kebaplar" },
+      { "name": "Domatesli Kebap", "price": "750 TL", "category": "Kebaplar" },
+      { "name": "Patlıcanlı Kebap", "price": "750 TL", "category": "Kebaplar" },
+      { "name": "Fıstıklı Kebap", "price": "800 TL", "category": "Kebaplar" },
+      { "name": "Alinazik Şişten", "price": "850 TL", "category": "Kebaplar" },
+      { "name": "Alinazik Kıymadan", "price": "850 TL", "category": "Kebaplar" },
+      { "name": "Beyti", "price": "700 TL", "category": "Beyti Çeşitleri" },
+      { "name": "Sarma Beyti", "price": "730 TL", "category": "Beyti Çeşitleri" },
+      { "name": "Fırın Beyti", "price": "730 TL", "category": "Beyti Çeşitleri" },
+      { "name": "Kaşarlı Sarma Beyti", "price": "780 TL", "category": "Beyti Çeşitleri" }
+    ]
+  },
 };
