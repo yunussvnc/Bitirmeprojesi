@@ -4489,3 +4489,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6115 ; https://restoranim.net/ist
 ## KEVOK OCAKBAŞI ID 6114 — HOLD
 Hentzer `Kamer Hatun, Meşrutiyet Cd. No:38, 34435 Beyoğlu/İstanbul`, `+90 534 928 21 21`; Yandex, Corner, Instagram ve Nerdeler exact işletme/adres/telefon paritesini destekliyor. Instagram resmi profilinde menü ve rezervasyon için WhatsApp’a yönlendirme var. RestaurantGuru’da menü görselleri mevcut olsa da kullanıcı eklemeli ve fiyatların güncellik tarihi/son bir yıl doğrulaması güvenilir değil; bu nedenle 20+ güncel fiyatlı gıda ürünü doğrulanamadı ve **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6114 ; https://www.instagram.com/kevokocakbasi/?hl=en ; https://restaurantguru.com/Kevok-Ocakbasi-Istanbul/menu ; https://www.nerdeler.com.tr/kevok-ocakbasi
+
+## KOL KÖFTE TARİHİ SOFRAM RESTAURANT ID 6113 — HOLD
+Hentzer `Altıntepsi, Malazgirt Sk. No:18 D:1a, 34035 Bayrampaşa/İstanbul`, `+90 212 613 98 54`; Restoranim, NasıI Bir Yer, Mekanlar ve RestaurantGuru exact adres/telefonu destekliyor. RestaurantGuru’da bir ay önce kullanıcı tarafından eklenmiş menü görünse de ürün/fiyat içeriği açık erişimde doğrulanamadı ve güncellik/şube fiyat geçerliliği güvencelemiyor. 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6113 ; https://restoranim.net/istanbul/bayrampasa/kofteci/kol-kofte-tarihi-sofram-restaurant ; https://restaurantguru.com/Sofram-Restaurant-Fethi-Babanin-Yeri-Istanbul/menu ; https://nasilbiryer.com.tr/yerler/kol-kofte-tarihi-sofram-restaurant/
