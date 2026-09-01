@@ -94342,4 +94342,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Ninda Bakeshop Kruton / 125 Gr", "price": "265 TL", "category": "Paketli Ürünler" }
     ]
   },
+  "6108": {
+    "name": "PİDE MİDE",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pide-mide-beylikduzu-cumhuriyet-mah-st-19b0f",
+    "sourceName": "Migros Yemek canlı menüsü; Mekanlar exact şube ve Hentzer adres/telefon doğrulaması",
+    "verifiedAt": "2026-09-01",
+    "items": [
+      { "name": "Kıymalı Pide Menü", "price": "430 TL", "category": "Menüler" },
+      { "name": "Patatesli Pide Menü", "price": "400 TL", "category": "Menüler" },
+      { "name": "Ispanaklı Kaşarlı Pide Menü", "price": "400 TL", "category": "Menüler" },
+      { "name": "5'li Lahmacun Menü", "price": "900 TL", "category": "Menüler" },
+      { "name": "3'lü Lahmacun Menü", "price": "520 TL", "category": "Menüler" },
+      { "name": "Ezogelin Çorbası", "price": "120 TL", "category": "Çorbalar" },
+      { "name": "Lahmacun", "price": "150 TL", "category": "Fırın Ürünleri" },
+      { "name": "Zengin İşi Pide", "price": "400 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Lahmacun", "price": "170 TL", "category": "Fırın Ürünleri" },
+      { "name": "Antep Lahmacun", "price": "180 TL", "category": "Fırın Ürünleri" },
+      { "name": "Vejetaryen Pide", "price": "280 TL", "category": "Fırın Ürünleri" },
+      { "name": "Patatesli Kaşarlı Pide", "price": "200 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Pide", "price": "250 TL", "category": "Fırın Ürünleri" },
+      { "name": "Ispanaklı Kaşarlı Pide", "price": "200 TL", "category": "Fırın Ürünleri" },
+      { "name": "Beyaz Peynirli Pide", "price": "280 TL", "category": "Fırın Ürünleri" },
+      { "name": "Mantarlı Kaşarlı Pide", "price": "250 TL", "category": "Fırın Ürünleri" },
+      { "name": "Tavuklu Kaşarlı Pide", "price": "280 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sucuklu Kaşarlı Pide", "price": "280 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Pide", "price": "280 TL", "category": "Fırın Ürünleri" },
+      { "name": "Beyaz Peynirli Zeytinli Pide", "price": "280 TL", "category": "Fırın Ürünleri" }
+    ]
+  },
 };

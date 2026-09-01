@@ -4509,3 +4509,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6110 ; https://restoranim.net/ist
 ## PELİN'İN EKMEĞİ ID 6109 — ACCEPTED (20 ürün)
 Hentzer `Kültür, Suna Sk. No:56, 34340 Beşiktaş/İstanbul`, `+90 212 358 58 77`; işletmenin resmî iletişim sayfası aynı adres ve telefonu yayımlıyor. Resmî online satış sayfasında güncel ürün bazlı fiyatlar bulundu; 20 benzersiz ekşi mayalı ekmek, glutensiz ürün ve paketli gıda ürünü eklendi. Askıda bağış ürünü ve tekrar eden ürünler dışlandı. Yemeksepeti exact Suna Sk. No:56 vendoru 2026 tarihli canlı yorumlarla destekliyor.
 Kaynaklar: https://pelininekmegi.com/iletisim/ ; https://pelininekmegi.com/online-satis/ ; https://www.yemeksepeti.com/en/restaurant/wn0h/pelinin-ekmegi ; https://api.asemos.tr/api/v1/places/6109
+
+## PİDE MİDE ID 6108 — ACCEPTED (20 ürün)
+Hentzer `Demir Romance Residans, Cumhuriyet, Fedakar Sk. No:11, 34520 Beylikdüzü/İstanbul`, `+90 212 873 13 67`; Mekanlar.com aynı exact adresi, Hentzer ve bağımsız arama kayıtları telefonu destekliyor. Migros Yemek exact `Pide Mide, Beylikdüzü (Cumhuriyet Mah.)` canlı menüsünden 5 menü, çorba ve 14 fırın ürünü olmak üzere 20 benzersiz fiyatlı gıda ürünü doğrulandı. İçecekler ve poşet dışlandı; menü 1 Eylül 2026’da kontrol edildi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6108 ; https://www.migros.com.tr/yemek/pide-mide-beylikduzu-cumhuriyet-mah-st-19b0f ; https://mekanlar.com/mekan/pidemide-beylikduzu-cumhuriyet-mh
