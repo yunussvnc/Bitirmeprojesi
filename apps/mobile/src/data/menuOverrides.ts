@@ -94314,4 +94314,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Cheddar Soslu Patates Kızartması", "price": "250 TL", "category": "Sıcaklar" }
     ]
   },
+  "6109": {
+    "name": "PELİN'İN EKMEĞİ",
+    "sourceUrl": "https://pelininekmegi.com/online-satis/",
+    "sourceName": "Pelin'in Ekmeği resmi online satış menüsü; resmi iletişim sayfası ve Yemeksepeti exact şube doğrulaması",
+    "verifiedAt": "2026-09-01",
+    "items": [
+      { "name": "Cevizli Köy - Ekşi Mayalı", "price": "330 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Zeytinli Köy - Ekşi Mayalı", "price": "330 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Tam Buğday - Ekşi Mayalı", "price": "270 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Klasik Köy - Ekşi Mayalı", "price": "270 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Hellimli & Zeytinli Köy - Ekşi Mayalı", "price": "470 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Atalık Köy Somun - Ekşi Mayalı", "price": "455 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Cevizli Tam Çavdar - Ekşi Mayalı", "price": "495 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Tam Siyez - Ekşi Mayalı & Atalık Tohum", "price": "410 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Kars Kavılca - Ekşi Mayalı & Atalık Tohum", "price": "375 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Karabuğday - Ekşi Mayalı & Glutensiz Ekmek", "price": "355 TL", "category": "Glutensiz Ürünler" },
+      { "name": "PALEO - Glutensiz & Ketojenik", "price": "570 TL", "category": "Glutensiz Ürünler" },
+      { "name": "Spelt & Rye (Çavdar & Kars Kavılca)", "price": "550 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "%100 Ekşi Mayalı Fransız Baget", "price": "170 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Klasik Tost - Ekşi Mayalı", "price": "325 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Tam Buğday Tost - Ekşi Mayalı", "price": "325 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Cevizli & Üzümlü - Ekşi Mayalı", "price": "400 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "Tam Çavdar - Ekşi Mayalı", "price": "410 TL", "category": "Ekşi Mayalı Ürünler" },
+      { "name": "%100 Sorgum - Glutensiz", "price": "490 TL", "category": "Glutensiz Ürünler" },
+      { "name": "Ninda Bakeshop Ekşi Mayalı Galeta Unu / 250 Gr", "price": "265 TL", "category": "Paketli Ürünler" },
+      { "name": "Ninda Bakeshop Kruton / 125 Gr", "price": "265 TL", "category": "Paketli Ürünler" }
+    ]
+  },
 };

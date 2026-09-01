@@ -4505,3 +4505,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6111 ; https://restaurantguru.com
 ## BİLİCE KEBAP ID 6110 — HOLD
 Hentzer `Asmalı Mescit, Asmalı Mescit Cd. No:8, 34430 Beyoğlu/İstanbul`, `+90 532 172 12 07`; Restoranim, NasıI Bir Yer, SmartBeyoğlu, Instagram ve Trip.com exact adres/telefonu destekliyor. Açık kaynaklarda 2026 yorumları ve toplam hesap bilgisi var, fakat ürün bazlı fiyat içeren güncel menü yok; 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6110 ; https://restoranim.net/istanbul/beyoglu/kebapci/bilice-kebap ; https://www.restaurantsistanbul.com/tr/istanbul/bilice-kebap ; https://nasilbiryer.com.tr/yerler/bilice-kebap/
+
+## PELİN'İN EKMEĞİ ID 6109 — ACCEPTED (20 ürün)
+Hentzer `Kültür, Suna Sk. No:56, 34340 Beşiktaş/İstanbul`, `+90 212 358 58 77`; işletmenin resmî iletişim sayfası aynı adres ve telefonu yayımlıyor. Resmî online satış sayfasında güncel ürün bazlı fiyatlar bulundu; 20 benzersiz ekşi mayalı ekmek, glutensiz ürün ve paketli gıda ürünü eklendi. Askıda bağış ürünü ve tekrar eden ürünler dışlandı. Yemeksepeti exact Suna Sk. No:56 vendoru 2026 tarihli canlı yorumlarla destekliyor.
+Kaynaklar: https://pelininekmegi.com/iletisim/ ; https://pelininekmegi.com/online-satis/ ; https://www.yemeksepeti.com/en/restaurant/wn0h/pelinin-ekmegi ; https://api.asemos.tr/api/v1/places/6109
