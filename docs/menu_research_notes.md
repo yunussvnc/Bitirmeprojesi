@@ -4485,3 +4485,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6116 ; https://beykentsaraysactav
 ## OLD FORT RESTAURANT AND PUB ID 6115 — HOLD
 Hentzer `Anadolu Hisarı, Kızılserçe Sok. No:2, 34810 Beykoz/İstanbul`, `+90 216 460 07 08`; Restoranim ve RestaurantGuru exact adres/telefonu destekliyor, resmi puboldfort.com sitesi de Kızılserçe Sokak No:2 adresini doğruluyor. Açık kaynaklarda yiyecek, bira ve içecek konsepti ile güncel yorumlar var ancak son bir yılda ürün bazlı fiyat içeren 20+ gıda ürünü menüsü bulunamadı. Bu nedenle **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6115 ; https://restoranim.net/istanbul/beykoz/pub/old-fort-restaurant-and-pub ; https://restaurantguru.com/Fiyaka-Istanbul ; https://www.puboldfort.com
+
+## KEVOK OCAKBAŞI ID 6114 — HOLD
+Hentzer `Kamer Hatun, Meşrutiyet Cd. No:38, 34435 Beyoğlu/İstanbul`, `+90 534 928 21 21`; Yandex, Corner, Instagram ve Nerdeler exact işletme/adres/telefon paritesini destekliyor. Instagram resmi profilinde menü ve rezervasyon için WhatsApp’a yönlendirme var. RestaurantGuru’da menü görselleri mevcut olsa da kullanıcı eklemeli ve fiyatların güncellik tarihi/son bir yıl doğrulaması güvenilir değil; bu nedenle 20+ güncel fiyatlı gıda ürünü doğrulanamadı ve **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6114 ; https://www.instagram.com/kevokocakbasi/?hl=en ; https://restaurantguru.com/Kevok-Ocakbasi-Istanbul/menu ; https://www.nerdeler.com.tr/kevok-ocakbasi
