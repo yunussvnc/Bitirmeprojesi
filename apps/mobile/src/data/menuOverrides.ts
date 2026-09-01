@@ -94286,4 +94286,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Kaşarlı Sarma Beyti", "price": "780 TL", "category": "Beyti Çeşitleri" }
     ]
   },
+  "6112": {
+    "name": "SİYAH CAFE & BREAKFAST",
+    "sourceUrl": "https://www.cafesiyah.com/menu",
+    "sourceName": "Cafe Siyah resmi canlı menüsü; Listorant ve Hentzer ile exact Beşiktaş şube adresi-telefon doğrulaması",
+    "verifiedAt": "2026-09-01",
+    "items": [
+      { "name": "Aperatif Kahvaltı", "price": "350 TL", "category": "Kahvaltılar" },
+      { "name": "Kahvaltı Tabağı", "price": "450 TL", "category": "Kahvaltılar" },
+      { "name": "Serpme Kahvaltı (İki Kişilik)", "price": "1000 TL", "category": "Kahvaltılar" },
+      { "name": "Siyah Kahvaltı (İki Kişilik)", "price": "1150 TL", "category": "Kahvaltılar" },
+      { "name": "Menemen", "price": "250 TL", "category": "Sıcaklar" },
+      { "name": "Menemen (Çift Kişilik)", "price": "300 TL", "category": "Sıcaklar" },
+      { "name": "Sahanda Yumurta", "price": "220 TL", "category": "Sıcaklar" },
+      { "name": "Sahanda Yumurta (Çift Kişilik)", "price": "290 TL", "category": "Sıcaklar" },
+      { "name": "Kavurma Tava", "price": "450 TL", "category": "Sıcaklar" },
+      { "name": "Kavurma Tava (Çift Kişilik)", "price": "500 TL", "category": "Sıcaklar" },
+      { "name": "Sucuk Tava", "price": "425 TL", "category": "Sıcaklar" },
+      { "name": "Sucuk Tava (Çift Kişilik)", "price": "475 TL", "category": "Sıcaklar" },
+      { "name": "Hellim", "price": "350 TL", "category": "Sıcaklar" },
+      { "name": "Hellim (Çift Kişilik)", "price": "390 TL", "category": "Sıcaklar" },
+      { "name": "Muhlama", "price": "400 TL", "category": "Sıcaklar" },
+      { "name": "Muhlama (Çift Kişilik)", "price": "450 TL", "category": "Sıcaklar" },
+      { "name": "Soslu Sosis", "price": "290 TL", "category": "Sıcaklar" },
+      { "name": "Soslu Sosis (Çift Kişilik)", "price": "350 TL", "category": "Sıcaklar" },
+      { "name": "Patates Kızartması", "price": "180 TL", "category": "Sıcaklar" },
+      { "name": "Cheddar Soslu Patates Kızartması", "price": "250 TL", "category": "Sıcaklar" }
+    ]
+  },
 };
