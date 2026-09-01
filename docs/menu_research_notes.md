@@ -4481,3 +4481,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6117 ; https://www.yemeksepeti.co
 ## BEYKENT SARAY | SAC TAVA & KEBAP ID 6116 — ACCEPTED (20 ürün)
 Hentzer `Adnan Kahveci, Yavuz Sultan Selim Blv. no 43, 34528 Beylikdüzü/İstanbul`, `+90 212 856 27 70`; işletmenin resmi iletişim sayfası exact adres ve telefonu yayımlıyor, Yemeksepeti kaydı da aynı işletmenin `Adnan Kahveci Mahallesi Yavuz Sultan Selim Bulvarı no 43/a1` adresini ve onaylanmış telefon bilgisini gösteriyor. Resmi `MENU-MAYIS-2026.pdf` menüsünde fiyat uygulama tarihi 18 Mayıs 2026 olarak belirtilmiş; 3 sac tava, 3 köfte, 10 kebap/beyti ve 4 ekmekli ana yemek olmak üzere 20 benzersiz gıda ürünü eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6116 ; https://beykentsaraysactava.com/iletisim/ ; https://beykentsaraysactava.com/wp-content/uploads/2026/05/MENU-MAYIS-2026.pdf ; https://www.yemeksepeti.com/en/restaurant/gjsn/beykent-saray-sac-tava
+
+## OLD FORT RESTAURANT AND PUB ID 6115 — HOLD
+Hentzer `Anadolu Hisarı, Kızılserçe Sok. No:2, 34810 Beykoz/İstanbul`, `+90 216 460 07 08`; Restoranim ve RestaurantGuru exact adres/telefonu destekliyor, resmi puboldfort.com sitesi de Kızılserçe Sokak No:2 adresini doğruluyor. Açık kaynaklarda yiyecek, bira ve içecek konsepti ile güncel yorumlar var ancak son bir yılda ürün bazlı fiyat içeren 20+ gıda ürünü menüsü bulunamadı. Bu nedenle **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6115 ; https://restoranim.net/istanbul/beykoz/pub/old-fort-restaurant-and-pub ; https://restaurantguru.com/Fiyaka-Istanbul ; https://www.puboldfort.com
