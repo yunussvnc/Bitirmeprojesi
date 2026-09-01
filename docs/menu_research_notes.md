@@ -4501,3 +4501,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6112 ; https://www.cafesiyah.com/
 ## BOLU ET RESTAURANT ID 6111 — HOLD
 Hentzer `Yıldız, Eski Yıldız Cd. No:4, 34353 Beşiktaş/İstanbul`, `+90 532 343 07 70`; Cybo ve Hentzer exact adres/telefonu destekliyor. RestaurantGuru’da dokuz menü sürümü görünse de bunlar kullanıcı eklemeli/eski veya fiyat güncelliği doğrulanamayan kayıtlar. Arama sonuçlarında çıkan boluetlokantasi.com, İstanbul’daki işletmenin resmi sitesi değil, Bolu et lokantaları rehberidir. Son bir yılda 20+ fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6111 ; https://restaurantguru.com/Bolu-Et-Restaurant-Istanbul/menu ; https://www.cybo.com/TR-postal-code/34353_besiktas/restaurants/ ; https://boluetlokantasi.com
+
+## BİLİCE KEBAP ID 6110 — HOLD
+Hentzer `Asmalı Mescit, Asmalı Mescit Cd. No:8, 34430 Beyoğlu/İstanbul`, `+90 532 172 12 07`; Restoranim, NasıI Bir Yer, SmartBeyoğlu, Instagram ve Trip.com exact adres/telefonu destekliyor. Açık kaynaklarda 2026 yorumları ve toplam hesap bilgisi var, fakat ürün bazlı fiyat içeren güncel menü yok; 20+ son bir yıl fiyatlı gıda ürünü doğrulanamadığı için **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6110 ; https://restoranim.net/istanbul/beyoglu/kebapci/bilice-kebap ; https://www.restaurantsistanbul.com/tr/istanbul/bilice-kebap ; https://nasilbiryer.com.tr/yerler/bilice-kebap/
