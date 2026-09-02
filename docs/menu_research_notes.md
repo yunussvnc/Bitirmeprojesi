@@ -4513,3 +4513,7 @@ Kaynaklar: https://pelininekmegi.com/iletisim/ ; https://pelininekmegi.com/onlin
 ## PİDE MİDE ID 6108 — ACCEPTED (20 ürün)
 Hentzer `Demir Romance Residans, Cumhuriyet, Fedakar Sk. No:11, 34520 Beylikdüzü/İstanbul`, `+90 212 873 13 67`; Mekanlar.com aynı exact adresi, Hentzer ve bağımsız arama kayıtları telefonu destekliyor. Migros Yemek exact `Pide Mide, Beylikdüzü (Cumhuriyet Mah.)` canlı menüsünden 5 menü, çorba ve 14 fırın ürünü olmak üzere 20 benzersiz fiyatlı gıda ürünü doğrulandı. İçecekler ve poşet dışlandı; menü 1 Eylül 2026’da kontrol edildi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6108 ; https://www.migros.com.tr/yemek/pide-mide-beylikduzu-cumhuriyet-mah-st-19b0f ; https://mekanlar.com/mekan/pidemide-beylikduzu-cumhuriyet-mh
+
+## FRIENDS COFFEE BEŞİKTAŞ ID 6107 — HOLD
+Hentzer `Friends Coffee, Türkali, Ali Suavi Sk. Akasya Apt No:2 / D, 34357 Beşiktaş/İstanbul`, telefon alanı boş. RestaurantGuru exact adresi ve güncel işletme kaydını destekliyor: https://restaurantguru.com/FRIENDS-COFFEE-Istanbul . Ancak bağımsız kaynaklarda telefon paritesi doğrulanamadı ve ürün bazlı son bir yıl fiyatlı 20+ gıda menüsü bulunamadı; yalnızca kişi başı fiyat aralığı mevcut. Bu nedenle override yazılmadı, **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6107 ; https://restaurantguru.com/FRIENDS-COFFEE-Istanbul ; https://www.instagram.com/friendscoffebesiktas/
