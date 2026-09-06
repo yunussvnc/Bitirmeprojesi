@@ -4544,3 +4544,7 @@ Burger King Türkiye resmi ortak menüsü ve 6 Eylül 2026 tarihli Yemeksepeti c
 - ID 4842 Burger King Kadir Has Center AVM — `Kadir Has AVM, Bahçelievler, Mehmetçik Sk. No:1, 34180 Bahçelievler/İstanbul`.
 Her şubeye aynı ortak menüden 20 benzersiz güncel fiyatlı ürün eklendi.
 Kaynaklar: https://www.burgerking.com.tr/urunler/menuler ; https://www.burgerking.com.tr/urunler ; https://www.yemeksepeti.com/restaurant/kuk6/burger-king-kuk6 ; https://www.menu-tr.com/istanbul/bagcilar/hamburger-restorani/burger-king-10 ; https://isletmeleribul.com.tr/istanbul/bahcelievler/fast-food/burger-king-kadir-has-center-avm-2llf84.html
+
+## PAPA JOHN'S GÜNEŞLİ ID 5310 — HOLD
+Hentzer adres `Güneşli, Atatürk Cd. No:25, 34209 Güneşli/İstanbul`, telefon `+90 444 75 79`; açık kaynaklarda aynı/benzer adres için telefonlar çelişkili: Papa John’s arama kaydı 444 75 79, Mekanlar kaydı `(0212) 651 84 64` gösteriyor. Resmi şube sayfası CAPTCHA nedeniyle adres/telefon metnini bağımsız doğrulama için açmadı; 20+ güncel ürün fiyatı da güvenilir biçimde çıkarılamadı. Zincir ortak menüsü olmasına rağmen strict telefon ve fiyat şartı sağlanamadığı için override yazılmadı, **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5310 ; https://www.papajohns.com.tr/subeler/gunesli-subesi ; https://mekanlar.com/mekan/papa-johns-pizza-gunesli-baglar-istanbul ; https://www.yemeksepeti.com/restaurant/kuk6/burger-king-kuk6
