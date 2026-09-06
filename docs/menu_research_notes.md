@@ -4521,3 +4521,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6107 ; https://restaurantguru.com
 ## ESPRESSOLAB BAĞCILAR OPET ID 5231 — ACCEPTED (20 ortak ürün)
 Hentzer `Kirazlı, Mahmutbey Cd. No:124, 34212 Bağcılar/İstanbul`, `+90 444 84 64`; bağımsız exact şube kayıtları aynı adresi, Espressolab resmi mağazalar listesi şube adını ve marka iletişim hattını destekliyor. Espressolab resmi menüsü ortak marka ürünlerini yayımlıyor; Yemeksepeti canlı Espressolab menüsü 2026 fiyatlı ürünleri doğruluyor. Şube menülerinde ürün/fiyat standardının ortak olduğu kontrol edilerek 20 benzersiz ürün aktarıldı; gıda ve içecek ürünleri kullanıldı, Popüler carousel tekrarları dışlandı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/5231 ; https://espressolab.com/kurumsal/menu ; https://espressolab.com/kurumsal/magazalar ; https://www.yemeksepeti.com/restaurant/jmdk/espressolab-jmdk ; https://www.menu-tr.com/istanbul/bagcilar/kafe/espressolab-bagcilar-opet
+
+## PIZZALAZZA ŞİRİNEVLER ID 5371 — HOLD
+Hentzer `Şirinevler, Mahmutbey Cd. No:96D, 34180 Bahçelievler/İstanbul`, `+90 212 942 32 00`; PizzaLazza resmi şube sayfası adresi exact doğruluyor ancak resmi telefon `0 212 952 06 75` olarak farklı. Marka ortak menüsü bulunsa da strict %100 telefon paritesi sağlanmadığı için override eklenmedi, **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5371 ; https://pizzalazza.com.tr/restoranlar/pizzalazza-sirinevler
