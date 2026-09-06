@@ -4556,3 +4556,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/4935 ; https://restoranim.net/ist
 ## ESPRESSOLAB ZİNCİRİ — 2 ŞUBE GÜNCELLEME/ACCEPTED (40 ürün)
 ID 7126 Beşiktaş Meydan ve ID 6770 Beylikdüzü Makyol için resmi Espressolab ortak menüsü 20 güncel fiyatlı ürünle uygulandı. ID 7126’nın önceki kaydı fiyat içermeyen eski ortak ürün listesiydi; strict fiyat kuralı nedeniyle 20 fiyatlı ürünle yenilendi. Exact adres/telefon bağımsız kaynaklarla doğrulandı: Beşiktaş Meydan `Sinanpaşa, Beşiktaş Cd. No:35`, `444 8 464`; Beylikdüzü Makyol `Barış, Samsun Cd. No:14/2`, `444 8 464`.
 Kaynaklar: https://api.asemos.tr/api/v1/places/7126 ; https://api.asemos.tr/api/v1/places/6770 ; https://espressolab.com/kurumsal/menu ; https://espressolab.com/kurumsal/magazalar ; https://www.tumisyeri.com/espressolab-be%C5%9Fikta%C5%9F-meydan-444-8-464 ; https://www.tumisyeri.com/espressolab-beykoz-444-8-464 ; https://mekanlar.com/mekan/espressolab-beylikduzu-makyol-baris ; https://www.kaciyor.com/espressolab-beylikduzu-makyol
+
+## ESPRESSOLAB BAKIRKÖY ID 5724 — ACCEPTED (20 ürün)
+Hentzer `Cevizlik, Fahri Korutürk Cd. No:2B/1, 34142 Bakırköy/İstanbul`, `+90 444 84 64`; Kacıyor exact şube kaydı aynı adres ve telefonu destekliyor. Espressolab resmi ortak menüsünden 20 güncel fiyatlı ürün aktarıldı; şube bazlı fiyat standardı mevcut canlı Espressolab menüsüyle kontrol edildi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5724 ; https://espressolab.com/kurumsal/menu ; https://espressolab.com/kurumsal/magazalar ; https://kaciyor.com/espressolab-bakirkoy
