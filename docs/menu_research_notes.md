@@ -4529,3 +4529,11 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/5371 ; https://pizzalazza.com.tr/
 ## PIZZALAZZA KAYAŞEHİR ID 5329 — HOLD
 Hentzer `Kayabaşı Mah. Kayaşehir Blv. No:36CA, 34494 Başakşehir/İstanbul`, `+90 212 919 05 66`; PizzaLazza resmi sayfası exact adresi doğruluyor fakat resmi telefon `0 212 919 05 67` olarak farklı. Ortak marka menüsü bulunmasına rağmen strict telefon paritesi yok; override eklenmedi, **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/5329 ; https://pizzalazza.com.tr/restoranlar/pizzalazza-kayasehir
+
+## BURGER KING ZİNCİRİ — 3 ŞUBE ACCEPTED (60 ürün)
+Burger King Türkiye resmi ürün/menü sayfaları ortak marka menüsünü ve ürünleri yayımlıyor; Yemeksepeti canlı İstanbul menüsü 6 Eylül 2026 kontrolünde güncel TL fiyatlarını doğruluyor. Hentzer’deki üç şubenin exact adresleri bağımsız işletme kayıtlarıyla doğrulandı ve telefon `444 54 64` Burger King Türkiye resmi hattıyla eşleşiyor:
+- ID 5333 Burger King Has Delta — `Bahçelievler Mh, D-100 Kuzey Yanyolu No:4B, 34180 Bahçelievler/İstanbul`.
+- ID 5279 Burger King Avcılar Marmara — `Merkez, Marmara Cd. No:19A, 34310 Avcılar/İstanbul`.
+- ID 5036 Burger King Güneşli Yürüyüşyolu — `Güneşli, Kirazlı Cd. No:36B, 34212 Bağcılar/İstanbul`.
+Her şubeye aynı marka ortak menüsünden 20 benzersiz fiyatlı ürün aktarıldı; poşet, tekrar ve yalnızca kampanya görseli niteliğindeki carousel ürünleri dışlandı.
+Kaynaklar: https://www.burgerking.com.tr/urunler/menuler ; https://www.burgerking.com.tr/urunler ; https://www.burgerking.com.tr/ ; https://www.yemeksepeti.com/restaurant/kuk6/burger-king-kuk6 ; https://restaurantguru.com/Burgerking-Istanbul-11 ; https://www.menu-tr.com/istanbul/avcilar/hamburger-restorani/burger-king-avcilar-marmara ; https://isletmeleribul.com.tr/istanbul/bagcilar/fast-food/burger-king-gunesli-yuruyusyolu-t5p5wy.html
