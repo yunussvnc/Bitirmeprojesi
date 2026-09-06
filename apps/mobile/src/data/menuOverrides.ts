@@ -94538,4 +94538,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Burger King® Süper Ekonomik Menü", "price": "310 TL", "category": "1-2 Kişilik Fırsatlar" }
     ]
   },
+  "4935": {
+    "name": "ARNAVUTKÖY KOMAGENE",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/b5cp/komagene-etsiz-cig-kofte-b5cp",
+    "sourceName": "Komagene resmi marka menüsü ve Yemeksepeti canlı Arnavutköy/Komagene fiyat menüsü; exact şube adres/telefon çapraz doğrulaması",
+    "verifiedAt": "2026-09-06",
+    "items": [
+      { "name": "Çiğ Köfte Dürüm", "price": "120", "category": "Dürümler" },
+      { "name": "Çiğ Köfte (500 g) Joker Porsiyon", "price": "375", "category": "Popüler" },
+      { "name": "Mega Çiğ Köfte Dürüm", "price": "135", "category": "Popüler" },
+      { "name": "Mega Dürüm Menü", "price": "170", "category": "Popüler" },
+      { "name": "Komagene Ayran (27 cl)", "price": "50", "category": "İçecekler" },
+      { "name": "Double Dürüm", "price": "165", "category": "Popüler" },
+      { "name": "Algida Dürüm Menü 1", "price": "215", "category": "Algida Menüleri" },
+      { "name": "Algida Dürüm Menü 2", "price": "430", "category": "Algida Menüleri" },
+      { "name": "Algida Mega Dürüm Menü 1", "price": "230", "category": "Algida Menüleri" },
+      { "name": "Algida Porsiyon Menü 1", "price": "295", "category": "Algida Menüleri" },
+      { "name": "Doritoslu Komagene Şuşi Bowl", "price": "250", "category": "Ayın Ürünü" },
+      { "name": "Çıtır Jalapenolu Komagene Şuşi Bowl", "price": "250", "category": "Ayın Ürünü" },
+      { "name": "Çıtır Soğanlı Komagene Şuşi Bowl", "price": "250", "category": "Ayın Ürünü" },
+      { "name": "Eti Craxlı Komagene Şuşi Bowl", "price": "250", "category": "Ayın Ürünü" },
+      { "name": "Doritoslu Komagene Roll Bowl", "price": "250", "category": "Ayın Ürünü" },
+      { "name": "Doritoslu Komagene Bowl", "price": "220", "category": "Ayın Ürünü" },
+      { "name": "Doritos'lu Çiğ Köfte Dürüm Menü", "price": "175", "category": "Dürümlü Menüler" },
+      { "name": "Double Dürüm Menü", "price": "200", "category": "Dürümlü Menüler" },
+      { "name": "Dürüm Menü", "price": "155", "category": "Dürümlü Menüler" },
+      { "name": "Ultra Mega Dürüm Menü", "price": "185", "category": "Dürümlü Menüler" }
+    ]
+  },
 };
