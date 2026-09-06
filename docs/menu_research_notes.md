@@ -4517,3 +4517,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6108 ; https://www.migros.com.tr/
 ## FRIENDS COFFEE BEŞİKTAŞ ID 6107 — HOLD
 Hentzer `Friends Coffee, Türkali, Ali Suavi Sk. Akasya Apt No:2 / D, 34357 Beşiktaş/İstanbul`, telefon alanı boş. RestaurantGuru exact adresi ve güncel işletme kaydını destekliyor: https://restaurantguru.com/FRIENDS-COFFEE-Istanbul . Ancak bağımsız kaynaklarda telefon paritesi doğrulanamadı ve ürün bazlı son bir yıl fiyatlı 20+ gıda menüsü bulunamadı; yalnızca kişi başı fiyat aralığı mevcut. Bu nedenle override yazılmadı, **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6107 ; https://restaurantguru.com/FRIENDS-COFFEE-Istanbul ; https://www.instagram.com/friendscoffebesiktas/
+
+## ESPRESSOLAB BAĞCILAR OPET ID 5231 — ACCEPTED (20 ortak ürün)
+Hentzer `Kirazlı, Mahmutbey Cd. No:124, 34212 Bağcılar/İstanbul`, `+90 444 84 64`; bağımsız exact şube kayıtları aynı adresi, Espressolab resmi mağazalar listesi şube adını ve marka iletişim hattını destekliyor. Espressolab resmi menüsü ortak marka ürünlerini yayımlıyor; Yemeksepeti canlı Espressolab menüsü 2026 fiyatlı ürünleri doğruluyor. Şube menülerinde ürün/fiyat standardının ortak olduğu kontrol edilerek 20 benzersiz ürün aktarıldı; gıda ve içecek ürünleri kullanıldı, Popüler carousel tekrarları dışlandı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5231 ; https://espressolab.com/kurumsal/menu ; https://espressolab.com/kurumsal/magazalar ; https://www.yemeksepeti.com/restaurant/jmdk/espressolab-jmdk ; https://www.menu-tr.com/istanbul/bagcilar/kafe/espressolab-bagcilar-opet

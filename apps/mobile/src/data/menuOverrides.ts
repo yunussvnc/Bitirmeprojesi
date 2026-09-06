@@ -94370,4 +94370,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Beyaz Peynirli Zeytinli Pide", "price": "280 TL", "category": "Fırın Ürünleri" }
     ]
   },
+  "5231": {
+    "name": "ESPRESSOLAB BAĞCILAR OPET",
+    "sourceUrl": "https://espressolab.com/kurumsal/menu",
+    "sourceName": "Espressolab resmi ortak menü ve resmi mağazalar listesi; Yemeksepeti güncel fiyat doğrulaması",
+    "verifiedAt": "2026-09-06",
+    "items": [
+      { "name": "Kabaklı Kalem Börek + Çay Orta Boy", "price": "147", "desc": "Kabaklı kalem börek, çay", "category": "Espressolab Özel Menüler" },
+      { "name": "Meyveli Granola + Filtre Kahve Orta Boy", "price": "338", "desc": "Meyveli granola, filtre kahve", "category": "Espressolab Özel Menüler" },
+      { "name": "Hindi Fümeli & Kaşar Peynirli Acuka Sandviç + Çay Orta Boy", "price": "321", "desc": "Hindi fümeli kaşar peynirli acuka, çay", "category": "Espressolab Özel Menüler" },
+      { "name": "Ispanaklı & Peynirli Poğaça + Çay Orta Boy", "price": "147", "desc": "Ispanaklı peynirli poğaça, çay", "category": "Espressolab Özel Menüler" },
+      { "name": "Frambuazlı & Fıstıklı Cheesecake + Filtre Kahve Orta Boy", "price": "418", "desc": "Frambuazlı fıstıklı cheesecake, filtre kahve", "category": "Espressolab Özel Menüler" },
+      { "name": "Kapalı Pizza + Çay Orta Boy", "price": "218", "desc": "Kapalı pizza, çay", "category": "Espressolab Özel Menüler" },
+      { "name": "Haşhaşlı & Limonlu Kek + Filtre Kahve Orta Boy", "price": "347", "desc": "Haşhaşlı limonlu kek, filtre kahve", "category": "Espressolab Özel Menüler" },
+      { "name": "Sarelle Mocha", "price": "304", "desc": "Sarelle’nin yoğun fındık ve kakao lezzetini espresso ve sütle buluşturan özel mocha", "category": "Sıcak Kahveler" },
+      { "name": "Espresso", "price": "185", "desc": "Kavrulmuş çekirdeklerle hazırlanır", "category": "Sıcak Kahveler" },
+      { "name": "Espresso Macchiato", "price": "191", "desc": "(Küçük) Yumuşak içimli, espresso shot, süt kreması ile hazırlanır", "category": "Sıcak Kahveler" },
+      { "name": "Caffe Americano", "price": "229", "desc": "Espresso'nun sıcak su ile seyreltilmiş hali", "category": "Sıcak Kahveler" },
+      { "name": "Caffe Latte", "price": "261", "desc": "Espresso shot ile kıvamlı sütün bir araya geldiği, espresso bazlı kahve Popüler0", "category": "Sıcak Kahveler" },
+      { "name": "Cappuccino", "price": "261", "desc": "Espresso shot, 65 derece ısıtılmış, kıvamlı süt, üzerinde yoğun süt kremasıyla hazırlanan yumuşak içimli kahve", "category": "Sıcak Kahveler" },
+      { "name": "Cortado", "price": "248", "desc": "Espresso shot, 65 derece ısıtılmış, kıvamlı süt üzeri latte art ile süslenmiş espressonun hafif hali", "category": "Sıcak Kahveler" },
+      { "name": "Flat White", "price": "210", "desc": "Ekstra espresso shot, kıvamlı sütle yoğun kahve tadı severlerin tercihi", "category": "Sıcak Kahveler" },
+      { "name": "Filtre Kahve", "price": "172", "desc": "Kavrulmuş, öğütülmüş kahve çekirdeklerinin sıcak su ile demlenmesi ile hazırlanır.", "category": "Sıcak Kahveler" },
+      { "name": "Chemex", "price": "331", "desc": "Chemex yöntemiyle demlenen taze filtre kahve", "category": "Sıcak Kahveler" },
+      { "name": "V60", "price": "331", "desc": "V60 yöntemiyle demlenen taze filtre kahve", "category": "Sıcak Kahveler" },
+      { "name": "Türk Kahvesi", "price": "172", "desc": "Brasil Santos kahve çekirdeği ile hazırlanır.", "category": "Sıcak Kahveler" },
+      { "name": "Spanish Latte", "price": "331", "desc": "Yoğunlaştılmış süt ve espresso shot 65 derece ısıtılmış kıvamlı süt ile hazırlanan latte", "category": "Sıcak Kahveler" }
+    ]
+  },
 };
