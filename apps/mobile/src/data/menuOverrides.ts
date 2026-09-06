@@ -94482,4 +94482,60 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Burger King® Süper Ekonomik Menü", "price": "310 TL", "category": "1-2 Kişilik Fırsatlar" }
     ]
   },
+  "5026": {
+    "name": "BURGER KING LUXERA AVM",
+    "sourceUrl": "https://www.burgerking.com.tr/urunler/menuler",
+    "sourceName": "Burger King Türkiye resmi ortak menü ve Yemeksepeti güncel fiyatlı menü; exact şube adres/telefon çapraz doğrulaması",
+    "verifiedAt": "2026-09-06",
+    "items": [
+      { "name": "Whopper® Menü", "price": "445 TL", "category": "Menüler" },
+      { "name": "Big King® Menü", "price": "435 TL", "category": "Menüler" },
+      { "name": "Chicken Royale® Menü", "price": "335 TL", "category": "Menüler" },
+      { "name": "Big King XXL® Menü", "price": "665 TL", "category": "Menüler" },
+      { "name": "Double King Chicken® Menü", "price": "370 TL", "category": "Menüler" },
+      { "name": "Coca-Cola Fırsatı (Maç Menüsü)", "price": "630 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (2'li Big King® Fırsatı)", "price": "810 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (3'lü Whopper® Fırsatı)", "price": "700 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (Kral Avantaj Menü)", "price": "540 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (Klasik İkili)", "price": "670 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (Kral Fırsat)", "price": "980 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (King Chicken® Fırsatı)", "price": "330 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Tek Kişilik Algida Menü", "price": "420 TL", "category": "Avantajlı Algida Menüleri" },
+      { "name": "Ranch Lezzetler Menüsü", "price": "410 TL", "category": "Yemeksepeti Özel Menüleri" },
+      { "name": "Yemeksepeti Özel 2'li Whopper Jr.® Kampanyası", "price": "460 TL", "category": "Yemeksepeti Özel Menüleri" },
+      { "name": "Yemeksepeti Özel Benim İkilim", "price": "300 TL", "category": "Yemeksepeti Özel Menüleri" },
+      { "name": "Kral İkili", "price": "585 TL", "category": "1-2 Kişilik Fırsatlar" },
+      { "name": "Pro Gamer Big King® Menü", "price": "435 TL", "category": "1-2 Kişilik Fırsatlar" },
+      { "name": "Süper Chicken Royale® Menü", "price": "365 TL", "category": "1-2 Kişilik Fırsatlar" },
+      { "name": "Burger King® Süper Ekonomik Menü", "price": "310 TL", "category": "1-2 Kişilik Fırsatlar" }
+    ]
+  },
+  "4842": {
+    "name": "BURGER KING - KADİR HAS CENTER AVM",
+    "sourceUrl": "https://www.burgerking.com.tr/urunler/menuler",
+    "sourceName": "Burger King Türkiye resmi ortak menü ve Yemeksepeti güncel fiyatlı menü; exact şube adres/telefon çapraz doğrulaması",
+    "verifiedAt": "2026-09-06",
+    "items": [
+      { "name": "Whopper® Menü", "price": "445 TL", "category": "Menüler" },
+      { "name": "Big King® Menü", "price": "435 TL", "category": "Menüler" },
+      { "name": "Chicken Royale® Menü", "price": "335 TL", "category": "Menüler" },
+      { "name": "Big King XXL® Menü", "price": "665 TL", "category": "Menüler" },
+      { "name": "Double King Chicken® Menü", "price": "370 TL", "category": "Menüler" },
+      { "name": "Coca-Cola Fırsatı (Maç Menüsü)", "price": "630 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (2'li Big King® Fırsatı)", "price": "810 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (3'lü Whopper® Fırsatı)", "price": "700 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (Kral Avantaj Menü)", "price": "540 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (Klasik İkili)", "price": "670 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (Kral Fırsat)", "price": "980 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Coca-Cola Fırsatı (King Chicken® Fırsatı)", "price": "330 TL", "category": "Coca-Cola Fırsat Menüleri" },
+      { "name": "Tek Kişilik Algida Menü", "price": "420 TL", "category": "Avantajlı Algida Menüleri" },
+      { "name": "Ranch Lezzetler Menüsü", "price": "410 TL", "category": "Yemeksepeti Özel Menüleri" },
+      { "name": "Yemeksepeti Özel 2'li Whopper Jr.® Kampanyası", "price": "460 TL", "category": "Yemeksepeti Özel Menüleri" },
+      { "name": "Yemeksepeti Özel Benim İkilim", "price": "300 TL", "category": "Yemeksepeti Özel Menüleri" },
+      { "name": "Kral İkili", "price": "585 TL", "category": "1-2 Kişilik Fırsatlar" },
+      { "name": "Pro Gamer Big King® Menü", "price": "435 TL", "category": "1-2 Kişilik Fırsatlar" },
+      { "name": "Süper Chicken Royale® Menü", "price": "365 TL", "category": "1-2 Kişilik Fırsatlar" },
+      { "name": "Burger King® Süper Ekonomik Menü", "price": "310 TL", "category": "1-2 Kişilik Fırsatlar" }
+    ]
+  },
 };

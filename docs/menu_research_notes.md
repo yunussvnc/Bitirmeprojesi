@@ -4537,3 +4537,10 @@ Burger King Türkiye resmi ürün/menü sayfaları ortak marka menüsünü ve ü
 - ID 5036 Burger King Güneşli Yürüyüşyolu — `Güneşli, Kirazlı Cd. No:36B, 34212 Bağcılar/İstanbul`.
 Her şubeye aynı marka ortak menüsünden 20 benzersiz fiyatlı ürün aktarıldı; poşet, tekrar ve yalnızca kampanya görseli niteliğindeki carousel ürünleri dışlandı.
 Kaynaklar: https://www.burgerking.com.tr/urunler/menuler ; https://www.burgerking.com.tr/urunler ; https://www.burgerking.com.tr/ ; https://www.yemeksepeti.com/restaurant/kuk6/burger-king-kuk6 ; https://restaurantguru.com/Burgerking-Istanbul-11 ; https://www.menu-tr.com/istanbul/avcilar/hamburger-restorani/burger-king-avcilar-marmara ; https://isletmeleribul.com.tr/istanbul/bagcilar/fast-food/burger-king-gunesli-yuruyusyolu-t5p5wy.html
+
+## BURGER KING ZİNCİRİ — 2 EK ŞUBE ACCEPTED (40 ürün)
+Burger King Türkiye resmi ortak menüsü ve 6 Eylül 2026 tarihli Yemeksepeti canlı fiyatları kullanıldı. Hentzer kayıtları ve bağımsız adres kayıtları exact parite sağlıyor; telefon `444 54 64` marka resmi hattıyla eşleşiyor:
+- ID 5026 Burger King Luxera AVM — `Luxera AVM, Göztepe, Maslak Cd. No:7, 34214 Bağcılar/İstanbul`.
+- ID 4842 Burger King Kadir Has Center AVM — `Kadir Has AVM, Bahçelievler, Mehmetçik Sk. No:1, 34180 Bahçelievler/İstanbul`.
+Her şubeye aynı ortak menüden 20 benzersiz güncel fiyatlı ürün eklendi.
+Kaynaklar: https://www.burgerking.com.tr/urunler/menuler ; https://www.burgerking.com.tr/urunler ; https://www.yemeksepeti.com/restaurant/kuk6/burger-king-kuk6 ; https://www.menu-tr.com/istanbul/bagcilar/hamburger-restorani/burger-king-10 ; https://isletmeleribul.com.tr/istanbul/bahcelievler/fast-food/burger-king-kadir-has-center-avm-2llf84.html
