@@ -4525,3 +4525,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/5231 ; https://espressolab.com/ku
 ## PIZZALAZZA ŞİRİNEVLER ID 5371 — HOLD
 Hentzer `Şirinevler, Mahmutbey Cd. No:96D, 34180 Bahçelievler/İstanbul`, `+90 212 942 32 00`; PizzaLazza resmi şube sayfası adresi exact doğruluyor ancak resmi telefon `0 212 952 06 75` olarak farklı. Marka ortak menüsü bulunsa da strict %100 telefon paritesi sağlanmadığı için override eklenmedi, **HOLD**.
 Kaynaklar: https://api.asemos.tr/api/v1/places/5371 ; https://pizzalazza.com.tr/restoranlar/pizzalazza-sirinevler
+
+## PIZZALAZZA KAYAŞEHİR ID 5329 — HOLD
+Hentzer `Kayabaşı Mah. Kayaşehir Blv. No:36CA, 34494 Başakşehir/İstanbul`, `+90 212 919 05 66`; PizzaLazza resmi sayfası exact adresi doğruluyor fakat resmi telefon `0 212 919 05 67` olarak farklı. Ortak marka menüsü bulunmasına rağmen strict telefon paritesi yok; override eklenmedi, **HOLD**.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5329 ; https://pizzalazza.com.tr/restoranlar/pizzalazza-kayasehir
