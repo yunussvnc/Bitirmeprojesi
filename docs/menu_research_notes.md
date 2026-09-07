@@ -4604,3 +4604,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6103 ; https://www.besiktasyorese
 ## HOLÂÂ COFFEE HOUSE ID 6102 — HOLD
 Hentzer `Yıldırım, Rize Sk. No:1 D:A, 34045 Bayrampaşa/İstanbul`, `+90 546 722 14 01`; Restoranim ve Tümİşyeri exact adres/telefonu doğruluyor. Migros Yemek exact vendoru tatlı, sıcak/soğuk kahve, sıcak/soğuk içecek, waffle ve bowl kategorilerinde 20+ ürün gösteriyor; ancak erişilebilir içerikte ürün fiyatları görünmüyor. Bu nedenle son bir yıl fiyat şartı güvenilir biçimde sağlanamadı ve override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6102 ; https://www.migros.com.tr/yemek/hol-coffee-house-bayrampasa-yildirim-mah-st-23099 ; https://restoranim.net/istanbul/bayrampasa/kafe/holaa-coffee-house ; https://www.tumisyeri.com/hol%C3%A2%C3%A2-coffee-house-0546-722-14-01
+
+## LAKERDA BALIK EVİ ID 6101 — HOLD
+Hentzer `Anadolu Kavağı, Eğri Boyun Cd. 2/A, 34825 Beykoz/İstanbul`, `+90 544 466 40 51`; Servis Kayıt Listesi ve Kacıyor exact adres/telefonu doğruluyor. Kartaweb kaydı 17 Ocak 2026 güncellemesiyle çok sayıda yemek türü ve 21 menü kalemi işaret ediyor, ancak ürün bazında güncel fiyat listesi yayınlamıyor; Facebook/Instagram da yalnızca işletme iletişimi veriyor. 20+ son bir yıl fiyatlı ürün şartı sağlanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6101 ; https://kartaweb.menu/restaurants/anadolu-kavagi-mahallesi/lakerda-balik-evi ; https://serviskayitlistesi.com/istanbul/beykoz/restoran/lakerda-balik-evi-Te7GCs.html ; https://www.facebook.com/lakerdabalikevi/photos/
