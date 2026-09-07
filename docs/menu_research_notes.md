@@ -4572,3 +4572,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/5049 ; https://api.asemos.tr/api/
 ## ESPRESSOLAB ZİNCİRİ — 2 ŞUBE ACCEPTED (40 ürün)
 ID 6001 Espressolab Başakşehir Mavera Comfort (`Ziya Gökalp, Dr. Mimar Kadir Topbaş Cd. G, Mavera Comfort, 1021 Sok. No:4U, 34490 Başakşehir`, `444 8 464`) ve ID 5548 Espressolab Forum İstanbul (`Kocatepe, Paşa Cd. Forum No:7, 34045 Bayrampaşa`, `444 8 464`) için exact adres/telefon bağımsız kaynaklarla doğrulandı. Resmi Espressolab ortak menüsünden her şubeye 20 güncel fiyatlı ürün eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6001 ; https://api.asemos.tr/api/v1/places/5548 ; https://espressolab.com/kurumsal/menu ; https://kaciyor.com/espressolab-basaksehir-mavera-comfort ; https://serviskayitlistesi.com/istanbul/bayrampasa/kafe/espressolab-forum-istanbul-vyIshQ.html ; https://turkiyekayit.com/istanbul/bayrampasa/kafe/espressolab-forum-istanbul-vyIshQ.html
+
+## KÖFTECİ YUSUF BAYRAMPAŞA ID 6365 — HOLD
+Hentzer `Muratpaşa, Eski Edirne Asf. No:1, 34040 Bayrampaşa/İstanbul`, `+90 444 61 62`; Migros Yemek exact Bayrampaşa/Muratpaşa vendoru ve resmi Köfteci Yusuf marka kanalı şubeyi destekliyor. Ancak erişilebilir Migros metninde 20+ ürün adı ve kategori var fakat ürün fiyatları görünmüyor; açık 2026 fiyat listeleri şube bazlı exact bağlantı kurmuyor. Bu nedenle son bir yıl fiyat şartı güvenilir biçimde sağlanamadı ve ortak menü kopyalanmadı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6365 ; https://www.migros.com.tr/yemek/kofteci-yusuf-bayrampasa-muratpasa-mah-st-1eb6e ; https://kofteciyusuf.com/
