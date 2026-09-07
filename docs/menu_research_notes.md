@@ -4560,3 +4560,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/7126 ; https://api.asemos.tr/api/
 ## ESPRESSOLAB BAKIRKÖY ID 5724 — ACCEPTED (20 ürün)
 Hentzer `Cevizlik, Fahri Korutürk Cd. No:2B/1, 34142 Bakırköy/İstanbul`, `+90 444 84 64`; Kacıyor exact şube kaydı aynı adres ve telefonu destekliyor. Espressolab resmi ortak menüsünden 20 güncel fiyatlı ürün aktarıldı; şube bazlı fiyat standardı mevcut canlı Espressolab menüsüyle kontrol edildi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/5724 ; https://espressolab.com/kurumsal/menu ; https://espressolab.com/kurumsal/magazalar ; https://kaciyor.com/espressolab-bakirkoy
+
+## ESPRESSOLAB ZİNCİRİ — AVCILAR 2 ŞUBE ACCEPTED (40 ürün)
+ID 5488 Espressolab Avcılar Merkez (`Merkez, Reşit Paşa Cd. No:86/A, 34310 Avcılar`, `444 8 464`) ve ID 5494 Espressolab İstanbul Üniversitesi Avcılar (`Üniversite, Bağlariçi Cd. No:7, 34320 Avcılar`, `444 8 464`) için bağımsız exact adres/telefon kayıtları doğrulandı. Espressolab resmi ortak menüsünden her şubeye 20 güncel fiyatlı ürün eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5488 ; https://api.asemos.tr/api/v1/places/5494 ; https://espressolab.com/kurumsal/menu ; https://www.tumisyeri.com/espressolab-avc%C4%B1lar-merkez-444-8-464 ; https://www.kaciyor.com/espressolab-istanbul-universitesi-avcilar
