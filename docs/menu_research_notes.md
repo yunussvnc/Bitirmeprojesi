@@ -4580,3 +4580,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6365 ; https://www.migros.com.tr/
 ## BURGER KING ZİNCİRİ — 2 EK ŞUBE ACCEPTED (40 ürün)
 ID 5945 Burger King Forum İstanbul (`Kocatepe, Paşa Cd. No:1/1 İç Kapı No:99, İstanbul Forum AVM, 34045 Bayrampaşa`, `444 54 64`) ve ID 5686 Burger King Deposite Outlet AVM (`İkitelli OSB, Giyim Sanatkarları 5A-6A Blok Sk. No:5A, D:6AB, 34490 Başakşehir`, `444 54 64`) için exact şube adres/telefon paritesi doğrulandı. Burger King Türkiye resmi ortak menüsünden her şubeye 20 güncel fiyatlı ürün eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/5945 ; https://api.asemos.tr/api/v1/places/5686 ; https://www.burgerking.com.tr/urunler/menuler ; https://www.burgerking.com.tr/urunler
+
+## KAHVE DÜNYASI BÜYÜKADA ID 5299 — HOLD
+Hentzer `Nizam, 23. Caddesi No:32, 34970 Adalar/İstanbul`, `+90 216 382 83 99`; İstanbul.net.tr ve Cybo exact adres/telefonu destekliyor. Kahve Dünyası resmi sitesi güncel ürünler yayımlıyor ancak erişilebilir içerik e-ticaret/hediyelik ürünleri; Büyükada kafe şubesine ait 20 ürünlük fiyatlı kafe menüsü doğrulanamadı. Bu nedenle zincir ortak menüsü varsayımla aktarılmadı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5299 ; https://www.kahvedunyasi.com/ ; https://www.istanbul.net.tr/kahve-dunyasi-buyukada-kafe-yeme-icme-6061-1/amp/ ; https://www.cybo.com/TR-biz/kahve-d%C3%BCnyas%C4%B1-b%C3%BCy%C3%BCkada
