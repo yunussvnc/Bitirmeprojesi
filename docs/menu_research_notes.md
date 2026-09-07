@@ -4576,3 +4576,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6001 ; https://api.asemos.tr/api/
 ## KÖFTECİ YUSUF BAYRAMPAŞA ID 6365 — HOLD
 Hentzer `Muratpaşa, Eski Edirne Asf. No:1, 34040 Bayrampaşa/İstanbul`, `+90 444 61 62`; Migros Yemek exact Bayrampaşa/Muratpaşa vendoru ve resmi Köfteci Yusuf marka kanalı şubeyi destekliyor. Ancak erişilebilir Migros metninde 20+ ürün adı ve kategori var fakat ürün fiyatları görünmüyor; açık 2026 fiyat listeleri şube bazlı exact bağlantı kurmuyor. Bu nedenle son bir yıl fiyat şartı güvenilir biçimde sağlanamadı ve ortak menü kopyalanmadı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6365 ; https://www.migros.com.tr/yemek/kofteci-yusuf-bayrampasa-muratpasa-mah-st-1eb6e ; https://kofteciyusuf.com/
+
+## BURGER KING ZİNCİRİ — 2 EK ŞUBE ACCEPTED (40 ürün)
+ID 5945 Burger King Forum İstanbul (`Kocatepe, Paşa Cd. No:1/1 İç Kapı No:99, İstanbul Forum AVM, 34045 Bayrampaşa`, `444 54 64`) ve ID 5686 Burger King Deposite Outlet AVM (`İkitelli OSB, Giyim Sanatkarları 5A-6A Blok Sk. No:5A, D:6AB, 34490 Başakşehir`, `444 54 64`) için exact şube adres/telefon paritesi doğrulandı. Burger King Türkiye resmi ortak menüsünden her şubeye 20 güncel fiyatlı ürün eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5945 ; https://api.asemos.tr/api/v1/places/5686 ; https://www.burgerking.com.tr/urunler/menuler ; https://www.burgerking.com.tr/urunler
