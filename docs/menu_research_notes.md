@@ -4588,3 +4588,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/5299 ; https://www.kahvedunyasi.c
 ## PAPER MOON ETİLER ID 6106 — HOLD
 Hentzer `Etiler, Ahmet Adnan Saygun Cd., 34340 Beşiktaş/İstanbul`, `+90 212 282 16 16`; Mudavim, Yapı Kredi, Akkök ve Yelp kaynaklarında exact adres/telefon destekleniyor. Resmi Paper Moon menü bağlantısı mevcut; ancak erişilebilir güncel menü kaynağı Mes Prestiges üzerinde 7 Haziran 2026 tarihli yalnızca 8 fiyatlı yemek gösteriyor. 20+ güncel fiyatlı ürün şartı sağlanamadığı için override yazılmadı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6106 ; https://www.papermoonrestaurants.com/menu-paper-moon-restaurant.html?catid=9 ; https://mesprestiges.com/tr/istanbul/places/paper-moon-istanbul/menu ; https://mudavim.net/paper-moon-paket-servis/
+
+## IZAKA TERRACE ID 6105 — HOLD
+Hentzer `Gümüşsuyu, İnönü Cd. No:8, 34437 Beyoğlu/İstanbul`, `+90 212 708 38 38`; Restoranim exact adres/telefonu doğruluyor. Izaka Terrace resmi menü sayfaları güncel mutfak içeriğini açıklıyor ancak erişilebilir fiyatlı ürün listesi sunmuyor; üçüncü taraf Mes Prestiges kaydı 7 Haziran 2026 tarihli olsa da yalnızca 8 fiyatlı yemek gösteriyor. 20+ güncel fiyatlı ürün şartı sağlanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6105 ; https://izakaterrace.com/en/menu/ ; https://izakaterrace.com/menu/ ; https://restoranim.net/istanbul/beyoglu/restoran/izaka-terrace ; https://mesprestiges.com/tr/istanbul/places/paper-moon-istanbul/menu
