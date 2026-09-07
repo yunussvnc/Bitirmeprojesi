@@ -4600,3 +4600,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6104 ; https://wanderlog.com/plac
 ## BEŞİKTAŞ YÖRESEL EV YEMEKLERİ ID 6103 — ACCEPTED (20 ürün)
 Hentzer `Türkali, Ihlamurdere Cd. 40/A, 34330 Beşiktaş/İstanbul`, `+90 212 327 44 39`; işletmenin resmi sitesi aynı adresi, telefonu ve her gün taze yemek hazırladığını yayımlıyor. Yemeksepeti canlı menüsünde 20+ güncel fiyatlı gıda ürünü bulunuyor; 20 benzersiz ana yemek ve çorba ürünü aktarıldı. Poşet ve popüler carousel tekrarları dışlandı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6103 ; https://www.besiktasyoreselevyemekleri.com/ ; https://www.yemeksepeti.com/restaurant/arga/besiktas-yoresel-ev-yemekleri ; https://menu.iletmen.com.tr/menu/besiktasyoreselevyemekleri
+
+## HOLÂÂ COFFEE HOUSE ID 6102 — HOLD
+Hentzer `Yıldırım, Rize Sk. No:1 D:A, 34045 Bayrampaşa/İstanbul`, `+90 546 722 14 01`; Restoranim ve Tümİşyeri exact adres/telefonu doğruluyor. Migros Yemek exact vendoru tatlı, sıcak/soğuk kahve, sıcak/soğuk içecek, waffle ve bowl kategorilerinde 20+ ürün gösteriyor; ancak erişilebilir içerikte ürün fiyatları görünmüyor. Bu nedenle son bir yıl fiyat şartı güvenilir biçimde sağlanamadı ve override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6102 ; https://www.migros.com.tr/yemek/hol-coffee-house-bayrampasa-yildirim-mah-st-23099 ; https://restoranim.net/istanbul/bayrampasa/kafe/holaa-coffee-house ; https://www.tumisyeri.com/hol%C3%A2%C3%A2-coffee-house-0546-722-14-01
