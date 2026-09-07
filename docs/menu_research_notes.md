@@ -4608,3 +4608,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6102 ; https://www.migros.com.tr/
 ## LAKERDA BALIK EVİ ID 6101 — HOLD
 Hentzer `Anadolu Kavağı, Eğri Boyun Cd. 2/A, 34825 Beykoz/İstanbul`, `+90 544 466 40 51`; Servis Kayıt Listesi ve Kacıyor exact adres/telefonu doğruluyor. Kartaweb kaydı 17 Ocak 2026 güncellemesiyle çok sayıda yemek türü ve 21 menü kalemi işaret ediyor, ancak ürün bazında güncel fiyat listesi yayınlamıyor; Facebook/Instagram da yalnızca işletme iletişimi veriyor. 20+ son bir yıl fiyatlı ürün şartı sağlanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6101 ; https://kartaweb.menu/restaurants/anadolu-kavagi-mahallesi/lakerda-balik-evi ; https://serviskayitlistesi.com/istanbul/beykoz/restoran/lakerda-balik-evi-Te7GCs.html ; https://www.facebook.com/lakerdabalikevi/photos/
+
+## TOM'S PETSHOP BAYRAMPAŞA ID 6100 — HOLD
+Hentzer kaydı `Kocatepe, Kocatepe Cd. No:44/A, 34045 Bayrampaşa/İstanbul`, `+90 552 525 14 11` olarak geçiyor; işletme türü petshop ve kategori kaydı hatalı biçimde Restoran görünüyor. Gıda işletmesi olmadığı için menü override’ı oluşturulmadı.
+Kaynak: https://api.asemos.tr/api/v1/places/6100
