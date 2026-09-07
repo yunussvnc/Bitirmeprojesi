@@ -4592,3 +4592,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6106 ; https://www.papermoonresta
 ## IZAKA TERRACE ID 6105 — HOLD
 Hentzer `Gümüşsuyu, İnönü Cd. No:8, 34437 Beyoğlu/İstanbul`, `+90 212 708 38 38`; Restoranim exact adres/telefonu doğruluyor. Izaka Terrace resmi menü sayfaları güncel mutfak içeriğini açıklıyor ancak erişilebilir fiyatlı ürün listesi sunmuyor; üçüncü taraf Mes Prestiges kaydı 7 Haziran 2026 tarihli olsa da yalnızca 8 fiyatlı yemek gösteriyor. 20+ güncel fiyatlı ürün şartı sağlanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6105 ; https://izakaterrace.com/en/menu/ ; https://izakaterrace.com/menu/ ; https://restoranim.net/istanbul/beyoglu/restoran/izaka-terrace ; https://mesprestiges.com/tr/istanbul/places/paper-moon-istanbul/menu
+
+## ŞİLAN CAFE&KAHVALTI ID 6104 — HOLD
+Hentzer `Sinanpaşa, Çelebi Oğlu Sk. No:14 D:B, 34353 Beşiktaş/İstanbul`, `+90 536 300 34 16`; Wanderlog ve RestaurantGuru exact adres/telefonu destekliyor. Ancak açık kaynaklarda son bir yıl tarihli ürün bazlı fiyat menüsü ve 20+ fiyatlı gıda ürünü bulunamadı. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6104 ; https://wanderlog.com/place/details/1993693/%C5%9Filan-cafekahvalt%C4%B1 ; https://restaurantguru.com/Pisi-Breakfast-and-Burger-Istanbul
