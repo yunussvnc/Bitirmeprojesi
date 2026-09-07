@@ -4564,3 +4564,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/5724 ; https://espressolab.com/ku
 ## ESPRESSOLAB ZİNCİRİ — AVCILAR 2 ŞUBE ACCEPTED (40 ürün)
 ID 5488 Espressolab Avcılar Merkez (`Merkez, Reşit Paşa Cd. No:86/A, 34310 Avcılar`, `444 8 464`) ve ID 5494 Espressolab İstanbul Üniversitesi Avcılar (`Üniversite, Bağlariçi Cd. No:7, 34320 Avcılar`, `444 8 464`) için bağımsız exact adres/telefon kayıtları doğrulandı. Espressolab resmi ortak menüsünden her şubeye 20 güncel fiyatlı ürün eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/5488 ; https://api.asemos.tr/api/v1/places/5494 ; https://espressolab.com/kurumsal/menu ; https://www.tumisyeri.com/espressolab-avc%C4%B1lar-merkez-444-8-464 ; https://www.kaciyor.com/espressolab-istanbul-universitesi-avcilar
+
+## ESPRESSOLAB ZİNCİRİ — 2 ŞUBE ACCEPTED (40 ürün)
+ID 5049 Espressolab Başakşehir 5. Etap (`Ahşap Çarşı, Başak, Yeşilvadi Cd. D:5. Etap No:2 Daire:2, 34480 Başakşehir`, `444 8 464`) ve ID 5752 Espressolab Arnavutköy İslambey (`İslambey, Fatih Cd. No:24, 34275 Arnavutköy`, `444 8 464`) için exact adres/telefon bağımsız kaynaklarla doğrulandı. Resmi Espressolab ortak menüsünden her şubeye 20 güncel fiyatlı ürün eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/5049 ; https://api.asemos.tr/api/v1/places/5752 ; https://espressolab.com/kurumsal/menu ; https://www.kaciyor.com/espressolab-basaksehir-5-etap ; https://www.tumisyeri.com/espressolab-arnavutk%C3%B6y-islambey-444-8-464 ; https://restoranim.net/istanbul/fatih/kafe/espressolab-arnavutkoy-islambey
