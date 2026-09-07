@@ -4596,3 +4596,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6105 ; https://izakaterrace.com/e
 ## ŞİLAN CAFE&KAHVALTI ID 6104 — HOLD
 Hentzer `Sinanpaşa, Çelebi Oğlu Sk. No:14 D:B, 34353 Beşiktaş/İstanbul`, `+90 536 300 34 16`; Wanderlog ve RestaurantGuru exact adres/telefonu destekliyor. Ancak açık kaynaklarda son bir yıl tarihli ürün bazlı fiyat menüsü ve 20+ fiyatlı gıda ürünü bulunamadı. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6104 ; https://wanderlog.com/place/details/1993693/%C5%9Filan-cafekahvalt%C4%B1 ; https://restaurantguru.com/Pisi-Breakfast-and-Burger-Istanbul
+
+## BEŞİKTAŞ YÖRESEL EV YEMEKLERİ ID 6103 — ACCEPTED (20 ürün)
+Hentzer `Türkali, Ihlamurdere Cd. 40/A, 34330 Beşiktaş/İstanbul`, `+90 212 327 44 39`; işletmenin resmi sitesi aynı adresi, telefonu ve her gün taze yemek hazırladığını yayımlıyor. Yemeksepeti canlı menüsünde 20+ güncel fiyatlı gıda ürünü bulunuyor; 20 benzersiz ana yemek ve çorba ürünü aktarıldı. Poşet ve popüler carousel tekrarları dışlandı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6103 ; https://www.besiktasyoreselevyemekleri.com/ ; https://www.yemeksepeti.com/restaurant/arga/besiktas-yoresel-ev-yemekleri ; https://menu.iletmen.com.tr/menu/besiktasyoreselevyemekleri

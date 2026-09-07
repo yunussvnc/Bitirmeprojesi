@@ -94761,4 +94761,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Burger King® Süper Ekonomik Menü", "price": "310 TL", "category": "1-2 Kişilik Fırsatlar" }
     ]
   },
+  "6103": {
+    "name": "BEŞİKTAŞ YÖRESEL EV YEMEKLERİ",
+    "sourceUrl": "https://www.besiktasyoreselevyemekleri.com/",
+    "sourceName": "Beşiktaş Yöresel Ev Yemekleri resmi canlı menü ve Yemeksepeti güncel menüsü; exact adres/telefon doğrulaması",
+    "verifiedAt": "2026-09-07",
+    "items": [
+      { "name": "Karnıyarık", "price": "450 TL", "category": "Ana Yemekler" },
+      { "name": "Brokoli", "price": "275 TL", "category": "Ana Yemekler" },
+      { "name": "Fırında Tavuk Budu", "price": "425 TL", "category": "Ana Yemekler" },
+      { "name": "Mücver", "price": "200 TL", "category": "Ana Yemekler" },
+      { "name": "Dana Sac Kavurma", "price": "690 TL", "category": "Ana Yemekler" },
+      { "name": "Taze Ispanak", "price": "185 TL", "category": "Ana Yemekler" },
+      { "name": "Beşamel Soslu Sebzeli ve Sultan Kebabı", "price": "475 TL", "category": "Ana Yemekler" },
+      { "name": "İzmir Köftesi", "price": "475 TL", "category": "Ana Yemekler" },
+      { "name": "Köri Soslu Tavuk", "price": "425 TL", "category": "Ana Yemekler" },
+      { "name": "Kuru Fasulye", "price": "185 TL", "category": "Ana Yemekler" },
+      { "name": "Meksika Usulü Tavuk", "price": "425 TL", "category": "Ana Yemekler" },
+      { "name": "Pazı Kızartması", "price": "220 TL", "category": "Ana Yemekler" },
+      { "name": "Nohut Yemeği", "price": "185 TL", "category": "Ana Yemekler" },
+      { "name": "Pırasa", "price": "185 TL", "category": "Ana Yemekler" },
+      { "name": "Tavuk Sote", "price": "325 TL", "category": "Ana Yemekler" },
+      { "name": "Taze Fasulye", "price": "180 TL", "category": "Ana Yemekler" },
+      { "name": "Enginar", "price": "350 TL", "category": "Ana Yemekler" },
+      { "name": "Yaprak Sarma (12 Adet)", "price": "375 TL", "category": "Ana Yemekler" },
+      { "name": "Mercimek Çorbası", "price": "175 TL", "category": "Çorbalar" },
+      { "name": "Tavuk Suyu Çorbası", "price": "195 TL", "category": "Çorbalar" }
+    ]
+  },
 };
