@@ -4584,3 +4584,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/5945 ; https://api.asemos.tr/api/
 ## KAHVE DÜNYASI BÜYÜKADA ID 5299 — HOLD
 Hentzer `Nizam, 23. Caddesi No:32, 34970 Adalar/İstanbul`, `+90 216 382 83 99`; İstanbul.net.tr ve Cybo exact adres/telefonu destekliyor. Kahve Dünyası resmi sitesi güncel ürünler yayımlıyor ancak erişilebilir içerik e-ticaret/hediyelik ürünleri; Büyükada kafe şubesine ait 20 ürünlük fiyatlı kafe menüsü doğrulanamadı. Bu nedenle zincir ortak menüsü varsayımla aktarılmadı.
 Kaynaklar: https://api.asemos.tr/api/v1/places/5299 ; https://www.kahvedunyasi.com/ ; https://www.istanbul.net.tr/kahve-dunyasi-buyukada-kafe-yeme-icme-6061-1/amp/ ; https://www.cybo.com/TR-biz/kahve-d%C3%BCnyas%C4%B1-b%C3%BCy%C3%BCkada
+
+## PAPER MOON ETİLER ID 6106 — HOLD
+Hentzer `Etiler, Ahmet Adnan Saygun Cd., 34340 Beşiktaş/İstanbul`, `+90 212 282 16 16`; Mudavim, Yapı Kredi, Akkök ve Yelp kaynaklarında exact adres/telefon destekleniyor. Resmi Paper Moon menü bağlantısı mevcut; ancak erişilebilir güncel menü kaynağı Mes Prestiges üzerinde 7 Haziran 2026 tarihli yalnızca 8 fiyatlı yemek gösteriyor. 20+ güncel fiyatlı ürün şartı sağlanamadığı için override yazılmadı.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6106 ; https://www.papermoonrestaurants.com/menu-paper-moon-restaurant.html?catid=9 ; https://mesprestiges.com/tr/istanbul/places/paper-moon-istanbul/menu ; https://mudavim.net/paper-moon-paket-servis/
