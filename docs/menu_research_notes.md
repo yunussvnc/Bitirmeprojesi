@@ -4704,3 +4704,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6078 ; https://fr.restaurantguru.
 ## NAPOLI 91 ID 6077 — HOLD
 Hentzer kaydı `Zeytinlik, Mor Menekşe Sk. No:5, 34140 Bakırköy/İstanbul`, telefon `+90 212 571 69 02`. Resmi Napoli 91 sitesi, Instagram ve Yandex exact adres/telefonu doğruluyor. Resmi menü fiyat güncelleme tarihi 08.08.2026; ancak menüde yalnızca 10 pizza ve 1 tatlı olmak üzere 11 gıda ürünü bulunuyor. İçecekler gıda ürünü asgari sayımına dahil edilmedi; minimum 20 gıda ürünü şartı sağlanmadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6077 ; https://www.napoli91.com/ ; https://www.instagram.com/91napoli/ ; https://yandex.com.tr/maps/org/napoli_91/68872796457/
+
+## BLACK ART LOUNGE ID 6076 — HOLD
+Hentzer kaydı `Kavaklı Mahallesi Yeşilyurt Caddesi Dış Kapı No:17/2C H Blok Ofis:215, 34520 Beylikdüzü/İstanbul`, telefon `+90 539 511 25 55`. Yandex, Menu-tr ve Restoranim.net exact adres/telefonu destekliyor. Wheree’nin 2026 menü sayfası yalnızca genel açıklamalar ve birkaç önerilen ürün içeriyor; 20+ güncel fiyatlı gıda ürünü doğrulanamadı. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6076 ; https://yandex.com.tr/maps/org/black_art_lounge/219868691303/ ; https://black-art-lounge.wheree.com/menu ; https://restoranim.net/istanbul/beylikduzu/bar/black-art-lounge
