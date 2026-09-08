@@ -4688,3 +4688,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6082 ; https://yandex.com.tr/maps
 ## ZEYNEPP RESTAURANT & CAFE & PATISSERIE POLONEZKÖY ID 6081 — HOLD
 Hentzer kaydı `Polonezköy, 75. Yıl Cd. No:41/B, 34829 Beykoz/İstanbul`, telefon `+90 552 705 22 56`. Wanderlog ve Snapchat exact adresi, Snapchat Hentzer telefonunu destekliyor; ancak Cybo sonucu aynı adres için `0530 338 17 36` telefonu veriyor. Telefon paritesi uyuşmadığı ve güncel 20+ fiyatlı menü doğrulanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6081 ; https://wanderlog.com/place/details/3340945/zeynepp-restaurant--cafe--patisserie-kahvalti-polonezk%C3%B6y ; https://www.snapchat.com/place/zeynepprestaurantcafepatisseriekahvaltipolonezky/9a80c72a-b028-40e1-8ffe-527929442adf ; https://biashara.cybo.com/TR-posta/34829/kahawa-migahawa
+
+## ECHI FRIED CHICKEN BURGER ID 6080 — ACCEPTED
+Hentzer kaydı `Barış, Reşat Nuri Güntekin Sk. No:61, 34515 Beylikdüzü/İstanbul`, telefon `+90 212 843 77 33`. QRDOS, Yandex, Menu-tr ve resmi Instagram exact adres/telefonu destekliyor. Canlı Migros Yemek DOM’unda 2026-09-08 tarihinde 30 fiyatlı gıda ürünü doğrulandı; QRDOS ürün adlarını/kategorilerini destekliyor. Override eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6080 ; https://qrdos.tr/echi-fried-chicken-burger ; https://www.migros.com.tr/yemek/echi-fried-chicken-burger-beylikduzu-baris-mah-st-20376 ; https://yandex.com/maps/org/echi_fried_chicken_burger/190264450618/ ; https://www.instagram.com/reel/DAYQgPwN0yx/

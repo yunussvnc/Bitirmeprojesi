@@ -95006,4 +95006,42 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Fıstıklı Soğuk Baklava (500 Gr.)", "price": "938 TL", "category": "Kiloluk Tatlılar" }
     ]
   },
+  "6080": {
+    "name": "ECHI FRIED CHICKEN BURGER",
+    "sourceUrl": "https://www.migros.com.tr/yemek/echi-fried-chicken-burger-beylikduzu-baris-mah-st-20376",
+    "sourceName": "Canlı Migros Yemek exact Beylikdüzü/Barış menüsü; QRDOS, Yandex ve resmi Instagram ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-09-08",
+    "items": [
+      { "name": "No 2 Menü", "price": "480 TL", "category": "Menüler" },
+      { "name": "No 21 Menü", "price": "1000 TL", "category": "Menüler" },
+      { "name": "No 5 Menü", "price": "550 TL", "category": "Menüler" },
+      { "name": "No 6 Menü", "price": "550 TL", "category": "Menüler" },
+      { "name": "No 3 Cheddar Peynirli Menü", "price": "500 TL", "category": "Menüler" },
+      { "name": "No 15 Menü", "price": "580 TL", "category": "Menüler" },
+      { "name": "No 8 Wrap Menü", "price": "500 TL", "category": "Menüler" },
+      { "name": "No 14 Menü", "price": "720 TL", "category": "Menüler" },
+      { "name": "No 11 Menü", "price": "530 TL", "category": "Menüler" },
+      { "name": "No 12 Menü", "price": "610 TL", "category": "Menüler" },
+      { "name": "No 13 Menü", "price": "670 TL", "category": "Menüler" },
+      { "name": "No 29 Big Chicken Menü", "price": "1300 TL", "category": "Menüler" },
+      { "name": "No 17 Menü", "price": "490 TL", "category": "Menüler" },
+      { "name": "No 20 Menü", "price": "580 TL", "category": "Menüler" },
+      { "name": "No 16 Menü", "price": "490 TL", "category": "Menüler" },
+      { "name": "No 18 Menü", "price": "435 TL", "category": "Menüler" },
+      { "name": "No 19 Menü", "price": "520 TL", "category": "Menüler" },
+      { "name": "No 7 Menü", "price": "630 TL", "category": "Menüler" },
+      { "name": "No 1 Eko Burger Menü", "price": "420 TL", "category": "Menüler" },
+      { "name": "No 10 Menü", "price": "400 TL", "category": "Menüler" },
+      { "name": "No 9 Wrap Tenders Menü", "price": "560 TL", "category": "Menüler" },
+      { "name": "No 4 Mexicano Burger Menü", "price": "500 TL", "category": "Menüler" },
+      { "name": "No 22 Menü", "price": "920 TL", "category": "Menüler" },
+      { "name": "No 25 Menü", "price": "1040 TL", "category": "Menüler" },
+      { "name": "Echi Eko Burger", "price": "300 TL", "category": "Burgerler" },
+      { "name": "Chicken Burger", "price": "350 TL", "category": "Burgerler" },
+      { "name": "Chicken Cheeseburger", "price": "360 TL", "category": "Burgerler" },
+      { "name": "Echi Wrap", "price": "360 TL", "category": "Burgerler" },
+      { "name": "Echi Chicken Mexicano", "price": "360 TL", "category": "Burgerler" },
+      { "name": "Echi Sos", "price": "10 TL", "category": "Soslar" }
+    ]
+  },
 };
