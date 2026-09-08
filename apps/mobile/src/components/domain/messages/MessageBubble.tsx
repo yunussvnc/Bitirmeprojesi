@@ -49,24 +49,49 @@ export function MessageBubble({
 
   // Mekan kartı mesajı
   if (item.placeCard) {
+    const renderStars = (rating: number = 4.8) => {
+      const stars = [];
+      const fullStars = Math.floor(rating);
+      for (let i = 0; i < 5; i++) {
+        stars.push(
+          <IconSymbol
+            key={i}
+            name={i < fullStars ? "star.fill" : "star"}
+            size={12}
+            color="#F5A623"
+          />
+        );
+      }
+      return <View style={styles.starsContainer}>{stars}</View>;
+    };
+
     return (
       <Animated.View entering={FadeInUp.springify().damping(15)} style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}>
         <TouchableOpacity onLongPress={longPressHandler} activeOpacity={0.9}>
           <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
           <TouchableOpacity
-            activeOpacity={0.8}
+            activeOpacity={0.9}
             onPress={() => {
               lightImpact();
-              if (item.placeCard) {
-                useAppStore.getState().setPendingPlaceName(item.placeCard.name);
+              if (item.placeCard?.id) {
+                router.push(`/place/${item.placeCard.id}` as any);
+              } else {
+                useAppStore.getState().setPendingPlaceName(item.placeCard?.name);
+                router.replace("/(tabs)/explore" as any);
               }
-              router.replace("/(tabs)/explore" as any);
             }}
             style={[
               styles.newPlaceCardBubble,
               {
-                backgroundColor: item.isMine ? "#ffffff" : colors.surface.elevated,
-                borderColor: colors.surface.border,
+                backgroundColor: "#111111", // Dark background
+                borderColor: "#00E5FF", // Neon glow border
+                borderWidth: 1,
+                // Glow effect parameters (iOS mostly, Android uses elevation or no real glow)
+                shadowColor: "#00E5FF",
+                shadowOpacity: 0.8,
+                shadowRadius: 10,
+                shadowOffset: { width: 0, height: 0 },
+                elevation: 8,
               },
             ]}
           >
@@ -76,34 +101,35 @@ export function MessageBubble({
               contentFit="cover"
             />
             <View style={styles.placeCardInfo}>
-              <View style={styles.placeCardNameRow}>
-                <IconSymbol
-                  name="mappin.and.ellipse"
-                  size={14}
-                  color={item.isMine ? "#2ecc71" : colors.accent.primary}
-                />
-                <Text
-                  style={[
-                    styles.placeCardName,
-                    { color: item.isMine ? "#000000" : colors.text.primary },
-                  ]}
-                  numberOfLines={1}
-                >
-                  {item.placeCard.name}
-                </Text>
-              </View>
               <Text
-                style={[
-                  styles.placeCardAddr,
-                  { color: item.isMine ? "rgba(0,0,0,0.6)" : colors.text.tertiary },
-                ]}
+                style={[styles.placeCardName, { color: "#FFFFFF" }]}
                 numberOfLines={1}
               >
-                {item.placeCard.address}
+                {item.placeCard.name}
               </Text>
-              <Text style={[styles.placeCardHint, { color: item.isMine ? "#2ecc71" : colors.accent.primary }]}>
-                {t("chat.open_in_explore", "Keşfet'te aç →")}
+              
+              <Text
+                style={[styles.placeCardAddr, { color: "rgba(255,255,255,0.6)", marginTop: 2 }]}
+                numberOfLines={1}
+              >
+                {item.placeCard.category ? `${item.placeCard.address} | ${item.placeCard.category}` : item.placeCard.address}
               </Text>
+              
+              <View style={styles.ratingRow}>
+                <Text style={styles.ratingText}>{item.placeCard.rating?.toFixed(1) || "4.8"}</Text>
+                {renderStars(item.placeCard.rating || 4.8)}
+                <Text style={styles.reviewCountText}>({item.placeCard.reviewCount || 342})</Text>
+              </View>
+
+              <Text style={styles.placeCardDesc} numberOfLines={2}>
+                {item.placeCard.description || t("chat.place_desc_fallback", "Harika bir mekan, mutlaka ziyaret etmelisin.")}
+              </Text>
+
+              <View style={styles.visitButton}>
+                <Text style={styles.visitButtonText}>
+                  {t("chat.visit_now", "Visit Now")}
+                </Text>
+              </View>
             </View>
           </TouchableOpacity>
           <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
@@ -367,6 +393,47 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "600",
     marginTop: 6,
+  },
+  ratingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 4,
+    marginBottom: 6,
+    gap: 4,
+  },
+  ratingText: {
+    color: "#FFFFFF",
+    fontSize: 13,
+    fontWeight: "600",
+  },
+  starsContainer: {
+    flexDirection: "row",
+    gap: 2,
+    alignItems: "center",
+    marginBottom: 1, // Visual alignment
+  },
+  reviewCountText: {
+    color: "rgba(255,255,255,0.6)",
+    fontSize: 12,
+  },
+  placeCardDesc: {
+    color: "rgba(255,255,255,0.8)",
+    fontSize: 12,
+    lineHeight: 16,
+    marginBottom: 12,
+  },
+  visitButton: {
+    backgroundColor: "#00E5FF", // Matching the glow color
+    borderRadius: 24,
+    paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+  },
+  visitButtonText: {
+    color: "#000000",
+    fontWeight: "700",
+    fontSize: 14,
   },
   storyReplyCard: {
     flexDirection: "row",

@@ -35,7 +35,7 @@ import {
 import { usePreferences } from "@/src/store/preferences";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { createTextStyle } from "@/src/constants/design";
-import { getForYouPlaces } from "@/src/services/mekanService";
+import { getAllPlaces, getForYouPlaces, getPlaces, logInteraction } from "@/src/services/mekanService";
 import { recommendPlaces } from "@/src/services/api";
 import type { Place } from "@/src/services/mekanService";
 import type { RecommendItem, RecommendResponse } from "@/src/types/recommend";
@@ -305,12 +305,25 @@ export default function HomeScreen() {
         setUserLocation({ lat, lng });
       }
       
-      const paginatedData = await getForYouPlaces(lat, lng, 1, 12);
-      setAllPlaces(paginatedData.items);
+      let places: Place[] = [];
+      try {
+        const paginatedData = await getForYouPlaces(lat, lng, 1, 12);
+        places = paginatedData.items;
+      } catch (foryouErr) {
+        // ForYou endpoint başarısız → genel listeye fallback dene
+        try {
+          const fallback = await getPlaces(1, 12);
+          places = fallback.items;
+        } catch {
+          // İkisi de başarısız — hata fırlat
+          throw foryouErr;
+        }
+      }
+      setAllPlaces(places);
     } catch (e: unknown) {
       const appError = handleApiError(e);
       setError(appError.userMessage);
-      setAllPlaces([]);
+      // Eski veri varsa silme — kullanıcı en azından önceki mekanları görebilsin
     } finally {
       setLoading(false);
     }

@@ -300,16 +300,30 @@ export async function getForYouPlaces(
       url += `&lat=${lat}&lng=${lng}`;
     }
     const data = await apiGet<any>(url);
-    if (data && Array.isArray(data.items)) {
+    if (data && Array.isArray(data.items) && data.items.length > 0) {
       return {
         ...data,
         items: data.items.map(normalizePlace),
       };
     }
+
+    // ForYou boş döndüyse → genel mekan listesine fallback
+    logger.log("[getForYouPlaces] ForYou boş döndü, genel listeye fallback yapılıyor…");
+    const fallback = await apiGet<any>(`/places/?page=${page}&page_size=${pageSize}`);
+    if (fallback && Array.isArray(fallback.items) && fallback.items.length > 0) {
+      return {
+        items: fallback.items.map(normalizePlace),
+        total: fallback.total ?? fallback.items.length,
+        page: fallback.page ?? page,
+        page_size: fallback.page_size ?? pageSize,
+      };
+    }
+
     return { items: [], total: 0, page, page_size: pageSize };
   } catch (error) {
     logger.error("[getForYouPlaces] Error:", error);
-    return { items: [], total: 0, page, page_size: pageSize };
+    // Hatayı yukarı fırlat ki HomeScreen error state gösterebilsin
+    throw error;
   }
 }
 

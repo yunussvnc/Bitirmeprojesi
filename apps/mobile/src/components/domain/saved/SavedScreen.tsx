@@ -41,10 +41,10 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { API_BASE_URL } from "@/src/constants/api";
 
-const GRID_COLS = 3;
-const GRID_GAP = 2;
+const GRID_COLS = 2;
+const GRID_GAP = 14;
 const SCREEN_WIDTH = Dimensions.get("window").width;
-const gridWidth = (SCREEN_WIDTH - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
+const gridWidth = (SCREEN_WIDTH - 32 - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function SavedScreen() {
@@ -317,9 +317,9 @@ export default function SavedScreen() {
                   }
                 }}
                 activeOpacity={0.8}
-                style={[styles.clearButton, { backgroundColor: colors.surface.elevated, paddingHorizontal: 12 }]}
+                style={[styles.clearButton, { backgroundColor: colors.surface.elevated }]}
               >
-                <Text style={{ color: isSelectionMode ? colors.semantic.error : colors.text.primary, fontSize: 14, fontWeight: "600" }}>
+                <Text style={[styles.clearButtonText, { color: isSelectionMode ? colors.semantic.error : colors.text.primary }]}>
                   {isSelectionMode ? t("common.cancel", "İptal") : t("common.select", "Seç")}
                 </Text>
               </TouchableOpacity>
@@ -429,7 +429,7 @@ export default function SavedScreen() {
           keyExtractor={(item) => String(item.id)}
           showsVerticalScrollIndicator={false}
           numColumns={GRID_COLS}
-          columnWrapperStyle={{ gap: GRID_GAP, paddingHorizontal: 0 }}
+          columnWrapperStyle={{ gap: GRID_GAP, paddingHorizontal: 16 }}
           renderItem={({ item, index }) => {
             const isSelected = selectedIds.includes(String(item.id));
             return (
@@ -438,9 +438,11 @@ export default function SavedScreen() {
                   styles.gridCell,
                   {
                     width: gridWidth,
-                    height: gridWidth,
+                    height: gridWidth * 1.25,
                     marginBottom: GRID_GAP,
-                    backgroundColor: colors.surface.elevated
+                    backgroundColor: colors.surface.elevated,
+                    borderRadius: 12,
+                    overflow: 'hidden',
                   },
                 ]}
                 onPress={() => {
@@ -611,11 +613,15 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   clearButton: {
-    minWidth: 40,
-    height: 40,
-    borderRadius: 20,
+    height: 36,
+    borderRadius: 18,
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 16,
+  },
+  clearButtonText: {
+    fontSize: 14,
+    fontWeight: "600",
   },
   emptyContainer: {
     flex: 1,

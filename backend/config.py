@@ -41,7 +41,7 @@ class Settings(BaseSettings):
     # E-posta (SMTP) ayarları — Gmail için App Password kullanılmalı
     SMTP_HOST: str = "smtp.gmail.com"
     SMTP_PORT: int = 587
-    SMTP_USER: str = ""      # Gmail adresin (ör: asemos.app@gmail.com)
+    SMTP_USER: str = ""      # Gmail adresin (ör: asemos.tr@gmail.com)
     SMTP_PASS: str = ""      # Gmail App Password (16 karakterlik)
     SMTP_FROM: str = ""      # Gönderici adres (boşsa SMTP_USER kullanılır)
 

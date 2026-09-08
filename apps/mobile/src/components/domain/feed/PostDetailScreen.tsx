@@ -59,15 +59,38 @@ export default function PostDetailScreen() {
     return idx >= 0 ? idx : 0;
   }, [visiblePosts, postId]);
 
+  const isSavedSource = source === "saved";
+
   const loadPosts = useCallback(async () => {
     if (!postId) return;
     setLoading(true);
     try {
-      if (source === "saved") {
+      if (isSavedSource) {
+        // Kaydedilen postları store'dan alıp backend'den güncel verilerini çek
         const savedPostsObj = useAppStore.getState().savedPostsById;
         const savedArray = Object.values(savedPostsObj) as Post[];
-        // Kaydedilenleri ters çeviriyoruz ki en son kaydedilen en üstte görünsün
-        setPosts(savedArray.reverse());
+        if (savedArray.length === 0) {
+          setPosts([]);
+          return;
+        }
+        // Her post için güncel veriyi backend'den çek (paralel)
+        const freshPosts = await Promise.all(
+          savedArray.map(async (sp) => {
+            try {
+              return await getPost(sp.id);
+            } catch {
+              return sp; // Backend'den çekilemezse store verisini kullan
+            }
+          })
+        );
+        // Güncel verileri store'a da yaz
+        const store = useAppStore.getState();
+        freshPosts.forEach((fp) => {
+          if (store.savedPostIds.includes(String(fp.id))) {
+            store.savedPostsById[String(fp.id)] = fp;
+          }
+        });
+        setPosts(freshPosts.reverse());
         return;
       }
 
@@ -80,11 +103,24 @@ export default function PostDetailScreen() {
     } finally {
       setLoading(false);
     }
-  }, [postId, source]);
+  }, [postId, isSavedSource]);
 
   useEffect(() => {
     loadPosts();
   }, [loadPosts]);
+
+  // Favoriden çıkarıldığında listeyi anlık güncelle
+  useEffect(() => {
+    if (!isSavedSource) return;
+    setPosts((prev) => {
+      const filtered = prev.filter((p) => savedPostIds.includes(String(p.id)));
+      // Tüm postlar kaldırıldıysa geri dön
+      if (filtered.length === 0 && prev.length > 0) {
+        setTimeout(() => router.back(), 100);
+      }
+      return filtered;
+    });
+  }, [savedPostIds, isSavedSource]);
   const pendingLikesRef = useRef<Set<number>>(new Set());
 
   const handleLike = useCallback(async (likedPost: Post) => {
@@ -93,10 +129,12 @@ export default function PostDetailScreen() {
     
     lightImpact();
     // Optimistic update
+    const optimisticLiked = !likedPost.is_liked;
+    const optimisticCount = likedPost.like_count + (likedPost.is_liked ? -1 : 1);
     setPosts((prev) =>
       prev.map((p) =>
         p.id === likedPost.id
-          ? { ...p, is_liked: !p.is_liked, like_count: p.like_count + (p.is_liked ? -1 : 1) }
+          ? { ...p, is_liked: optimisticLiked, like_count: optimisticCount }
           : p
       )
     );
@@ -109,6 +147,14 @@ export default function PostDetailScreen() {
             : p
         )
       );
+      // Store'a da yansıt (kaydedilen gönderilerde güncel kalması için)
+      if (isSavedSource) {
+        const store = useAppStore.getState();
+        const key = String(likedPost.id);
+        if (store.savedPostsById[key]) {
+          store.savedPostsById[key] = { ...store.savedPostsById[key], is_liked: res.liked, like_count: res.like_count };
+        }
+      }
     } catch {
       // Revert
       setPosts((prev) =>
@@ -121,7 +167,7 @@ export default function PostDetailScreen() {
     } finally {
       pendingLikesRef.current.delete(likedPost.id);
     }
-  }, []);
+  }, [isSavedSource]);
 
   const handleDelete = useCallback((deletedPost: Post) => {
     Alert.alert(
@@ -286,6 +332,14 @@ export default function PostDetailScreen() {
                 p.id === commentPostId ? { ...p, comment_count: p.comment_count + 1 } : p
               )
             );
+            // Store'a da yansıt
+            if (isSavedSource) {
+              const store = useAppStore.getState();
+              const key = String(commentPostId);
+              if (store.savedPostsById[key]) {
+                store.savedPostsById[key] = { ...store.savedPostsById[key], comment_count: (store.savedPostsById[key].comment_count || 0) + 1 };
+              }
+            }
           }
         }}
       />

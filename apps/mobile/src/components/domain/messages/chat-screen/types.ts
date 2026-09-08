@@ -6,9 +6,14 @@ export interface Message {
     isMine: boolean;
     timestamp: string;
     placeCard?: {
+        id?: string;
         name: string;
         address: string;
         image: string;
+        rating?: number;
+        reviewCount?: number;
+        category?: string;
+        description?: string;
     };
     imageUri?: string;
     seen?: boolean;
