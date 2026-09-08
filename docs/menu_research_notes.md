@@ -4616,3 +4616,7 @@ Kaynak: https://api.asemos.tr/api/v1/places/6100
 ## BAZAAR ISTANBUL ID 6099 — HOLD
 Hentzer kaydı `Cumhuriyet, 34520 Beylikdüzü/İstanbul`, `+90 533 069 86 15`. Exact şubeye ait güvenilir güncel kaynak ve son bir yılda 20+ fiyatlı gıda menüsü bulunamadı; arama sonuçlarındaki benzer isimli işletmeler farklı adresler olduğundan kullanılmadı. Bu nedenle override eklenmedi.
 Kaynak: https://api.asemos.tr/api/v1/places/6099
+
+## DODE COFFEE EATERY ID 6098 — HOLD
+Hentzer adresi `Türkali, Maşuklar Ykş. No:39A, 34357 Beşiktaş/İstanbul`; telefon alanı boş. RestaurantGuru ve Yandex exact adresi destekliyor ancak bağımsız telefon kaydı bulunamadı; bu nedenle strict adres/telefon paritesi sağlanmadı. Ayrıca 20+ son bir yıl fiyatlı ürün menüsü doğrulanamadı. Override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6098 ; https://restaurantguru.com/Dode-coffee-eatery-Istanbul ; https://yandex.com.tr/maps/11508/istanbul/house/masuklar_yokusu_39a/ZkAYdgdlSkUAQFprfXx1dHliZQ==/
