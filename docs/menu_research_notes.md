@@ -4648,3 +4648,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6092 ; https://ioki.com.tr/menu-2
 ## KÖPRÜLÜ KARDEŞLER EKMEK FIRINI ID 6091 — HOLD
 Hentzer kaydı `Kocatepe, Şehir Parkı Caddesi No:105, 34045 Bayrampaşa/İstanbul`, telefon `+90 212 640 47 61`. Yandex ve bağımsız işletme dizinleri aynı işletme, adres ve telefonu destekliyor. Ancak son bir yılda exact şubeye ait 20+ fiyatlı gıda ürünü menüsü bulunamadı; yalnızca fırın/ünlü mamul işletme kayıtları mevcut. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6091 ; https://yandex.com.tr/maps/org/koprulu_kardesler_ekmek_firini/57356084407/ ; https://food.turkeyturism.com/tr/koprulu-kardesler-ekmek-firini-90-212-640-47-61.html
+
+## TATLI İSTASYONU ID 6090 — ACCEPTED
+Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:44/A, 34045 Bayrampaşa/İstanbul`, telefon `+90 539 703 18 87`. Yandex ve Facebook exact adres/telefonu destekliyor; Migros Yemek sayfası da Bayrampaşa/Yıldırım şubesini aynı menüyle listeliyor. Canlı Migros DOM’unda 2026-09-08 tarihinde 35 fiyatlı tatlı ürünü doğrulandı; override eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6090 ; https://yandex.com.tr/maps/org/tatli_istasyonu/129596344026/ ; https://www.facebook.com/tatli.istasyonu/ ; https://www.migros.com.tr/yemek/tatli-istasyonu-bayrampasa-yildirim-mah-st-24c96
