@@ -4672,3 +4672,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6086 ; https://me.maptons.com/p/1
 ## RA GASTRO PUB ID 6085 — HOLD
 Hentzer kaydı `Sinanpaşa, Altıntaş Sk. No:23/B, 34353 Beşiktaş/İstanbul`, telefon `+90 553 298 80 74`. Yandex exact adres ve telefonu; RestaurantGuru ve Tadar exact adresi destekliyor. Restoranim.net yorumlarında Instagram’da fix menüler bulunduğu belirtilse de erişilebilir kaynaklarda ürün başına güncel fiyatlı 20+ liste bulunamadı. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6085 ; https://yandex.com.tr/maps/org/ra_gastro_pub/29169530277/ ; https://restaurantguru.com/RA-GASTRO-PUB-Istanbul ; https://restoranim.net/istanbul/besiktas/pub/ra-gastro-pub
+
+## PEPO RESTAURANT AND CAFE ID 6084 — HOLD
+Hentzer kaydı `Şahkulu, Erkanı Harp Sk. No:2, 34421 Beyoğlu/İstanbul`, telefon `+90 533 304 73 76`. Mindtrip, Wanderlog ve RestaurantGuru exact adresi destekliyor; ancak Mapstr kaydı aynı adres için `+90 212 514 16 26` telefonunu veriyor. Telefon paritesi uyuşmadığı ve güncel 20+ fiyatlı ürün menüsü doğrulanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6084 ; https://mapstr.com/place/11PpYPBkVQg ; https://mindtrip.ai/restaurant/istanbul-turkiye/pepo-restaurant-cafe/re-OBsTX1ED ; https://restaurantguru.com/PEPO-cafe-istanbul-Istanbul
