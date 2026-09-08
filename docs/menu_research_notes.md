@@ -4656,3 +4656,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6090 ; https://yandex.com.tr/maps
 ## WOO COFFEE ID 6089 — HOLD
 Hentzer kaydı `Türkali, Ihlamurdere Cd. No:83, 34357 Beşiktaş/İstanbul`; telefon alanı boş. Yandex kaydı aynı adresi gösterse de işletmenin artık çalışmadığını belirtiyor; RestaurantGuru yalnızca eski bir kayıt sunuyor ve 20+ güncel fiyatlı ürün menüsü doğrulanamadı. Strict güncellik/telefon paritesi sağlanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6089 ; https://yandex.ru/maps/org/woo_coffee/200584714022/reviews/ ; https://fr.restaurantguru.com/Woo-Coffee-Istanbul
+
+## SULTAN KEBAP & FISH ID 6088 — HOLD
+Hentzer kaydı `Kocatepe, Şht. Muhtar Bey Cd. No:33, 34437 Beyoğlu/İstanbul`, telefon `+90 537 967 41 24`. Yandex, WanderBoat ve RestaurantGuru exact adresi; Yandex ve Cybo aynı telefonu destekliyor. Ancak son bir yılda exact şubeye ait 20+ fiyatlı ürün menüsü bulunamadı; yalnızca menü/yorum dizinleri mevcut. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6088 ; https://yandex.com.tr/maps/org/sultan_kebap_fish/181522129336/ ; https://wanderboat.ai/restaurants/turkey/beyo%C4%9Flu/sultan-kebap-%26-fish/CamBesR5Tpi1ACIVkTswmg ; https://restaurantguru.com/Sultan-Kebap-and-Fish-Istanbul
