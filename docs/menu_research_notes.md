@@ -4700,3 +4700,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6079 ; https://restaurantguru.com
 ## KERVAN KEBAB GRILL ID 6078 — HOLD
 Hentzer kaydı `Kemankeş Karamustafa Paşa Kılıç Ali Paşa Mescidi Sokak, Tophane, Kemankeş Karamustafa Paşa, Karaköy No:4, 34425 Beyoğlu/İstanbul`, telefon `+90 212 292 95 92`. Mindtrip ve RestaurantGuru exact adresi destekliyor; ancak erişilebilir kaynaklarda Hentzer telefonunu doğrulayan bağımsız kayıt bulunamadı. RestaurantGuru yalnızca genel fiyat aralığı ve yorumlar sunuyor; 20+ güncel ürün fiyatı yok. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6078 ; https://fr.restaurantguru.com/Kervan-Ocakbasi-Istanbul-2 ; https://mindtrip.ai/restaurant/istanbul-turkiye/kervan-kebab-grill/re-CcZ1sM2O
+
+## NAPOLI 91 ID 6077 — HOLD
+Hentzer kaydı `Zeytinlik, Mor Menekşe Sk. No:5, 34140 Bakırköy/İstanbul`, telefon `+90 212 571 69 02`. Resmi Napoli 91 sitesi, Instagram ve Yandex exact adres/telefonu doğruluyor. Resmi menü fiyat güncelleme tarihi 08.08.2026; ancak menüde yalnızca 10 pizza ve 1 tatlı olmak üzere 11 gıda ürünü bulunuyor. İçecekler gıda ürünü asgari sayımına dahil edilmedi; minimum 20 gıda ürünü şartı sağlanmadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6077 ; https://www.napoli91.com/ ; https://www.instagram.com/91napoli/ ; https://yandex.com.tr/maps/org/napoli_91/68872796457/
