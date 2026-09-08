@@ -4696,3 +4696,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6080 ; https://qrdos.tr/echi-frie
 ## MESSHAFE CAFE ID 6079 — HOLD
 Hentzer kaydı `Kavacık Mh, Ekinciler Cd., 34810 Beykoz/İstanbul`, telefon `+90 216 693 12 34`. Cybo ve RestaurantGuru işletme adı/adres/telefonunu kısmen destekliyor; ancak bağımsız kaynaklarda exact kapı numarası yok ve RestaurantGuru’da güncel ürün fiyatları bulunmuyor. Son bir yılda 20+ fiyatlı ürün ve tam şube paritesi doğrulanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6079 ; https://restaurantguru.com/Messhafe-Istanbul ; https://halaman-kuning.cybo.com/TR/anadoluhisar%C4%B1/lounge
+
+## KERVAN KEBAB GRILL ID 6078 — HOLD
+Hentzer kaydı `Kemankeş Karamustafa Paşa Kılıç Ali Paşa Mescidi Sokak, Tophane, Kemankeş Karamustafa Paşa, Karaköy No:4, 34425 Beyoğlu/İstanbul`, telefon `+90 212 292 95 92`. Mindtrip ve RestaurantGuru exact adresi destekliyor; ancak erişilebilir kaynaklarda Hentzer telefonunu doğrulayan bağımsız kayıt bulunamadı. RestaurantGuru yalnızca genel fiyat aralığı ve yorumlar sunuyor; 20+ güncel ürün fiyatı yok. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6078 ; https://fr.restaurantguru.com/Kervan-Ocakbasi-Istanbul-2 ; https://mindtrip.ai/restaurant/istanbul-turkiye/kervan-kebab-grill/re-CcZ1sM2O
