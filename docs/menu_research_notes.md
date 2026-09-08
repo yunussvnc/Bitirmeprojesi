@@ -4692,3 +4692,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6081 ; https://wanderlog.com/plac
 ## ECHI FRIED CHICKEN BURGER ID 6080 — ACCEPTED
 Hentzer kaydı `Barış, Reşat Nuri Güntekin Sk. No:61, 34515 Beylikdüzü/İstanbul`, telefon `+90 212 843 77 33`. QRDOS, Yandex, Menu-tr ve resmi Instagram exact adres/telefonu destekliyor. Canlı Migros Yemek DOM’unda 2026-09-08 tarihinde 30 fiyatlı gıda ürünü doğrulandı; QRDOS ürün adlarını/kategorilerini destekliyor. Override eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6080 ; https://qrdos.tr/echi-fried-chicken-burger ; https://www.migros.com.tr/yemek/echi-fried-chicken-burger-beylikduzu-baris-mah-st-20376 ; https://yandex.com/maps/org/echi_fried_chicken_burger/190264450618/ ; https://www.instagram.com/reel/DAYQgPwN0yx/
+
+## MESSHAFE CAFE ID 6079 — HOLD
+Hentzer kaydı `Kavacık Mh, Ekinciler Cd., 34810 Beykoz/İstanbul`, telefon `+90 216 693 12 34`. Cybo ve RestaurantGuru işletme adı/adres/telefonunu kısmen destekliyor; ancak bağımsız kaynaklarda exact kapı numarası yok ve RestaurantGuru’da güncel ürün fiyatları bulunmuyor. Son bir yılda 20+ fiyatlı ürün ve tam şube paritesi doğrulanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6079 ; https://restaurantguru.com/Messhafe-Istanbul ; https://halaman-kuning.cybo.com/TR/anadoluhisar%C4%B1/lounge
