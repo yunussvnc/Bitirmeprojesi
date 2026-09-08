@@ -4628,3 +4628,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6097 ; https://wanderlog.com/tr/p
 ## WAFFLEHANE ID 6096 — HOLD
 Hentzer kaydı `Muratpaşa, Cumhuriyet Cd. No:54/B, 34035 Bayrampaşa/İstanbul`, telefon `+90 552 230 04 19`. Yandex aynı isim ve telefonu listelese de adresi `Muratpaşa Mah., Evci Sok. 17B` olarak veriyor; bu, Hentzer adresiyle exact branch eşleşmesi değildir. Ayrıca son bir yılda exact şubeye ait 20+ fiyatlı ürün menüsü doğrulanamadı. Override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6096 ; https://yandex.com.tr/maps/org/wafflehane/194119513381/
+
+## MISSION STREET FOOD ID 6095 — HOLD
+Hentzer kaydı `Sinanpaşa, Alaybeyi Sk No:6 Daire:A1, 34353 Beşiktaş/İstanbul`, telefon `+90 212 259 80 90`. Corner, Cybo ve RestaurantGuru exact adres/telefon paritesini destekliyor. Migros Yemek ve QRDOS menüleri çok sayıda ürünü gösteriyor; ancak erişilebilir sayfa/DOM içeriklerinde ürün fiyatları yer almıyor veya yüklenmiyor. Bu nedenle son bir yılda doğrulanabilir 20+ fiyat şartı sağlanamadı; override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6095 ; https://www.corner.inc/place/pwJ1wm3qWro7 ; https://qrdos.tr/mission-street-food ; https://www.migros.com.tr/yemek/mission-street-food-besiktas-sinanpasa-mah-st-1cd91
