@@ -4676,3 +4676,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6085 ; https://yandex.com.tr/maps
 ## PEPO RESTAURANT AND CAFE ID 6084 — HOLD
 Hentzer kaydı `Şahkulu, Erkanı Harp Sk. No:2, 34421 Beyoğlu/İstanbul`, telefon `+90 533 304 73 76`. Mindtrip, Wanderlog ve RestaurantGuru exact adresi destekliyor; ancak Mapstr kaydı aynı adres için `+90 212 514 16 26` telefonunu veriyor. Telefon paritesi uyuşmadığı ve güncel 20+ fiyatlı ürün menüsü doğrulanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6084 ; https://mapstr.com/place/11PpYPBkVQg ; https://mindtrip.ai/restaurant/istanbul-turkiye/pepo-restaurant-cafe/re-OBsTX1ED ; https://restaurantguru.com/PEPO-cafe-istanbul-Istanbul
+
+## VALONIA CHOCOLATE & CAFE ID 6083 — HOLD
+Hentzer kaydı `Türkali, Ihlamurdere Cd. No:40 D:B, 34357 Beşiktaş/İstanbul`, telefon `+90 212 259 18 50`. Yandex, Trip.com, Dijital.link ve resmi valonia.com.tr exact adres/telefonu destekliyor. Resmi sitede güncel fiyatlı ürünler bulunuyor ancak bunlar perakende/hediyelik çikolata kataloğu; exact kafe şubesinin servis menüsü değil. Son bir yılda 20+ kafe menü ürünü doğrulanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6083 ; https://yandex.com/maps/org/valonia_chocolate_cafe/1118392810/ ; https://www.valonia.com.tr ; https://www.valonia.com.tr/hediyelik-cikolata
