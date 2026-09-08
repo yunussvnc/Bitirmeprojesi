@@ -4660,3 +4660,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6089 ; https://yandex.ru/maps/org
 ## SULTAN KEBAP & FISH ID 6088 — HOLD
 Hentzer kaydı `Kocatepe, Şht. Muhtar Bey Cd. No:33, 34437 Beyoğlu/İstanbul`, telefon `+90 537 967 41 24`. Yandex, WanderBoat ve RestaurantGuru exact adresi; Yandex ve Cybo aynı telefonu destekliyor. Ancak son bir yılda exact şubeye ait 20+ fiyatlı ürün menüsü bulunamadı; yalnızca menü/yorum dizinleri mevcut. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6088 ; https://yandex.com.tr/maps/org/sultan_kebap_fish/181522129336/ ; https://wanderboat.ai/restaurants/turkey/beyo%C4%9Flu/sultan-kebap-%26-fish/CamBesR5Tpi1ACIVkTswmg ; https://restaurantguru.com/Sultan-Kebap-and-Fish-Istanbul
+
+## KARDES PAYI BREAKFAST CAFE ID 6087 — HOLD
+Hentzer kaydı `Sinanpaşa, Çelebi Oğlu Sk. No:5, 34353 Beşiktaş/İstanbul`, telefon `+90 533 922 21 96`. WanderBoat, Mindtrip ve RestaurantGuru exact adresi destekliyor; ancak Cybo kaydı aynı adres için `+90 212 259 23 98` telefonunu veriyor. Telefon paritesi uyuşmadığı ve exact şubeye ait güncel 20+ fiyatlı menü doğrulanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6087 ; https://wanderboat.ai/restaurants/turkey/be%C5%9Fikta%C5%9F/kardes-payi-breakfast-cafe/cek5iHYzTVO3msj53geYdA ; https://biashara.cybo.com/TR/be%C5%9Fikta%C5%9F/kifungua-kinywa-na-brunch
