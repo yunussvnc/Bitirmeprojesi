@@ -4708,3 +4708,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6077 ; https://www.napoli91.com/ 
 ## BLACK ART LOUNGE ID 6076 — HOLD
 Hentzer kaydı `Kavaklı Mahallesi Yeşilyurt Caddesi Dış Kapı No:17/2C H Blok Ofis:215, 34520 Beylikdüzü/İstanbul`, telefon `+90 539 511 25 55`. Yandex, Menu-tr ve Restoranim.net exact adres/telefonu destekliyor. Wheree’nin 2026 menü sayfası yalnızca genel açıklamalar ve birkaç önerilen ürün içeriyor; 20+ güncel fiyatlı gıda ürünü doğrulanamadı. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6076 ; https://yandex.com.tr/maps/org/black_art_lounge/219868691303/ ; https://black-art-lounge.wheree.com/menu ; https://restoranim.net/istanbul/beylikduzu/bar/black-art-lounge
+
+## MUTLULAR PATISSERIE ID 6075 — ACCEPTED
+Hentzer kaydı `Kavaklı, Yeşilyurt Cd. No:51, 34520 Beylikdüzü/İstanbul`, telefon `+90 539 705 77 24`. Mutlular’ın resmi iletişim/FAQ sayfaları adresi `No:51A` ve telefonu doğruluyor; Yandex aynı işletme ve telefonla `51A` adresini veriyor. Güncel Yemeksepeti menüsünde 2026-09-08 tarihinde 58 fiyatlı gıda ürünü doğrulandı; override eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6075 ; https://www.mutlularpatisserie.com.tr/iletisim ; https://yandex.com/maps/org/mutlular_patisserie/62829945539/ ; https://www.yemeksepeti.com/restaurant/k3oc/mutlular-patisserie
