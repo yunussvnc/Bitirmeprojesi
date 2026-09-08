@@ -4652,3 +4652,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6091 ; https://yandex.com.tr/maps
 ## TATLI İSTASYONU ID 6090 — ACCEPTED
 Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:44/A, 34045 Bayrampaşa/İstanbul`, telefon `+90 539 703 18 87`. Yandex ve Facebook exact adres/telefonu destekliyor; Migros Yemek sayfası da Bayrampaşa/Yıldırım şubesini aynı menüyle listeliyor. Canlı Migros DOM’unda 2026-09-08 tarihinde 35 fiyatlı tatlı ürünü doğrulandı; override eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6090 ; https://yandex.com.tr/maps/org/tatli_istasyonu/129596344026/ ; https://www.facebook.com/tatli.istasyonu/ ; https://www.migros.com.tr/yemek/tatli-istasyonu-bayrampasa-yildirim-mah-st-24c96
+
+## WOO COFFEE ID 6089 — HOLD
+Hentzer kaydı `Türkali, Ihlamurdere Cd. No:83, 34357 Beşiktaş/İstanbul`; telefon alanı boş. Yandex kaydı aynı adresi gösterse de işletmenin artık çalışmadığını belirtiyor; RestaurantGuru yalnızca eski bir kayıt sunuyor ve 20+ güncel fiyatlı ürün menüsü doğrulanamadı. Strict güncellik/telefon paritesi sağlanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6089 ; https://yandex.ru/maps/org/woo_coffee/200584714022/reviews/ ; https://fr.restaurantguru.com/Woo-Coffee-Istanbul
