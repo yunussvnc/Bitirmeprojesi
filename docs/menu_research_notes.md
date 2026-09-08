@@ -4632,3 +4632,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6096 ; https://yandex.com.tr/maps
 ## MISSION STREET FOOD ID 6095 — HOLD
 Hentzer kaydı `Sinanpaşa, Alaybeyi Sk No:6 Daire:A1, 34353 Beşiktaş/İstanbul`, telefon `+90 212 259 80 90`. Corner, Cybo ve RestaurantGuru exact adres/telefon paritesini destekliyor. Migros Yemek ve QRDOS menüleri çok sayıda ürünü gösteriyor; ancak erişilebilir sayfa/DOM içeriklerinde ürün fiyatları yer almıyor veya yüklenmiyor. Bu nedenle son bir yılda doğrulanabilir 20+ fiyat şartı sağlanamadı; override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6095 ; https://www.corner.inc/place/pwJ1wm3qWro7 ; https://qrdos.tr/mission-street-food ; https://www.migros.com.tr/yemek/mission-street-food-besiktas-sinanpasa-mah-st-1cd91
+
+## LACİVERT ID 6094 — ACCEPTED
+Hentzer kaydı `Anadolu Hisarı, Körfez Cd. 57/A, 34410 Beykoz/İstanbul`, telefon `+90 216 413 42 24`. Lacivert’in resmi iletişim/menü sayfası aynı adresi ve aynı telefonu doğruluyor. Resmi `Lacivert-Menu-Temmuz26-TR.pdf` dosyası 01.07.2026 tarihinden itibaren uygulanan fiyatları belirtiyor ve 42 fiyatlı gıda ürünü içeriyor. Override eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6094 ; https://www.lacivertrestaurant.com/tr/menu ; https://www.lacivertrestaurant.com/static/uploads/2026/07/Lacivert-Menu-Temmuz26-TR.pdf
