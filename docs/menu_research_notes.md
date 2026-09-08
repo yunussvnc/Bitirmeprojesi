@@ -4620,3 +4620,7 @@ Kaynak: https://api.asemos.tr/api/v1/places/6099
 ## DODE COFFEE EATERY ID 6098 — HOLD
 Hentzer adresi `Türkali, Maşuklar Ykş. No:39A, 34357 Beşiktaş/İstanbul`; telefon alanı boş. RestaurantGuru ve Yandex exact adresi destekliyor ancak bağımsız telefon kaydı bulunamadı; bu nedenle strict adres/telefon paritesi sağlanmadı. Ayrıca 20+ son bir yıl fiyatlı ürün menüsü doğrulanamadı. Override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6098 ; https://restaurantguru.com/Dode-coffee-eatery-Istanbul ; https://yandex.com.tr/maps/11508/istanbul/house/masuklar_yokusu_39a/ZkAYdgdlSkUAQFprfXx1dHliZQ==/
+
+## BEYLİKDÜZÜ BEYLİK BAZAAR ID 6097 — HOLD
+Hentzer kaydı `Adnan Kahveci, Osmanlı Cd. No:29 D:1, 34528 Beylikdüzü/İstanbul`; telefon alanı boş. Bağımsız kaynaklar buranın pazar alanı olduğunu doğruluyor; exact bir gıda işletmesi ve son bir yıl fiyatlı 20+ ürün menüsü bulunamadı. Gıda işletmesi olmadığı/telefon paritesi sağlanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6097 ; https://wanderlog.com/tr/place/details/12225917/beylild%C3%BCz%C3%BC-beylik-pazar%C4%B1 ; https://www.instagram.com/reel/DapX5vbqfF_/ 
