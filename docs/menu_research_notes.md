@@ -4644,3 +4644,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6093 ; https://istanbulservislist
 ## İOKİ ULUS ID 6092 — ACCEPTED
 Hentzer kaydı `No:, Kültür, Ahmet Adnan Saygun Cd. No:7, 34340 Beşiktaş/İstanbul`, telefon `+90 212 323 24 14`. İOKİ’nin resmi menü/iletişim sayfası Ulus PDF bağlantısını ve aynı telefonu veriyor; Yandex de exact adres/telefon paritesini destekliyor. Resmi Ulus PDF’si 20.05.2026 tarihinde düzenlenmiş, fiyatları vergiler dahil olarak belirtiyor ve 60 fiyatlı gıda ürünü işlendi. Override eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6092 ; https://ioki.com.tr/menu-2/ ; https://ioki.com.tr/wp-content/uploads/2026/05/HOS_MM_ULUS_TR_small-v2.pdf ; https://yandex.com.tr/maps/org/ioki/241943436025/
+
+## KÖPRÜLÜ KARDEŞLER EKMEK FIRINI ID 6091 — HOLD
+Hentzer kaydı `Kocatepe, Şehir Parkı Caddesi No:105, 34045 Bayrampaşa/İstanbul`, telefon `+90 212 640 47 61`. Yandex ve bağımsız işletme dizinleri aynı işletme, adres ve telefonu destekliyor. Ancak son bir yılda exact şubeye ait 20+ fiyatlı gıda ürünü menüsü bulunamadı; yalnızca fırın/ünlü mamul işletme kayıtları mevcut. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6091 ; https://yandex.com.tr/maps/org/koprulu_kardesler_ekmek_firini/57356084407/ ; https://food.turkeyturism.com/tr/koprulu-kardesler-ekmek-firini-90-212-640-47-61.html
