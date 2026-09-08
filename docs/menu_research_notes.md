@@ -4612,3 +4612,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6101 ; https://kartaweb.menu/rest
 ## TOM'S PETSHOP BAYRAMPAŞA ID 6100 — HOLD
 Hentzer kaydı `Kocatepe, Kocatepe Cd. No:44/A, 34045 Bayrampaşa/İstanbul`, `+90 552 525 14 11` olarak geçiyor; işletme türü petshop ve kategori kaydı hatalı biçimde Restoran görünüyor. Gıda işletmesi olmadığı için menü override’ı oluşturulmadı.
 Kaynak: https://api.asemos.tr/api/v1/places/6100
+
+## BAZAAR ISTANBUL ID 6099 — HOLD
+Hentzer kaydı `Cumhuriyet, 34520 Beylikdüzü/İstanbul`, `+90 533 069 86 15`. Exact şubeye ait güvenilir güncel kaynak ve son bir yılda 20+ fiyatlı gıda menüsü bulunamadı; arama sonuçlarındaki benzer isimli işletmeler farklı adresler olduğundan kullanılmadı. Bu nedenle override eklenmedi.
+Kaynak: https://api.asemos.tr/api/v1/places/6099
