@@ -4640,3 +4640,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6094 ; https://www.lacivertrestau
 ## MOGAF DÖNER BEŞİKTAŞ ÇARŞI ŞUBESİ ID 6093 — ACCEPTED
 Hentzer kaydı `Sinanpaşa, Sinanpaşa Köprüsü Sok. No:3, 34351 Beşiktaş/İstanbul`, telefon `+90 850 840 8055`. Servis kayıtları ve RestaurantGuru exact adresi doğruluyor; Mogaf resmi Facebook iletişim kaydı aynı telefon numarasını veriyor. Mogaf’ın resmi fiyatlı paket servis PDF’sinde fiyat değişim tarihi 14.01.2026 ve 47 fiyatlı gıda ürünü işlendi. Override eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6093 ; https://istanbulservislistesi.com.tr/istanbul/besiktas/restoran/mogaf-doner-besiktas-carsi-subesi-6A5_-M.html ; https://www.facebook.com/mogafhataydoner/ ; https://mogafdoner.com/wp-content/uploads/2026/01/Mogaf-_a3_menu_v3_fiyatli-2026-Ocak-Paket-Servis-pdf.pdf
+
+## İOKİ ULUS ID 6092 — ACCEPTED
+Hentzer kaydı `No:, Kültür, Ahmet Adnan Saygun Cd. No:7, 34340 Beşiktaş/İstanbul`, telefon `+90 212 323 24 14`. İOKİ’nin resmi menü/iletişim sayfası Ulus PDF bağlantısını ve aynı telefonu veriyor; Yandex de exact adres/telefon paritesini destekliyor. Resmi Ulus PDF’si 20.05.2026 tarihinde düzenlenmiş, fiyatları vergiler dahil olarak belirtiyor ve 60 fiyatlı gıda ürünü işlendi. Override eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6092 ; https://ioki.com.tr/menu-2/ ; https://ioki.com.tr/wp-content/uploads/2026/05/HOS_MM_ULUS_TR_small-v2.pdf ; https://yandex.com.tr/maps/org/ioki/241943436025/
