@@ -4712,3 +4712,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6076 ; https://yandex.com.tr/maps
 ## MUTLULAR PATISSERIE ID 6075 — ACCEPTED
 Hentzer kaydı `Kavaklı, Yeşilyurt Cd. No:51, 34520 Beylikdüzü/İstanbul`, telefon `+90 539 705 77 24`. Mutlular’ın resmi iletişim/FAQ sayfaları adresi `No:51A` ve telefonu doğruluyor; Yandex aynı işletme ve telefonla `51A` adresini veriyor. Güncel Yemeksepeti menüsünde 2026-09-08 tarihinde 58 fiyatlı gıda ürünü doğrulandı; override eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6075 ; https://www.mutlularpatisserie.com.tr/iletisim ; https://yandex.com/maps/org/mutlular_patisserie/62829945539/ ; https://www.yemeksepeti.com/restaurant/k3oc/mutlular-patisserie
+
+## TERMEH IRANIAN RESTAURANT ID 6074 — HOLD
+Hentzer kaydı `Tomtom, Yeni Çarşı Cd. No:8, 34433 Beyoğlu/İstanbul`, telefon `+90 212 243 14 02`. IraniLink işletme sayfası exact adres ve telefonu doğruluyor; RestaurantGuru da exact adresi destekliyor. Ancak erişilebilir güncel kaynaklarda tarihli, ürün başına fiyat veren 20+ ürün menüsü yok; IraniLink’deki fotoğraflar fiyat güncelliğini metinsel olarak doğrulamıyor. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6074 ; https://iranilink.tr/directory/istanbul/food-drink/restaurants/termeh-iranian-restaurant ; https://restaurantguru.com/Termeh-Istanbul-Turkey
