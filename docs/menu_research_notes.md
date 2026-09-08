@@ -4668,3 +4668,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6087 ; https://wanderboat.ai/rest
 ## ARYA ISTANBUL - AFGHAN RESTAURANT AND CAFE ID 6086 — HOLD
 Hentzer kaydı `Adnan Kahveci, Avrupa Cd. No:106, 34528 Beylikdüzü/İstanbul`, telefon `+90 531 841 43 43`. Maptons, Wanderlog, Snapchat ve Allzin aynı exact adres/telefonu destekliyor. Ancak Wheree menü sayfası yalnızca menü fotoğraflarından derlenmiş açıklamalar ve birkaç öneri sunuyor; Allzin’de fiyatlar görünmüyor. Son bir yılda doğrulanabilir 20+ fiyatlı ürün bulunamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6086 ; https://me.maptons.com/p/12942730515 ; https://wanderlog.com/place/details/12531126/arya-istanbul-afghan-restaurant-and-cafe ; https://allzinapp.com/aryarestaurant.ist ; https://arya-istanbul-afghan-restaurant-and-cafe.wheree.com/menu
+
+## RA GASTRO PUB ID 6085 — HOLD
+Hentzer kaydı `Sinanpaşa, Altıntaş Sk. No:23/B, 34353 Beşiktaş/İstanbul`, telefon `+90 553 298 80 74`. Yandex exact adres ve telefonu; RestaurantGuru ve Tadar exact adresi destekliyor. Restoranim.net yorumlarında Instagram’da fix menüler bulunduğu belirtilse de erişilebilir kaynaklarda ürün başına güncel fiyatlı 20+ liste bulunamadı. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6085 ; https://yandex.com.tr/maps/org/ra_gastro_pub/29169530277/ ; https://restaurantguru.com/RA-GASTRO-PUB-Istanbul ; https://restoranim.net/istanbul/besiktas/pub/ra-gastro-pub
