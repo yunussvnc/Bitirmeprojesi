@@ -4636,3 +4636,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6095 ; https://www.corner.inc/pla
 ## LACİVERT ID 6094 — ACCEPTED
 Hentzer kaydı `Anadolu Hisarı, Körfez Cd. 57/A, 34410 Beykoz/İstanbul`, telefon `+90 216 413 42 24`. Lacivert’in resmi iletişim/menü sayfası aynı adresi ve aynı telefonu doğruluyor. Resmi `Lacivert-Menu-Temmuz26-TR.pdf` dosyası 01.07.2026 tarihinden itibaren uygulanan fiyatları belirtiyor ve 42 fiyatlı gıda ürünü içeriyor. Override eklendi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6094 ; https://www.lacivertrestaurant.com/tr/menu ; https://www.lacivertrestaurant.com/static/uploads/2026/07/Lacivert-Menu-Temmuz26-TR.pdf
+
+## MOGAF DÖNER BEŞİKTAŞ ÇARŞI ŞUBESİ ID 6093 — ACCEPTED
+Hentzer kaydı `Sinanpaşa, Sinanpaşa Köprüsü Sok. No:3, 34351 Beşiktaş/İstanbul`, telefon `+90 850 840 8055`. Servis kayıtları ve RestaurantGuru exact adresi doğruluyor; Mogaf resmi Facebook iletişim kaydı aynı telefon numarasını veriyor. Mogaf’ın resmi fiyatlı paket servis PDF’sinde fiyat değişim tarihi 14.01.2026 ve 47 fiyatlı gıda ürünü işlendi. Override eklendi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6093 ; https://istanbulservislistesi.com.tr/istanbul/besiktas/restoran/mogaf-doner-besiktas-carsi-subesi-6A5_-M.html ; https://www.facebook.com/mogafhataydoner/ ; https://mogafdoner.com/wp-content/uploads/2026/01/Mogaf-_a3_menu_v3_fiyatli-2026-Ocak-Paket-Servis-pdf.pdf
