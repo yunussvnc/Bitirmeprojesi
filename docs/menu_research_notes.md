@@ -4664,3 +4664,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6088 ; https://yandex.com.tr/maps
 ## KARDES PAYI BREAKFAST CAFE ID 6087 — HOLD
 Hentzer kaydı `Sinanpaşa, Çelebi Oğlu Sk. No:5, 34353 Beşiktaş/İstanbul`, telefon `+90 533 922 21 96`. WanderBoat, Mindtrip ve RestaurantGuru exact adresi destekliyor; ancak Cybo kaydı aynı adres için `+90 212 259 23 98` telefonunu veriyor. Telefon paritesi uyuşmadığı ve exact şubeye ait güncel 20+ fiyatlı menü doğrulanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6087 ; https://wanderboat.ai/restaurants/turkey/be%C5%9Fikta%C5%9F/kardes-payi-breakfast-cafe/cek5iHYzTVO3msj53geYdA ; https://biashara.cybo.com/TR/be%C5%9Fikta%C5%9F/kifungua-kinywa-na-brunch
+
+## ARYA ISTANBUL - AFGHAN RESTAURANT AND CAFE ID 6086 — HOLD
+Hentzer kaydı `Adnan Kahveci, Avrupa Cd. No:106, 34528 Beylikdüzü/İstanbul`, telefon `+90 531 841 43 43`. Maptons, Wanderlog, Snapchat ve Allzin aynı exact adres/telefonu destekliyor. Ancak Wheree menü sayfası yalnızca menü fotoğraflarından derlenmiş açıklamalar ve birkaç öneri sunuyor; Allzin’de fiyatlar görünmüyor. Son bir yılda doğrulanabilir 20+ fiyatlı ürün bulunamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6086 ; https://me.maptons.com/p/12942730515 ; https://wanderlog.com/place/details/12531126/arya-istanbul-afghan-restaurant-and-cafe ; https://allzinapp.com/aryarestaurant.ist ; https://arya-istanbul-afghan-restaurant-and-cafe.wheree.com/menu
