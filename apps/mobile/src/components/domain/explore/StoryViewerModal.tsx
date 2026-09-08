@@ -9,7 +9,6 @@ import {
   View,
   Text,
   Modal,
-  Pressable,
   TouchableOpacity,
   StyleSheet,
   Platform,
@@ -121,21 +120,6 @@ export function StoryViewerModal({
     screenHeight: SCREEN_HEIGHT,
   });
 
-  if (!story) return null;
-
-  const isCloseFriends = isStoryCloseFriends(story);
-  const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
-  const showReplyBar = !isOwnStory;
-  const canShare = !isCloseFriends;
-
-  const overlayOpacity = dragY.interpolate({
-    inputRange: [0, SCREEN_HEIGHT * 0.4],
-    outputRange: [1, 0.3],
-    extrapolate: 'clamp',
-  });
-
-  const progressFillColor = getProgressFillColor(isCloseFriends);
-
   const singleTap = useMemo(() => {
     return Gesture.Tap().onEnd((e) => {
       if (viewersModalVisible || showOwnMenu || showOtherMenu || showReportMenu) return;
@@ -164,6 +148,21 @@ export function StoryViewerModal({
   const composedGestures = useMemo(() => {
     return Gesture.Exclusive(longPress, singleTap);
   }, [longPress, singleTap]);
+
+  if (!story) return null;
+
+  const isCloseFriends = isStoryCloseFriends(story);
+  const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
+  const showReplyBar = !isOwnStory;
+  const canShare = !isCloseFriends;
+
+  const overlayOpacity = dragY.interpolate({
+    inputRange: [0, SCREEN_HEIGHT * 0.4],
+    outputRange: [1, 0.3],
+    extrapolate: 'clamp',
+  });
+
+  const progressFillColor = getProgressFillColor(isCloseFriends);
 
   return (
     <Modal
