@@ -4680,3 +4680,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6084 ; https://mapstr.com/place/1
 ## VALONIA CHOCOLATE & CAFE ID 6083 — HOLD
 Hentzer kaydı `Türkali, Ihlamurdere Cd. No:40 D:B, 34357 Beşiktaş/İstanbul`, telefon `+90 212 259 18 50`. Yandex, Trip.com, Dijital.link ve resmi valonia.com.tr exact adres/telefonu destekliyor. Resmi sitede güncel fiyatlı ürünler bulunuyor ancak bunlar perakende/hediyelik çikolata kataloğu; exact kafe şubesinin servis menüsü değil. Son bir yılda 20+ kafe menü ürünü doğrulanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6083 ; https://yandex.com/maps/org/valonia_chocolate_cafe/1118392810/ ; https://www.valonia.com.tr ; https://www.valonia.com.tr/hediyelik-cikolata
+
+## KANLICA DONDURMA KAFE ID 6082 — HOLD
+Hentzer kaydı `Mihrabat Caddesi Halepliçeşme Sokak, Kanlıca, No:8A, 34810 Beykoz/İstanbul`, telefon `+90 216 680 99 47`. Yandex, Restoranim.net ve Kaçıyor exact adres/telefonu destekliyor. Kaçıyor ve Restoranim sayfalarında ürün adları/yorumlar bulunsa da ürün başına güncel fiyatlar görünmüyor; son bir yılda 20+ fiyatlı menü ürünü doğrulanamadı. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6082 ; https://yandex.com.tr/maps/org/kanlica_dondurma_kafe/96239236995/ ; https://restoranim.net/istanbul/beykoz/dondurmaci/kanlica-dondurma-kafe ; https://www.kaciyor.com/kanlica-dondurma-kafe
