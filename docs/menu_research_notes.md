@@ -4624,3 +4624,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6098 ; https://restaurantguru.com
 ## BEYLİKDÜZÜ BEYLİK BAZAAR ID 6097 — HOLD
 Hentzer kaydı `Adnan Kahveci, Osmanlı Cd. No:29 D:1, 34528 Beylikdüzü/İstanbul`; telefon alanı boş. Bağımsız kaynaklar buranın pazar alanı olduğunu doğruluyor; exact bir gıda işletmesi ve son bir yıl fiyatlı 20+ ürün menüsü bulunamadı. Gıda işletmesi olmadığı/telefon paritesi sağlanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6097 ; https://wanderlog.com/tr/place/details/12225917/beylild%C3%BCz%C3%BC-beylik-pazar%C4%B1 ; https://www.instagram.com/reel/DapX5vbqfF_/ 
+
+## WAFFLEHANE ID 6096 — HOLD
+Hentzer kaydı `Muratpaşa, Cumhuriyet Cd. No:54/B, 34035 Bayrampaşa/İstanbul`, telefon `+90 552 230 04 19`. Yandex aynı isim ve telefonu listelese de adresi `Muratpaşa Mah., Evci Sok. 17B` olarak veriyor; bu, Hentzer adresiyle exact branch eşleşmesi değildir. Ayrıca son bir yılda exact şubeye ait 20+ fiyatlı ürün menüsü doğrulanamadı. Override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6096 ; https://yandex.com.tr/maps/org/wafflehane/194119513381/
