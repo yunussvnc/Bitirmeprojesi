@@ -4684,3 +4684,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6083 ; https://yandex.com/maps/or
 ## KANLICA DONDURMA KAFE ID 6082 — HOLD
 Hentzer kaydı `Mihrabat Caddesi Halepliçeşme Sokak, Kanlıca, No:8A, 34810 Beykoz/İstanbul`, telefon `+90 216 680 99 47`. Yandex, Restoranim.net ve Kaçıyor exact adres/telefonu destekliyor. Kaçıyor ve Restoranim sayfalarında ürün adları/yorumlar bulunsa da ürün başına güncel fiyatlar görünmüyor; son bir yılda 20+ fiyatlı menü ürünü doğrulanamadı. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6082 ; https://yandex.com.tr/maps/org/kanlica_dondurma_kafe/96239236995/ ; https://restoranim.net/istanbul/beykoz/dondurmaci/kanlica-dondurma-kafe ; https://www.kaciyor.com/kanlica-dondurma-kafe
+
+## ZEYNEPP RESTAURANT & CAFE & PATISSERIE POLONEZKÖY ID 6081 — HOLD
+Hentzer kaydı `Polonezköy, 75. Yıl Cd. No:41/B, 34829 Beykoz/İstanbul`, telefon `+90 552 705 22 56`. Wanderlog ve Snapchat exact adresi, Snapchat Hentzer telefonunu destekliyor; ancak Cybo sonucu aynı adres için `0530 338 17 36` telefonu veriyor. Telefon paritesi uyuşmadığı ve güncel 20+ fiyatlı menü doğrulanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6081 ; https://wanderlog.com/place/details/3340945/zeynepp-restaurant--cafe--patisserie-kahvalti-polonezk%C3%B6y ; https://www.snapchat.com/place/zeynepprestaurantcafepatisseriekahvaltipolonezky/9a80c72a-b028-40e1-8ffe-527929442adf ; https://biashara.cybo.com/TR-posta/34829/kahawa-migahawa
