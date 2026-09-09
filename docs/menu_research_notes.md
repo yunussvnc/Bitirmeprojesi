@@ -4724,3 +4724,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6073 ; https://restaurantguru.com
 ## İTALYAN KORNETTO ID 6072 — HOLD
 Hentzer kaydı `Adnan Kahveci, Çamlıtepe Cd. beyaz palas, 34528 Beylikdüzü/İstanbul`, telefon `+90 532 787 90 80`. Bağımsız Yandex kayıtlarından biri aynı marka için `Adnan Kahveci Mah., Çamlıtepe Cad., No:63/6` adresinde `+90 532 161 80 20` telefonu, diğerleri Barış Mahallesi/Atatürk Bulvarı ve farklı adresleri gösteriyor. Bu nedenle Hentzer kaydının exact şube ve telefon paritesi doğrulanamadı. Ayrıca 20+ güncel fiyatlı ürün menüsü bulunamadı; override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6072 ; https://yandex.com.tr/maps/org/italyan_kornetto/121288396543/ ; https://yandex.com.tr/maps/org/italyan_kornetto/75624739878/ ; https://fr.restaurantguru.com/ITALYAN-KORNETTO-Buyukcekmece
+
+## ÇUBUKLU İSKELESİ VAPUR KAFE ID 6071 — HOLD
+Hentzer kaydı `Çubuklu Mah. TPAŞ Ana Depo Sok.1, Çubuklu, 34805 Beykoz/İstanbul`, telefon alanı boş. Restoranim.net exact adresi ve telefon bulunmadığını doğruluyor; işletme Beltur/İBB Vapur Kafe olarak eşleşiyor. MenuHaritasi ve diğer erişilebilir kaynaklarda son bir yılda ürün başına fiyat verilen 20+ gıda ürünü bulunmadı. Telefon ve güncel menü şartları sağlanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6071 ; https://restoranim.net/istanbul/istanbul/kafe/cubuklu-iskelesi-vapur-kafe ; https://menuharitasi.com/menu/beltur-cubuklu-iskelesi-vapur-kafe
