@@ -4740,3 +4740,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6069 ; https://restaurantguru.com
 ## HALK LOKANTASI ID 6068 — HOLD
 Hentzer kaydı `Rüzgarlıbahçe, Şht. İbrahim Gürhan Sk. No:4, 34805 Beykoz/İstanbul`, telefon `+90 216 322 26 27`. Cybo, Yandex, Menu-tr ve RestaurantGuru exact adres/telefonu destekliyor. Ancak MenuB​​urada’da menü bulunmuyor; Menu-tr/RestaurantGuru yalnızca yemek türleri ve genel fiyat aralığı veriyor, son bir yılda ürün başına fiyat verilen 20+ gıda ürünü yok. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6068 ; https://www.menu-tr.com/istanbul/beykoz/restoran/halk-lokantasi ; https://menuburada.com/halk-lokantasi-ruzgarlibahce-istanbul/ ; https://restaurantguru.com/Halk-Lokantasi-Istanbul
+
+## 8ONE BURGER BEYLİKDÜZÜ ID 6067 — HOLD
+Hentzer kaydı `Demir Country, Kavaklı, G blok No:202, 34520 Beylikdüzü/İstanbul`, telefon `+90 552 108 88 80`. Resmi 8one Burger sitesi Beylikdüzü şubesini ve Demir Country lokasyonunu doğruluyor; Instagram/Facebook paylaşımları da aynı şube/telefonu destekliyor. Resmi menüde burger, çocuk menüsü, tatlı ve yan ürün adları bulunuyor, ancak ürün başına fiyat yayınlanmıyor. Wheree yalnızca genel ürün açıklamaları veriyor; son bir yılda exact şubeye ait 20+ doğrulanabilir fiyat bulunamadı. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6067 ; https://8oneburger.com/ ; https://8oneburger.com/8oneburger-menu/ ; https://8one-burger.wheree.com/menu ; https://www.instagram.com/reel/DLwn8jGo12H/
