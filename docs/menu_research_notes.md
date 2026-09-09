@@ -4716,3 +4716,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6075 ; https://www.mutlularpatiss
 ## TERMEH IRANIAN RESTAURANT ID 6074 — HOLD
 Hentzer kaydı `Tomtom, Yeni Çarşı Cd. No:8, 34433 Beyoğlu/İstanbul`, telefon `+90 212 243 14 02`. IraniLink işletme sayfası exact adres ve telefonu doğruluyor; RestaurantGuru da exact adresi destekliyor. Ancak erişilebilir güncel kaynaklarda tarihli, ürün başına fiyat veren 20+ ürün menüsü yok; IraniLink’deki fotoğraflar fiyat güncelliğini metinsel olarak doğrulamıyor. Bu nedenle override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6074 ; https://iranilink.tr/directory/istanbul/food-drink/restaurants/termeh-iranian-restaurant ; https://restaurantguru.com/Termeh-Istanbul-Turkey
+
+## MEPHISTO BOOKSTORE & CAFE - BEYOGLU ID 6073 — HOLD
+Hentzer kaydı `Kuloğlu, İstiklal Cd. No:125, 34435 Beyoğlu/İstanbul`; telefon alanı boş. Bağımsız kaynaklar exact şube adresini destekliyor, ancak telefonlarda tutarsızlık var: RestaurantGuru/NovaCircle `+90 212 249 06 96`, başka bir işletme dizini `0212 535 40 40` gösteriyor. Erişilebilir menü içerikleri yalnızca genel ürün türleri sunuyor; son bir yılda ürün başına fiyat verilen 20+ gıda ürünü doğrulanamadı. Telefon paritesi ve güncel fiyat şartları sağlanamadığı için override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6073 ; https://restaurantguru.com/MEPHISTO-Istanbul-2 ; https://www.novacircle.com/sv-se/spots/europe/turkiye/beyoglu/istanbul/istanbul/mephisto-bookstore-cafe-beyoglu-9b9195/menu ; https://www.karekod.org/blog/bitcoin-atm-listesi/
