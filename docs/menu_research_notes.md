@@ -4728,3 +4728,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6072 ; https://yandex.com.tr/maps
 ## ÇUBUKLU İSKELESİ VAPUR KAFE ID 6071 — HOLD
 Hentzer kaydı `Çubuklu Mah. TPAŞ Ana Depo Sok.1, Çubuklu, 34805 Beykoz/İstanbul`, telefon alanı boş. Restoranim.net exact adresi ve telefon bulunmadığını doğruluyor; işletme Beltur/İBB Vapur Kafe olarak eşleşiyor. MenuHaritasi ve diğer erişilebilir kaynaklarda son bir yılda ürün başına fiyat verilen 20+ gıda ürünü bulunmadı. Telefon ve güncel menü şartları sağlanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6071 ; https://restoranim.net/istanbul/istanbul/kafe/cubuklu-iskelesi-vapur-kafe ; https://menuharitasi.com/menu/beltur-cubuklu-iskelesi-vapur-kafe
+
+## B.BLOK BAKERY - AKARETLER ID 6070 — HOLD
+Hentzer kaydı `Vişnezade, Refik Osman Top Sk. No:13, 34357 Beşiktaş/İstanbul`, telefon `+90 212 259 13 15`. RestaurantGuru, Mekanlar ve resmi Instagram exact adres/telefonu destekliyor. RestaurantGuru’da son 6 ay içinde eklenmiş menü kaydı görünse de erişilebilir görsel/metin katmanında ürün-fiyat listesi okunmuyor; 20+ güncel fiyatlı ürün doğrulanamadı. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6070 ; https://restaurantguru.com/BBlok-Bakery-Istanbul/menu ; https://mekanlar.com/mekan/bblok-bakery-akaretler-visnezade-mh ; https://www.instagram.com/b.blokbakery/
