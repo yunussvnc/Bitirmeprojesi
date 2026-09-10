@@ -4760,3 +4760,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6064 ; https://restoranim.net/ist
 ## FUTURE COFFEE ROASTERY ID 6063 — HOLD
 Hentzer kaydı `Kavaklı, Yeşilyurt Cd. Demir Country Sit. No:17/1G G-213, 34520 Beylikdüzü/İstanbul`, telefon alanı boş. Instagram paylaşımları exact Demir Country adresini destekliyor; ancak bağımsız telefon kaydı bulunamadı. Erişilebilir kaynaklar işletmeyi kahve/tatlı deneyimi olarak tanımlıyor fakat son bir yılda ürün başına fiyat veren 20+ güncel menü ürünü sunmuyor. Telefon paritesi ve güncel fiyat şartları sağlanamadığı için override eklenmedi.
 Kaynaklar: https://api.asemos.tr/api/v1/places/6063 ; https://www.instagram.com/reel/C-C8N1jI2ao/ ; https://www.instagram.com/reel/DPi0f2oDYn3/ ; https://www.wheree.com/Coffee_Roasteries-c394-g184-Istanbul_Province
+
+## BURGER@ KAVACIK ID 6062 — HOLD
+Hentzer kaydı `Kavacık Mh, Orhan Veli Kanık Cd. No:112/C, 34820 Beykoz/İstanbul`, telefon `+90 216 693 00 50`. Yandex ve YeniFirma exact adres/telefonu destekliyor. Ancak erişilebilir Mekanlar/YeniFirma kayıtlarında ürün-fiyat menüsü bulunmuyor; arama sonuçlarında da exact şubeye ait son bir yılda doğrulanabilir 20+ fiyatlı burger ürünü bulunamadı. Bu nedenle override eklenmedi.
+Kaynaklar: https://api.asemos.tr/api/v1/places/6062 ; https://yandex.com.tr/maps/org/burger_kavacik/132192122732/ ; https://www.yenifirma.com.tr/firma/burger-kavacik ; https://mekanlar.com/mekan/burgerat-kavacik-kavacik
